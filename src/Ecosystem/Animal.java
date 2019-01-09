@@ -22,3 +22,12 @@ public abstract class Animal {
 	public abstract void seek (Animal animal);
 	public abstract void hurt (Integer damage);
 }
+
+interface Herbivore {
+	public void feed (String food);
+}
+
+interface Carnivore {
+	public void feed (Animal prey);
+	public void chase (Animal prey);
+}
