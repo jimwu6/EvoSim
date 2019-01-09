@@ -15,12 +15,25 @@ public abstract class Animal {
 		this.health = 100;
 	}
 	
-	public abstract void drink();
-	public abstract void mate(Animal mate);
-	public abstract Animal birth();
-	public abstract void flee (Animal predator);
-	public abstract void seek (Animal animal);
-	public abstract void hurt (Integer damage);
+	public void drink(){
+		
+	}
+	public void mate(Animal mate){
+		
+	}
+	public Animal birth(){
+		
+	}
+	public void flee (Animal predator){
+		
+	}
+	public void seek (Animal animal){
+		
+	}
+	
+	public void injured (Integer damage) {
+		health -= damage;
+	}
 }
 
 interface Herbivore {
