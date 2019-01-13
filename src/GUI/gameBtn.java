@@ -19,7 +19,11 @@ public class gameBtn extends JButton implements MouseListener {
     	
         try
         {
+<<<<<<< HEAD:src/GUI/gameBtn.java
         	i = ImageIO.read(new File(fileName));
+=======
+        	i = ImageIO.read(new File("C://work//Projects//2018//EvoSim//src//settings.png"));
+>>>>>>> d1454fef7190902c5a7f78ef112b444a3a8f85d6:src/GUI/settingsBtn.java
         }
         catch (IOException e)
         {
