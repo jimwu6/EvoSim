@@ -15,16 +15,17 @@ public class Display extends JFrame implements MouseListener{
 
 	public Display()
 	{
-		JPanel north = new JPanel(new FlowLayout());
-		settingsBtn settings = new settingsBtn();
+		JPanel north = new JPanel();
+		gameBtn settings = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\src\\settings.png", 114, 114);
 		settings.addMouseListener(this);
 		settings.setPreferredSize(new Dimension(111,111));
 		
-		drawArea board = new drawArea(200, 200);
+		drawArea board = new drawArea(600, 600);
 		
 		north.add(board);
 		north.add(settings);
 
+		
 		// set window attributes
 		setContentPane(north);
 		pack();

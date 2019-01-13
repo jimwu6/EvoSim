@@ -7,16 +7,19 @@ import javax.swing.*;
 import java.io.*; // allows file access
 import javax.imageio.*; // allows image loading
  
-public class settingsBtn extends JButton implements MouseListener {
+public class gameBtn extends JButton implements MouseListener {
 	Image i;
 	public boolean entered;
+	int width, height;
 	
-    public settingsBtn() {
+    public gameBtn(String fileName, int w, int h) {
     	addMouseListener(this);
-    
+    	width = w;
+    	height = h;
+    	
         try
         {
-        	i = ImageIO.read(new File("settings.png"));
+        	i = ImageIO.read(new File(fileName));
         }
         catch (IOException e)
         {
@@ -26,6 +29,8 @@ public class settingsBtn extends JButton implements MouseListener {
         size.width = size.height = Math.max(size.width, size.height);
         setPreferredSize(size);
  
+        setBounds(11, 11, width, height);
+        
         // This call causes the JButton not to paint the background.
         // This allows us to paint a round background.
         setContentAreaFilled(false);
@@ -37,7 +42,7 @@ public class settingsBtn extends JButton implements MouseListener {
     	g.setColor(highlight);
     	if (entered)
     		g.fillRoundRect(0, 0, getSize().width-10, getSize().height-10, 30, 30);
-    	g.drawImage(i, 5, 5, getSize().width-20, getSize().height-20, this);
+    	g.drawImage(i, 5, 5, width-20, height-20, this);
  
         // This call will paint the label and the focus rectangle.
     super.paintComponent(g);
@@ -91,8 +96,7 @@ public class settingsBtn extends JButton implements MouseListener {
     // Test routine.
     public static void main(String[] args) {
         // Create a button with the label "Jackpot".
-        settingsBtn button = new settingsBtn();
-        button.setBounds(0, 0, 120, 120);
+        gameBtn button = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\src\\settings.png", 114, 114);
  
         // Create a frame in which to show the button.
         JFrame frame = new JFrame();
@@ -103,29 +107,29 @@ public class settingsBtn extends JButton implements MouseListener {
         frame.setSize(500, 500);
         frame.setVisible(true);
  
-//        MouseListener mouseListener = new MouseAdapter() {
-//            public void mouseEntered( MouseEvent e )
-//            {}
-// 
-//            public void mouseExited( MouseEvent e )
-//            {}
-// 
-//            public void mouseClicked( MouseEvent e )
-//            {
-//                System.out.println( "clicked " );
-//            }
-// 
-//            public void mousePressed( MouseEvent e )
-//            {
-//                System.out.println( "pressed " );
-//            }
-// 
-//            public void mouseReleased( MouseEvent e )
-//            {
-//                System.out.println( "released " + button.entered);
-//            }
-//        };
-//        button.addMouseListener( mouseListener );
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseEntered( MouseEvent e )
+            {}
+ 
+            public void mouseExited( MouseEvent e )
+            {}
+ 
+            public void mouseClicked( MouseEvent e )
+            {
+                System.out.println( "clicked " );
+            }
+ 
+            public void mousePressed( MouseEvent e )
+            {
+                System.out.println( "pressed " );
+            }
+ 
+            public void mouseReleased( MouseEvent e )
+            {
+                System.out.println( "released " + button.entered);
+            }
+        };
+        button.addMouseListener( mouseListener );
  
     }
 }
