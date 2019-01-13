@@ -16,7 +16,7 @@ public class settingsBtn extends JButton implements MouseListener {
     
         try
         {
-        	i = ImageIO.read(new File("settings.png"));
+        	i = ImageIO.read(new File("C://work//Projects//2018//EvoSim//src//settings.png"));
         }
         catch (IOException e)
         {
