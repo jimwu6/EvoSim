@@ -9,7 +9,7 @@ import java.awt.Event;
 import java.awt.event.*;
 import javax.swing.event.*;
 
-public class Game implements MouseListener, KeyListener, ActionListener, ChangeListener{
+public class Game implements MouseListener, KeyListener, ActionListener, ChangeListener {
 
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
