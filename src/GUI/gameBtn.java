@@ -19,11 +19,7 @@ public class gameBtn extends JButton implements MouseListener {
 
 		try
 		{
-			<<<<<<< HEAD:src/GUI/gameBtn.java
 			i = ImageIO.read(new File(fileName));
-			=======
-					i = ImageIO.read(new File("C://work//Projects//2018//EvoSim//src//settings.png"));
-			>>>>>>> d1454fef7190902c5a7f78ef112b444a3a8f85d6:src/GUI/settingsBtn.java
 		}
 		catch (IOException e)
 		{
@@ -100,7 +96,7 @@ public class gameBtn extends JButton implements MouseListener {
 	// Test routine.
 	public static void main(String[] args) {
 		// Create a button with the label "Jackpot".
-		gameBtn button = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\src\\settings.png", 114, 114);
+		gameBtn button = new gameBtn("C://work//Projects//2018//EvoSim//src//settings.png", 114, 114);
 
 		// Create a frame in which to show the button.
 		JFrame frame = new JFrame();
