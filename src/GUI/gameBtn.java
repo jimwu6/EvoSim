@@ -11,30 +11,30 @@ public class gameBtn extends JButton implements MouseListener {
 	Image i;
 	public boolean entered;
 	int width, height;
-	
-    public gameBtn(String fileName, int w, int h) {
-    	addMouseListener(this);
-    	width = w;
-    	height = h;
-    	
-        try
-        {
-        	i = ImageIO.read(new File(fileName));
-        }
-        catch (IOException e)
-        {
-        }
-        
-        Dimension size = getPreferredSize();
-        size.width = size.height = Math.max(size.width, size.height);
-        setPreferredSize(size);
- 
-        setBounds(11, 11, width, height);
-        
-        // This call causes the JButton not to paint the background.
-        // This allows us to paint a round background.
-        setContentAreaFilled(false);
-    }
+
+	public gameBtn(String fileName, int w, int h) {
+		addMouseListener(this);
+		width = w;
+		height = h;
+
+		try
+		{
+			i = ImageIO.read(new File(fileName));
+		}
+		catch (IOException e)
+		{
+		}
+
+		Dimension size = getPreferredSize();
+		size.width = size.height = Math.max(size.width, size.height);
+		setPreferredSize(size);
+
+		setBounds(11, 11, width, height);
+
+		// This call causes the JButton not to paint the background.
+		// This allows us to paint a round background.
+		setContentAreaFilled(false);
+	}
 
 	// Paint the round background and label.
 	protected void paintComponent(Graphics g) {
@@ -97,6 +97,7 @@ public class gameBtn extends JButton implements MouseListener {
 	public static void main(String[] args) {
 		// Create a button with the label "Jackpot".
 		gameBtn button = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\src\\settings.png", 214, 214);
+		button = new gameBtn("C://work//Projects//2018//EvoSim//src//settings.png", 114, 114);
 
 		// Create a frame in which to show the button.
 		JFrame frame = new JFrame();
