@@ -9,7 +9,7 @@ import javax.imageio.*; // allows image loading
 
 public class gameBtn extends JButton implements MouseListener {
 	Image i;
-	public boolean entered;
+	public boolean entered, clicked = false;
 	int width, height;
 	int value;
 
@@ -70,10 +70,12 @@ public class gameBtn extends JButton implements MouseListener {
 		return shape.contains(x, y);
 	}
 
-	@Override
+	public boolean wasClicked() {
+		return clicked;
+	}
+	
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+		clicked = true;
 	}
 
 
