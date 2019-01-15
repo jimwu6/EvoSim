@@ -97,7 +97,7 @@ public class gameBtn extends JButton implements MouseListener {
 	public static void main(String[] args) {
 		// Create a button with the label "Jackpot".
 		gameBtn button = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\src\\settings.png", 214, 214);
-		button = new gameBtn("C://work//Projects//2018//EvoSim//src//settings.png", 114, 114);
+		//button = new gameBtn("C://work//Projects//2018//EvoSim//src//settings.png", 114, 114);
 
 		// Create a frame in which to show the button.
 		JFrame frame = new JFrame();
