@@ -11,6 +11,7 @@ public class gameBtn extends JButton implements MouseListener {
 	Image i;
 	public boolean entered;
 	int width, height;
+	int value;
 
 	public gameBtn(String fileName, int w, int h) {
 		addMouseListener(this);
@@ -36,6 +37,11 @@ public class gameBtn extends JButton implements MouseListener {
 		setContentAreaFilled(false);
 	}
 
+	public gameBtn(String fileName, int w, int h, int selection) {
+		this(fileName, w, h);
+		
+	}
+	
 	// Paint the round background and label.
 	protected void paintComponent(Graphics g) {
 		Color highlight = new Color(234,221,146);
