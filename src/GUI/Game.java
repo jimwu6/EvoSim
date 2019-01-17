@@ -9,6 +9,8 @@ import java.awt.Event;
 import java.awt.event.*;
 import javax.swing.event.*;
 
+import Ecosystem.*;
+
 public class Game implements MouseListener, KeyListener, ActionListener, ChangeListener {
 
 	public void stateChanged(ChangeEvent e) {
