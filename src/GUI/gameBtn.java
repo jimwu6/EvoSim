@@ -71,7 +71,9 @@ public class gameBtn extends JButton implements MouseListener {
 	}
 
 	public boolean wasClicked() {
-		return clicked;
+		boolean temp = clicked;
+		clicked = false;
+		return temp;
 	}
 	
 	public void mouseClicked(MouseEvent arg0) {
@@ -85,7 +87,7 @@ public class gameBtn extends JButton implements MouseListener {
 
 	public void mouseExited(MouseEvent arg0) {
 		entered = false;
-
+		
 	}
 
 	@Override

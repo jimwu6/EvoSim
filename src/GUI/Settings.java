@@ -13,8 +13,8 @@ import javax.swing.event.*;
 
 public class Settings extends JLayeredPane implements MouseListener, ActionListener, ChangeListener {
 	//field
-	gameBtn sun, cloud, rain, reset, onA, onB, offA, offB;
-	JSlider RR, simSpeed, temp;
+	gameBtn sun, cloud, rain, reset, onA, onB, offA, offB, exit;
+	Slider RR, simSpeed, temp;
 	boolean ndOn;
 	Image image = null;
 	
@@ -36,9 +36,14 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	    reset = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\resetButton.png",this.getSize().height/5, this.getSize().height/5);
 	    onA = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\onButtonA.png",this.getSize().height/4, this.getSize().height/8);
 	    onB = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\onButtonB.png",this.getSize().height/4, this.getSize().height/8);
-	    offA = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\offButtonA.png",this.getSize().height/4, this.getSize().height/8);
+	    offA = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\onffButtonA.png",this.getSize().height/4, this.getSize().height/8);
 	    offB = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\offButtonB.png",this.getSize().height/4, this.getSize().height/8);
-	    
+	    exit = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\exitBtn.png",this.getSize().height/8, this.getSize().height/8);
+		   
+	    simSpeed = new Slider(this.getSize().height/2);
+	    RR = new Slider(this.getSize().height/2);
+	    temp = new Slider(this.getSize().height/2);
+		    
 	    sun.setBounds(this.getSize().height/5, this.getSize().height/3 + this.getSize().height/25, this.getSize().height/5, this.getSize().height/5);
 	    cloud.setBounds(2*this.getSize().height/5, this.getSize().height/3 + this.getSize().height/25, this.getSize().height/5, this.getSize().height/5);
 	    rain.setBounds(3*this.getSize().height/5, this.getSize().height/3 + this.getSize().height/25, this.getSize().height/5, this.getSize().height/5);
@@ -48,13 +53,14 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	    onB.setBounds(5*this.getSize().height/6 + this.getSize().height/16, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
 	    offA.setBounds(4*this.getSize().height/6 - this.getSize().height/12, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
 	    offB.setBounds(4*this.getSize().height/6 - this.getSize().height/12, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
+	    exit.setBounds(14*this.getSize().width/16, this.getSize().height/21, this.getSize().height/8, this.getSize().height/8);
 	    
-	    onA.addMouseListener(this);
-	    if (onA.entered)
-	    {
-	    	System.out.println("HI");
-	    }
-	    
+	    simSpeed.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/6 + this.getSize().height/88, this.getSize().height/2, this.getSize().height/12);
+	    RR.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/2 + 17
+	    		
+	    		*this.getSize().height/256, this.getSize().height/2, this.getSize().height/12);
+	    temp.setBounds(this.getSize().height/2 + this.getSize().height/12, 2*this.getSize().height/3+4*this.getSize().height/30, this.getSize().height/2, this.getSize().height/12);
+		   
 	    Image newImage = image.getScaledInstance(this.getSize().width-20, this.getSize().height-50, Image.SCALE_DEFAULT);
 		 ImageIcon icon = new ImageIcon(newImage);
 		
@@ -67,15 +73,57 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	    // Place the buttons in different layers
 	   add(sun, new Integer(2));
 	   add(cloud, new Integer(2));
-	   add(bg, new Integer(1));
+	   add(bg, new Integer(0));
 	   add(rain, new Integer(2));
 	   add(reset, new Integer(2));
+	   add(onB, new Integer(3));
 	   add(onA, new Integer(3));
-	   //add(onB, new Integer(3));
-	   //add(offA, new Integer(3));
-	   //add(offB, new Integer(3));
+	   add(offA, new Integer(3));
+	   add(offB, new Integer(3));
+	   add(exit, new Integer(3));
+	   
+	   add(simSpeed, new Integer(3));
+	   add(RR, new Integer(3));
+	   add(temp, new Integer(3));
 	}
 
+	protected void paintComponent(Graphics g) {
+		
+		if (onA.wasClicked())
+		{
+			onA.setVisible(false);
+			onB.setVisible(true);
+			offB.setVisible(false);
+			offA.setVisible(true);
+		}
+		
+		if (onB.wasClicked())
+		{
+			onB.setVisible(false);
+			onA.setVisible(true);
+			offA.setVisible(false);
+			offB.setVisible(true);
+		}
+
+		if (offA.wasClicked())
+		{
+			offA.setVisible(false);
+			offB.setVisible(true);
+			onB.setVisible(false);
+			onA.setVisible(true);
+		}
+		
+		if (offB.wasClicked())
+		{
+			offB.setVisible(false);
+			offA.setVisible(true);
+			onA.setVisible(false);
+			onB.setVisible(true);
+		}
+		
+		// This call will paint the label and the focus rectangle.
+		super.paintComponent(g);
+	}
 	
 	@Override
 	public void stateChanged(ChangeEvent arg0) {
