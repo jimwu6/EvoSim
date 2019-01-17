@@ -7,7 +7,7 @@ import java.awt.Event;
 import java.awt.event.*;
 import javax.swing.event.*;
 
-public class MainMenu implements MouseListener, KeyListener, ActionListener {
+public class MainMenu extends JLayeredPane implements MouseListener, KeyListener, ActionListener {
 
 	int btnChoice = 1;
 	
@@ -68,6 +68,14 @@ public class MainMenu implements MouseListener, KeyListener, ActionListener {
 	
 	public static void main(String[] args) {
 		MainMenu menu = new MainMenu();
+		
+		JFrame frame = new JFrame();
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(menu);
+
+		//frame.getContentPane().setLayout(new FlowLayout());
+		frame.setSize(1200, 1200);
+		frame.setVisible(true);
 	}
 
 }

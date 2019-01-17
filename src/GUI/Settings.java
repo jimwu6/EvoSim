@@ -36,7 +36,7 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	    reset = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\resetButton.png",this.getSize().height/5, this.getSize().height/5);
 	    onA = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\onButtonA.png",this.getSize().height/4, this.getSize().height/8);
 	    onB = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\onButtonB.png",this.getSize().height/4, this.getSize().height/8);
-	    offA = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\onffButtonA.png",this.getSize().height/4, this.getSize().height/8);
+	    offA = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\offButtonA.png",this.getSize().height/4, this.getSize().height/8);
 	    offB = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\offButtonB.png",this.getSize().height/4, this.getSize().height/8);
 	    exit = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\exitBtn.png",this.getSize().height/8, this.getSize().height/8);
 		   
@@ -56,9 +56,7 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	    exit.setBounds(14*this.getSize().width/16, this.getSize().height/21, this.getSize().height/8, this.getSize().height/8);
 	    
 	    simSpeed.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/6 + this.getSize().height/88, this.getSize().height/2, this.getSize().height/12);
-	    RR.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/2 + 17
-	    		
-	    		*this.getSize().height/256, this.getSize().height/2, this.getSize().height/12);
+	    RR.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/2 + 17*this.getSize().height/256, this.getSize().height/2, this.getSize().height/12);
 	    temp.setBounds(this.getSize().height/2 + this.getSize().height/12, 2*this.getSize().height/3+4*this.getSize().height/30, this.getSize().height/2, this.getSize().height/12);
 		   
 	    Image newImage = image.getScaledInstance(this.getSize().width-20, this.getSize().height-50, Image.SCALE_DEFAULT);
@@ -168,7 +166,7 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	}
 	
 	public static void main (String[] args) {
-		Settings window = new Settings(825);
+		Settings window = new Settings(625);
 		// Create a frame in which to show the button.
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);

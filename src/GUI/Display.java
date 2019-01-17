@@ -19,7 +19,7 @@ public class Display extends JFrame implements MouseListener{
 		gameBtn settings = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\src\\settings.png", 114, 114);
 		settings.addMouseListener(this);
 		settings.setPreferredSize(new Dimension(114,114));
-		
+
 		drawArea board = new drawArea(600, 600);
 		
 		north.add(board);
@@ -35,7 +35,8 @@ public class Display extends JFrame implements MouseListener{
 		setLocationRelativeTo(null);
 	}
     
-    class drawArea extends JPanel {
+
+	class drawArea extends JPanel {
 
     	public drawArea (int width, int height)
 		{
