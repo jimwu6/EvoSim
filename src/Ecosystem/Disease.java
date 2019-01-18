@@ -1,10 +1,13 @@
 package Ecosystem;
 
-public abstract class Disease {
+public class Disease {
+
 	public int strength, expiration, area;
-	public void hurt(){
+
+	public void hurt() {
 		
 	}
+	
 	public void infect(){
 		
 	}
