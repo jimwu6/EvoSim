@@ -3,8 +3,7 @@ package GUI;
 import java.util.*;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 import javax.imageio.*;
 import javax.swing.*;
@@ -53,10 +52,18 @@ public class Display extends JFrame implements MouseListener{
 		}
     }
 
-    class Advance {
+    class Advance implements ActionListener {
 
-        Territory territory;
-
+        Landscape landscape;
+        
+        public Advance(Landscape l) {
+        	this.landscape = l;
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+        	landscape.advance();
+        	repaint();
+        }
     }
 
     public static void main (String[] args) {
