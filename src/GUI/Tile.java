@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 import Ecosystem.Animal;
 
-public class Tile extends JComponent {
+public class Tile {
 
     ArrayList<Animal> animals;
     String habitat, decor = null;
@@ -29,7 +29,7 @@ public class Tile extends JComponent {
     }
     
     public Tile(String h, String d) {
-        super();
+        this(h);
         decor = d;
         try
 		{

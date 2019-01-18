@@ -2,43 +2,57 @@ package GUI;
 
 import java.util.*;
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.Event;
+
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.event.*;
 
-public class MainMenu extends JLayeredPane implements MouseListener, KeyListener, ActionListener {
+public class MainMenu extends JLayeredPane implements MouseListener {
 
 	int btnChoice = 1;
+	int w, h;
+	Image bg = null, title = null;
 	
-	public MainMenu() {
+	public MainMenu(int width) {
+		w = width;
+		h = w * 3 / 4;
 		
-	}
-	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		setSize(w, h);
 		
-	}
-
-	public void keyTyped(KeyEvent e) {
-		int keyCode = e.getKeyCode();
+		try
+        {
+        	bg = ImageIO.read(new File("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\bg.png"));
+        	title = ImageIO.read(new File("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\title.png"));
+        	
+        }
+        catch (IOException e)
+        {
+        }
 		
-		if (keyCode == KeyEvent.VK_UP) {						// for navigation
-			btnChoice = btnChoice <= 1? btnChoice = 4 : btnChoice--;	// move up one button
-		}
-		else if(keyCode == KeyEvent.VK_DOWN) {
-			btnChoice = btnChoice >= 4? btnChoice = 1 : btnChoice++;	// move down one button
-		}			
-	}
-
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+		Image newBG = bg.getScaledInstance(this.getSize().width, this.getSize().height, Image.SCALE_DEFAULT);
+		Image newTitle = title.getScaledInstance(3*this.getSize().width/4, 2*this.getSize().height/3, Image.SCALE_DEFAULT);
+		ImageIcon background = new ImageIcon(newBG);
+		ImageIcon finalTitle = new ImageIcon(newTitle);
 		
-	}
-
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		 JLabel pic = new JLabel(background);	 
+		 JLabel ttl = new JLabel(finalTitle);
+		 JPanel bg = new JPanel();
+		 JPanel ttlPanel = new JPanel();
+		 bg.add(ttl);
+		 bg.add(pic);
+		 
+		 //bg.setVisible(true);
+		 ttl.setVisible(true);
+		 bg.setBounds(0, 0, getSize().width, getSize().height);
+		 ttl.setBounds(1, 1, getSize().width/2, getSize().height/6);
+		 
+		 add (bg, new Integer(0));
+		 add (ttlPanel, new Integer(1));
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -67,7 +81,7 @@ public class MainMenu extends JLayeredPane implements MouseListener, KeyListener
 	}
 	
 	public static void main(String[] args) {
-		MainMenu menu = new MainMenu();
+		MainMenu menu = new MainMenu(555);
 		
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);

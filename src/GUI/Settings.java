@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import javax.swing.event.*;
 
-public class Settings extends JLayeredPane implements MouseListener, ActionListener, ChangeListener {
+public class Settings extends JLayeredPane implements MouseListener {
 	//field
 	gameBtn sun, cloud, rain, reset, onA, onB, offA, offB, exit;
 	Slider RR, simSpeed, temp;
@@ -29,7 +29,7 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	        {
 	        }
 		 
-		 // Create 3 buttons
+		 // Create new buttons
 		sun = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\sunButton.png",this.getSize().height/5, this.getSize().height/5);
 	    cloud = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\cloudButton.png",this.getSize().height/5, this.getSize().height/5);
 	    rain = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\rainButton.png",this.getSize().height/5, this.getSize().height/5);
@@ -60,7 +60,7 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	    temp.setBounds(this.getSize().height/2 + this.getSize().height/12, 2*this.getSize().height/3+4*this.getSize().height/30, this.getSize().height/2, this.getSize().height/12);
 		   
 	    Image newImage = image.getScaledInstance(this.getSize().width-20, this.getSize().height-50, Image.SCALE_DEFAULT);
-		 ImageIcon icon = new ImageIcon(newImage);
+		ImageIcon icon = new ImageIcon(newImage);
 		
 		 JLabel pic = new JLabel(icon);	 
 		 JPanel bg = new JPanel();
@@ -123,18 +123,6 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 		super.paintComponent(g);
 	}
 	
-	@Override
-	public void stateChanged(ChangeEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
