@@ -15,7 +15,7 @@ public class Display extends JFrame implements MouseListener{
 	public Display()
 	{
 		JPanel north = new JPanel();
-		gameBtn settings = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\src\\settings.png", 114, 114);
+		gameBtn settings = new gameBtn("src\\settings.png", 114, 114);
 		settings.addMouseListener(this);
 		settings.setPreferredSize(new Dimension(114,114));
 

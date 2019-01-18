@@ -23,22 +23,22 @@ public class Settings extends JLayeredPane implements MouseListener {
 		setSize(w, w*5 / 6);
 		 try
 	        {
-	        	image = ImageIO.read(new File("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\settings bg.png"));
+	        	image = ImageIO.read(new File("Summative Graphics\\Menu\\png\\settings bg.png"));
 	        }
 	        catch (IOException e)
 	        {
 	        }
 		 
 		 // Create new buttons
-		sun = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\sunButton.png",this.getSize().height/5, this.getSize().height/5);
-	    cloud = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\cloudButton.png",this.getSize().height/5, this.getSize().height/5);
-	    rain = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\rainButton.png",this.getSize().height/5, this.getSize().height/5);
-	    reset = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\resetButton.png",this.getSize().height/5, this.getSize().height/5);
-	    onA = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\onButtonA.png",this.getSize().height/4, this.getSize().height/8);
-	    onB = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\onButtonB.png",this.getSize().height/4, this.getSize().height/8);
-	    offA = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\offButtonA.png",this.getSize().height/4, this.getSize().height/8);
-	    offB = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\Menu\\png\\offButtonB.png",this.getSize().height/4, this.getSize().height/8);
-	    exit = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\exitBtn.png",this.getSize().height/8, this.getSize().height/8);
+		sun = new gameBtn("Summative Graphics\\Menu\\png\\sunButton.png",this.getSize().height/5, this.getSize().height/5);
+	    cloud = new gameBtn("Summative Graphics\\Menu\\png\\cloudButton.png",this.getSize().height/5, this.getSize().height/5);
+	    rain = new gameBtn("Summative Graphics\\Menu\\png\\rainButton.png",this.getSize().height/5, this.getSize().height/5);
+	    reset = new gameBtn("Summative Graphics\\Menu\\png\\resetButton.png",this.getSize().height/5, this.getSize().height/5);
+	    onA = new gameBtn("Summative Graphics\\Menu\\png\\onButtonA.png",this.getSize().height/4, this.getSize().height/8);
+	    onB = new gameBtn("Summative Graphics\\Menu\\png\\onButtonB.png",this.getSize().height/4, this.getSize().height/8);
+	    offA = new gameBtn("Summative Graphics\\Menu\\png\\offButtonA.png",this.getSize().height/4, this.getSize().height/8);
+	    offB = new gameBtn("Summative Graphics\\Menu\\png\\offButtonB.png",this.getSize().height/4, this.getSize().height/8);
+	    exit = new gameBtn("Summative Graphics\\exitBtn.png",this.getSize().height/8, this.getSize().height/8);
 		   
 	    simSpeed = new Slider(this.getSize().height/2);
 	    RR = new Slider(this.getSize().height/2);

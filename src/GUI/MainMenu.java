@@ -29,10 +29,10 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 		
 		try
         {
-        	bg = ImageIO.read(new File("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\bg.png"));
-        	title = ImageIO.read(new File("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\title.png"));
-        	instructions = ImageIO.read(new File("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\howTo.png"));
-        	credits = ImageIO.read(new File("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\creds.png"));
+        	bg = ImageIO.read(new File("Summative Graphics\\MainMenu\\bg.png"));
+        	title = ImageIO.read(new File("Summative Graphics\\MainMenu\\title.png"));
+        	instructions = ImageIO.read(new File("Summative Graphics\\MainMenu\\howTo.png"));
+        	credits = ImageIO.read(new File("Summative Graphics\\MainMenu\\creds.png"));
         }
         catch (IOException e)
         {
@@ -48,11 +48,11 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 		ImageIcon finalHowTo = new ImageIcon(instructions);
 		ImageIcon finalCreds = new ImageIcon(credits);
 		
-		gameMode = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\gameModeBtn.png",this.getSize().width/4, this.getSize().height/7);
-		simMode = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\simModeBtn.png",this.getSize().width/4, this.getSize().height/7);
-		creds = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\credits.png",this.getSize().width/4, this.getSize().height/7);
-		howTo = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\howToPlayBtn.png",this.getSize().width/4, this.getSize().height/7);
-		exit = new gameBtn ("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\exitBtn.png",this.getSize().height/7, this.getSize().height/7);
+		gameMode = new gameBtn("Summative Graphics\\MainMenu\\gameModeBtn.png",this.getSize().width/4, this.getSize().height/7);
+		simMode = new gameBtn("Summative Graphics\\MainMenu\\simModeBtn.png",this.getSize().width/4, this.getSize().height/7);
+		creds = new gameBtn("Summative Graphics\\MainMenu\\credits.png",this.getSize().width/4, this.getSize().height/7);
+		howTo = new gameBtn("Summative Graphics\\MainMenu\\howToPlayBtn.png",this.getSize().width/4, this.getSize().height/7);
+		exit = new gameBtn ("Summative Graphics\\exitBtn.png",this.getSize().height/7, this.getSize().height/7);
 		
 		JLabel pic = new JLabel(background);	 
 		JLabel ttl = new JLabel(finalTitle);
@@ -111,8 +111,8 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 		
 		else if (btnChoice == -1)
 		{
-			howToLbl.setVisible(false);
-			credsLbl.setVisible(false);
+			//howToLbl.setVisible(false);
+			//credsLbl.setVisible(false);
 			exit.setVisible(false);
 		}
 		// This call will paint the label and the focus rectangle.

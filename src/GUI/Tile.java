@@ -22,7 +22,7 @@ public class Tile {
         
         try
 		{
-			visual = ImageIO.read(new File("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\" + habitat + ".png"));
+			visual = ImageIO.read(new File("Summative Graphics\\" + habitat + ".png"));
 		}
 		catch (IOException e)
 		{
@@ -34,7 +34,7 @@ public class Tile {
         decor = d;
         try
 		{
-			decorPic = ImageIO.read(new File("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\" + decor + ".png"));
+			decorPic = ImageIO.read(new File("Summative Graphics\\" + decor + ".png"));
 		}
 		catch (IOException e)
 		{
