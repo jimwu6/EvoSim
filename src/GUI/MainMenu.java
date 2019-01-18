@@ -17,12 +17,14 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 	int btnChoice = 1;
 	int w, h;
 	Image bg = null, title = null;
+	gameBtn gameMode, simMode, howTo, creds;
 	
 	public MainMenu(int width) {
 		w = width;
 		h = w * 3 / 4;
-		
 		setSize(w, h);
+		
+		addMouseListener(this);
 		
 		try
         {
@@ -39,22 +41,35 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 		ImageIcon background = new ImageIcon(newBG);
 		ImageIcon finalTitle = new ImageIcon(newTitle);
 		
-		 JLabel pic = new JLabel(background);	 
-		 JLabel ttl = new JLabel(finalTitle);
-		 JPanel bg = new JPanel();
-		 JPanel ttlPanel = new JPanel();
-		 bg.add(ttl);
-		 bg.add(pic);
-		 
-		 //bg.setVisible(true);
-		 ttl.setVisible(true);
-		 bg.setBounds(0, 0, getSize().width, getSize().height);
-		 ttl.setBounds(1, 1, getSize().width/2, getSize().height/6);
-		 
-		 add (bg, new Integer(0));
-		 add (ttlPanel, new Integer(1));
+		gameMode = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\gameModeBtn.png",this.getSize().width/4, this.getSize().height/7);
+		simMode = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\simModeBtn.png",this.getSize().width/4, this.getSize().height/7);
+		creds = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\credits.png",this.getSize().width/4, this.getSize().height/7);
+		howTo = new gameBtn("C:\\Data\\Justin\\Grade 11\\ICS\\Summative\\EvoSim\\Summative Graphics\\MainMenu\\howToPlayBtn.png",this.getSize().width/4, this.getSize().height/7);
+		
+		JLabel pic = new JLabel(background);	 
+		JLabel ttl = new JLabel(finalTitle);
+		JPanel bg = new JPanel();
+		JPanel ttlPanel = new JPanel();
+		ttlPanel.add(ttl);
+		bg.add(pic);
+		
+		bg.setBounds(0, 0, getSize().width, getSize().height);
+		ttlPanel.setBounds(1, 1, getSize().width, getSize().height);
+		ttlPanel.setBackground(null);
+		ttlPanel.setOpaque(false);
+		gameMode.setBounds(getSize().width/2 + getSize().width/12, 7* getSize().height/12, this.getSize().width/4, this.getSize().height/7);
+		simMode.setBounds (getSize().width/2 - getSize().width/3, 7* getSize().height/12, this.getSize().width/4, this.getSize().height/7);
+		creds.setBounds(getSize().width/2 + getSize().width/12, 9* getSize().height/12, this.getSize().width/4, this.getSize().height/7);
+		howTo.setBounds(getSize().width/2 - getSize().width/3, 9* getSize().height/12, this.getSize().width/4, this.getSize().height/7);
+				
+		add (bg, new Integer(0));
+		add (ttlPanel, new Integer(1));
+		add (gameMode, new Integer(2));
+		add (simMode, new Integer(2));
+		add (howTo, new Integer(2));
+		add (creds, new Integer(2));
 	}
-
+	
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
@@ -81,7 +96,7 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 	}
 	
 	public static void main(String[] args) {
-		MainMenu menu = new MainMenu(555);
+		MainMenu menu = new MainMenu(611);
 		
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);
