@@ -15,7 +15,7 @@ public class Landscape {
 
 	}
 
-	public void show() {
+	public void show(Graphics g) {
 		
 	}
 	

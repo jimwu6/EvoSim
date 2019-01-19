@@ -4,23 +4,41 @@ import java.util.*;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.Timer;
 
-import java.awt.Event;
 import java.awt.event.*;
 import javax.swing.event.*;
-
 import Ecosystem.*;
 
 public class Game extends JLayeredPane implements MouseListener, KeyListener, ActionListener, ChangeListener {
 
 	int w, h;
 	Landscape landscape;
-	
+	static Timer t;
+	gameBtn start;
 	
 	public Game(int width) {
 		w = width;
 		h = w * 3 / 4;
 		setSize(w, h);
+		
+		start = new gameBtn("Summative Graphics\\MainMenu\\credits.png",this.getSize().width/4, this.getSize().height/7);
+		
+		add(start);
+	}
+	
+	class DrawArea extends JPanel									// drawarea class for drawing landscape
+	{
+		public DrawArea (int width, int height)
+		{
+			// set size 
+			this.setPreferredSize(new Dimension (width, height));
+		}
+
+		public void paintComponent (Graphics g)
+		{
+			landscape.show(g);
+		}
 	}
 	
 	public void stateChanged(ChangeEvent e) {
@@ -56,7 +74,7 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 		
 	}
 
-	public void keyReleased(KeyEvent e) {						// maybe have a boolean thats set false when released for movement
+	public void keyReleased(KeyEvent e) {	// maybe have a boolean thats set false when released for movement
 		// TODO Auto-generated method stub
 		
 	}
@@ -86,4 +104,15 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 		
 	}
 
+	public static void main(String[] args) {
+		Game game = new Game(611);
+		
+		JFrame frame = new JFrame();
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(game);
+
+		//frame.getContentPane().setLayout(new FlowLayout());
+		frame.setSize(800, 800);
+		frame.setVisible(true);
+	}
 }
