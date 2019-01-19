@@ -1,16 +1,41 @@
 package Ecosystem;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.*;
 
 public class Territory{
 	Plant plant;
-    ArrayList <Resource> resource;
-    Image groundImg;
-    Image plantImg;
+    ArrayList <Resource> resources;
+    String ground;
+    Image groundImg = null, plantImg = null;
 
-    public Territory() {
-        resource = new ArrayList<Resource>();
+    public Territory(String gName) {
+        resources = new ArrayList<Resource>();
+        ground = gName;
+        
+        try
+		{
+			groundImg = ImageIO.read(new File("Summative Graphics\\" + gName + ".png"));
+		}
+		catch (IOException e)
+		{
+		}
+    }
+    
+    public Territory(String gName, String pName) {
+    	this(gName);
+    	plant = new Plant(pName);
+
+    	try
+		{
+			plantImg = ImageIO.read(new File("Summative Graphics\\" + pName + ".png"));
+		}
+		catch (IOException e)
+		{
+		}
     }
     
     public void grow() {
@@ -18,7 +43,7 @@ public class Territory{
     }
     
     public void release() {
-    	resource.add(plant.resource);
+    	resources.add(plant.resource);
     }
 
 }

@@ -1,14 +1,18 @@
 package Ecosystem;
 
-import java.util.*;
-
 public class Plant {
 
 	String name;
-	Resource resource;
+	Resource resource = null;
+	int size;
 	
+	public Plant(String plantName) {
+		name = plantName;
+		size = 10;
+	}
+		
 	public Plant(String plantName, String resourceName) {
-		this.name = plantName;
+		this(plantName);
 		resource = new Resource(resourceName);
 	}
 }
@@ -19,10 +23,10 @@ class Resource {
 	String name;
 	
 	public Resource(String n) {
-		this.name = n;
+		name = n;
 	}
 	
 	public int heal() {
-		return this.heal;
+		return heal;
 	}
 }

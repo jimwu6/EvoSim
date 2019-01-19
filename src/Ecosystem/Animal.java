@@ -57,6 +57,7 @@ public abstract class Animal {
 	}
 
 	public Animal birth() {
+		return null;
 		
 	}
 
