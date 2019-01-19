@@ -11,8 +11,18 @@ import javax.swing.event.*;
 
 import Ecosystem.*;
 
-public class Game implements MouseListener, KeyListener, ActionListener, ChangeListener {
+public class Game extends JLayeredPane implements MouseListener, KeyListener, ActionListener, ChangeListener {
 
+	int w, h;
+	Landscape landscape;
+	
+	
+	public Game(int width) {
+		w = width;
+		h = w * 3 / 4;
+		setSize(w, h);
+	}
+	
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
 		

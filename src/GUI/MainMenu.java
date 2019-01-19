@@ -111,8 +111,8 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 		
 		else if (btnChoice == -1)
 		{
-			//howToLbl.setVisible(false);
-			//credsLbl.setVisible(false);
+			howToLbl.setVisible(false);
+			credsLbl.setVisible(false);
 			exit.setVisible(false);
 		}
 		// This call will paint the label and the focus rectangle.
@@ -132,6 +132,8 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 			btnChoice = 4;
 		else if (exit.wasClicked())
 			btnChoice = -1;
+		
+		repaint();
 	}
 
 	public void mousePressed(MouseEvent e) {
