@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import javax.imageio.*;
 
 public class Territory{
-	Plant plant;
+	public Plant plant = null;
     ArrayList <Resource> resources;
     String ground;
-    Image groundImg = null, plantImg = null;
+    public Image groundImg = null, plantImg = null;
 
     public Territory(String gName) {
         resources = new ArrayList<Resource>();
