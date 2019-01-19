@@ -16,7 +16,6 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 	Landscape landscape;
 	static Timer t;
 	gameBtn start;
-	JSlider gameSpeed;
 	
 	public Game(int width) {
 		// set size
@@ -24,13 +23,10 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 		h = w * 3 / 4;
 		setSize(w, h);
 		
-		// create things to add to pane
+		// create things to add to pane  --------------------- PICK A DIFFERENT BUTTON
 		start = new gameBtn("Summative Graphics\\MainMenu\\credits.png",this.getSize().width/4, this.getSize().height/7);
 		
 		add(start);
-		
-		// slider?
-		gameSpeed = new JSlider();
 		
 		// panels to add
 	}
