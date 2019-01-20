@@ -14,7 +14,8 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 	int w, h;
 	Landscape landscape;
 	static Timer t;
-	gameBtn start;
+	gameBtn settings;
+	DrawArea board;
 	
 	public Game(int width) {
 		landscape = new Landscape();
@@ -23,15 +24,18 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		w = width;
 		h = w * 5 / 6;
 		setSize(w, h);
-//		
-//		// create things to add to pane  --------------------- PICK A DIFFERENT BUTTON
-//		start = new gameBtn("Summative Graphics\\MainMenu\\credits.png",this.getSize().width/4, this.getSize().height/7);
-//		
+		
+		// create things to add to pane  --------------------- PICK A DIFFERENT BUTTON
+		settings = new gameBtn("Summative Graphics\\Menu\\settings.png",this.getSize().height/8, this.getSize().height/8);
+		settings.setBounds(this.getSize().height, this.getSize().height/16, this.getSize().height/8, this.getSize().height/8);
+
 		// panels to add
-		DrawArea board = new DrawArea(w, h);
+		board = new DrawArea(w, h);
 
 		//add(start);
-		add(board);
+
+		//add(settings);
+		add(board);	
 	}
 	
 	class DrawArea extends JPanel									// drawarea class for drawing landscape
@@ -46,7 +50,7 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		{
 			landscape.show(g);
 			//g.setColor(Color.BLACK);
-			//g.fillRect(5, 5, 100, 100);
+			//g.fillRect(0, 0, board.getSize().width, board.getSize().height);
 		}
 	}
 	
