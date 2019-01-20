@@ -17,7 +17,7 @@ public class Landscape {
 	int temperature;
 	
 	public Landscape() {
-		land = new Tile[120][100];
+		land = new Tile[100][120];
 		String[] tiles = null;
 		int counter = 0;
 		
