@@ -116,7 +116,7 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 		frame.getContentPane().add(game);
 
 		//frame.getContentPane().setLayout(new FlowLayout());
-		frame.setSize(800, 800);
+		frame.setSize(1200, 1000);
 		frame.setVisible(true);
 	}
 }

@@ -164,7 +164,7 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 		frame.getContentPane().add(menu);
 
 		//frame.getContentPane().setLayout(new FlowLayout());
-		frame.setSize(1200, 1200);
+		frame.setSize(1200, 1000);
 		frame.setVisible(true);
 	}
 

@@ -13,6 +13,7 @@ public class Landscape {
 
 	public Landscape() {
 
+		land = new Tile[10][10];
 	}
 
 	public void show(Graphics g) {
