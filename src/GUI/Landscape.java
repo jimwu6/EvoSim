@@ -82,9 +82,4 @@ public class Landscape {
 		land = nextGen; 
 	}
 	
-	public static void main (String[] args)
-    {
-    	Landscape land = new Landscape();
-    }
-	
 }

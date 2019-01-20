@@ -10,7 +10,7 @@ public class Territory{
 	
 	public Plant plant = null;
     ArrayList <Resource> resources;
-    String ground;
+    public String ground;
     public Image groundImg = null, plantImg = null;
 
     public Territory(String gName) {
@@ -19,7 +19,7 @@ public class Territory{
         
         try
 		{
-			groundImg = ImageIO.read(new File("Summative Graphics\\" + gName + ".jpg"));
+			groundImg = ImageIO.read(new File("Summative Graphics\\" + gName + ".png"));
 		}
 		catch (IOException e)
 		{

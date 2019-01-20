@@ -23,15 +23,15 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 		w = width;
 		h = w * 5 / 6;
 		setSize(w, h);
-		
-		// create things to add to pane  --------------------- PICK A DIFFERENT BUTTON
-		start = new gameBtn("Summative Graphics\\MainMenu\\credits.png",this.getSize().width/4, this.getSize().height/7);
-		
+//		
+//		// create things to add to pane  --------------------- PICK A DIFFERENT BUTTON
+//		start = new gameBtn("Summative Graphics\\MainMenu\\credits.png",this.getSize().width/4, this.getSize().height/7);
+//		
 		// panels to add
 		DrawArea board = new DrawArea(w, h);
 
 		//add(start);
-		add(board);
+		add(board, new Integer(0));
 	}
 	
 	class DrawArea extends JPanel									// drawarea class for drawing landscape
@@ -47,6 +47,7 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 			landscape.show(g);
 		}
 	}
+	
 	
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
@@ -113,6 +114,7 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 
 	public static void main(String[] args) {
 		Game game = new Game(1200);
+		System.out.println(game.landscape.land[1][1].territory.ground);
 		
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);
