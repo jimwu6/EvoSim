@@ -12,8 +12,7 @@ public class Landscape {
 	int temperature;
 
 	public Landscape() {
-
-		land = new Tile[10][10];
+		land = new Tile[120][100];
 	}
 
 	public void show(Graphics g) {
