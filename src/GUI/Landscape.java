@@ -3,6 +3,11 @@ package GUI;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class Landscape {
@@ -13,6 +18,31 @@ public class Landscape {
 
 	public Landscape() {
 		land = new Tile[120][100];
+		String[] tiles = null;
+		int counter = 0;
+		
+		try
+		{
+			
+			Scanner reader = new Scanner(new File("Summative Graphics\\landscape.txt"));
+			while (reader.hasNextLine())
+			{
+				String in =	reader.nextLine();
+				tiles = in.split(",");
+
+				for (int col = 0; col < land[0].length; col++)
+				{
+					land[counter][col] = new Tile (tiles[col]);
+				}
+				
+				counter++;
+			}
+			
+			reader.close();
+		}
+		catch (IOException e)
+		{
+		}
 	}
 
 	public void show(Graphics g) {
@@ -51,4 +81,10 @@ public class Landscape {
 
 		land = nextGen; 
 	}
+	
+	public static void main (String[] args)
+    {
+    	Landscape land = new Landscape();
+    }
+	
 }

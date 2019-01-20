@@ -19,7 +19,7 @@ public class Territory{
         
         try
 		{
-			groundImg = ImageIO.read(new File("Summative Graphics\\" + gName + ".jpg"));
+			groundImg = ImageIO.read(new File("Summative Graphics\\" + gName + ".png"));
 		}
 		catch (IOException e)
 		{
