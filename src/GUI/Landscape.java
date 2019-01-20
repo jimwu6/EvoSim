@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Ecosystem.Animal;
@@ -58,21 +59,35 @@ public class Landscape {
 			for (int col = 0; col < land[0].length; col++)
 			{
 				// draw ground and plant --> maybe move this somewhere?
-				try {
-					g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
+				try {	
+						g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
+					
+					//if (land[row][col].territory.plant != null)
+					//g.drawImage(land[row][col].territory.plantImg, col * 10, row * 10, 10, 10, null);
 					
 				} catch (NullPointerException e) {}
-
-				//if (land[row][col].territory.plant != null)
-					//g.drawImage(land[row][col].territory.plantImg, col * 10, row * 10, 10, 10, null);
 			}
 		}
-
-			try {
-			g.drawImage(land[1][1].animals.get(0).appearance, 1 * 10, 1 * 10, 10, 10, null);
+		
+		for (int row = 0; row < land.length; row++)
+		{
+			for (int col = 0; col < land[0].length; col++)
+			{
+				// draw ground and plant --> maybe move this somewhere?
+				try {	
+					if (!land[row][col].animals.isEmpty())
+						g.drawImage(land[row][col].animals.get(0).appearance, col * 10 - 10, row * 10 - 10, 40, 40, null);					
+				} catch (NullPointerException e) {}
 			}
-		 catch (IndexOutOfBoundsException e) {}
-
+		}
+		
+//		Image appearance = null;
+//		try {
+//			appearance = ImageIO.read(new File("Summative Graphics\\animal2.png"));
+//		}
+//		catch (Exception ex) {}
+//
+//		g.drawImage(appearance, 12, 12, 111,111, null);
 	}
 
 	public void populate(Animal animal) {
@@ -82,11 +97,10 @@ public class Landscape {
         {
             for (int col = 0 ; col < land[0].length ; col++)
             {
-               // if (Math.floor(Math.random () * 10) < 1)
-                //{
-                	//land[row][col].add(animal);
-                	System.out.println("Animal added" + row + ", " + col);
-               // }
+                if (Math.floor(Math.random () * 120) < 1 && !land[row][col].territory.ground.equals("water"))
+                {
+                	land[row][col].add(animal);
+                }
             }
         }
 	}
