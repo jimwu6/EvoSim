@@ -52,10 +52,10 @@ public class Landscape {
 			for (int col = 0; col < land[0].length; col++)
 			{
 				// draw ground and plant --> maybe move this somewhere?
-				g.drawImage(land[row][col].territory.groundImg, col * 7, row * 7, 10, 10, null);
+				g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
 				
-				if (land[row][col].territory.plant != null)
-					g.drawImage(land[row][col].territory.plantImg, col * 7, row * 7, 10, 10, null);
+				//if (land[row][col].territory.plant != null)
+					//g.drawImage(land[row][col].territory.plantImg, col * 10, row * 10, 10, 10, null);
 			}
 		}
 	}

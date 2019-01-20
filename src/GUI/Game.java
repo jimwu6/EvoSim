@@ -5,7 +5,6 @@ import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.Timer;
-
 import java.awt.event.*;
 import javax.swing.event.*;
 import Ecosystem.*;
@@ -18,17 +17,21 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 	gameBtn start;
 	
 	public Game(int width) {
+		landscape = new Landscape();
+		
 		// set size
 		w = width;
-		h = w * 3 / 4;
+		h = w * 5 / 6;
 		setSize(w, h);
 		
 		// create things to add to pane  --------------------- PICK A DIFFERENT BUTTON
 		start = new gameBtn("Summative Graphics\\MainMenu\\credits.png",this.getSize().width/4, this.getSize().height/7);
 		
-		add(start);
-		
 		// panels to add
+		DrawArea board = new DrawArea(w, h);
+
+		//add(start);
+		add(board);
 	}
 	
 	class DrawArea extends JPanel									// drawarea class for drawing landscape
@@ -109,7 +112,7 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 	}
 
 	public static void main(String[] args) {
-		Game game = new Game(611);
+		Game game = new Game(1200);
 		
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);
