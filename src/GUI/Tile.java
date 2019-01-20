@@ -25,8 +25,15 @@ public class Tile {
         territory = new Territory(land, plant);
     }
 
-    public void add(Animal animal)
-    {
+    public void add(Animal animal) {
     	animals.add(animal);
+    }
+    
+    public boolean planted() {
+    	return territory.plant != null;
+    }
+    
+    public boolean occupied() {
+    	return animals.size() > 0;
     }
 }

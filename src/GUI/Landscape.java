@@ -34,9 +34,12 @@ public class Landscape {
 				
 				for (int col = 0; col < land[0].length; col++)
 				{
-					try {
+					try 
+					{
 						land[counter][col] = new Tile (tiles[col]);
-					} catch (ArrayIndexOutOfBoundsException e) {
+					} 
+					catch (ArrayIndexOutOfBoundsException e) 
+					{
 						System.out.println("ohno");
 					}
 				}
@@ -50,6 +53,28 @@ public class Landscape {
 		{
 			System.out.println("error landscape");
 		}
+		
+		// generate plants
+		for (int row = 0; row < land.length; row++)
+		{
+			for (int col = 0; col < land[0].length; col++)
+			{
+				if (land[row][col].territory.ground.equals("grass"))
+				{
+					int chance = (int) (Math.random() * 101);
+					
+					if (chance >= 80)
+						land[row][col].territory.grow("tree");
+					/*else if (chance >= 70)									OTHER PLANTs
+						land[row][col].territory.grow("tree");
+					else if (chance >= 60)
+						land[row][col].territory.grow("tree");
+					else if (chance >= 50)
+						land[row][col].territory.grow("tree");
+						*/
+				}
+			}
+		}
 	}
 
 	public void show(Graphics g) {
@@ -59,13 +84,13 @@ public class Landscape {
 			for (int col = 0; col < land[0].length; col++)
 			{
 				// draw ground and plant --> maybe move this somewhere?
-				try {	
-						g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
-					
-					//if (land[row][col].territory.plant != null)
-					//g.drawImage(land[row][col].territory.plantImg, col * 10, row * 10, 10, 10, null);
-					
-				} catch (NullPointerException e) {}
+				try 
+				{	
+					g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
+					if (land[row][col].territory.plant != null)
+						g.drawImage(land[row][col].territory.plantImg, col * 10, row * 10, land[row][col].territory.plant.size, land[row][col].territory.plant.size, null);
+				} 
+				catch (NullPointerException e) {}
 			}
 		}
 		

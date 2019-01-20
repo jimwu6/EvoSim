@@ -41,8 +41,19 @@ public class Territory{
 		}
     }
     
-    public void grow() {
-    	
+    public void grow(String pName) {
+    	if (plant == null) {
+	    	plant = new Plant(pName);
+	
+	    	try
+			{
+				plantImg = ImageIO.read(new File("Summative Graphics\\" + pName + ".png"));
+			}
+			catch (IOException e)
+			{
+				System.out.println("error plant");
+			}
+    	}
     }
     
     public void release() {
