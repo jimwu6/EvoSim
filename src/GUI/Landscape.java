@@ -15,7 +15,7 @@ public class Landscape {
 	Tile[][] land;
 	String weather;
 	int temperature;
-
+	
 	public Landscape() {
 		land = new Tile[120][100];
 		String[] tiles = null;
@@ -29,10 +29,14 @@ public class Landscape {
 			{
 				String in =	reader.nextLine();
 				tiles = in.split(",");
-
+				
 				for (int col = 0; col < land[0].length; col++)
 				{
-					land[counter][col] = new Tile (tiles[col]);
+					try {
+						land[counter][col] = new Tile (tiles[counter * land[0].length + col]);
+					} catch (ArrayIndexOutOfBoundsException e) {
+						System.out.println("ohno");
+					}
 				}
 				
 				counter++;
@@ -42,6 +46,7 @@ public class Landscape {
 		}
 		catch (IOException e)
 		{
+			System.out.println("error landscape");
 		}
 	}
 
@@ -52,8 +57,10 @@ public class Landscape {
 			for (int col = 0; col < land[0].length; col++)
 			{
 				// draw ground and plant --> maybe move this somewhere?
-				g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
-				
+				try {
+					g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
+				} catch (NullPointerException e) {}
+
 				//if (land[row][col].territory.plant != null)
 					//g.drawImage(land[row][col].territory.plantImg, col * 10, row * 10, 10, 10, null);
 			}

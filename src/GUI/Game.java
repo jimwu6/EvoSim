@@ -9,7 +9,7 @@ import java.awt.event.*;
 import javax.swing.event.*;
 import Ecosystem.*;
 
-public class Game extends JLayeredPane implements MouseListener, KeyListener, ActionListener, ChangeListener {
+public class Game extends JFrame implements MouseListener, KeyListener, ActionListener, ChangeListener {
 
 	int w, h;
 	Landscape landscape;
@@ -31,7 +31,7 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 		DrawArea board = new DrawArea(w, h);
 
 		//add(start);
-		add(board, new Integer(0));
+		add(board);
 	}
 	
 	class DrawArea extends JPanel									// drawarea class for drawing landscape
@@ -45,6 +45,8 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 		public void paintComponent (Graphics g)
 		{
 			landscape.show(g);
+			//g.setColor(Color.BLACK);
+			//g.fillRect(5, 5, 100, 100);
 		}
 	}
 	
@@ -114,14 +116,18 @@ public class Game extends JLayeredPane implements MouseListener, KeyListener, Ac
 
 	public static void main(String[] args) {
 		Game game = new Game(1200);
-		System.out.println(game.landscape.land[1][1].territory.ground);
+		System.out.println(game.landscape.land[0][1].territory.ground);
 		
+		game.setVisible(true);
+		/*
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(game);
+		frame.setContentPane(game);
 
-		//frame.getContentPane().setLayout(new FlowLayout());
+		frame.getContentPane().setLayout(new FlowLayout());
 		frame.setSize(1200, 1000);
 		frame.setVisible(true);
+		*/
 	}
 }

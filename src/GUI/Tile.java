@@ -13,7 +13,7 @@ import Ecosystem.*;
 public class Tile {
 
     public ArrayList<Animal> animals;
-    Territory territory;
+    public Territory territory;
 
     public Tile(String land) {
         animals = new ArrayList<Animal>();
