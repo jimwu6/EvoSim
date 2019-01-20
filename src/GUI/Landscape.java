@@ -17,13 +17,12 @@ public class Landscape {
 	int temperature;
 	
 	public Landscape() {
-		land = new Tile[120][100];
+		land = new Tile[100][120];
 		String[] tiles = null;
 		int counter = 0;
 		
 		try
 		{
-			
 			Scanner reader = new Scanner(new File("Summative Graphics\\landscape.txt"));
 			while (reader.hasNextLine())
 			{
@@ -33,7 +32,7 @@ public class Landscape {
 				for (int col = 0; col < land[0].length; col++)
 				{
 					try {
-						land[counter][col] = new Tile (tiles[counter * land[0].length + col]);
+						land[counter][col] = new Tile (tiles[col]);
 					} catch (ArrayIndexOutOfBoundsException e) {
 						System.out.println("ohno");
 					}
