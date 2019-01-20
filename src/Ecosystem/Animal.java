@@ -11,7 +11,7 @@ public abstract class Animal {
 	//fields
 
 	protected int health, size, speed, lifespan, hunger, thirst;
-	protected Image appearance;
+	public Image appearance = null;
 
 	protected boolean controlled;
 
@@ -24,7 +24,7 @@ public abstract class Animal {
 	// methods
 
 	// constructor
-	public Animal (int size, int speed, int lifespan, String gender) {
+	public Animal (String imageName, int size, int speed, int lifespan, String gender) {
 		this.health = maxStat;
 		this.hunger = maxStat;
 		this.thirst = maxStat;
@@ -35,6 +35,11 @@ public abstract class Animal {
 		
 		this.gender = gender;
 
+		try {
+			appearance = ImageIO.read(new File(imageName));
+		}
+		catch (Exception ex) {}
+		
 		disease = new ArrayList<Disease>();
 	}
 	

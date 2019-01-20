@@ -10,6 +10,8 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+import Ecosystem.Animal;
+
 public class Landscape {
 
 	Tile[][] land;
@@ -58,14 +60,37 @@ public class Landscape {
 				// draw ground and plant --> maybe move this somewhere?
 				try {
 					g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
+					
 				} catch (NullPointerException e) {}
 
 				//if (land[row][col].territory.plant != null)
 					//g.drawImage(land[row][col].territory.plantImg, col * 10, row * 10, 10, 10, null);
 			}
 		}
+
+			try {
+			g.drawImage(land[1][1].animals.get(0).appearance, 1 * 10, 1 * 10, 10, 10, null);
+			}
+		 catch (IndexOutOfBoundsException e) {}
+
 	}
 
+	public void populate(Animal animal) {
+
+        //for every cell in the grid, place true or false value --> true is more likely with a higher density
+        for (int row = 0 ; row < land.length ; row++)
+        {
+            for (int col = 0 ; col < land[0].length ; col++)
+            {
+               // if (Math.floor(Math.random () * 10) < 1)
+                //{
+                	//land[row][col].add(animal);
+                	System.out.println("Animal added" + row + ", " + col);
+               // }
+            }
+        }
+	}
+	
 	public void advance() {
 
 		Tile nextGen[][] = new Tile [land.length][land[0].length];

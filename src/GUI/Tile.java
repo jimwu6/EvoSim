@@ -25,4 +25,8 @@ public class Tile {
         territory = new Territory(land, plant);
     }
 
+    public void add(Animal animal)
+    {
+    	animals.add(animal);
+    }
 }
