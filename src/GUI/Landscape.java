@@ -123,7 +123,7 @@ public class Landscape {
         {
             for (int col = 0 ; col < land[0].length ; col++)
             {
-                if (Math.floor(Math.random () * 120) < 1 && !land[row][col].territory.ground.equals("water"))
+                if (Math.floor(Math.random () * 650) < 1 && !land[row][col].territory.ground.equals("water"))
                 {
                 	land[row][col].add(animal);
                 }
@@ -196,9 +196,10 @@ public class Landscape {
 		{
 			for (int col = 0; col < land[0].length; col++)
 			{
-				
-				if (land[row][col].occupied())
+				if (land[row][col].occupied() && land[row][col].animal.health() >= 1)
 				{	
+					land[row][col].animal.updateAppetite();
+					
 					int upDown = (int) (Math.random() * 3) - 1;
 					int leftRight = (int) (Math.random() * 3) - 1;
 					
@@ -219,6 +220,7 @@ public class Landscape {
 						nextGen[row][col + leftRight].add(land[row][col].animal);
 					else if (!nextGen[row][col].occupied())
 						nextGen[row][col + leftRight].add(land[row][col].animal);
+				
 				}
 			}
 		}

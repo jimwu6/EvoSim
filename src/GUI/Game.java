@@ -71,6 +71,7 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
         if (e.getSource().equals(t))
         {
             landscape.advance();
+			System.out.println("______________________________________");
         }
 		
         repaint();
