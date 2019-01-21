@@ -125,13 +125,17 @@ public class Landscape {
             {
                 if (Math.floor(Math.random () * 650) < 1 && !land[row][col].territory.ground.equals("water"))
                 {
-                	land[row][col].add(animal);
+                	Animal newAnimal = null;
+                	if (animal instanceof Mammal)
+						newAnimal = new Mammal((Mammal) animal);
+                	
+                	land[row][col].add(newAnimal);
                 }
             }
         }
 	}
 	
-	public  ArrayList<String> findResource(int row, int col, Resource r) {
+	public  ArrayList<String> findResource(int row, int col, natResource r) {
 		ArrayList<String> arr = new ArrayList<String>();
 		
 		int vis[][] = new int[land.length][land[0].length];
@@ -200,6 +204,9 @@ public class Landscape {
 				{	
 					System.out.println(row + ", " + col);
 					land[row][col].animal.updateAppetite();
+						
+					if (land[row][col].animal instanceof Mammal)
+						System.out.println("MAMMAL");
 					
 					int upDown = (int) (Math.random() * 3) - 1;
 					int leftRight = (int) (Math.random() * 3) - 1;

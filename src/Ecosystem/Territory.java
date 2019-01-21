@@ -9,12 +9,12 @@ import javax.imageio.*;
 public class Territory{
 	
 	public Plant plant = null;
-    ArrayList <Resource> resources;
+    ArrayList <natResource> resources;
     public String ground;
     public Image groundImg = null, plantImg = null;
 
     public Territory(String gName) {
-        resources = new ArrayList<Resource>();
+        resources = new ArrayList<natResource>();
         ground = gName;
         
         try

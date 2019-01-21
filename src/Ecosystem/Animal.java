@@ -6,7 +6,7 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 
-public abstract class Animal {
+public class Animal {
 
 	//fields
 
@@ -15,7 +15,7 @@ public abstract class Animal {
 
 	protected boolean controlled;
 
-	protected String gender;
+	protected String gender, imageName;
 
 	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
@@ -29,7 +29,7 @@ public abstract class Animal {
 		this.health = maxStat;
 		this.hunger = maxStat;
 		this.thirst = maxStat;
-
+		this.imageName = imageName;
 		this.size = size;
 		this.speed = speed;
 		this.lifespan = lifespan;
@@ -43,6 +43,27 @@ public abstract class Animal {
 		
 		disease = new ArrayList<Disease>();
 		moveList = new ArrayList<String>();
+	}
+	
+	public Animal(Animal animal)
+	{
+		this.health = maxStat;
+		this.hunger = maxStat;
+		this.thirst = maxStat;
+		this.imageName = animal.imageName;
+		this.size = animal.size;
+		this.speed = animal.speed;
+		this.lifespan = animal.lifespan;
+		
+		this.gender = animal.gender;
+
+		try {
+			appearance = ImageIO.read(new File(imageName));
+		}
+		catch (Exception ex) {}
+		
+		disease = animal.disease;
+		moveList = animal.moveList;
 	}
 	
 	public void updateImage(String imageName) {
