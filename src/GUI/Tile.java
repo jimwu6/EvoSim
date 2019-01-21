@@ -12,21 +12,19 @@ import Ecosystem.*;
 
 public class Tile {
 
-    public ArrayList<Animal> animals;
+    public Animal animal = null;
     public Territory territory;
 
     public Tile(String land) {
-        animals = new ArrayList<Animal>();
         territory = new Territory(land);
     }
     
     public Tile(String land, String plant) {
-    	animals = new ArrayList<Animal>();
         territory = new Territory(land, plant);
     }
 
     public void add(Animal animal) {
-    	animals.add(animal);
+    	this.animal = animal;
     }
     
     public boolean planted() {
@@ -34,6 +32,6 @@ public class Tile {
     }
     
     public boolean occupied() {
-    	return animals.size() > 0;
+    	return animal != null;
     }
 }

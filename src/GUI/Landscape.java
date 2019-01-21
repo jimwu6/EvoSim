@@ -61,9 +61,9 @@ public class Landscape {
 			{
 				if (land[row][col].territory.ground.equals("grass"))
 				{
-					int chance = (int) (Math.random() * 101);
+					int chance = (int) (Math.random() * 201);
 					
-					if (chance >= 80)
+					if (chance == 93)
 						land[row][col].territory.grow("tree");
 					/*else if (chance >= 70)									OTHER PLANTs
 						land[row][col].territory.grow("tree");
@@ -87,8 +87,7 @@ public class Landscape {
 				try 
 				{	
 					g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
-					if (land[row][col].territory.plant != null)
-						g.drawImage(land[row][col].territory.plantImg, col * 10, row * 10, land[row][col].territory.plant.size, land[row][col].territory.plant.size, null);
+					
 				} 
 				catch (NullPointerException e) {}
 			}
@@ -100,8 +99,10 @@ public class Landscape {
 			{
 				// draw ground and plant --> maybe move this somewhere?
 				try {	
-					if (!land[row][col].animals.isEmpty())
-						g.drawImage(land[row][col].animals.get(0).appearance, col * 10 - 10, row * 10 - 10, 40, 40, null);					
+					if (land[row][col].animal != null)
+						g.drawImage(land[row][col].animal.appearance, col * 10 - 10, row * 10 - 10, 40, 40, null);					
+					if (land[row][col].territory.plant != null)
+						g.drawImage(land[row][col].territory.plantImg, col * 10 -land[row][col].territory.plant.size/2 , row * 10 - land[row][col].territory.plant.size/2, land[row][col].territory.plant.size, land[row][col].territory.plant.size, null);
 				} catch (NullPointerException e) {}
 			}
 		}
@@ -138,13 +139,22 @@ public class Landscape {
 		{
 			for (int col = 0; col < land[0].length; col++)
 			{
-				for (int i = 0; i < land[row][col].animals.size(); i++)
+				if (land[row][col].animal != null)
 				{
 					int upDown = (int) (Math.random() * 3 - 1);
 					int leftRight = (int) (Math.random() * 3 - 1);
+					
+					if (col == 0 && leftRight == -1)
+						leftRight = 1;
+					if (col == land[0].length-1 && leftRight == 1)
+						leftRight = -1;
+					if (row == 0 && upDown == -1)
+						upDown = 1;
+					if (row == land.length-1 && upDown == 1)
+						upDown = -1;
 	
-					nextGen[row + upDown][col + leftRight].animals.add(land[row][col].animals.get(0));
-					land[row][col].animals.remove(0);
+					nextGen[row + upDown][col + leftRight].add(land[row][col].animal);
+					land[row][col].animal = null;
 				}
 			}
 		}

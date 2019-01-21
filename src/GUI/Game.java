@@ -9,6 +9,7 @@ import java.awt.event.*;
 import javax.swing.event.*;
 import Ecosystem.*;
 
+
 public class Game extends JFrame implements MouseListener, KeyListener, ActionListener, ChangeListener {
 
 	int w, h;
@@ -19,6 +20,11 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 	
 	public Game(int width) {
 		landscape = new Landscape();
+		t = new Timer(1999, this);
+
+		
+		t.start();
+		t.addActionListener(this);
 		
 		// set size
 		w = width;
@@ -61,8 +67,13 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+
+        if (e.getSource().equals(t))
+        {
+            landscape.advance();
+        }
 		
+        repaint();
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -122,6 +133,7 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		Game game = new Game(1200);
 		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
 		game.landscape.populate(animal);
+		System.out.println("HI");
 		game.setVisible(true);
 		/*
 		JFrame frame = new JFrame();

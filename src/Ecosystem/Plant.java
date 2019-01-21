@@ -8,7 +8,7 @@ public class Plant {
 	
 	public Plant(String plantName) {
 		name = plantName;
-		size = 10;
+		size = 111;
 	}
 		
 	public Plant(String plantName, String resourceName) {
