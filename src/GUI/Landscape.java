@@ -150,6 +150,7 @@ public class Landscape {
 			{
 				if (land[row][col].occupied() && land[row][col].animal.health() >= 1)
 				{	
+					System.out.println(row + ", " + col);
 					land[row][col].animal.updateAppetite();
 					
 					int upDown = (int) (Math.random() * 3) - 1;
