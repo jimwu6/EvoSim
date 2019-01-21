@@ -134,13 +134,19 @@ public class Landscape {
 	public void advance() {
 
 		Tile nextGen[][] = new Tile [land.length][land[0].length];
-
+		
+		for (int row = 0; row < land.length; row++) {
+			for (int col = 0; col < land[0].length; col++)
+				nextGen[row][col] = new Tile(land[row][col]);
+		}
+		
 		for (int row = 0; row < land.length; row++)
 		{
 			for (int col = 0; col < land[0].length; col++)
 			{
-				if (land[row][col].animal != null)
-				{
+				
+				if (land[row][col].occupied())
+				{	
 					int upDown = (int) (Math.random() * 3 - 1);
 					int leftRight = (int) (Math.random() * 3 - 1);
 					
@@ -152,7 +158,7 @@ public class Landscape {
 						upDown = 1;
 					if (row == land.length-1 && upDown == 1)
 						upDown = -1;
-	
+					
 					nextGen[row + upDown][col + leftRight].add(land[row][col].animal);
 					land[row][col].animal = null;
 				}

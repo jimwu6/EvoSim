@@ -4,7 +4,7 @@ public class smallBird extends Bird implements Carnivore, Herbivore{
 
 	public int featherVibrance;
 	public String colour;
-	
+	  
 	public void sing(){
 		
 	}

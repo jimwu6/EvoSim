@@ -77,11 +77,7 @@ public abstract class Animal {
 	public void injured (Integer damage) {
 		health -= damage;
 	}
-
-	public void advanceAnimal() {
-
-	}
-
+	
 	// accessors
 	public int health() {
 		return this.health;

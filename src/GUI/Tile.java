@@ -22,7 +22,12 @@ public class Tile {
     public Tile(String land, String plant) {
         territory = new Territory(land, plant);
     }
-
+    
+    public Tile(Tile copy) {
+    	this.animal = copy.animal;
+    	this.territory = copy.territory;
+    }
+    
     public void add(Animal animal) {
     	this.animal = animal;
     }
