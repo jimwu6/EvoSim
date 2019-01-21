@@ -78,6 +78,26 @@ public abstract class Animal {
 		health -= damage;
 	}
 	
+	public void updateAppetite () {
+		if (Math.random() < .5)
+		{
+			thirst -= 3;
+			hunger -= 2;
+		}
+		
+		if (thirst < 35)
+		{
+			health -= 5;
+		}
+		
+		if (hunger < 35)
+		{
+			health -= 5;
+		}
+		
+		System.out.println(hunger + ", " + thirst + ", " + health);
+	}
+	
 	// accessors
 	public int health() {
 		return this.health;
