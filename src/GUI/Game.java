@@ -133,7 +133,6 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		Game game = new Game(1200);
 		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
 		game.landscape.populate(animal);
-		System.out.println("HI");
 		game.setVisible(true);
 		/*
 		JFrame frame = new JFrame();

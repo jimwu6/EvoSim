@@ -137,7 +137,11 @@ public class Landscape {
 		
 		for (int row = 0; row < land.length; row++) {
 			for (int col = 0; col < land[0].length; col++)
+			{
 				nextGen[row][col] = new Tile(land[row][col]);
+				nextGen[row][col].animal = null;
+			}
+			
 		}
 		
 		for (int row = 0; row < land.length; row++)
@@ -147,8 +151,8 @@ public class Landscape {
 				
 				if (land[row][col].occupied())
 				{	
-					int upDown = (int) (Math.random() * 3 - 1);
-					int leftRight = (int) (Math.random() * 3 - 1);
+					int upDown = (int) (Math.random() * 3) - 1;
+					int leftRight = (int) (Math.random() * 3) - 1;
 					
 					if (col == 0 && leftRight == -1)
 						leftRight = 1;
@@ -159,8 +163,14 @@ public class Landscape {
 					if (row == land.length-1 && upDown == 1)
 						upDown = -1;
 					
-					nextGen[row + upDown][col + leftRight].add(land[row][col].animal);
-					land[row][col].animal = null;
+					if (!nextGen[row + upDown][col + leftRight].occupied() && !nextGen[row + upDown][col + leftRight].territory.ground.equals("water"))
+						nextGen[row + upDown][col + leftRight].add(land[row][col].animal);
+					else if (!nextGen[row + upDown][col].occupied() && !nextGen[row + upDown][col].territory.ground.equals("water"))
+						nextGen[row + upDown][col].add(land[row][col].animal);
+					else if (!nextGen[row][col + leftRight].occupied() && !nextGen[row][col + leftRight].territory.ground.equals("water"))
+						nextGen[row][col + leftRight].add(land[row][col].animal);
+					else if (!nextGen[row][col].occupied())
+						nextGen[row][col + leftRight].add(land[row][col].animal);
 				}
 			}
 		}
