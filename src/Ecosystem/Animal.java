@@ -18,7 +18,8 @@ public abstract class Animal {
 	protected String gender;
 
 	protected ArrayList<Disease> disease;
-
+	public ArrayList<String> moveList;
+	
 	protected static int maxStat = 100;
 	
 	// methods
@@ -41,6 +42,7 @@ public abstract class Animal {
 		catch (Exception ex) {}
 		
 		disease = new ArrayList<Disease>();
+		moveList = new ArrayList<String>();
 	}
 	
 	public void updateImage(String imageName) {

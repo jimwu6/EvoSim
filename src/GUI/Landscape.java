@@ -11,7 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Ecosystem.Animal;
+import Ecosystem.*;
 
 public class Landscape {
 
@@ -129,6 +129,54 @@ public class Landscape {
                 }
             }
         }
+	}
+	
+	public  ArrayList<String> findResource(int row, int col, Resource r) {
+		ArrayList<String> arr = new ArrayList<String>();
+		
+		int vis[][] = new int[land.length][land[0].length];
+		Queue<Integer> q = new LinkedList<Integer>();
+		
+		q.add(row);
+		q.add(col);
+		
+		while (!q.isEmpty()) {
+			int curX = q.poll();
+			int curY = q.poll();
+				
+			// mark the wanted thing with -1
+			
+			//left
+			if (curY-1 > 0) {
+				if (vis[curX][curY] == 0) {
+					q.add(curX);
+					q.add(curY-1);
+				}
+			}
+			// right
+			if (curY+1 > 0) {
+				if (vis[curX][curY+1] == 0) {
+					q.add(curX);
+					q.add(curY+1);
+				}
+			}
+			// up
+			if (curX-1 > 0) {
+				if (vis[curX-1][curY] == 0) {
+					q.add(curX-1);
+					q.add(curY);
+				}
+			}
+			// down
+			if (curX+1 > 0) {
+				if (vis[curX+1][curY] == 0) {
+					q.add(curX+1);
+					q.add(curY);
+				}
+			}
+		}
+		
+		return arr;
 	}
 	
 	public void advance() {
