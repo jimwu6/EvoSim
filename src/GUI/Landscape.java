@@ -134,11 +134,7 @@ public class Landscape {
 			}
 		}
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 64778777faf14875e21c4d7020ee22930cd429ac
 	public  ArrayList<String> findResource(int row, int col, Resource r) {
 		ArrayList<String> arr = new ArrayList<String>();
 
@@ -208,17 +204,14 @@ public class Landscape {
 			{
 				if (land[row][col].occupied() && land[row][col].animal.health() >= 1)
 				{	
-<<<<<<< HEAD
 					System.out.println(row + ", " + col);
 					land[row][col].animal.update();
 
 					if (land[row][col].animal instanceof Mammal)
 						System.out.println("MAMMAL");
 
-=======
-					land[row][col].animal.updateAppetite();
+					land[row][col].animal.update();
 					
->>>>>>> 64778777faf14875e21c4d7020ee22930cd429ac
 					int upDown = (int) (Math.random() * 3) - 1;
 					int leftRight = (int) (Math.random() * 3) - 1;
 
@@ -239,8 +232,6 @@ public class Landscape {
 						nextGen[row][col + leftRight].add(land[row][col].animal);
 					else if (!nextGen[row][col].occupied())
 						nextGen[row][col + leftRight].add(land[row][col].animal);
-<<<<<<< HEAD
-
 				}
 			}
 		}
@@ -276,8 +267,6 @@ public class Landscape {
 
 					if (baby != null)
 						nextGen[emptyRow][emptyCol].add(baby);
-=======
->>>>>>> 64778777faf14875e21c4d7020ee22930cd429ac
 				}
 			}
 		}
