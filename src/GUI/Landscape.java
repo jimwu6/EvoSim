@@ -18,12 +18,12 @@ public class Landscape {
 	Tile[][] land;
 	String weather;
 	int temperature;
-	
+
 	public Landscape() {
 		land = new Tile[100][120];
 		String[] tiles = null;
 		int counter = 0;
-		
+
 		try
 		{
 			Scanner reader = new Scanner(new File("Summative Graphics\\landscape.txt"));
@@ -31,7 +31,7 @@ public class Landscape {
 			{
 				String in =	reader.nextLine();
 				tiles = in.split(",");
-				
+
 				for (int col = 0; col < land[0].length; col++)
 				{
 					try 
@@ -43,17 +43,17 @@ public class Landscape {
 						System.out.println("ohno");
 					}
 				}
-				
+
 				counter++;
 			}
-			
+
 			reader.close();
 		}
 		catch (IOException e)
 		{
 			System.out.println("error landscape");
 		}
-		
+
 		// generate plants
 		for (int row = 0; row < land.length; row++)
 		{
@@ -62,7 +62,7 @@ public class Landscape {
 				if (land[row][col].territory.ground.equals("grass"))
 				{
 					int chance = (int) (Math.random() * 201);
-					
+
 					if (chance == 93)
 						land[row][col].territory.grow("tree");
 					/*else if (chance >= 70)									OTHER PLANTs
@@ -71,14 +71,14 @@ public class Landscape {
 						land[row][col].territory.grow("tree");
 					else if (chance >= 50)
 						land[row][col].territory.grow("tree");
-						*/
+					 */
 				}
 			}
 		}
 	}
 
 	public void show(Graphics g) {
-		
+
 		for (int row = 0; row < land.length; row++)
 		{
 			for (int col = 0; col < land[0].length; col++)
@@ -87,69 +87,69 @@ public class Landscape {
 				try 
 				{	
 					g.drawImage(land[row][col].territory.groundImg, col * 10, row * 10, 10, 10, null);
-					
+
 				} 
 				catch (NullPointerException e) {}
 			}
 		}
-		
+
 		for (int row = 0; row < land.length; row++)
 		{
 			for (int col = 0; col < land[0].length; col++)
 			{
 				// draw ground and plant --> maybe move this somewhere?
 				try {	
-					if (land[row][col].animal != null)
+					if (land[row][col].occupied())
 						g.drawImage(land[row][col].animal.appearance, col * 10 - 10, row * 10 - 10, 40, 40, null);					
 					if (land[row][col].territory.plant != null)
 						g.drawImage(land[row][col].territory.plantImg, col * 10 -land[row][col].territory.plant.size/2 , row * 10 - land[row][col].territory.plant.size/2, land[row][col].territory.plant.size, land[row][col].territory.plant.size, null);
 				} catch (NullPointerException e) {}
 			}
 		}
-		
-//		Image appearance = null;
-//		try {
-//			appearance = ImageIO.read(new File("Summative Graphics\\animal2.png"));
-//		}
-//		catch (Exception ex) {}
-//
-//		g.drawImage(appearance, 12, 12, 111,111, null);
+
+		//		Image appearance = null;
+		//		try {
+		//			appearance = ImageIO.read(new File("Summative Graphics\\animal2.png"));
+		//		}
+		//		catch (Exception ex) {}
+		//
+		//		g.drawImage(appearance, 12, 12, 111,111, null);
 	}
 
 	public void populate(Animal animal) {
 
-        //for every cell in the grid, place true or false value --> true is more likely with a higher density
-        for (int row = 0 ; row < land.length ; row++)
-        {
-            for (int col = 0 ; col < land[0].length ; col++)
-            {
-                if (Math.floor(Math.random () * 650) < 1 && !land[row][col].territory.ground.equals("water"))
-                {
-                	Animal newAnimal = null;
-                	if (animal instanceof Mammal)
+		//for every cell in the grid, place true or false value --> true is more likely with a higher density
+		for (int row = 0 ; row < land.length ; row++)
+		{
+			for (int col = 0 ; col < land[0].length ; col++)
+			{
+				if (Math.floor(Math.random () * 650) < 1 && !land[row][col].territory.ground.equals("water"))
+				{
+					Animal newAnimal = null;
+					if (animal instanceof Mammal)
 						newAnimal = new Mammal((Mammal) animal);
-                	
-                	land[row][col].add(newAnimal);
-                }
-            }
-        }
+
+					land[row][col].add(newAnimal);
+				}
+			}
+		}
 	}
-	
-	public  ArrayList<String> findResource(int row, int col, natResource r) {
+
+	public  ArrayList<String> findResource(int row, int col, Resource r) {
 		ArrayList<String> arr = new ArrayList<String>();
-		
+
 		int vis[][] = new int[land.length][land[0].length];
 		Queue<Integer> q = new LinkedList<Integer>();
-		
+
 		q.add(row);
 		q.add(col);
-		
+
 		while (!q.isEmpty()) {
 			int curX = q.poll();
 			int curY = q.poll();
-				
+
 			// mark the wanted thing with -1
-			
+
 			//left
 			if (curY-1 > 0) {
 				if (vis[curX][curY] == 0) {
@@ -179,23 +179,25 @@ public class Landscape {
 				}
 			}
 		}
-		
+
 		return arr;
 	}
-	
+
 	public void advance() {
 
+		// set up nextGen array
 		Tile nextGen[][] = new Tile [land.length][land[0].length];
-		
+
 		for (int row = 0; row < land.length; row++) {
 			for (int col = 0; col < land[0].length; col++)
 			{
 				nextGen[row][col] = new Tile(land[row][col]);
 				nextGen[row][col].animal = null;
 			}
-			
+
 		}
-		
+
+		// coordinate animal movement
 		for (int row = 0; row < land.length; row++)
 		{
 			for (int col = 0; col < land[0].length; col++)
@@ -203,14 +205,14 @@ public class Landscape {
 				if (land[row][col].occupied() && land[row][col].animal.health() >= 1)
 				{	
 					System.out.println(row + ", " + col);
-					land[row][col].animal.updateAppetite();
-						
+					land[row][col].animal.update();
+
 					if (land[row][col].animal instanceof Mammal)
 						System.out.println("MAMMAL");
-					
+
 					int upDown = (int) (Math.random() * 3) - 1;
 					int leftRight = (int) (Math.random() * 3) - 1;
-					
+
 					if (col == 0 && leftRight == -1)
 						leftRight = 1;
 					if (col == land[0].length-1 && leftRight == 1)
@@ -219,7 +221,7 @@ public class Landscape {
 						upDown = 1;
 					if (row == land.length-1 && upDown == 1)
 						upDown = -1;
-					
+
 					if (!nextGen[row + upDown][col + leftRight].occupied() && !nextGen[row + upDown][col + leftRight].territory.ground.equals("water"))
 						nextGen[row + upDown][col + leftRight].add(land[row][col].animal);
 					else if (!nextGen[row + upDown][col].occupied() && !nextGen[row + upDown][col].territory.ground.equals("water"))
@@ -228,12 +230,47 @@ public class Landscape {
 						nextGen[row][col + leftRight].add(land[row][col].animal);
 					else if (!nextGen[row][col].occupied())
 						nextGen[row][col + leftRight].add(land[row][col].animal);
-				
+
+				}
+			}
+		}
+
+		// coordinate animal interactions
+		for (int row = 0; row < nextGen.length; row++)
+		{
+			for (int col = 0; col < nextGen[0].length; col++)
+			{
+				if (nextGen[row][col].occupied())
+				{
+					Animal baby = null;
+					int emptyRow = -1, emptyCol = -1;
+
+					if (row + 1 < nextGen.length && nextGen[row + 1][col].occupied())
+						baby = new Animal(nextGen[row + 1][col].animal); //nextGen[row][col].animal.mate(nextGen[row + 1][col].animal);
+					else {
+						emptyRow = row + 1;
+						emptyCol = col;
+					}
+
+					int compare = row - 1;				
+					while (col + 1 < nextGen[0].length && compare <= row + 1 && compare > -1 && compare < nextGen.length) {
+						if (nextGen[compare][col + 1].occupied() && baby == null)
+							baby = nextGen[row][col].animal.mate(nextGen[compare][col + 1].animal);
+						else {
+							emptyRow = compare;
+							emptyCol = col + 1;
+						}
+
+						compare++;
+					}
+
+					if (baby != null)
+						nextGen[emptyRow][emptyCol].add(baby);
 				}
 			}
 		}
 
 		land = nextGen; 
 	}
-	
+
 }
