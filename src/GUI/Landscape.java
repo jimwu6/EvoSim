@@ -204,13 +204,9 @@ public class Landscape {
 			{
 				if (land[row][col].occupied() && land[row][col].animal.health() >= 1)
 				{	
-					System.out.println(row + ", " + col);
+					//System.out.println(row + ", " + col);
 					land[row][col].animal.update();
 
-					if (land[row][col].animal instanceof Mammal)
-						System.out.println("MAMMAL");
-
-					land[row][col].animal.update();
 					
 					int upDown = (int) (Math.random() * 3) - 1;
 					int leftRight = (int) (Math.random() * 3) - 1;

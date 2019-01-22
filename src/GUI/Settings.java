@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import javax.swing.event.*;
 
-public class Settings extends JLayeredPane implements MouseListener {
+public class Settings extends JLayeredPane implements MouseListener, ActionListener {
 	//field
 	gameBtn sun, cloud, rain, reset, onA, onB, offA, offB, exit;
 	Slider RR, simSpeed, temp;
@@ -63,6 +63,7 @@ public class Settings extends JLayeredPane implements MouseListener {
 		
 		 JLabel pic = new JLabel(icon);	 
 		 JPanel bg = new JPanel();
+		 bg.setOpaque(false);
 		 bg.add(pic);
 		 bg.setVisible(true);
 		 bg.setBounds(10, 10, getSize().width-20, getSize().height-20);
@@ -82,6 +83,9 @@ public class Settings extends JLayeredPane implements MouseListener {
 	   add(simSpeed, new Integer(3));
 	   add(RR, new Integer(3));
 	   add(temp, new Integer(3));
+	   
+	   this.setBackground(new Color (0,0,0,0));
+
 	}
 
 	protected void paintComponent(Graphics g) {
@@ -118,6 +122,7 @@ public class Settings extends JLayeredPane implements MouseListener {
 			onB.setVisible(true);
 		}
 		
+		this.setOpaque(false);
 		// This call will paint the label and the focus rectangle.
 		super.paintComponent(g);
 	}
@@ -150,6 +155,10 @@ public class Settings extends JLayeredPane implements MouseListener {
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void makeInvisible() {
+		this.setVisible(false);
 	}
 	
 	public static void main (String[] args) {
@@ -191,6 +200,12 @@ public class Settings extends JLayeredPane implements MouseListener {
 //		};
 //		window.onA.addMouseListener( mouseListener );
 	
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

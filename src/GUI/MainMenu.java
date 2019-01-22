@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import javax.swing.event.*;
 
-public class MainMenu extends JLayeredPane implements MouseListener {
+public class MainMenu extends JLayeredPane implements MouseListener, ActionListener {
 
 	int btnChoice = -1;
 	int w, h;
@@ -58,7 +58,13 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 		JLabel ttl = new JLabel(finalTitle);
 		howToLbl = new JLabel(finalHowTo);
 		credsLbl = new JLabel(finalCreds);
-				
+		
+		simMode.addActionListener(this);
+		gameMode.addActionListener(this);
+		howTo.addActionListener(this);
+		creds.addActionListener(this);
+		exit.addActionListener(this);
+		
 		JPanel bg = new JPanel();
 		JPanel ttlPanel = new JPanel();
 		JPanel popup = new JPanel();
@@ -120,20 +126,7 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 	}
 	
 	public void mouseClicked(MouseEvent e) {		
-		System.out.println(btnChoice);
 		
-		if (simMode.wasClicked())
-			btnChoice = 1;
-		else if (gameMode.wasClicked())
-			btnChoice = 2;
-		else if (howTo.wasClicked())
-			btnChoice = 3;
-		else if (creds.wasClicked())
-			btnChoice = 4;
-		else if (exit.wasClicked())
-			btnChoice = -1;
-		
-		repaint();
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -166,6 +159,36 @@ public class MainMenu extends JLayeredPane implements MouseListener {
 		//frame.getContentPane().setLayout(new FlowLayout());
 		frame.setSize(1200, 1000);
 		frame.setVisible(true);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(simMode))
+        {
+            btnChoice = 1;
+        }
+		
+		else if (e.getSource().equals(gameMode))
+        {
+            btnChoice = 2;
+        }
+		
+		else if (e.getSource().equals(howTo))
+        {
+            btnChoice = 3;
+        }
+		
+		else if (e.getSource().equals(creds))
+        {
+            btnChoice = 4;
+        }
+
+		else if (e.getSource().equals(exit))
+        {
+            btnChoice = -1;
+        }
+		
+		repaint();
+		
 	}
 
 }
