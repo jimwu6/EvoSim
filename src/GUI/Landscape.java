@@ -265,13 +265,45 @@ public class Landscape {
 						compare++;
 					}
 
-					if (baby != null)
+					if (baby != null) {
 						nextGen[emptyRow][emptyCol].add(baby);
+						System.out.println("BABY MADE" + emptyRow + emptyCol);
+					}
 				}
 			}
 		}
 
 		land = nextGen; 
 	}
+	
+	public Animal find(int r, int c, Tile[][] nextGen) {
+		for(int i = 0; i < 8; i ++)
+		{
+			try		//check the different edges once
+			{
+				if (i == 0 && nextGen[r][c - 1].occupied())		//check the 8 different edges
+					return nextGen[r][c - 1].animal;
+				else if (i == 1 && nextGen [r - 1][c].occupied())
+					return nextGen[r -1][c].animal;
+				else if (i == 2 && nextGen [r - 1][c + 1].occupied())
+					return nextGen[r - 1][c + 1].animal;
+				else if (i == 3 && nextGen [r - 1][c - 1].occupied())
+					return nextGen[r - 1][c - 1].animal;
+				else if (i == 4 && nextGen [r][c + 1].occupied())
+					return nextGen[r][c + 1].animal;
+				else if (i == 5 && nextGen [r + 1][c - 1].occupied())
+					return nextGen[r + 1][c - 1].animal;
+				else if (i == 6 && nextGen [r + 1][c].occupied())
+					return nextGen[r + 1][c - 1].animal;
+				else if (i == 7 && nextGen [r][c + 1].occupied())
+					return nextGen[r][c + 1].animal;
+			}
+			catch (ArrayIndexOutOfBoundsException e)		//catch the exception
+			{
+				System.out.println("out of bounds");
+			}
+		}
 
+		return null;
+	}
 }
