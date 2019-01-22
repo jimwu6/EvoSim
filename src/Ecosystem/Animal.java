@@ -144,6 +144,8 @@ public class Animal {
 		if (hunger < 35) {
 			this.health -= 5;
 		}
+<<<<<<< HEAD
+=======
 		
 		// update aging conditions
 		double progress = (age + 0.0) / (lifespan + 0.0);
@@ -159,6 +161,7 @@ public class Animal {
 		}
 		
 		System.out.println(this.hunger + ", " + this.thirst + ", " + this.health);
+>>>>>>> c8f4fb667d1b63de8e51fcee6a315e812d1671f8
 	}
 	
 	// accessors
