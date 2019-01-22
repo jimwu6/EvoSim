@@ -104,19 +104,24 @@ public class Animal {
 	public void updateAppetite () {
 		if (Math.random() < .5)
 		{
-			thirst -= 3;
-			hunger -= 2;
+			this.thirst -= 3;
+			this.hunger -= 2;
 		}
 		
 		if (thirst < 35)
 		{
-			health -= 5;
+			this.health -= 5;
 		}
 		
 		if (hunger < 35)
 		{
-			health -= 5;
+			this.health -= 5;
 		}
+<<<<<<< HEAD
+=======
+		
+		System.out.println(this.hunger + ", " + this.thirst + ", " + this.health);
+>>>>>>> c8f4fb667d1b63de8e51fcee6a315e812d1671f8
 	}
 	
 	// accessors
