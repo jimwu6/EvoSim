@@ -38,7 +38,7 @@ public class Settings extends JLayeredPane implements MouseListener {
 	    onB = new gameBtn("Summative Graphics\\Menu\\png\\onButtonB.png",this.getSize().height/4, this.getSize().height/8);
 	    offA = new gameBtn("Summative Graphics\\Menu\\png\\offButtonA.png",this.getSize().height/4, this.getSize().height/8);
 	    offB = new gameBtn("Summative Graphics\\Menu\\png\\offButtonB.png",this.getSize().height/4, this.getSize().height/8);
-	    exit = new gameBtn("Summative Graphics\\exitBtn.png",this.getSize().height/8, this.getSize().height/8);
+	  //  exit = new gameBtn("Summative Graphics\\exitBtn.png",this.getSize().height/8, this.getSize().height/8);
 		   
 	    simSpeed = new Slider(this.getSize().height/2);
 	    RR = new Slider(this.getSize().height/2);
@@ -53,7 +53,6 @@ public class Settings extends JLayeredPane implements MouseListener {
 	    onB.setBounds(5*this.getSize().height/6 + this.getSize().height/16, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
 	    offA.setBounds(4*this.getSize().height/6 - this.getSize().height/12, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
 	    offB.setBounds(4*this.getSize().height/6 - this.getSize().height/12, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
-	    exit.setBounds(14*this.getSize().width/16, this.getSize().height/21, this.getSize().height/8, this.getSize().height/8);
 	    
 	    simSpeed.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/6 + this.getSize().height/88, this.getSize().height/2, this.getSize().height/12);
 	    RR.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/2 + 17*this.getSize().height/256, this.getSize().height/2, this.getSize().height/12);
@@ -78,7 +77,7 @@ public class Settings extends JLayeredPane implements MouseListener {
 	   add(onA, new Integer(3));
 	   add(offA, new Integer(3));
 	   add(offB, new Integer(3));
-	   add(exit, new Integer(3));
+	//   add(exit, new Integer(3));
 	   
 	   add(simSpeed, new Integer(3));
 	   add(RR, new Integer(3));

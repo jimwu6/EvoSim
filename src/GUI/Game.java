@@ -17,11 +17,13 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 	static Timer t;
 	gameBtn settings;
 	DrawArea board;
+	boolean settingOn = false;
+	
+	Settings settingsMenu;
 	
 	public Game(int width) {
 		landscape = new Landscape();
 		t = new Timer(1999, this);
-
 		
 		t.start();
 		t.addActionListener(this);
@@ -31,16 +33,20 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		h = w * 5 / 6;
 		setSize(w, h);
 		
+		Settings settingsMenu = new Settings(width*4/5);
+		//settingsMenu.setVisible(true);
+		
 		// create things to add to pane  --------------------- PICK A DIFFERENT BUTTON
 		settings = new gameBtn("Summative Graphics\\Menu\\settings.png",this.getSize().height/8, this.getSize().height/8);
 		settings.setBounds(this.getSize().height, this.getSize().height/16, this.getSize().height/8, this.getSize().height/8);
 
+		settings.addActionListener(this);
+		
 		// panels to add
 		board = new DrawArea(w, h);
-
-		//add(start);
-
-		//add(settings);
+		
+		add(settings);
+		//add(settingsMenu);
 		add(board);	
 	}
 	
@@ -59,8 +65,6 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 			//g.fillRect(0, 0, board.getSize().width, board.getSize().height);
 		}
 	}
-	
-	
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
 		
@@ -71,10 +75,17 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
         if (e.getSource().equals(t))
         {
             landscape.advance();
-			System.out.println("______________________________________");
         }
 		
-        repaint();
+        else if (e.getSource().equals(settings))
+        {
+            //settingOn = !settingOn;
+            if(settingOn)
+            	t.setDelay(111);
+            //settingsMenu.setVisible(false);
+        }
+        
+        this.repaint();
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -135,6 +146,7 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
 		game.landscape.populate(animal);
 		game.setVisible(true);
+		
 		/*
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);

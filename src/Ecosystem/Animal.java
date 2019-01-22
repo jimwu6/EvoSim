@@ -117,8 +117,6 @@ public class Animal {
 		{
 			health -= 5;
 		}
-		
-		System.out.println(hunger + ", " + thirst + ", " + health);
 	}
 	
 	// accessors

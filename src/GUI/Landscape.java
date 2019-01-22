@@ -135,7 +135,7 @@ public class Landscape {
         }
 	}
 	
-	public  ArrayList<String> findResource(int row, int col, natResource r) {
+	public  ArrayList<String> findResource(int row, int col, Resource r) {
 		ArrayList<String> arr = new ArrayList<String>();
 		
 		int vis[][] = new int[land.length][land[0].length];
@@ -202,11 +202,7 @@ public class Landscape {
 			{
 				if (land[row][col].occupied() && land[row][col].animal.health() >= 1)
 				{	
-					System.out.println(row + ", " + col);
 					land[row][col].animal.updateAppetite();
-						
-					if (land[row][col].animal instanceof Mammal)
-						System.out.println("MAMMAL");
 					
 					int upDown = (int) (Math.random() * 3) - 1;
 					int leftRight = (int) (Math.random() * 3) - 1;
@@ -228,7 +224,6 @@ public class Landscape {
 						nextGen[row][col + leftRight].add(land[row][col].animal);
 					else if (!nextGen[row][col].occupied())
 						nextGen[row][col + leftRight].add(land[row][col].animal);
-				
 				}
 			}
 		}
