@@ -3,7 +3,7 @@ package Ecosystem;
 public class Plant {
 
 	String name;
-	Resource resource = null;
+	natResource resource = null;
 	public int size;
 	
 	public Plant(String plantName) {
@@ -13,7 +13,7 @@ public class Plant {
 		
 	public Plant(String plantName, String resourceName) {
 		this(plantName);
-		resource = new Resource(resourceName);
+		resource = new natResource(resourceName);
 	}
 	
 	public void grow() {
@@ -28,16 +28,4 @@ public class Plant {
 	}
 }
 
-class Resource {
-	
-	int heal;
-	String name;
-	
-	public Resource(String n) {
-		name = n;
-	}
-	
-	public int heal() {
-		return heal;
-	}
-}
+

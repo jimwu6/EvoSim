@@ -7,4 +7,11 @@ public class Mammal extends Animal {
 		super (imageName,size, speed, lifespan, gender);
 	}
 	
+	public Mammal(Mammal m) {
+		super (m);
+		furDensity = m.furDensity;
+		furLength = m.furLength;
+		hornSize = m.hornSize;
+		intelligence = m.intelligence;
+	}
 }

@@ -11,7 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Ecosystem.Animal;
+import Ecosystem.*;
 
 public class Landscape {
 
@@ -125,10 +125,62 @@ public class Landscape {
             {
                 if (Math.floor(Math.random () * 650) < 1 && !land[row][col].territory.ground.equals("water"))
                 {
-                	land[row][col].add(animal);
+                	Animal newAnimal = null;
+                	if (animal instanceof Mammal)
+						newAnimal = new Mammal((Mammal) animal);
+                	
+                	land[row][col].add(newAnimal);
                 }
             }
         }
+	}
+	
+	public  ArrayList<String> findResource(int row, int col, natResource r) {
+		ArrayList<String> arr = new ArrayList<String>();
+		
+		int vis[][] = new int[land.length][land[0].length];
+		Queue<Integer> q = new LinkedList<Integer>();
+		
+		q.add(row);
+		q.add(col);
+		
+		while (!q.isEmpty()) {
+			int curX = q.poll();
+			int curY = q.poll();
+				
+			// mark the wanted thing with -1
+			
+			//left
+			if (curY-1 > 0) {
+				if (vis[curX][curY] == 0) {
+					q.add(curX);
+					q.add(curY-1);
+				}
+			}
+			// right
+			if (curY+1 > 0) {
+				if (vis[curX][curY+1] == 0) {
+					q.add(curX);
+					q.add(curY+1);
+				}
+			}
+			// up
+			if (curX-1 > 0) {
+				if (vis[curX-1][curY] == 0) {
+					q.add(curX-1);
+					q.add(curY);
+				}
+			}
+			// down
+			if (curX+1 > 0) {
+				if (vis[curX+1][curY] == 0) {
+					q.add(curX+1);
+					q.add(curY);
+				}
+			}
+		}
+		
+		return arr;
 	}
 	
 	public void advance() {
@@ -150,7 +202,11 @@ public class Landscape {
 			{
 				if (land[row][col].occupied() && land[row][col].animal.health() >= 1)
 				{	
+					System.out.println(row + ", " + col);
 					land[row][col].animal.updateAppetite();
+						
+					if (land[row][col].animal instanceof Mammal)
+						System.out.println("MAMMAL");
 					
 					int upDown = (int) (Math.random() * 3) - 1;
 					int leftRight = (int) (Math.random() * 3) - 1;
