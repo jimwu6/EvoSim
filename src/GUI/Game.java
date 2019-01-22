@@ -33,8 +33,10 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		h = w * 5 / 6;
 		setSize(w, h);
 		
-		Settings settingsMenu = new Settings(width*4/5);
-		//settingsMenu.setVisible(true);
+		settingsMenu = new Settings(this.w*4/5);
+		settingsMenu.setBounds(this.getSize().height/24, this.getSize().height/12, settingsMenu.getWidth(), settingsMenu.getHeight()); 
+		settingsMenu.addMouseListener(this);
+		settingsMenu.setVisible(false);
 		
 		// create things to add to pane  --------------------- PICK A DIFFERENT BUTTON
 		settings = new gameBtn("Summative Graphics\\Menu\\settings.png",this.getSize().height/8, this.getSize().height/8);
@@ -46,7 +48,7 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		board = new DrawArea(w, h);
 		
 		add(settings);
-		//add(settingsMenu);
+		add(settingsMenu);
 		add(board);	
 	}
 	
@@ -61,10 +63,9 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		public void paintComponent (Graphics g)
 		{
 			landscape.show(g);
-			//g.setColor(Color.BLACK);
-			//g.fillRect(0, 0, board.getSize().width, board.getSize().height);
 		}
 	}
+	
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
 		
@@ -80,10 +81,9 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		
         else if (e.getSource().equals(settings))
         {
-            //settingOn = !settingOn;
-            if(settingOn)
-            	t.setDelay(111);
-            //settingsMenu.setVisible(false);
+            settingOn = !settingOn;
+
+            	settingsMenu.setVisible(settingOn);
         }
         
         this.repaint();

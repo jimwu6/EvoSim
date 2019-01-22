@@ -159,6 +159,7 @@ public class Animal {
 		}
 		
 		System.out.println(this.hunger + ", " + this.thirst + ", " + this.health);
+
 	}
 	
 	// accessors
