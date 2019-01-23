@@ -18,6 +18,10 @@ public class Hooved extends Mammal implements Herbivore{
 		super(hooved, canMate);
 	}
 	
+	public Hooved(Mammal mammal, boolean canMate) {
+		super(mammal, canMate);
+	}
+
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
 			return new Hooved(this, this.canMate(mate));

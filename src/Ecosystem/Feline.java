@@ -25,6 +25,10 @@ public class Feline extends Mammal implements Carnivore{
 		this.claw = feline.claw;
 	}
 	
+	public Feline(Mammal mammal, boolean canMate) {
+		super(mammal, canMate);
+	}
+
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
 		{

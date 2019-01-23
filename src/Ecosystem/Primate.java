@@ -14,6 +14,10 @@ public class Primate extends Mammal implements Carnivore, Herbivore{
 		super(primate);
 	}
 	
+	public Primate(Mammal mammal, boolean canMate) {
+		super(mammal, canMate);
+	}
+	
 	public Primate(Primate primate, boolean canMate) {
 		super(primate, canMate);
 	}

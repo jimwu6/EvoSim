@@ -28,6 +28,21 @@ public class Mammal extends Animal {
 		if (this.canMate(mate))
 		{
 			this.mateTimer = 3;
+			if (this.intelligence > 70) {
+				double chance = Math.random();
+				if(chance > 0.98)
+					return new Primate(this, this.canMate(mate));
+				else if (chance > 0.96) 
+					return new Feline(this, this.canMate(mate));
+				else if (chance > 0.94) 
+					return new Canine(this, this.canMate(mate));
+				else if (chance > 0.92) 
+					return new Rodent(this, this.canMate(mate));
+				else if (chance > 0.90)
+					return new Hooved(this, this.canMate(mate));
+				else return null;
+			}
+			
 			return new Mammal(this, this.canMate(mate));
 		}
 		
