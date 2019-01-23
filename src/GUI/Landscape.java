@@ -142,7 +142,9 @@ public class Landscape {
 				if (Math.floor(Math.random () * 650) < 1)
 				{
 					Animal newAnimal = null;
-					if (animal.type().equals("mammal") && !land[r][c].territory.ground.equals("water"))
+					if (animal.type().equals("cellular"))
+						newAnimal = new Cellular((Cellular) animal);
+					else if (animal.type().equals("mammal") && !land[r][c].territory.ground.equals("water"))
 						newAnimal = new Mammal((Mammal) animal);
 					else if (animal.type().equals("fish") && land[r][c].territory.ground.equals("water"))
 						newAnimal = new Fish((Fish) animal);
