@@ -10,28 +10,33 @@ import javax.swing.*;
 import java.io.*;
 import javax.swing.event.*;
 
-public class Display extends JFrame implements MouseListener{
+import Ecosystem.Animal;
+import Ecosystem.Mammal;
 
-	public Display()
+public class Display extends JFrame implements MouseListener, ActionListener{
+	Game game;
+	MainMenu menu;
+	int w,h;
+	boolean selected = false;
+	
+	public Display(int width)
 	{
-		JPanel north = new JPanel();
-		gameBtn settings = new gameBtn("src\\settings.png", 114, 114);
-		settings.addMouseListener(this);
-		settings.setPreferredSize(new Dimension(114,114));
-
-		drawArea board = new drawArea(600, 600);
+		// set size
+		w = width;
+		h = w * 5 / 6;
+		setSize(w, h);
+				
+		game = new Game(this.getSize().width);
+		game.pauseTimer();
+		menu = new MainMenu(this.getSize().width);
 		
-		north.add(board);
-		north.add(settings);
-
+		menu.simMode.addActionListener(this);
 		
-		// set window attributes
-		setContentPane(north);
-		pack();
-		setTitle("Evolution Simulation");
-		setSize(765, 790);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
+		game.landscape.populate(animal);
+		
+		//setContentPane(game);
+		setContentPane(menu);
 	}
     
 
@@ -52,22 +57,35 @@ public class Display extends JFrame implements MouseListener{
 		}
     }
 
-    class Advance implements ActionListener {
-
-        Landscape landscape;
-        
-        public Advance(Landscape l) {
-        	this.landscape = l;
-        }
-        
-        public void actionPerformed(ActionEvent e) {
-        	landscape.advance();
-        	repaint();
-        }
-    }
+	 public void actionPerformed(ActionEvent e) {
+		 if (e.getSource().equals(menu.simMode))
+         {
+           	  selected = true;
+           	  menu.setVisible(false);
+           	  game.setVisible(true);
+           	  setContentPane(game);
+           	  game.resumeTimer();
+         }   
+		 
+		 this.repaint();
+	 }
+	 
+//    class Advance implements ActionListener {
+//    	
+//        Landscape landscape;
+//        
+//        public Advance(Landscape l) {
+//        	this.landscape = l;
+//        }
+//        
+//        public void actionPerformed(ActionEvent e) {     	
+//        	landscape.advance();
+//        	repaint();
+//        }
+//    }
 
     public static void main (String[] args) {
-    	Display window = new Display();
+    	Display window = new Display(1200);
 		window.setVisible(true);
 		window.setResizable(false);
     }
@@ -101,4 +119,5 @@ public class Display extends JFrame implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

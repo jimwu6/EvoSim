@@ -14,7 +14,7 @@ import javax.swing.event.*;
 
 public class MainMenu extends JLayeredPane implements MouseListener, ActionListener {
 
-	int btnChoice = -1;
+	private int btnChoice = -1;
 	int w, h;
 	Image bg = null, title = null, instructions = null, credits = null;
 	gameBtn gameMode, simMode, howTo, creds, exit;
@@ -22,7 +22,7 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 	
 	public MainMenu(int width) {
 		w = width;
-		h = w * 3 / 4;
+		h = w * 5 / 6;
 		setSize(w, h);
 		
 		addMouseListener(this);
@@ -123,6 +123,11 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 		}
 		// This call will paint the label and the focus rectangle.
 		super.paintComponent(g);
+	}
+	
+	public int buttonChoice() 
+	{
+		return btnChoice;
 	}
 	
 	public void mouseClicked(MouseEvent e) {		

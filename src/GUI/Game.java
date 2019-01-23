@@ -10,7 +10,7 @@ import javax.swing.event.*;
 import Ecosystem.*;
 
 
-public class Game extends JFrame implements MouseListener, KeyListener, ActionListener, ChangeListener {
+public class Game extends JInternalFrame implements MouseListener, KeyListener, ActionListener, ChangeListener {
 
 	int w, h;
 	Landscape landscape;
@@ -18,13 +18,15 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 	gameBtn settings;
 	DrawArea board;
 	boolean settingOn = false;
+	boolean simMode = true;
 	
 	Settings settingsMenu;
 	
 	public Game(int width) {
+		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+		
 		landscape = new Landscape();
 		t = new Timer(1999, this);
-		
 		t.start();
 		t.addActionListener(this);
 		
@@ -71,6 +73,14 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		
 	}
 
+	public void pauseTimer() {
+		t.stop();
+	}
+	
+	public void resumeTimer() {
+		t.start();
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 
         if (e.getSource().equals(t))
@@ -112,6 +122,10 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		
 	}
 
+	public void changeMode() {
+		simMode = !simMode;
+	}
+	
 	public void keyReleased(KeyEvent e) {	// maybe have a boolean thats set false when released for movement
 		// TODO Auto-generated method stub
 		
@@ -147,15 +161,13 @@ public class Game extends JFrame implements MouseListener, KeyListener, ActionLi
 		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
 		game.landscape.populate(animal);
 		game.setVisible(true);
-		/*
+		
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(game);
-		frame.setContentPane(game);
 
-		frame.getContentPane().setLayout(new FlowLayout());
 		frame.setSize(1200, 1000);
 		frame.setVisible(true);
-		*/
+		
 	}
 }
