@@ -69,12 +69,6 @@ public class gameBtn extends JButton implements MouseListener {
 		}
 		return shape.contains(x, y);
 	}
-
-	public boolean wasClicked() {
-		boolean temp = clicked;
-		clicked = false;
-		return temp;
-	}
 	
 	public void mouseClicked(MouseEvent arg0) {
 		clicked = true;
