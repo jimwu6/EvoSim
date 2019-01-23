@@ -160,18 +160,20 @@ public class Landscape {
 			
 			while (cur.x != -1) {
 				if (cur.x == curx + 1) {
-					instruct.add(0, "left");
-				}
-				else if (cur.x == curx - 1) {
-					instruct.add(0, "right");
-				}
-				else if (cur.y == cury + 1) {
 					instruct.add(0, "up");
 				}
-				else {
+				else if (cur.x == curx - 1) {
 					instruct.add(0, "down");
 				}
+				else if (cur.y == cury + 1) {
+					instruct.add(0, "left");
+				}
+				else {
+					instruct.add(0, "right");
+				}
 				cur = vis[cur.x][cur.y];
+				curx = cur.x;
+				cury = cur.y;
 			}
 		}
 		
