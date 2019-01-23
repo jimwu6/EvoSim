@@ -27,13 +27,15 @@ public class Primate extends Mammal implements Carnivore, Herbivore{
 	}
 	
 	public Animal mate(Animal mate) {
-		if (this.canMate(mate))
+		Animal a = super.mate(mate);
+		
+		if (a == null && this.canMate(mate))
 		{
 			this.mateTimer = 3;
 			return new Primate(this, this.canMate(mate));
 		}
 		
-		return null;
+		return a;
 	}
 	
 	public void update() {

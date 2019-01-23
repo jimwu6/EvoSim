@@ -21,8 +21,12 @@ public class Fish extends Animal implements Herbivore, Carnivore {
 	public Fish(Fish f, boolean canMate) {
 		super(f, canMate);
 		scaleHardness = f.scaleHardness;
-		poisonous = f.poisonous;
-		luminant = f.luminant;
+		poisonous = f.poisonous? f.poisonous : Math.random() > 0.9;
+		luminant = Math.random() > 0.9? !f.luminant : f.luminant;
+	}
+
+	public Fish(Cellular cellular, boolean canMate) {
+		super("fish", 10, 20, 50 + (int) (Math.random() * 21 - 10), cellular.gender());
 	}
 
 	public Animal mate(Animal mate) {
@@ -30,23 +34,10 @@ public class Fish extends Animal implements Herbivore, Carnivore {
 		{
 			this.mateTimer = 3;
 			
-			if (this.scaleHardness > 50) {
-				double chance = Math.random();
-				if(chance > 0.97)
-					return new Fish(this, this.canMate(mate));
-				else if (chance > 0.95) 
-					return new Fish(this, this.canMate(mate));
-				else if (chance > 0.93) 
-					return new Fish(this, this.canMate(mate));
-				else if (chance > 0.91) 
-					return new Fish(this, this.canMate(mate));
-				else if (chance > 0.89)
-					return new Fish(this, this.canMate(mate));
-				else return null;
-			}
+			if (this.scaleHardness > 50 && Math.random() > 0.97 && this.poisonous)
+				return new Amphibian(this, this.canMate(mate));
 			return new Fish(this, this.canMate(mate));
 		}
-		
 		return null;	
 	}
 	
@@ -55,7 +46,9 @@ public class Fish extends Animal implements Herbivore, Carnivore {
 		double rand = Math.random();
 		
 		if (rand > 0.7)
-			scaleHardness++;
+			scaleHardness += 4;
+		else if (rand > 0.4)
+			scaleHardness -= 4;
 		
 	}
 
