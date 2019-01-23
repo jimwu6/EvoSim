@@ -11,7 +11,7 @@ public abstract class Animal {
 
 	//fields
 
-	protected int health, size, speed, age, lifespan, hunger, thirst, mateTimer;
+	protected int health, size, speed, age, lifespan, hunger, thirst, mateTimer, damage;
 	public BufferedImage appearance = null;
 
 	protected boolean controlled, land, water, carnivore, herbivore;
@@ -33,6 +33,7 @@ public abstract class Animal {
 		this.size = size;
 		this.speed = speed;
 		this.age = 0;
+		this.calculateDamage();
 		this.lifespan = lifespan;
 
 		this.mateTimer = 4;
@@ -101,6 +102,10 @@ public abstract class Animal {
 	}
 
 	public abstract Animal mate(Animal mate);
+	
+	public void calculateDamage() {
+		damage = 10;
+	}
 
 	public boolean canMate(Animal mate) {
 		return this.type.equals(mate.type) && !this.gender.equals(mate.gender) && mateTimer == 0 && mate.mateTimer == 0;
@@ -121,6 +126,10 @@ public abstract class Animal {
 
 	public void injured (Integer damage) {
 		health -= damage;
+	}
+	
+	public void hurt (Animal prey) {
+		prey.injured(damage);
 	}
 
 	public boolean controlled() {
