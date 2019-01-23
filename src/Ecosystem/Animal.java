@@ -13,7 +13,7 @@ public abstract class Animal {
 	protected int health, size, speed, age, lifespan, hunger, thirst, mateTimer;
 	public Image appearance = null;
 
-	protected boolean controlled;
+	protected boolean controlled, land, water;
 
 	protected String gender, imageName;
 
@@ -177,6 +177,13 @@ public abstract class Animal {
 		return this.gender;
 	}
 
+	public boolean land() {
+		return land;
+	}
+	
+	public boolean water() {
+		return water;
+	}
 
 }
 

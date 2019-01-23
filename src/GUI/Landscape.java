@@ -178,7 +178,7 @@ public class Landscape {
 		return instruct;
 	}
 	
-	public ArrayList<String> findResource(int r, int c, Resource resource) {
+	public ArrayList<String> findResource(int r, int c, Resource resource, Animal a) {
 
 		Pair vis[][] = new Pair[land.length][land[0].length];
 		
@@ -199,15 +199,13 @@ public class Landscape {
 			Pair cur = q.poll();
 			
 			ArrayList<Resource> res = land[cur.x][cur.y].territory.resources();
-			for (int i = 0; i < res.size(); i++) {
-				if (res.get(i).getName() == resource.getName()){
-					wantX = cur.x;
-					wantY = cur.y;
-					while (!q.isEmpty()) {
-						q.poll();
-					}
-					keepSearching = false;
+			if (res.contains(resource)){
+				wantX = cur.x;
+				wantY = cur.y;
+				while (!q.isEmpty()) {
+					q.poll();
 				}
+				keepSearching = false;
 			}
 			
 			// mark the wanted thing with -1
@@ -215,7 +213,10 @@ public class Landscape {
 			if (keepSearching) {
 				//left
 				if (cur.y-1 > 0) {
-					if (!vis[cur.x][cur.y-1].visited) {
+					if (!vis[cur.x][cur.y-1].visited 
+							&& (land[cur.x][cur.y-1].territory.resources().contains(resource) 
+							|| (a.land() && !land[cur.x][cur.y-1].territory.ground.equals("water"))
+							|| (a.water() && land[cur.x][cur.y-1].territory.ground.equals("water")))) {
 						q.add(new Pair(cur.x, cur.y-1));
 						vis[cur.x][cur.y-1].x = cur.x;
 						vis[cur.x][cur.y-1].y = cur.y;
@@ -224,7 +225,10 @@ public class Landscape {
 				}
 				// right
 				if (cur.y+1 > 0) {
-					if (vis[cur.x][cur.y+1].visited) {
+					if (!vis[cur.x][cur.y+1].visited 
+							&& (land[cur.x][cur.y+1].territory.resources().contains(resource) 
+							|| (a.land() && !land[cur.x][cur.y+1].territory.ground.equals("water"))
+							|| (a.water() && land[cur.x][cur.y+1].territory.ground.equals("water")))) {
 						q.add(new Pair(cur.x, cur.y+1));
 						vis[cur.x][cur.y+1].x = cur.x;
 						vis[cur.x][cur.y+1].y = cur.y;
@@ -233,7 +237,10 @@ public class Landscape {
 				}
 				// up
 				if (cur.x-1 > 0) {
-					if (vis[cur.x-1][cur.y].visited) {
+					if (!vis[cur.x-1][cur.y].visited 
+							&& (land[cur.x-1][cur.y].territory.resources().contains(resource) 
+							|| (a.land() && !land[cur.x-1][cur.y].territory.ground.equals("water"))
+							|| (a.water() && land[cur.x-1][cur.y].territory.ground.equals("water")))) {
 						q.add(new Pair(cur.x-1, cur.y));
 						vis[cur.x-1][cur.y].x = cur.x;
 						vis[cur.x-1][cur.y].y = cur.y;
@@ -242,7 +249,10 @@ public class Landscape {
 				}
 				// down
 				if (cur.x+1 > 0) {
-					if (vis[cur.x+1][cur.y].visited) {
+					if (!vis[cur.x+1][cur.y].visited 
+							&& (land[cur.x+1][cur.y].territory.resources().contains(resource) 
+							|| (a.land() && !land[cur.x+1][cur.y].territory.ground.equals("water"))
+							|| (a.water() && land[cur.x+1][cur.y].territory.ground.equals("water")))) {
 						q.add(new Pair(cur.x+1, cur.y));
 						vis[cur.x+1][cur.y].x = cur.x;
 						vis[cur.x+1][cur.y].y = cur.y;
@@ -366,6 +376,12 @@ public class Landscape {
 	public void updateTemp(int temp)
 	{
 		temperature = temp;
+	}
+	
+	public static void main(String[] args) {
+		Landscape landscape = new Landscape();
+		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
+		landscape.populate(animal);
 	}
 }
 
