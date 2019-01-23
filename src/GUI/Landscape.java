@@ -114,8 +114,8 @@ public class Landscape {
 						g.drawImage(land[r][c].territory.plantImg, c * 10 -land[r][c].territory.plant.size/2 , r * 10 - land[r][c].territory.plant.size/2, land[r][c].territory.plant.size, land[r][c].territory.plant.size, null);
 					if (land[r][c].territory.hasResource())
 					{
-						for (int x = 0; x < land[r][c].territory.resourceList().size(); x++) 
-							g.drawImage(land[r][c].territory.resourceList().get(x).resourceImage, c * 10 - 15, r * 10 - 15, 30, 30, null);
+						for (int x = 0; x < land[r][c].territory.resources().size(); x++) 
+							g.drawImage(land[r][c].territory.resources().get(x).resourceImage, c * 10 - 15, r * 10 - 15, 30, 30, null);
 
 					}
 
@@ -431,93 +431,176 @@ public class Landscape {
 		{
 			for (int c = 0; c < land[0].length; c++)
 			{
+				Animal curAnimal = land[r][c].animal;
+				
 				if (land[r][c].planted() || land[r][c].territory.ground.equals("water")) {
 					land[r][c].territory.release();
 				}
 
-				if (land[r][c].occupied() && land[r][c].animal.health() >= 1 
-						&& (land[r][c].animal.age() < land[r][c].animal.lifespan() || Math.random() < 0.7 - 0.2 * (land[r][c].animal.age() - land[r][c].animal.lifespan()))) 
+				if (land[r][c].occupied() && curAnimal.health() >= 1 
+						&& (curAnimal.age() < curAnimal.lifespan() || Math.random() < 0.7 - 0.2 * (curAnimal.age() - curAnimal.lifespan()))) 
 				{	
-					if (land[r][c].animal != null && (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty())) {
-						if (land[r][c].animal.thirst() < 75 ) 
-							land[r][c].animal.moveList = findResource(r, c, new Resource ("waterResource"), land[r][c].animal);
-						else if (land[r][c].animal.hunger() < 60 && land[r][c].animal.land()) 
-							land[r][c].animal.moveList = findResource(r, c, new Resource ("fruit"), land[r][c].animal);
-						else if (land[r][c].animal.hunger() < 60 && land[r][c].animal.water()) 
-							land[r][c].animal.moveList = findResource(r, c, new Resource ("seaweed"), land[r][c].animal);
+					if (curAnimal != null && (curAnimal.moveList == null || curAnimal.moveList.isEmpty())) {
+						if (curAnimal.thirst() < 75 ) 
+							curAnimal.moveList = findResource(r, c, new Resource ("waterResource"), curAnimal);
+						else if (curAnimal.hunger() < 60 && curAnimal.land()) 
+							curAnimal.moveList = findResource(r, c, new Resource ("fruit"), curAnimal);
+						else if (curAnimal.hunger() < 60 && curAnimal.water()) 
+							curAnimal.moveList = findResource(r, c, new Resource ("seaweed"), curAnimal);
 						
-//						else if (needanimal) {
-//							land[r][c].animal.moveList = findAnimal(r, c, ANIMAL, land[r][c].animal);
-//						}
 					}
 					
-					land[r][c].animal.update();
+					curAnimal.update();
 					
-					if (land[r][c].animal.thirst() < 60)
+					if (curAnimal.hunger() < 60)
+					{
+						if (r != 0)
+						{
+							
+							if (curAnimal.carnivore() && land[r-1][c].animal != null) {
+								curAnimal.hurt(land[r-1][c].animal);
+								if (land[r-1][c].animal.health() <= 0 && land[r-1][c].animal.size() < curAnimal.size()) {
+									curAnimal.feed();
+									land[r-1][c].animal = null;	
+								}
+							}
+							else {
+								ArrayList<Resource> res = land[r-1][c].territory.resources();
+								boolean stopSearch = false;
+
+								String resourceWant = "fruit";
+								if (curAnimal.water()) 
+									resourceWant = "seaweed";
+								
+								for (int i = 0; i < res.size() && !stopSearch; i++) {
+									if (res.get(i).equals(resourceWant)) {
+										curAnimal.feed();
+										res.remove(i);
+										stopSearch = true;
+									}
+								}
+							}
+						}
+						
+						else if (r != land.length-1)
+						{
+							if (curAnimal.carnivore() && land[r+1][c].animal != null) {
+								curAnimal.hurt(land[r+1][c].animal);
+								if (land[r+1][c].animal.health() <= 0 && land[r+1][c].animal.size() < curAnimal.size()) {
+									curAnimal.feed();
+									land[r+1][c].animal = null;	
+								}
+							}
+							else {
+								ArrayList<Resource> res = land[r+1][c].territory.resources();
+								boolean stopSearch = false;
+
+								String resourceWant = "fruit";
+								if (curAnimal.water()) 
+									resourceWant = "seaweed";
+								
+								for (int i = 0; i < res.size() && !stopSearch; i++) {
+									if (res.get(i).equals(resourceWant)) {
+										curAnimal.feed();
+										res.remove(i);
+										stopSearch = true;
+									}
+								}
+							}
+						}
+						
+						else if (c != 0)
+						{
+							if (curAnimal.carnivore() && land[r][c-1].animal != null) {
+								curAnimal.hurt(land[r][c-1].animal);
+								if (land[r][c-1].animal.health() <= 0 && land[r][c-1].animal.size() < curAnimal.size()) {
+									curAnimal.feed();
+									land[r][c-1].animal = null;	
+								}
+							}
+							else {
+								ArrayList<Resource> res = land[r][c-1].territory.resources();
+								boolean stopSearch = false;
+
+								String resourceWant = "fruit";
+								if (curAnimal.water()) 
+									resourceWant = "seaweed";
+								
+								for (int i = 0; i < res.size() && !stopSearch; i++) {
+									if (res.get(i).equals(resourceWant)) {
+										curAnimal.feed();
+										res.remove(i);
+										stopSearch = true;
+									}
+								}
+							}
+						}
+						else if (c != land[0].length-1)
+						{
+							if (curAnimal.carnivore() && land[r][c+1].animal != null) {
+								curAnimal.hurt(land[r][c+1].animal);
+								if (land[r][c+1].animal.health() <= 0 && land[r][c+1].animal.size() < curAnimal.size()) {
+									curAnimal.feed();
+									land[r][c+1].animal = null;	
+								}
+							}
+							else {
+								ArrayList<Resource> res = land[r][c+1].territory.resources();
+								boolean stopSearch = false;
+
+								String resourceWant = "fruit";
+								if (curAnimal.water()) 
+									resourceWant = "seaweed";
+								
+								for (int i = 0; i < res.size() && !stopSearch; i++) {
+									if (res.get(i).equals(resourceWant)) {
+										curAnimal.feed();
+										res.remove(i);
+										stopSearch = true;
+									}
+								}
+							}
+						}
+					}
+					
+					if (curAnimal.thirst() < 60)
 					{
 						if (r != 0 && land[r-1][c].territory.resources.contains("waterResource"))
 						{
-							land[r][c].animal.drink();
-							land[r][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf("waterResource"));
+							curAnimal.drink();
+							land[r-1][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf("waterResource"));
 						}
 						
 						else if (r != land.length-1 && land[r+1][c].territory.resources.contains("waterResource"))
 						{
-							land[r][c].animal.drink();
-							land[r][c].territory.resources.remove(land[r+1][c].territory.resources.indexOf("waterResource"));
+							curAnimal.drink();
+							land[r+1][c].territory.resources.remove(land[r+1][c].territory.resources.indexOf("waterResource"));
 						}
 						
 						else if (c != 0 && land[r][c-1].territory.resources.contains("waterResource"))
 						{
-							land[r][c].animal.drink();
-							land[r][c].territory.resources.remove(land[r][c-1].territory.resources.indexOf("waterResource"));
+							curAnimal.drink();
+							land[r][c-1].territory.resources.remove(land[r][c-1].territory.resources.indexOf("waterResource"));
 						}
 						
 						else if (c != land[0].length-1 && land[r][c+1].territory.resources.contains("waterResource"))
 						{
-							land[r][c].animal.drink();
-							land[r][c].territory.resources.remove(land[r][c+1].territory.resources.indexOf("waterResource"));
+							curAnimal.drink();
+							land[r][c+1].territory.resources.remove(land[r][c+1].territory.resources.indexOf("waterResource"));
 						}
 					}
 					
-					if (land[r][c].animal.thirst() < 60)
-					{
-						if (r != 0 && land[r-1][c].territory.resources.contains("waterResource"))
-						{
-							land[r][c].animal.drink();
-							land[r][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf("waterResource"));
-						}
-						
-						else if (r != land.length-1 && land[r+1][c].territory.resources.contains("waterResource"))
-						{
-							land[r][c].animal.drink();
-							land[r][c].territory.resources.remove(land[r+1][c].territory.resources.indexOf("waterResource"));
-						}
-						
-						else if (c != 0 && land[r][c-1].territory.resources.contains("waterResource"))
-						{
-							land[r][c].animal.drink();
-							land[r][c].territory.resources.remove(land[r][c-1].territory.resources.indexOf("waterResource"));
-						}
-						
-						else if (c != land[0].length-1 && land[r][c+1].territory.resources.contains("waterResource"))
-						{
-							land[r][c].animal.drink();
-							land[r][c].territory.resources.remove(land[r][c+1].territory.resources.indexOf("waterResource"));
-						}
-					}
-					
-					if (land[r][c].animal != null && !(land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty())) {
-						String dir = land[r][c].animal.moveList.remove(0);
+					if (curAnimal != null && !(curAnimal.moveList == null || curAnimal.moveList.isEmpty())) {
+						String dir = curAnimal.moveList.remove(0);
 						
 						if (dir.equals("up"))
-							nextGen[r][c-1].add(land[r][c].animal);
+							nextGen[r][c-1].add(curAnimal);
 						else if (dir.equals("down"))
-							nextGen[r][c+1].add(land[r][c].animal);
+							nextGen[r][c+1].add(curAnimal);
 						else if (dir.equals("left"))
-							nextGen[r-1][c].add(land[r][c].animal);
+							nextGen[r-1][c].add(curAnimal);
 						else if (dir.equals("right"))
-							nextGen[r+1][c].add(land[r][c].animal);
+							nextGen[r+1][c].add(curAnimal);
 					}
 					else {					
 						int upDown = (int) (Math.random() * 3) - 1;
@@ -534,13 +617,13 @@ public class Landscape {
 							upDown = -1;
 	
 						if (!nextGen[r + upDown][c + leftRight].occupied() && !nextGen[r + upDown][c + leftRight].territory.ground.equals("water"))
-							nextGen[r + upDown][c + leftRight].add(land[r][c].animal);
+							nextGen[r + upDown][c + leftRight].add(curAnimal);
 						else if (!nextGen[r + upDown][c].occupied() && !nextGen[r + upDown][c].territory.ground.equals("water"))
-							nextGen[r + upDown][c].add(land[r][c].animal);
+							nextGen[r + upDown][c].add(curAnimal);
 						else if (!nextGen[r][c + leftRight].occupied() && !nextGen[r][c + leftRight].territory.ground.equals("water"))
-							nextGen[r][c + leftRight].add(land[r][c].animal);
+							nextGen[r][c + leftRight].add(curAnimal);
 						else if (!nextGen[r][c].occupied())
-							nextGen[r][c + leftRight].add(land[r][c].animal);
+							nextGen[r][c + leftRight].add(curAnimal);
 					}
 				}					
 			}
@@ -577,7 +660,7 @@ public class Landscape {
 						compare++;
 					}
 
-					if (baby != null && emptyRow != -1 && Math.random() > 0.4) {
+					if (baby != null && emptyRow != -1 && Math.random() > 0.7) {
 						nextGen[emptyRow][emptyCol].add(baby);
 						System.out.println("BABY MADE" + emptyRow + emptyCol);
 					}
