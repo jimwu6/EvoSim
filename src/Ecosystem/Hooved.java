@@ -35,6 +35,14 @@ public class Hooved extends Mammal implements Herbivore{
 		return null;
 	}
 	
+	public void update() {
+		super.update();
+		double rand = Math.random();
+		
+		if (hornSize > 0 && rand > 0.5)
+			hornStrength++;
+	}
+	
 	public void findHerd(Hooved animal){
 		
 	}

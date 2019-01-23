@@ -10,6 +10,7 @@ public class Rodent extends Mammal implements Herbivore{
 		furDensity = 10;
 		furLength = 5;
 		intelligence = 5;
+		claw = 5;
 	}
 	
 	public Rodent(Rodent rodent) {
@@ -36,6 +37,14 @@ public class Rodent extends Mammal implements Herbivore{
 		}
 		
 		return null;
+	}
+	
+	public void update() {
+		super.update();
+		double rand = Math.random();
+		
+		if (rand > 0.9)
+			claw++;
 	}
 	
 	public void spreadDisease(Animal animal){

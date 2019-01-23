@@ -130,7 +130,7 @@ public abstract class Animal {
 		age++;
 
 		// update health
-		if (Math.random() < .5) {		// randomly gets thirsty
+		if (Math.random() < .5) {
 			this.thirst -= 3;
 			this.hunger -= 2;
 		}
@@ -164,6 +164,14 @@ public abstract class Animal {
 	public int health() {
 		return this.health;
 	}
+	
+	public int age() {
+		return this.age;
+	}
+	
+	public int lifespan() {
+		return this.lifespan;
+	}
 
 	public int size() {
 		return this.size;
@@ -194,7 +202,7 @@ public abstract class Animal {
     	BufferedImage[] input = new BufferedImage[3];
         for ( int i = 0; i < input.length; i++ ) {
             try {
-                File f = new File( "Summative Graphics\\" + strings[i] + ".png" );
+                File f = new File( "Summative Graphics\\" + strings.get(i) + ".png" );
                 input[i] = ImageIO.read( f );
             }
             catch ( IOException x ) {

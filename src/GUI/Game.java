@@ -182,7 +182,7 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 
 	public static void main(String[] args) {
 		Game game = new Game(1200);
-		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
+		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 50, "Male");
 		game.landscape.populate(animal);
 		game.setVisible(true);
 		
