@@ -276,7 +276,6 @@ public class Landscape {
 				nextGen[r][c] = new Tile(land[r][c]);
 				nextGen[r][c].animal = null;
 			}
-
 		}
 
 		// coordinate animal movement

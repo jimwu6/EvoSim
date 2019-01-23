@@ -34,7 +34,7 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		menu.gameMode.addActionListener(this);
 		
 		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
-		game.landscape.populate(animal);
+		game.landscape.land[50][50].add(animal);
 		
 		//setContentPane(game);
 		setContentPane(menu);
