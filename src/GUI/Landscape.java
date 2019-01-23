@@ -378,11 +378,11 @@ public class Landscape {
 					land[r][c].territory.release();
 				}
 				
-				if (land[r][c].occupied() && land[r][c].animal.health() >= 1)
+				if (land[r][c].occupied() && land[r][c].animal.health() >= 1 
+						&& (land[r][c].animal.age() < land[r][c].animal.lifespan() || Math.random() < 0.7 - 0.2 * (land[r][c].animal.age() - land[r][c].animal.lifespan())))
 				{	
 					//System.out.println(r + ", " + c);
 					land[r][c].animal.update();
-
 					
 					int upDown = (int) (Math.random() * 3) - 1;
 					int leftRight = (int) (Math.random() * 3) - 1;

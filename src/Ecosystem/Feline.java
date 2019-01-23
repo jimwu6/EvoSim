@@ -39,6 +39,16 @@ public class Feline extends Mammal implements Carnivore{
 		return null;	
 	}
 	
+	public void update() {
+		super.update();
+		double rand = Math.random();
+		
+		if (rand > 0.7) {
+			fangSize++;
+			claw++;
+		}
+	}
+	
 	public void stalk(){
 		
 	}

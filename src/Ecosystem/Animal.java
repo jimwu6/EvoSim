@@ -130,7 +130,7 @@ public abstract class Animal {
 		age++;
 
 		// update health
-		if (Math.random() < .5) {		// randomly gets thirsty
+		if (Math.random() < .5) {
 			this.thirst -= 3;
 			this.hunger -= 2;
 		}
@@ -163,6 +163,14 @@ public abstract class Animal {
 	// accessors
 	public int health() {
 		return this.health;
+	}
+	
+	public int age() {
+		return this.age;
+	}
+	
+	public int lifespan() {
+		return this.lifespan;
 	}
 
 	public int size() {

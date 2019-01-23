@@ -8,6 +8,7 @@ public class Primate extends Mammal implements Carnivore, Herbivore{
 		furDensity = 30;
 		furLength = 15;
 		intelligence = 50;
+		toolStrength = 10;
 	}
 	
 	public Primate(Primate primate) {
@@ -33,6 +34,14 @@ public class Primate extends Mammal implements Carnivore, Herbivore{
 		}
 		
 		return null;
+	}
+	
+	public void update() {
+		super.update();
+		double rand = Math.random();
+		
+		if (rand > 0.8)
+			toolStrength++;
 	}
 	
 	public void buildTool(){
