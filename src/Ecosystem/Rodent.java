@@ -24,6 +24,10 @@ public class Rodent extends Mammal implements Herbivore{
 		this.disease = rodent.disease;
 	}
 	
+	public Rodent(Mammal mammal, boolean canMate) {
+		super(mammal, canMate);
+	}
+
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
 		{

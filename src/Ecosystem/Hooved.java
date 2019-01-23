@@ -21,6 +21,10 @@ public class Hooved extends Mammal implements Herbivore{
 		this.hornSize = hooved.hornStrength;
 	}
 	
+	public Hooved(Mammal mammal, boolean canMate) {
+		super(mammal, canMate);
+	}
+
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
 		{

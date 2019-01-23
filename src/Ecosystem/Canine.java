@@ -25,14 +25,20 @@ public class Canine extends Mammal implements Carnivore{
 		this.claw = canine.claw;
 	}
 	
+	public Canine(Mammal mammal, boolean canMate) {
+		super(mammal, canMate);
+	}
+
 	public Animal mate(Animal mate) {
-		if (this.canMate(mate))
+//		Animal a = super.mate(mate);
+		
+		if (a != null && this.canMate(mate))
 		{
 			this.mateTimer = 3;
 			return new Canine(this, this.canMate(mate));
 		}
 		
-		return null;
+		return a;
 	}
 	
 	public void findPack(Canine pack){
