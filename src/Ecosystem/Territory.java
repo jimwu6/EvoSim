@@ -67,7 +67,12 @@ public class Territory{
     	{
     		if (Math.random() < rRate)
     			resources.add(new Resource("fruit"));
-    	}		
+    	}
+    	
+    	if (ground.equals("water") && resources.size() < 5)
+    	{
+    		resources.add(new Resource("waterResource"));
+    	}
     }
     
     public boolean hasResource() {
