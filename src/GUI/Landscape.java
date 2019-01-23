@@ -448,9 +448,6 @@ public class Landscape {
 						else if (curAnimal.hunger() < 60 && curAnimal.water()) 
 							curAnimal.moveList = findResource(r, c, new Resource ("seaweed"), curAnimal);
 						
-//						else if (needanimal) {
-//							curAnimal.moveList = findAnimal(r, c, ANIMAL, curAnimal);
-//						}
 					}
 					
 					curAnimal.update();
