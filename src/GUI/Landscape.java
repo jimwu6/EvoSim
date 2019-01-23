@@ -274,7 +274,7 @@ public class Landscape {
 		{
 			for (int c = 0; c < land[0].length; c++)
 			{
-				if (land[r][c].planted())
+				if (land[r][c].planted() || land[r][c].territory.ground.equals("water"))
 				{
 					land[r][c].territory.release();
 				}

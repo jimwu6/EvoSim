@@ -11,15 +11,24 @@ public class Raptor extends Bird implements Carnivore{
 	
 	public Raptor(Raptor raptor) {
 		super (raptor);
+		this.talonSize = raptor.talonSize;
+		this.beakStrength = raptor.beakStrength;
 	}
 	
 	public Raptor(Raptor raptor, boolean canMate) {
 		super(raptor, canMate);
+
+		this.talonSize = raptor.talonSize;
+		this.beakStrength = raptor.beakStrength;
 	}
 
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
+		{
+			this.mateTimer = 3;
 			return new Raptor(this, this.canMate(mate));
+		}
+		
 		return null;	
 	}
 	

@@ -15,14 +15,18 @@ public class Resource {
 	public Resource(String n) {
 		name = n;
 		
-		try
+		if (name != "waterResource")
 		{
-			resourceImage = ImageIO.read(new File("Summative Graphics\\" + name + ".png"));
+			try
+			{
+				resourceImage = ImageIO.read(new File("Summative Graphics\\" + name + ".png"));
+			}
+			catch (IOException e)
+			{
+				System.out.println("error resource");
+			}
 		}
-		catch (IOException e)
-		{
-			System.out.println("error resource");
-		}
+		
 	}
 	
 	public int heal() {

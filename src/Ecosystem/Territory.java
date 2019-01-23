@@ -69,9 +69,13 @@ public class Territory{
     			resources.add(new Resource("fruit"));
     	}
     	
-    	if (ground.equals("water") && resources.size() < 5)
+    	if (ground.equals("water") && resources.size() < 6)
     	{
-    		resources.add(new Resource("waterResource"));
+    		if (Math.random() < (rRate/70))
+    			resources.add(new Resource("seaweed"));
+    		
+    		if (ground.equals("water") && resources.size() < 4)
+    		resources.add(new Resource("waterResource"));    	
     	}
     }
     

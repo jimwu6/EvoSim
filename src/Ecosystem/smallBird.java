@@ -11,15 +11,21 @@ public class smallBird extends Bird implements Carnivore, Herbivore{
 	
 	public smallBird(smallBird bird) {
 		super (bird);
+		this.featherVibrance = bird.featherVibrance;
 	}
 	
 	public smallBird(smallBird bird, boolean canMate) {
 		super(bird, canMate);
+		this.featherVibrance = bird.featherVibrance;
 	}
 
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
+		{
+			this.mateTimer = 2;
 			return new smallBird(this, this.canMate(mate));
+		}
+		
 		return null;
 	}
 	

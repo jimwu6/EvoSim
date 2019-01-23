@@ -12,19 +12,27 @@ public class Hooved extends Mammal implements Herbivore{
 	
 	public Hooved(Hooved hooved) {
 		super(hooved);
+		this.furDensity = hooved.furDensity;
+		this.furLength = hooved.furLength;
+		this.intelligence = hooved.intelligence;
 	}
 	
 	public Hooved(Hooved hooved, boolean canMate) {
 		super(hooved, canMate);
+		this.furDensity = hooved.furDensity;
+		this.furLength = hooved.furLength;
+		this.intelligence = hooved.intelligence;
 	}
 	
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
+		{
+			this.mateTimer = 3;
 			return new Hooved(this, this.canMate(mate));
+		}
+		
 		return null;
 	}
-	
-	
 	
 	public void findHerd(Hooved animal){
 		
