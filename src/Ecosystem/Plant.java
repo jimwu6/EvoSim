@@ -3,17 +3,11 @@ package Ecosystem;
 public class Plant {
 
 	String name;
-	Resource resource = null;
 	public int size;
-	
-	public Plant(String plantName) {
+
+	public Plant(String plantName, int s) {
 		name = plantName;
-		size = 111;
-	}
-		
-	public Plant(String plantName, String resourceName) {
-		this(plantName);
-		resource = new Resource(resourceName);
+		size = s;
 	}
 	
 	public void grow() {
@@ -26,6 +20,7 @@ public class Plant {
 		else
 			size += Math.random() * 5 - 2;
 	}
+	
 }
 
 

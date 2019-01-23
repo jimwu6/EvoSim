@@ -61,10 +61,13 @@ public class Landscape {
 			{
 				if (land[row][col].territory.ground.equals("grass"))
 				{
-					int chance = (int) (Math.random() * 201);
+					int chance = (int) (Math.random() * 401);
 
-					if (chance == 93)
-						land[row][col].territory.grow("tree");
+					if(chance == 91 || chance == 92)
+						land[row][col].territory.grow("shrub", 44);
+					else if (chance == 93)
+						land[row][col].territory.grow("tree", 111);
+					 
 					/*else if (chance >= 70)									OTHER PLANTs
 						land[row][col].territory.grow("tree");
 					else if (chance >= 60)
@@ -103,6 +106,13 @@ public class Landscape {
 						g.drawImage(land[row][col].animal.appearance, col * 10 - 10, row * 10 - 10, 40, 40, null);					
 					if (land[row][col].territory.plant != null)
 						g.drawImage(land[row][col].territory.plantImg, col * 10 -land[row][col].territory.plant.size/2 , row * 10 - land[row][col].territory.plant.size/2, land[row][col].territory.plant.size, land[row][col].territory.plant.size, null);
+					if (land[row][col].territory.hasResource())
+					{
+						for (int x = 0; x < land[row][col].territory.resourceList().size() -1; x++) 
+							g.drawImage(land[row][col].territory.resourceList().get(x).resourceImage, col * 10 - 15, row * 10 - 15, 30, 30, null);
+								
+					}
+						
 				} catch (NullPointerException e) {}
 			}
 		}
@@ -135,52 +145,107 @@ public class Landscape {
 		}
 	}
 
-	public  ArrayList<String> findResource(int row, int col, Resource r) {
-		ArrayList<String> arr = new ArrayList<String>();
-
-		int vis[][] = new int[land.length][land[0].length];
-		Queue<Integer> q = new LinkedList<Integer>();
-
-		q.add(row);
-		q.add(col);
-
-		while (!q.isEmpty()) {
-			int curX = q.poll();
-			int curY = q.poll();
-
-			// mark the wanted thing with -1
-
-			//left
-			if (curY-1 > 0) {
-				if (vis[curX][curY] == 0) {
-					q.add(curX);
-					q.add(curY-1);
+	public ArrayList<String> makeInstructions(Pair[][] vis, int wantX, int wantY) {
+		ArrayList<String> instruct = new ArrayList<String>();
+		
+		if (wantX != -1) {
+			Pair cur = vis[wantX][wantY];
+			int curx = wantX, cury = wantY;
+			
+			while (cur.x != -1) {
+				if (cur.x == curx + 1) {
+					instruct.add(0, "left");
 				}
-			}
-			// right
-			if (curY+1 > 0) {
-				if (vis[curX][curY+1] == 0) {
-					q.add(curX);
-					q.add(curY+1);
+				else if (cur.x == curx - 1) {
+					instruct.add(0, "right");
 				}
-			}
-			// up
-			if (curX-1 > 0) {
-				if (vis[curX-1][curY] == 0) {
-					q.add(curX-1);
-					q.add(curY);
+				else if (cur.y == cury + 1) {
+					instruct.add(0, "up");
 				}
-			}
-			// down
-			if (curX+1 > 0) {
-				if (vis[curX+1][curY] == 0) {
-					q.add(curX+1);
-					q.add(curY);
+				else {
+					instruct.add(0, "down");
 				}
 			}
 		}
+		
+		return instruct;
+	}
+	
+	public ArrayList<String> findResource(int row, int col, Resource r) {
 
-		return arr;
+		Pair vis[][] = new Pair[land.length][land[0].length];
+		
+		vis[row][col].x = -1;
+		vis[row][col].y = -1;
+		vis[row][col].visited = true;
+		
+		Queue<Pair> q = new LinkedList<Pair>();
+
+		q.add(vis[row][col]);
+
+		int wantX = -1, wantY = -1;
+		
+		while (!q.isEmpty()) {
+			
+			boolean keepSearching = true;
+			
+			Pair cur = q.poll();
+			
+			ArrayList<Resource> res = land[cur.x][cur.y].territory.resources();
+			for (int i = 0; i < res.size(); i++) {
+				if (res.get(i).getName() == r.getName()){
+					wantX = cur.x;
+					wantY = cur.y;
+					while (!q.isEmpty()) {
+						q.poll();
+					}
+					keepSearching = false;
+				}
+			}
+			
+			// mark the wanted thing with -1
+			
+			if (keepSearching) {
+				//left
+				if (cur.y-1 > 0) {
+					if (!vis[cur.x][cur.y-1].visited) {
+						q.add(new Pair(cur.x, cur.y-1));
+						vis[cur.x][cur.y-1].x = cur.x;
+						vis[cur.x][cur.y-1].y = cur.y;
+						vis[cur.x][cur.y-1].visited = true;
+					}
+				}
+				// right
+				if (cur.y+1 > 0) {
+					if (vis[cur.x][cur.y+1].visited) {
+						q.add(new Pair(cur.x, cur.y+1));
+						vis[cur.x][cur.y+1].x = cur.x;
+						vis[cur.x][cur.y+1].y = cur.y;
+						vis[cur.x][cur.y+1].visited = true;
+					}
+				}
+				// up
+				if (cur.x-1 > 0) {
+					if (vis[cur.x-1][cur.y].visited) {
+						q.add(new Pair(cur.x-1, cur.y));
+						vis[cur.x-1][cur.y].x = cur.x;
+						vis[cur.x-1][cur.y].y = cur.y;
+						vis[cur.x-1][cur.y].visited = true;
+					}
+				}
+				// down
+				if (cur.x+1 > 0) {
+					if (vis[cur.x+1][cur.y].visited) {
+						q.add(new Pair(cur.x+1, cur.y));
+						vis[cur.x+1][cur.y].x = cur.x;
+						vis[cur.x+1][cur.y].y = cur.y;
+						vis[cur.x+1][cur.y].visited = true;
+					}
+				}
+			}
+		}
+		
+		return makeInstructions(vis, wantX, wantY);
 	}
 
 	public void advance() {
@@ -202,6 +267,11 @@ public class Landscape {
 		{
 			for (int col = 0; col < land[0].length; col++)
 			{
+				if (land[row][col].planted())
+				{
+					land[row][col].territory.release();
+				}
+				
 				if (land[row][col].occupied() && land[row][col].animal.health() >= 1)
 				{	
 					//System.out.println(row + ", " + col);
@@ -312,4 +382,17 @@ public class Landscape {
 
 		return null;
 	}
+}
+
+class Pair {
+	
+	public int x, y;
+	public boolean visited = false;
+	
+	public Pair(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	
 }

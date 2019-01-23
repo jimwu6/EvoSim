@@ -8,19 +8,19 @@ import java.io.*; // allows file access
 import javax.imageio.*; // allows image loading
 
 public class Slider extends JButton implements MouseListener {
-	private int width, height, value, sliderL, mouseX;
+	private int width, height, value = 50, sliderL, mouseX;
 
 	public Slider(int w) {
 		addMouseListener(this);
 		width = w;
 		height = w/6;
-		mouseX = 0;
 
 		Dimension size = getPreferredSize();
 		size.width = size.height = Math.max(size.width, size.height);
 		setPreferredSize(size);
-
 		setBounds(0, 0, width, height);
+		mouseX = this.getSize().width/2 - this.getSize().width/32;
+
 		sliderL = getSize().width/16;
 		value = mouseX * 100 / getSize().width;
 		
@@ -84,7 +84,8 @@ public class Slider extends JButton implements MouseListener {
 		
 		if (mouseX > 15*getSize().width/16)
 			mouseX = 15*getSize().width/16;
-		
+		if (mouseX < 0 )
+			mouseX = 0;
 		value = mouseX * 100 / getSize().width;
 	}
 
