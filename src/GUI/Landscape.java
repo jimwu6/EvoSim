@@ -400,10 +400,10 @@ public class Landscape {
 				if (land[r][c].occupied() && land[r][c].animal.health() >= 1 
 						&& (land[r][c].animal.age() < land[r][c].animal.lifespan() || Math.random() < 0.7 - 0.2 * (land[r][c].animal.age() - land[r][c].animal.lifespan()))) 
 				{	
-					if (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty()) {
-						if (land[r][c].animal.thirst() < 60 ) 
+					if (land[r][c].animal != null && (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty())) {
+						if (land[r][c].animal.thirst() < 75 ) 
 							land[r][c].animal.moveList = findResource(r, c, new Resource ("waterResource"), land[r][c].animal);
-						else if (land[r][c].animal.hunger() < 50 ) 
+						else if (land[r][c].animal.hunger() < 60 ) 
 							land[r][c].animal.moveList = findResource(r, c, new Resource ("fruit"), land[r][c].animal);
 						
 //						else if (needanimal) {
@@ -411,7 +411,35 @@ public class Landscape {
 //						}
 					}
 					
-					if (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty()) {
+					land[r][c].animal.update();
+					
+					if (land[r][c].animal.thirst() < 60)
+					{
+						if (r != 0 && land[r][c].territory.resources.contains("waterResource"))
+						{
+							land[r][c].animal.drink();
+							land[r][c].territory.resources.remove(land[r][c].territory.resources.indexOf("waterResource"));
+						}
+						
+						else if (r != 0 && land[r][c].territory.resources.contains("waterResource"))
+						{
+							land[r][c].animal.drink();
+							land[r][c].territory.resources.remove(land[r][c].territory.resources.indexOf("waterResource"));
+						}
+						
+						else if (r != 0 && land[r][c].territory.resources.contains("waterResource"))
+						{
+							land[r][c].animal.drink();
+							land[r][c].territory.resources.remove(land[r][c].territory.resources.indexOf("waterResource"));
+						}
+						
+						else if (r != 0 && land[r][c].territory.resources.contains("waterResource"))
+						{
+							land[r][c].animal.drink();
+							land[r][c].territory.resources.remove(land[r][c].territory.resources.indexOf("waterResource"));
+						}
+					}
+					if (land[r][c].animal != null && !(land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty())) {
 						String dir = land[r][c].animal.moveList.remove(0);
 						
 						if (dir.equals("up"))
@@ -423,44 +451,28 @@ public class Landscape {
 						else if (dir.equals("right"))
 							nextGen[r+1][c].add(land[r][c].animal);
 					}
-					else {
-						int upDown = 0, leftRight = 0;
-						String move = land[r][c].animal.moveList.remove(0);
-						if (move.equals("left")) {
-							leftRight = -1;
-						}
-						else if (move.equals("right"))
+					else {					
+						int upDown = (int) (Math.random() * 3) - 1;
+						int leftRight = (int) (Math.random() * 3) - 1;
+	
+						if (c == 0 && leftRight == -1)
 							leftRight = 1;
-						else if (move.equals("up"))
-							upDown = -1;
-						else
+						if (c == land[0].length-1 && leftRight == 1)
+							leftRight = -1;
+						if (r == 0 && upDown == -1)
 							upDown = 1;
-						
-						// MOVE USING UP DOWN (OR SOME OTHER WAY)
-					}					
-						//System.out.println(r + ", " + c);
-					land[r][c].animal.update();
-					
-					int upDown = (int) (Math.random() * 3) - 1;
-					int leftRight = (int) (Math.random() * 3) - 1;
-
-					if (c == 0 && leftRight == -1)
-						leftRight = 1;
-					if (c == land[0].length-1 && leftRight == 1)
-						leftRight = -1;
-					if (r == 0 && upDown == -1)
-						upDown = 1;
-					if (r == land.length-1 && upDown == 1)
-						upDown = -1;
-
-					if (!nextGen[r + upDown][c + leftRight].occupied() && !nextGen[r + upDown][c + leftRight].territory.ground.equals("water"))
-						nextGen[r + upDown][c + leftRight].add(land[r][c].animal);
-					else if (!nextGen[r + upDown][c].occupied() && !nextGen[r + upDown][c].territory.ground.equals("water"))
-						nextGen[r + upDown][c].add(land[r][c].animal);
-					else if (!nextGen[r][c + leftRight].occupied() && !nextGen[r][c + leftRight].territory.ground.equals("water"))
-						nextGen[r][c + leftRight].add(land[r][c].animal);
-					else if (!nextGen[r][c].occupied())
-						nextGen[r][c + leftRight].add(land[r][c].animal);
+						if (r == land.length-1 && upDown == 1)
+							upDown = -1;
+	
+						if (!nextGen[r + upDown][c + leftRight].occupied() && !nextGen[r + upDown][c + leftRight].territory.ground.equals("water"))
+							nextGen[r + upDown][c + leftRight].add(land[r][c].animal);
+						else if (!nextGen[r + upDown][c].occupied() && !nextGen[r + upDown][c].territory.ground.equals("water"))
+							nextGen[r + upDown][c].add(land[r][c].animal);
+						else if (!nextGen[r][c + leftRight].occupied() && !nextGen[r][c + leftRight].territory.ground.equals("water"))
+							nextGen[r][c + leftRight].add(land[r][c].animal);
+						else if (!nextGen[r][c].occupied())
+							nextGen[r][c + leftRight].add(land[r][c].animal);
+					}
 				}
 			}
 		}

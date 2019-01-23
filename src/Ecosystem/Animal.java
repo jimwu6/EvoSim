@@ -44,7 +44,6 @@ public abstract class Animal {
 		bodyParts.add("Mammal\\Leg\\leg3");
 		bodyParts.add("Mammal\\Tail\\tail3");
 		
-		bodyParts.add("Animals\\animal2");
 		appearance = makeImage(bodyParts);// make it access package
 
 		disease = new ArrayList<Disease>();
