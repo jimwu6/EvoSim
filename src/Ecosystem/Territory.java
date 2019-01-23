@@ -12,7 +12,8 @@ public class Territory{
     ArrayList <Resource> resources;
     public String ground;
     public Image groundImg = null, plantImg = null;
-
+    double rRate = .04;
+    
     public Territory(String gName) {
         resources = new ArrayList<Resource>();
         ground = gName;
@@ -62,9 +63,9 @@ public class Territory{
     }
     
     public void release() {
-    	if (plant != null)
+    	if (plant != null && resources.size() < 5)
     	{
-    		if (Math.random() < .04)
+    		if (Math.random() < rRate)
     			resources.add(new Resource("fruit"));
     	}		
     }
@@ -75,6 +76,10 @@ public class Territory{
     
     public ArrayList<Resource> resources() {
     	return resources;
+    }
+    
+    public void changeRate(double rate) {
+    	rRate = rate;
     }
 
 }

@@ -140,7 +140,7 @@ public abstract class Animal {
 			speed -= (int) (Math.random() * 2);
 		}
 
-		System.out.println(this.hunger + ", " + this.thirst + ", " + this.health);
+		//System.out.println(this.hunger + ", " + this.thirst + ", " + this.health);
 
 	}
 

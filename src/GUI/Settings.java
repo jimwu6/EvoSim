@@ -55,8 +55,8 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 		offB.setBounds(4*this.getSize().height/6 - this.getSize().height/12, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
 
 		simSpeed.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/6 + this.getSize().height/88, this.getSize().height/2, this.getSize().height/12);
-		RR.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/2 + 17*this.getSize().height/256, this.getSize().height/2, this.getSize().height/12);
-		temp.setBounds(this.getSize().height/2 + this.getSize().height/12, 2*this.getSize().height/3+4*this.getSize().height/30, this.getSize().height/2, this.getSize().height/12);
+		temp.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/2 + 17*this.getSize().height/256, this.getSize().height/2, this.getSize().height/12);
+		RR.setBounds(this.getSize().height/2 + this.getSize().height/12, 2*this.getSize().height/3+4*this.getSize().height/30, this.getSize().height/2, this.getSize().height/12);
 
 		Image newImage = image.getScaledInstance(this.getSize().width-20, this.getSize().height-50, Image.SCALE_DEFAULT);
 		ImageIcon icon = new ImageIcon(newImage);

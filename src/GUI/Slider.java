@@ -65,7 +65,7 @@ public class Slider extends JButton implements MouseListener {
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-	}
+		}
 
 
 	public void mouseEntered(MouseEvent e) {
@@ -76,18 +76,20 @@ public class Slider extends JButton implements MouseListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		
-	}
-
-	public void mouseReleased(MouseEvent e) {
-		mouseX = e.getX();
+		mouseX = (int) (e.getXOnScreen() - this.getLocationOnScreen().getX());
 		
 		if (mouseX > 15*getSize().width/16)
 			mouseX = 15*getSize().width/16;
 		if (mouseX < 0 )
 			mouseX = 0;
+		//System.out.println(e.getXOnScreen() + ", " + this.getLocationOnScreen().getX() + ", " + mouseX);
 		value = mouseX * 100 / getSize().width;
+	
+	
 	}
+
+	public void mouseReleased(MouseEvent e) {
+		}
 
 	//-------------------------------------------------------------------------------------------------------------
 	// Test routine.

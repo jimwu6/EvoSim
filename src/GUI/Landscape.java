@@ -17,7 +17,7 @@ public class Landscape {
 
 	Tile[][] land;
 	String weather;
-	int temperature;
+	int temperature = 50;
 
 	public Landscape() {
 		land = new Tile[100][120];
@@ -343,6 +343,23 @@ public class Landscape {
 		}
 
 		land = nextGen; 
+	}
+	
+	public void updateRR(double rate)
+	{
+		for (int row = 0; row < land.length; row++)
+		{
+			for (int col = 0; col < land[0].length; col++)
+			{
+				land[row][col].territory.changeRate(rate);
+			}
+				
+		}
+	}
+	
+	public void updateTemp(int temp)
+	{
+		temperature = temp;
 	}
 }
 

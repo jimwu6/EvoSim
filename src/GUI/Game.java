@@ -44,7 +44,8 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		settings.setBounds(this.getSize().height, this.getSize().height/16, this.getSize().height/8, this.getSize().height/8);
 
 		settings.addActionListener(this);
-		settingsMenu.simSpeed.addActionListener(this);
+		settingsMenu.simSpeed.addMouseListener(this);
+		settingsMenu.RR.addMouseListener(this);
 		
 		// panels to add
 		board = new DrawArea(w, h);
@@ -86,7 +87,7 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         if (e.getSource().equals(t))
         {
             landscape.advance();
-            System.out.println("_____________________________________");
+           // System.out.println("_____________________________________");
         }
 		
         else if (e.getSource().equals(settings))
@@ -94,15 +95,6 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
             settingOn = !settingOn;
 
             	settingsMenu.setVisible(settingOn);
-        }
-        
-        else if (e.getSource().equals(settingsMenu.simSpeed))
-        {
-        	int delay = 4000 - settingsMenu.simSpeed.value()*35;
-        	if (delay == 4000)
-        		t.stop();
-        	else
-        		t.setDelay(delay);
         }
         
         this.repaint();
@@ -151,8 +143,31 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource().equals(settingsMenu.simSpeed))
+        {
+           	int delay = 4000 - settingsMenu.simSpeed.value()*39;
+        	if (delay == 4000)
+        		t.stop();
+        	else
+        	{
+        		t.setDelay(delay);
+        		t.start();
+        	}
+        }
 		
+		else if (e.getSource().equals(settingsMenu.RR))
+        {
+           	double rate = (settingsMenu.RR.value()) * .001;
+        	landscape.updateRR(rate);
+        }
+		
+		else if (e.getSource().equals(settingsMenu.temp))
+        {
+           	int temp = settingsMenu.temp.value();
+        	landscape.updateTemp(temp);
+        }
+		
+		repaint();
 	}
 
 	public void mouseEntered(MouseEvent e) {
