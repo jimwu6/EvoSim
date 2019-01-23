@@ -6,6 +6,8 @@ public class Mammal extends Animal {
 	public Mammal(String imageName, int size, int speed, int lifespan, String gender) {
 		super (imageName, size, speed, lifespan, gender);
 		hornSize = 0;
+		land = true;
+		water = false;
 	}
 	
 	public Mammal(Mammal m) {

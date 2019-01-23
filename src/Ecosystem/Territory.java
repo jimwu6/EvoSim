@@ -9,7 +9,7 @@ import javax.imageio.*;
 public class Territory{
 	
 	public Plant plant = null;
-    ArrayList <Resource> resources;
+    public ArrayList <Resource> resources;
     public String ground;
     public Image groundImg = null, plantImg = null;
     double rRate = .04;
@@ -69,10 +69,18 @@ public class Territory{
     			resources.add(new Resource("fruit"));
     	}
     	
-    	if (ground.equals("water") && resources.size() < 5)
+    	if (ground.equals("water") && resources.size() < 6)
     	{
-    		resources.add(new Resource("waterResource"));
+    		if (Math.random() < (rRate/70))
+    			resources.add(new Resource("seaweed"));
+    		
+    		if (ground.equals("water") && resources.size() < 4)
+    		resources.add(new Resource("waterResource"));    	
     	}
+    }
+    
+    public void release(boolean t) {
+    	resources.add(new Resource("fruit"));
     }
     
     public boolean hasResource() {
