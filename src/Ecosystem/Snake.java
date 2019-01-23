@@ -7,6 +7,8 @@ public class Snake extends Reptile{
 		super(imageName, size, speed, lifespan, gender);
 		venomous = false;
 		hooded = false;
+		carnivore = true;
+		herbivore = false;
 	}
 	
 	public Snake(Snake s) {

@@ -11,6 +11,8 @@ public class Canine extends Mammal{
 		intelligence = 35;
 		fangSize = 5;
 		claw = 5;
+		carnivore = true;
+		herbivore = false;
 	}
 	
 	public Canine(Canine canine) {

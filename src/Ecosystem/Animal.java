@@ -19,7 +19,6 @@ public abstract class Animal {
 	protected String gender, type;
 	ArrayList<String> bodyParts = new ArrayList<String>();
 
-	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
 
 	protected static final int maxStat = 100;
@@ -41,14 +40,15 @@ public abstract class Animal {
 		this.gender = gender;
 
 		bodyParts = new ArrayList<String>();
-//		bodyParts.add(type);
+
+		//bodyParts.add("cellular");
+
 		bodyParts.add("Mammal\\Head\\head5");
 		bodyParts.add("Mammal\\Leg\\leg3");
 		bodyParts.add("Mammal\\Tail\\tail3");
 		bodyParts.add("animal2");
 		appearance = makeImage(bodyParts);// make it access package
 
-		disease = new ArrayList<Disease>();
 		moveList = new ArrayList<String>();
 		
 	}
@@ -63,6 +63,9 @@ public abstract class Animal {
 		this.age = animal.age;
 		this.lifespan = animal.lifespan;
 
+		this.carnivore = animal.carnivore;
+		this.herbivore = animal.herbivore;
+		
 		if (Math.random() > 0.5)
 			this.gender = "Male";
 		else
@@ -72,7 +75,6 @@ public abstract class Animal {
 		
 		appearance = makeImage(bodyParts);// make it access package
 
-		disease = animal.disease;
 		moveList = animal.moveList;
 	}
 

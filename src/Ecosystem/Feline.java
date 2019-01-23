@@ -11,6 +11,8 @@ public class Feline extends Mammal{
 		intelligence = 30;
 		fangSize = 30;
 		claw = 30;
+		carnivore = true;
+		herbivore = false;
 	}
 	
 	public Feline(Feline feline) {

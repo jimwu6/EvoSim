@@ -9,6 +9,8 @@ public class Amphibian extends Animal {
 		hydration = 100;
 		poisonous = Math.random() > 0.93;
 		venomous = false;
+		herbivore = true;
+		carnivore = true;
 	}
 	
 	public Amphibian(Amphibian a) {
@@ -49,22 +51,5 @@ public class Amphibian extends Animal {
 		super.update();
 		hydration--;
 	}
-	
-	@Override
-	public void feed(Animal prey) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void chase(Animal prey) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void feed(String food) {
-		// TODO Auto-generated method stub
-		
-	}
 }
