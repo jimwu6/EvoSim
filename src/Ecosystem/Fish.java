@@ -1,6 +1,6 @@
 package Ecosystem;
 
-public class Fish extends Animal implements Herbivore, Carnivore {
+public class Fish extends Animal {
 	public int scaleHardness;
 	public boolean poisonous, luminant;
 	
@@ -9,6 +9,8 @@ public class Fish extends Animal implements Herbivore, Carnivore {
 		scaleHardness = 20;
 		poisonous = false;
 		luminant = false;
+		herbivore = true;
+		carnivore = true;
 	}
 	
 	public Fish(Fish f) {
@@ -52,21 +54,4 @@ public class Fish extends Animal implements Herbivore, Carnivore {
 		
 	}
 
-	@Override
-	public void feed(Animal prey) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void chase(Animal prey) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void feed(String food) {
-		// TODO Auto-generated method stub
-		
-	}
 }

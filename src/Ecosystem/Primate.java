@@ -1,6 +1,6 @@
 package Ecosystem;
 
-public class Primate extends Mammal implements Carnivore, Herbivore{
+public class Primate extends Mammal {
 	public int toolStrength;
 	
 	public Primate(String imageName, int size, int speed, int lifespan, String gender) {
@@ -9,6 +9,8 @@ public class Primate extends Mammal implements Carnivore, Herbivore{
 		furLength = 15;
 		intelligence = 50;
 		toolStrength = 10;
+		carnivore = true;
+		herbivore = true;
 	}
 	
 	public Primate(Primate primate) {

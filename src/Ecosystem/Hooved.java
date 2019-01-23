@@ -1,6 +1,6 @@
 package Ecosystem;
 
-public class Hooved extends Mammal implements Herbivore{
+public class Hooved extends Mammal {
 	public int hornStrength;
 	
 	public Hooved(String imageName, int size, int speed, int lifespan, String gender) {
@@ -9,6 +9,8 @@ public class Hooved extends Mammal implements Herbivore{
 		furLength = 20;
 		intelligence = 20;
 		hornStrength = 50;
+		carnivore = false;
+		herbivore = true;
 	}
 	
 	public Hooved(Hooved hooved) {

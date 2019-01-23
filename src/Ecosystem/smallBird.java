@@ -1,12 +1,14 @@
 package Ecosystem;
 
-public class smallBird extends Bird implements Carnivore, Herbivore{
+public class smallBird extends Bird {
 
 	public int featherVibrance;
 
 	public smallBird(String imageName, int size, int speed, int lifespan, String gender, boolean flight) {
 		super(imageName, size, speed, lifespan, gender, flight);
 		featherVibrance = 20;
+		carnivore = true;
+		herbivore = true;
 	}
 
 	public smallBird(smallBird bird) {

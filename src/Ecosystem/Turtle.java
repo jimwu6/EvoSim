@@ -1,11 +1,13 @@
 package Ecosystem;
 
-public class Turtle extends Reptile implements Herbivore{
+public class Turtle extends Reptile{
 	private int shellHardness;
 	
 	public Turtle(String imageName, int size, int speed, int lifespan, String gender) {
 		super(imageName, size, speed, lifespan, gender);
 		shellHardness = 50;
+		carnivore = false;
+		herbivore = true;
 	}
 	
 	public Turtle(Turtle t) {

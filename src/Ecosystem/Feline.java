@@ -1,6 +1,6 @@
 package Ecosystem;
 
-public class Feline extends Mammal implements Carnivore{
+public class Feline extends Mammal{
 
 	public int fangSize, claw;
 	
