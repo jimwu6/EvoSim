@@ -333,7 +333,7 @@ public class Landscape {
 						compare++;
 					}
 
-					if (baby != null && emptyRow != -1 && Math.random() > 0.3) {
+					if (baby != null && emptyRow != -1 && Math.random() < 0.3) {
 						nextGen[emptyRow][emptyCol].add(baby);
 						System.out.println("BABY MADE" + emptyRow + emptyCol);
 					}
