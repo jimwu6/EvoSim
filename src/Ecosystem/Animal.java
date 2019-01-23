@@ -1,6 +1,7 @@
 package Ecosystem;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 
@@ -16,6 +17,7 @@ public abstract class Animal {
 	protected boolean controlled, land, water;
 
 	protected String gender, type;
+	String[] bodyParts;
 
 	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
@@ -189,6 +191,39 @@ public abstract class Animal {
 		return type;
 	}
 
+	public BufferedImage makeImage(String[] strings)
+    {
+    	BufferedImage[] input = new BufferedImage[3];
+        for ( int i = 0; i < input.length; i++ ) {
+            try {
+                File f = new File( "Summative Graphics\\" + strings[i] + ".png" );
+                input[i] = ImageIO.read( f );
+            }
+            catch ( IOException x ) {
+                // Complain if there is any problem loading 
+                // an input image.
+                x.printStackTrace();
+            }
+        }
+         
+        // Create the output image.
+        // It is the same size as the first
+        // input image.  I had to specify the type
+        // so it would keep it's transparency.
+        BufferedImage output = new BufferedImage( 
+                input[0].getWidth()*2, 
+                input[0].getHeight()*2, 
+                BufferedImage.TYPE_INT_ARGB );
+         
+        // Draw each of the input images onto the
+        // output image.
+        Graphics g = output.getGraphics();
+        for ( int i = 0; i < input.length; i++ ) {
+            g.drawImage( input[i], i*55 , 0, null );
+        }
+        
+        return output;           
+    }
 }
 
 interface Herbivore {
