@@ -12,12 +12,12 @@ public abstract class Animal {
 	//fields
 
 	protected int health, size, speed, age, lifespan, hunger, thirst, mateTimer;
-	public Image appearance = null;
+	public BufferedImage appearance = null;
 
 	protected boolean controlled, land, water;
 
 	protected String gender, type;
-	String[] bodyParts;
+	ArrayList<String> bodyParts;
 
 	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
@@ -39,10 +39,7 @@ public abstract class Animal {
 		
 		this.gender = gender;
 
-		try {
-			appearance = ImageIO.read(new File(type));		// make it access package
-		}
-		catch (Exception ex) {}
+		appearance = makeImage(bodyParts);// make it access package
 
 		disease = new ArrayList<Disease>();
 		moveList = new ArrayList<String>();
@@ -80,6 +77,7 @@ public abstract class Animal {
 		this.size = 10;
 		this.age = 0;
 		this.mateTimer = 4;
+		this.appearance = makeImage(bodyParts);
 	}
 
 	// methods
@@ -191,7 +189,7 @@ public abstract class Animal {
 		return type;
 	}
 
-	public BufferedImage makeImage(String[] strings)
+	public BufferedImage makeImage(ArrayList<String> strings)
     {
     	BufferedImage[] input = new BufferedImage[3];
         for ( int i = 0; i < input.length; i++ ) {
