@@ -36,4 +36,15 @@ public class Resource {
 	public String getName() {
 		return name;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		boolean same = false;
+		
+		if (o != null && o instanceof Resource) {
+			same = this.name.equals(((Resource) o).getName());
+		}
+		
+		return same;
+	}
 }

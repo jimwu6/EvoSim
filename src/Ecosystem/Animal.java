@@ -13,9 +13,9 @@ public abstract class Animal {
 	protected int health, size, speed, age, lifespan, hunger, thirst, mateTimer;
 	public Image appearance = null;
 
-	protected boolean controlled;
+	protected boolean controlled, land, water;
 
-	protected String gender, imageName;
+	protected String gender, type;
 
 	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
@@ -23,11 +23,11 @@ public abstract class Animal {
 	protected static final int maxStat = 100;
 
 	// constructors
-	public Animal (String imageName, int size, int speed, int lifespan, String gender) {	// new animal
+	public Animal (String type, int size, int speed, int lifespan, String gender) {	// new animal
 		this.health = maxStat;
 		this.hunger = maxStat;
 		this.thirst = maxStat;
-		this.imageName = imageName;
+		this.type = type;
 		this.size = size;
 		this.speed = speed;
 		this.age = 0;
@@ -38,7 +38,7 @@ public abstract class Animal {
 		this.gender = gender;
 
 		try {
-			appearance = ImageIO.read(new File(imageName));		// make it access package
+			appearance = ImageIO.read(new File(type));		// make it access package
 		}
 		catch (Exception ex) {}
 
@@ -50,7 +50,7 @@ public abstract class Animal {
 		this.health = animal.health;
 		this.hunger = animal.hunger;
 		this.thirst = animal.thirst;
-		this.imageName = animal.imageName;
+		this.type = animal.type;
 		this.size = animal.size;
 		this.speed = animal.speed;
 		this.age = animal.age;
@@ -62,7 +62,7 @@ public abstract class Animal {
 			this.gender = "Female";
 
 		try {
-			appearance = ImageIO.read(new File(imageName));
+			appearance = ImageIO.read(new File(type));
 		}
 		catch (Exception ex) {}
 
@@ -96,7 +96,7 @@ public abstract class Animal {
 	public abstract Animal mate(Animal mate);
 
 	public boolean canMate(Animal mate) {
-		return this.imageName.equals(mate.imageName) && !this.gender.equals(mate.gender) && mateTimer == 0 && mate.mateTimer == 0;
+		return this.type.equals(mate.type) && !this.gender.equals(mate.gender) && mateTimer == 0 && mate.mateTimer == 0;
 	}
 
 	public void mateUpdate() {
@@ -177,6 +177,17 @@ public abstract class Animal {
 		return this.gender;
 	}
 
+	public boolean land() {
+		return land;
+	}
+	
+	public boolean water() {
+		return water;
+	}
+
+	public String type() {
+		return type;
+	}
 
 }
 

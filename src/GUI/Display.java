@@ -10,8 +10,7 @@ import javax.swing.*;
 import java.io.*;
 import javax.swing.event.*;
 
-import Ecosystem.Animal;
-import Ecosystem.Mammal;
+import Ecosystem.*;
 
 public class Display extends JFrame implements MouseListener, ActionListener{
 	Game game;
@@ -34,7 +33,9 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		menu.gameMode.addActionListener(this);
 		
 		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
-		game.landscape.populate(animal);
+		game.landscape.land[50][50].add(animal);
+		game.landscape.land[40][50].territory.release(true);
+		
 		
 		//setContentPane(game);
 		setContentPane(menu);
@@ -99,6 +100,10 @@ public class Display extends JFrame implements MouseListener, ActionListener{
     	Display window = new Display(1200);
 		window.setVisible(true);
 		window.setResizable(false);
+		
+		ArrayList <String> test = window.game.landscape.findResource(50, 50, window.game.landscape.land[40][50].territory.resources.get(0), window.game.landscape.land[50][50].animal);
+		for (int i = 0; i < test.size();i ++)
+			System.out.println(test.get(i));
     }
 
 	@Override
