@@ -171,9 +171,9 @@ public class Landscape {
 				else {
 					instruct.add(0, "right");
 				}
-				cur = vis[cur.x][cur.y];
 				curx = cur.x;
 				cury = cur.y;
+				cur = vis[curx][cury];
 			}
 		}
 		
@@ -201,7 +201,6 @@ public class Landscape {
 		int wantX = -1, wantY = -1;
 		
 		while (!q.isEmpty()) {
-			System.out.println("x");
 			boolean keepSearching = true;
 			
 //			Pair cur = q.poll();
@@ -221,15 +220,9 @@ public class Landscape {
 			}
 			// mark the wanted thing with -1
 			
-			System.out.println(curx);
-			System.out.println(cury);
-			
-			
 			if (keepSearching) {
-				System.out.println("sera");
 				//left
 				if (cury-1 >= 0) {
-					System.out.println("left");
 					if (!vis[curx][cury-1].visited
 							&& (land[curx][cury-1].territory.resources().contains(resource) 
 							|| (a.land() && !land[curx][cury-1].territory.ground.equals("water"))
@@ -243,7 +236,6 @@ public class Landscape {
 				}
 				// right
 				if (cury+1 < land[0].length) {
-					System.out.println("right");
 					if (!vis[curx][cury+1].visited 
 							&& (land[curx][cury+1].territory.resources().contains(resource) 
 							|| (a.land() && !land[curx][cury+1].territory.ground.equals("water"))
@@ -257,7 +249,6 @@ public class Landscape {
 				}
 				// up
 				if (curx-1 >= 0) {
-					System.out.println("up");
 					if (!vis[curx-1][cury].visited 
 							&& (land[curx-1][cury].territory.resources().contains(resource) 
 							|| (a.land() && !land[curx-1][cury].territory.ground.equals("water"))
@@ -271,7 +262,6 @@ public class Landscape {
 				}
 				// down
 				if (curx+1 < land.length) {
-					System.out.println("down");
 					if (!vis[curx+1][cury].visited 
 							&& (land[curx+1][cury].territory.resources().contains(resource) 
 							|| (a.land() && !land[curx+1][cury].territory.ground.equals("water"))
@@ -286,18 +276,6 @@ public class Landscape {
 			}
 		}
 		
-		for (int i = 0; i < land.length; i++) {
-			for (int j = 0; j < land[0].length; j++) {
-				if (vis[i][j].visited == true)
-					System.out.print(1);
-				else
-					System.out.print(0);
-			}
-			System.out.println();
-		}
-		
-		System.out.println(wantX);
-		System.out.println(wantY);
 		ArrayList<String> z = makeInstructions(vis, wantX, wantY);
 		for (int i = 0; i < z.size(); i++) {
 			System.out.println(z.get(i));

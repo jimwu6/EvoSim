@@ -17,7 +17,7 @@ public abstract class Animal {
 	protected boolean controlled, land, water;
 
 	protected String gender, type;
-	ArrayList<String> bodyParts;
+	ArrayList<String> bodyParts = new ArrayList<String>();
 
 	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
@@ -38,11 +38,12 @@ public abstract class Animal {
 		this.mateTimer = 4;
 		
 		this.gender = gender;
-
+		bodyParts.add("Animals\\animal2");
 		appearance = makeImage(bodyParts);// make it access package
 
 		disease = new ArrayList<Disease>();
 		moveList = new ArrayList<String>();
+		
 	}
 
 	public Animal(Animal animal) {	// copy constructor
@@ -199,13 +200,13 @@ public abstract class Animal {
 
 	public BufferedImage makeImage(ArrayList<String> strings)
     {
-    	BufferedImage[] input = new BufferedImage[3];
+    	BufferedImage[] input = new BufferedImage[1];
         for ( int i = 0; i < input.length; i++ ) {
             try {
                 File f = new File( "Summative Graphics\\" + strings.get(i) + ".png" );
                 input[i] = ImageIO.read( f );
             }
-            catch ( IOException x ) {
+            catch ( Exception x ) {
                 // Complain if there is any problem loading 
                 // an input image.
                 x.printStackTrace();
