@@ -90,36 +90,40 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 
 	protected void paintComponent(Graphics g) {
 
-		if (onA.wasClicked())
+		if (onA.clicked)
 		{
 			onA.setVisible(false);
 			onB.setVisible(true);
 			offB.setVisible(false);
 			offA.setVisible(true);
+			onA.clicked = false;
 		}
 
-		if (onB.wasClicked())
+		if (onB.clicked)
 		{
 			onB.setVisible(false);
 			onA.setVisible(true);
 			offA.setVisible(false);
 			offB.setVisible(true);
+			onB.clicked = false;
 		}
 
-		if (offA.wasClicked())
+		if (offA.clicked)
 		{
 			offA.setVisible(false);
 			offB.setVisible(true);
 			onB.setVisible(false);
 			onA.setVisible(true);
+			offA.clicked = false;
 		}
 
-		if (offB.wasClicked())
+		if (offB.clicked)
 		{
 			offB.setVisible(false);
 			offA.setVisible(true);
 			onA.setVisible(false);
 			onB.setVisible(true);
+			offB.clicked = false;
 		}
 
 		this.setOpaque(false);

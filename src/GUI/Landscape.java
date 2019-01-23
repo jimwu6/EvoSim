@@ -61,10 +61,13 @@ public class Landscape {
 			{
 				if (land[row][col].territory.ground.equals("grass"))
 				{
-					int chance = (int) (Math.random() * 201);
+					int chance = (int) (Math.random() * 401);
 
-					if (chance == 93)
-						land[row][col].territory.grow("tree");
+					if(chance == 91 || chance == 92)
+						land[row][col].territory.grow("shrub", 44);
+					else if (chance == 93)
+						land[row][col].territory.grow("tree", 111);
+					 
 					/*else if (chance >= 70)									OTHER PLANTs
 						land[row][col].territory.grow("tree");
 					else if (chance >= 60)
@@ -103,6 +106,13 @@ public class Landscape {
 						g.drawImage(land[row][col].animal.appearance, col * 10 - 10, row * 10 - 10, 40, 40, null);					
 					if (land[row][col].territory.plant != null)
 						g.drawImage(land[row][col].territory.plantImg, col * 10 -land[row][col].territory.plant.size/2 , row * 10 - land[row][col].territory.plant.size/2, land[row][col].territory.plant.size, land[row][col].territory.plant.size, null);
+					if (land[row][col].territory.hasResource())
+					{
+						for (int x = 0; x < land[row][col].territory.resourceList().size() -1; x++) 
+							g.drawImage(land[row][col].territory.resourceList().get(x).resourceImage, col * 10 - 15, row * 10 - 15, 30, 30, null);
+								
+					}
+						
 				} catch (NullPointerException e) {}
 			}
 		}
@@ -257,6 +267,11 @@ public class Landscape {
 		{
 			for (int col = 0; col < land[0].length; col++)
 			{
+				if (land[row][col].planted())
+				{
+					land[row][col].territory.release();
+				}
+				
 				if (land[row][col].occupied() && land[row][col].animal.health() >= 1)
 				{	
 					//System.out.println(row + ", " + col);

@@ -27,9 +27,9 @@ public class Territory{
 		}
     }
     
-    public Territory(String gName, String pName) {
+    public Territory(String gName, String pName, int size) {
     	this(gName);
-    	plant = new Plant(pName);
+    	plant = new Plant(pName, size);
 
     	try
 		{
@@ -41,9 +41,14 @@ public class Territory{
 		}
     }
     
-    public void grow(String pName) {
+    public ArrayList<Resource> resourceList()
+    {
+    	return resources;
+    }
+    
+    public void grow(String pName, int size) {
     	if (plant == null) {
-	    	plant = new Plant(pName);
+	    	plant = new Plant(pName, size);
 	
 	    	try
 			{
@@ -57,7 +62,15 @@ public class Territory{
     }
     
     public void release() {
-    	resources.add(plant.resource);
+    	if (plant != null)
+    	{
+    		if (Math.random() < .04)
+    			resources.add(new Resource("fruit"));
+    	}		
+    }
+    
+    public boolean hasResource() {
+    	return resources != null;
     }
     
     public ArrayList<Resource> resources() {

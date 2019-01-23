@@ -19,8 +19,8 @@ public class Tile {
         territory = new Territory(land);
     }
     
-    public Tile(String land, String plant) {
-        territory = new Territory(land, plant);
+    public Tile(String land, String plant, int size) {
+        territory = new Territory(land, plant, size);
     }
     
     public Tile(Tile copy) {
