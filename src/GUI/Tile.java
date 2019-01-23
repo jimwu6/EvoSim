@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -18,8 +20,8 @@ public class Tile {
     public Tile(String land) {
         territory = new Territory(land);
     }
-    
-    public Tile(String land, String plant, int size) {
+
+	public Tile(String land, String plant, int size) {
         territory = new Territory(land, plant, size);
     }
     

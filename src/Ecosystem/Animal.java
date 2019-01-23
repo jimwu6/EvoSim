@@ -116,6 +116,14 @@ public abstract class Animal {
 		health -= damage;
 	}
 
+	public boolean controlled() {
+		return controlled;
+	}
+	
+	public void underControl() {
+		controlled = true;
+	}
+	
 	public void update () {
 
 		// aging

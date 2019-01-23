@@ -27,7 +27,7 @@ public class Mammal extends Animal {
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
 		{
-			this.mateTimer = 2;
+			this.mateTimer = 3;
 			return new Mammal(this, this.canMate(mate));
 		}
 		

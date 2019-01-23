@@ -9,19 +9,29 @@ public class Canine extends Mammal implements Carnivore{
 		furDensity = 15;
 		furLength = 30;
 		intelligence = 35;
+		fangSize = 5;
+		claw = 5;
 	}
 	
 	public Canine(Canine canine) {
 		super(canine);
+		this.fangSize = canine.fangSize;
+		this.claw = canine.claw;
 	}
 	
 	public Canine(Canine canine, boolean canMate) {
 		super(canine, canMate);
+		this.fangSize = canine.fangSize;
+		this.claw = canine.claw;
 	}
 	
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
+		{
+			this.mateTimer = 3;
 			return new Canine(this, this.canMate(mate));
+		}
+		
 		return null;
 	}
 	

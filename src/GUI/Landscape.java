@@ -103,7 +103,13 @@ public class Landscape {
 				// draw ground and plant --> maybe move this somewhere?
 				try {	
 					if (land[r][c].occupied())
-						g.drawImage(land[r][c].animal.appearance, c * 10 - 10, r * 10 - 10, 40, 40, null);					
+					{
+						if (land[r][c].animal.controlled())
+							g.drawImage(land[r][c].animal.appearance, c * 10 - 20, r * 10 - 20, 60, 60, null);					
+						else
+							g.drawImage(land[r][c].animal.appearance, c * 10 - 10, r * 10 - 10, 40, 40, null);					
+						
+					}
 					if (land[r][c].territory.plant != null)
 						g.drawImage(land[r][c].territory.plantImg, c * 10 -land[r][c].territory.plant.size/2 , r * 10 - land[r][c].territory.plant.size/2, land[r][c].territory.plant.size, land[r][c].territory.plant.size, null);
 					if (land[r][c].territory.hasResource())
