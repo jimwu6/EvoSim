@@ -205,6 +205,14 @@ public abstract class Animal {
 		return type;
 	}
 
+	public int thirst() {
+		return thirst;
+	}
+	
+	public int hunger() {
+		return hunger;
+	}
+	
 	public BufferedImage makeImage(ArrayList<String> strings)
     {
     	BufferedImage[] input = new BufferedImage[strings.size()];
