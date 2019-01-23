@@ -264,6 +264,92 @@ public class Landscape {
 		
 		return makeInstructions(vis, wantX, wantY);
 	}
+	
+	public ArrayList<String> findAnimal(int r, int c, Animal animal, Animal a) {
+
+		Pair vis[][] = new Pair[land.length][land[0].length];
+		
+		vis[r][c].x = -1;
+		vis[r][c].y = -1;
+		vis[r][c].visited = true;
+		
+		Queue<Pair> q = new LinkedList<Pair>();
+
+		q.add(vis[r][c]);
+
+		int wantX = -1, wantY = -1;
+		
+		while (!q.isEmpty()) {
+			
+			boolean keepSearching = true;
+			
+			Pair cur = q.poll();
+			
+			if (land[cur.x][cur.y].animal.type().equals(animal.type())){
+				wantX = cur.x;
+				wantY = cur.y;
+				while (!q.isEmpty()) {
+					q.poll();
+				}
+				keepSearching = false;
+			}
+			
+			// mark the wanted thing with -1
+			
+			if (keepSearching) {
+				//left
+				if (cur.y-1 > 0) {
+					if (!vis[cur.x][cur.y-1].visited 
+							&& (land[cur.x][cur.y-1].animal.type().equals(animal.type())
+							|| (a.land() && !land[cur.x][cur.y-1].territory.ground.equals("water"))
+							|| (a.water() && land[cur.x][cur.y-1].territory.ground.equals("water")))) {
+						q.add(new Pair(cur.x, cur.y-1));
+						vis[cur.x][cur.y-1].x = cur.x;
+						vis[cur.x][cur.y-1].y = cur.y;
+						vis[cur.x][cur.y-1].visited = true;
+					}
+				}
+				// right
+				if (cur.y+1 > 0) {
+					if (!vis[cur.x][cur.y+1].visited 
+							&& (land[cur.x][cur.y+1].animal.type().equals(animal.type())
+							|| (a.land() && !land[cur.x][cur.y+1].territory.ground.equals("water"))
+							|| (a.water() && land[cur.x][cur.y+1].territory.ground.equals("water")))) {
+						q.add(new Pair(cur.x, cur.y+1));
+						vis[cur.x][cur.y+1].x = cur.x;
+						vis[cur.x][cur.y+1].y = cur.y;
+						vis[cur.x][cur.y+1].visited = true;
+					}
+				}
+				// up
+				if (cur.x-1 > 0) {
+					if (!vis[cur.x-1][cur.y].visited 
+							&& (land[cur.x-1][cur.y].animal.type().equals(animal.type()) 
+							|| (a.land() && !land[cur.x-1][cur.y].territory.ground.equals("water"))
+							|| (a.water() && land[cur.x-1][cur.y].territory.ground.equals("water")))) {
+						q.add(new Pair(cur.x-1, cur.y));
+						vis[cur.x-1][cur.y].x = cur.x;
+						vis[cur.x-1][cur.y].y = cur.y;
+						vis[cur.x-1][cur.y].visited = true;
+					}
+				}
+				// down
+				if (cur.x+1 > 0) {
+					if (!vis[cur.x+1][cur.y].visited 
+							&& (land[cur.x+1][cur.y].animal.type().equals(animal.type())
+							|| (a.land() && !land[cur.x+1][cur.y].territory.ground.equals("water"))
+							|| (a.water() && land[cur.x+1][cur.y].territory.ground.equals("water")))) {
+						q.add(new Pair(cur.x+1, cur.y));
+						vis[cur.x+1][cur.y].x = cur.x;
+						vis[cur.x+1][cur.y].y = cur.y;
+						vis[cur.x+1][cur.y].visited = true;
+					}
+				}
+			}
+		}
+		
+		return makeInstructions(vis, wantX, wantY);
+	}
 
 	public void advance() {
 
