@@ -2,10 +2,12 @@ package Ecosystem;
 
 public class Cellular extends Animal {
 	public int membrane;
-
+	
 	public Cellular(String imageName, int size, int speed, int lifespan, String gender) {
 		super (imageName, size, speed, lifespan, gender);
 		membrane = 1;
+		herbivore = true;
+		carnivore = false;
 	}
 
 	public Cellular(Cellular c) {
@@ -22,7 +24,7 @@ public class Cellular extends Animal {
 		if (this.canMate(mate))
 		{
 			this.mateTimer = 1;
-			if (membrane >= 5) {
+			if (membrane >= 5 && Math.random() > 0.5) {
 				if (this.water())
 					return new Fish(this, this.canMate(mate));
 				else
