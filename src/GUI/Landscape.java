@@ -165,6 +165,7 @@ public class Landscape {
 				else {
 					instruct.add(0, "down");
 				}
+				cur = vis[cur.x][cur.y];
 			}
 		}
 		
