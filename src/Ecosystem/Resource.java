@@ -8,14 +8,9 @@ import javax.imageio.ImageIO;
 
 public class Resource {
 	
-<<<<<<< HEAD
-	protected int heal;
-	protected String name;
-=======
 	int heal;
 	String name;
 	public Image resourceImage = null;
->>>>>>> 4cdd01bdd11c2cf92dffd0f66b4e2024f3d70dad
 	
 	public Resource(String n) {
 		name = n;
