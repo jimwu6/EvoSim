@@ -311,10 +311,7 @@ public class Landscape {
 				
 				if (row > 0 && nextGen[row - 1][col].occupied())
 					baby = new Mammal((Mammal) nextGen[row + 1][col].animal);
-				
-				
-				
-				
+						
 				/*if (nextGen[row][col].occupied())
 				{
 					Animal baby = null;

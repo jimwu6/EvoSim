@@ -19,7 +19,6 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 	DrawArea board;
 	boolean settingOn = false;
 	boolean simMode = true;
-	
 	Settings settingsMenu;
 	
 	public Game(int width) {
@@ -45,6 +44,7 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		settings.setBounds(this.getSize().height, this.getSize().height/16, this.getSize().height/8, this.getSize().height/8);
 
 		settings.addActionListener(this);
+		settingsMenu.simSpeed.addActionListener(this);
 		
 		// panels to add
 		board = new DrawArea(w, h);
@@ -94,6 +94,15 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
             settingOn = !settingOn;
 
             	settingsMenu.setVisible(settingOn);
+        }
+        
+        else if (e.getSource().equals(settingsMenu.simSpeed))
+        {
+        	int delay = 4000 - settingsMenu.simSpeed.value()*35;
+        	if (delay == 4000)
+        		t.stop();
+        	else
+        		t.setDelay(delay);
         }
         
         this.repaint();

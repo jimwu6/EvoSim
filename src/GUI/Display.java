@@ -31,6 +31,7 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		menu = new MainMenu(this.getSize().width);
 		
 		menu.simMode.addActionListener(this);
+		menu.gameMode.addActionListener(this);
 		
 		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
 		game.landscape.populate(animal);
@@ -63,6 +64,16 @@ public class Display extends JFrame implements MouseListener, ActionListener{
            	  selected = true;
            	  menu.setVisible(false);
            	  game.setVisible(true);
+           	  setContentPane(game);
+           	  game.resumeTimer();
+         }   
+		 
+		 if (e.getSource().equals(menu.gameMode))
+         {
+           	  selected = true;
+           	  menu.setVisible(false);
+           	  game.setVisible(true);
+           	  game.changeMode();
            	  setContentPane(game);
            	  game.resumeTimer();
          }   
