@@ -400,7 +400,36 @@ public class Landscape {
 				if (land[r][c].occupied() && land[r][c].animal.health() >= 1 
 						&& (land[r][c].animal.age() < land[r][c].animal.lifespan() || Math.random() < 0.7 - 0.2 * (land[r][c].animal.age() - land[r][c].animal.lifespan()))) 
 				{	
-					//System.out.println(r + ", " + c);
+					if (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty()) {
+						if (needresource) {
+							land[r][c].animal.moveList = findResource(r, c, resource, land[r][c].animal);
+						}
+						else if (needanimal) {
+							land[r][c].animal.moveList = findAnimal(r, c, ANIMAL, land[r][c].animal);
+						}
+					}
+					
+					if (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty()) {
+						
+					}
+					else {
+						int upDown = 0, leftRight = 0;
+						String move = land[r][c].animal.moveList.remove(0);
+						if (move.equals("left")) {
+							leftRight = -1;
+						}
+						else if (move.equals("right"))
+							leftRight = 1;
+						else if (move.equals("up"))
+							upDown = -1;
+						else
+							upDown = 1;
+						
+						// MOVE USING UP DOWN (OR SOME OTHER WAY)
+					}
+					
+					
+						//System.out.println(r + ", " + c);
 					land[r][c].animal.update();
 					
 					int upDown = (int) (Math.random() * 3) - 1;
