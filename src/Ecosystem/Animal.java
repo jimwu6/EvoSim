@@ -17,7 +17,7 @@ public abstract class Animal {
 	protected boolean controlled, land, water;
 
 	protected String gender, type;
-	ArrayList<String> bodyParts;
+	ArrayList<String> bodyParts = new ArrayList<String>();
 
 	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
@@ -39,10 +39,18 @@ public abstract class Animal {
 		
 		this.gender = gender;
 
+		bodyParts = new ArrayList<String>();
+		bodyParts.add("Mammal\\Body\\body1");
+		bodyParts.add("Mammal\\Head\\head5");
+		bodyParts.add("Mammal\\Leg\\leg3");
+		bodyParts.add("Mammal\\Tail\\tail3");
+		
+		bodyParts.add("Animals\\animal2");
 		appearance = makeImage(bodyParts);// make it access package
 
 		disease = new ArrayList<Disease>();
 		moveList = new ArrayList<String>();
+		
 	}
 
 	public Animal(Animal animal) {	// copy constructor
@@ -60,10 +68,9 @@ public abstract class Animal {
 		else
 			this.gender = "Female";
 
-		try {
-			appearance = ImageIO.read(new File(type));
-		}
-		catch (Exception ex) {}
+		bodyParts = animal.bodyParts;
+		
+		appearance = makeImage(bodyParts);// make it access package
 
 		disease = animal.disease;
 		moveList = animal.moveList;
@@ -77,6 +84,7 @@ public abstract class Animal {
 		this.size = 10;
 		this.age = 0;
 		this.mateTimer = 4;
+		this.bodyParts = animal.bodyParts;
 		this.appearance = makeImage(bodyParts);
 	}
 
@@ -199,13 +207,13 @@ public abstract class Animal {
 
 	public BufferedImage makeImage(ArrayList<String> strings)
     {
-    	BufferedImage[] input = new BufferedImage[3];
+    	BufferedImage[] input = new BufferedImage[strings.size()];
         for ( int i = 0; i < input.length; i++ ) {
             try {
-                File f = new File( "Summative Graphics\\" + strings.get(i) + ".png" );
+                File f = new File( "Summative Graphics\\Animals\\" + strings.get(i) + ".png" );
                 input[i] = ImageIO.read( f );
             }
-            catch ( IOException x ) {
+            catch ( Exception x ) {
                 // Complain if there is any problem loading 
                 // an input image.
                 x.printStackTrace();
@@ -224,9 +232,28 @@ public abstract class Animal {
         // Draw each of the input images onto the
         // output image.
         Graphics g = output.getGraphics();
+        int headIndex = 1;
         for ( int i = 0; i < input.length; i++ ) {
-            g.drawImage( input[i], i*55 , 0, null );
+        	if (strings.get(i).contains("Bird\\Leg"))
+        	{
+        		g.drawImage( input[i],  2*input[0].getWidth()/5 , 6*input[0].getHeight()/5, input[0].getWidth()/2 , 3*input[0].getHeight()/4,  null);
+        		g.drawImage( input[i],  input[0].getWidth() , input[0].getHeight(), input[0].getWidth()/2 , 3*input[0].getHeight()/4,  null);
+        	}
+        	else if (strings.get(i).contains("leg"))
+        	{
+        		g.drawImage( input[i],  3*input[0].getWidth()/11 , input[0].getHeight(), input[0].getWidth()/2 , 3*input[0].getHeight()/4,  null);
+        		g.drawImage( input[i],  6*input[0].getWidth()/7 , 6*input[0].getHeight()/7, input[0].getWidth()/2 , 3*input[0].getHeight()/4,  null);
+           		g.drawImage( input[i],  2*input[0].getWidth()/5 , 6*input[0].getHeight()/5, input[0].getWidth()/2 , 3*input[0].getHeight()/4,  null);
+        		g.drawImage( input[i],  input[0].getWidth() , input[0].getHeight(), input[0].getWidth()/2 , 3*input[0].getHeight()/4,  null);
+        	}
+        	else if (strings.get(i).contains("head"))
+        		headIndex = i;	
+        	else if (strings.get(i).contains("tail"))
+        		g.drawImage( input[i],  input[0].getWidth() , 3*input[0].getHeight()/4, input[0].getWidth()/2 , input[i].getHeight(),  null);            	
         }
+        g.drawImage( input[0], input[0].getWidth()/2 , input[0].getHeight()/2, input[0].getWidth() , input[0].getHeight(), null );
+    	g.drawImage( input[headIndex],  input[0].getWidth()/6 , input[0].getHeight()/6, input[0].getWidth() , input[0].getHeight(),  null );
+    	
         
         return output;           
     }

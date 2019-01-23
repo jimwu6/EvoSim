@@ -34,7 +34,7 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		
 		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 50, "Male");
 		game.landscape.land[50][50].add(animal);
-		game.landscape.land[40][50].territory.release(true);
+		game.landscape.land[60][52].territory.release(true);
 		
 		
 		//setContentPane(game);
@@ -101,7 +101,8 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		window.setVisible(true);
 		window.setResizable(false);
 		
-		ArrayList <String> test = window.game.landscape.findResource(50, 50, window.game.landscape.land[40][50].territory.resources().get(0), window.game.landscape.land[50][50].animal);
+		
+		ArrayList <String> test = window.game.landscape.findResource(50, 50, window.game.landscape.land[60][52].territory.resources().get(0), window.game.landscape.land[50][50].animal);
 		if (test.isEmpty())
 			System.out.println("EMPTY");
 //		for (int i = 0; i < test.size();i ++)

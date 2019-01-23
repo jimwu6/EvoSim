@@ -192,19 +192,22 @@ public class Landscape {
 
 			while (cur.x != -1) {
 				if (cur.x == curx + 1) {
-					instruct.add(0, "left");
-				}
-				else if (cur.x == curx - 1) {
-					instruct.add(0, "right");
-				}
-				else if (cur.y == cury + 1) {
 					instruct.add(0, "up");
 				}
-				else {
+				else if (cur.x == curx - 1) {
 					instruct.add(0, "down");
 				}
-				cur = vis[cur.x][cur.y];
+				else if (cur.y == cury + 1) {
+					instruct.add(0, "left");
+				}
+				else {
+					instruct.add(0, "right");
+				}
+				curx = cur.x;
+				cury = cur.y;
+				cur = vis[curx][cury];
 			}
+			instruct.remove(instruct.size()-1);
 		}
 
 		return instruct;
@@ -222,19 +225,16 @@ public class Landscape {
 		vis[r][c].y = -1;
 		vis[r][c].visited = true;
 
-		//		Queue<Pair> q = new LinkedList<Pair>();
-
-		//		q.add(vis[r][c]);
 		Queue<Integer> q = new LinkedList<Integer>();
 		q.add(r);
 		q.add(c);
+		
 		int wantX = -1, wantY = -1;
 
 		while (!q.isEmpty()) {
-			System.out.println("x");
+			
 			boolean keepSearching = true;
 
-			//			Pair cur = q.poll();
 			int curx = q.poll();
 			int cury = q.poll();
 
@@ -251,15 +251,9 @@ public class Landscape {
 			}
 			// mark the wanted thing with -1
 
-			System.out.println(curx);
-			System.out.println(cury);
-
-
 			if (keepSearching) {
-				System.out.println("sera");
 				//left
 				if (cury-1 >= 0) {
-					System.out.println("left");
 					if (!vis[curx][cury-1].visited
 							&& (land[curx][cury-1].territory.resources().contains(resource) 
 									|| (a.land() && !land[curx][cury-1].territory.ground.equals("water"))
@@ -273,7 +267,6 @@ public class Landscape {
 				}
 				// right
 				if (cury+1 < land[0].length) {
-					System.out.println("right");
 					if (!vis[curx][cury+1].visited 
 							&& (land[curx][cury+1].territory.resources().contains(resource) 
 									|| (a.land() && !land[curx][cury+1].territory.ground.equals("water"))
@@ -287,7 +280,6 @@ public class Landscape {
 				}
 				// up
 				if (curx-1 >= 0) {
-					System.out.println("up");
 					if (!vis[curx-1][cury].visited 
 							&& (land[curx-1][cury].territory.resources().contains(resource) 
 									|| (a.land() && !land[curx-1][cury].territory.ground.equals("water"))
@@ -301,7 +293,6 @@ public class Landscape {
 				}
 				// down
 				if (curx+1 < land.length) {
-					System.out.println("down");
 					if (!vis[curx+1][cury].visited 
 							&& (land[curx+1][cury].territory.resources().contains(resource) 
 									|| (a.land() && !land[curx+1][cury].territory.ground.equals("water"))
@@ -316,39 +307,25 @@ public class Landscape {
 			}
 		}
 
-		for (int i = 0; i < land.length; i++) {
-			for (int j = 0; j < land[0].length; j++) {
-				if (vis[i][j].visited == true)
-					System.out.print(1);
-				else
-					System.out.print(0);
-			}
-			System.out.println();
-		}
-
-		System.out.println(wantX);
-		System.out.println(wantY);
-		ArrayList<String> z = makeInstructions(vis, wantX, wantY);
-		for (int i = 0; i < z.size(); i++) {
-			System.out.println(z.get(i));
-		}
 		return makeInstructions(vis, wantX, wantY);
 	}
 
 	public ArrayList<String> findAnimal(int r, int c, Animal animal, Animal a) {
 
 		Pair vis[][] = new Pair[land.length][land[0].length];
-
+		
+		for (int row = 0; row < land.length; row++)
+			for (int col = 0; col < land[0].length; col++)
+				vis[row][col] = new Pair();
+		
 		vis[r][c].x = -1;
 		vis[r][c].y = -1;
 		vis[r][c].visited = true;
-
-		//		Queue<Pair> q = new LinkedList<Pair>();
+		
 		Queue<Integer> q = new LinkedList<Integer>();
-		//		q.add(vis[r][c]);
-
 		q.add(r);
 		q.add(c);
+		
 		int wantX = -1, wantY = -1;
 
 		while (!q.isEmpty()) {
@@ -358,13 +335,17 @@ public class Landscape {
 			int curx = q.poll();
 			int cury = q.poll();
 
-			if (land[curx][cury].animal.type().equals(animal.type())){
-				wantX = curx;
-				wantY = cury;
-				while (!q.isEmpty()) {
-					q.poll();
+
+	
+			if (curx != -1) {
+				if (land[curx][cury].animal.type().equals(animal.type())){
+					wantX = curx;
+					wantY = cury;
+					while (!q.isEmpty()) {
+						q.poll();
+					}
+					keepSearching = false;
 				}
-				keepSearching = false;
 			}
 
 			// mark the wanted thing with -1
@@ -453,7 +434,36 @@ public class Landscape {
 				if (land[r][c].occupied() && land[r][c].animal.health() >= 1 
 						&& (land[r][c].animal.age() < land[r][c].animal.lifespan() || Math.random() < 0.7 - 0.2 * (land[r][c].animal.age() - land[r][c].animal.lifespan()))) 
 				{	
-					//System.out.println(r + ", " + c);
+					if (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty()) {
+						if (needresource) {
+							land[r][c].animal.moveList = findResource(r, c, resource, land[r][c].animal);
+						}
+						else if (needanimal) {
+							land[r][c].animal.moveList = findAnimal(r, c, ANIMAL, land[r][c].animal);
+						}
+					}
+					
+					if (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty()) {
+						
+					}
+					else {
+						int upDown = 0, leftRight = 0;
+						String move = land[r][c].animal.moveList.remove(0);
+						if (move.equals("left")) {
+							leftRight = -1;
+						}
+						else if (move.equals("right"))
+							leftRight = 1;
+						else if (move.equals("up"))
+							upDown = -1;
+						else
+							upDown = 1;
+						
+						// MOVE USING UP DOWN (OR SOME OTHER WAY)
+					}
+					
+					
+						//System.out.println(r + ", " + c);
 					land[r][c].animal.update();
 
 					int upDown = (int) (Math.random() * 3) - 1;
