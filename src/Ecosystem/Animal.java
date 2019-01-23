@@ -15,13 +15,13 @@ public abstract class Animal {
 
 	protected boolean controlled;
 
-	protected String gender, type, imageName;
+	protected String gender, imageName;
 
 	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
-	
+
 	protected static final int maxStat = 100;
-	
+
 	// constructors
 	public Animal (String imageName, int size, int speed, int lifespan, String gender) {	// new animal
 		this.health = maxStat;
@@ -32,18 +32,18 @@ public abstract class Animal {
 		this.speed = speed;
 		this.age = 0;
 		this.lifespan = lifespan;
-		
+
 		this.gender = gender;
 
 		try {
-			appearance = ImageIO.read(new File(imageName));
+			appearance = ImageIO.read(new File(imageName));		// make it access package
 		}
 		catch (Exception ex) {}
-		
+
 		disease = new ArrayList<Disease>();
 		moveList = new ArrayList<String>();
 	}
-	
+
 	public Animal(Animal animal) {	// copy constructor
 		this.health = animal.health;
 		this.hunger = animal.hunger;
@@ -53,7 +53,7 @@ public abstract class Animal {
 		this.speed = animal.speed;
 		this.age = animal.age;
 		this.lifespan = animal.lifespan;
-		
+
 		if (Math.random() > 0.5)
 			this.gender = "Male";
 		else
@@ -63,34 +63,18 @@ public abstract class Animal {
 			appearance = ImageIO.read(new File(imageName));
 		}
 		catch (Exception ex) {}
-		
+
 		disease = animal.disease;
 		moveList = animal.moveList;
 	}
-	
-	public Animal(Animal animal, boolean birth) {	// construct newborn
-		if (birth)
-		{			
-			this.health = maxStat;
-			this.hunger = maxStat;
-			this.thirst = maxStat;
-			this.size = 10;
-			this.age = 0;
-			this.imageName = animal.imageName;
-			this.speed = animal.speed;
-			this.age = animal.age;
-			this.lifespan = animal.lifespan;
-			
-			this.gender = animal.gender;
 
-			try {
-				appearance = ImageIO.read(new File(imageName));
-			}
-			catch (Exception ex) {}
-			
-			disease = animal.disease;
-			moveList = animal.moveList;
-		}
+	public Animal(Animal animal, boolean birth) {	// construct newborn
+		this(animal);
+		this.health = maxStat;
+		this.hunger = maxStat;
+		this.thirst = maxStat;
+		this.size = 10;
+		this.age = 0;
 	}
 
 	// methods
@@ -109,40 +93,40 @@ public abstract class Animal {
 	public abstract Animal mate(Animal mate);
 
 	public boolean canMate(Animal mate) {
-		return this.type.equals(mate.type) && !this.gender.equals(mate.gender);
+		return this.imageName.equals(mate.imageName) && !this.gender.equals(mate.gender);
 	}
-	
+
 	public void flee (Animal predator) {
-		
+
 	}
 
 	public void seek (Animal animal){
-		
+
 	}
-	
+
 	public void injured (Integer damage) {
 		health -= damage;
 	}
-	
+
 	public void update () {
-		
+
 		// aging
 		age++;
-		
+
 		// update health
 		if (Math.random() < .5) {		// randomly gets thirsty
 			this.thirst -= 3;
 			this.hunger -= 2;
 		}
-		
+
 		if (thirst < 35) {
 			this.health -= 5;
 		}
-		
+
 		if (hunger < 35) {
 			this.health -= 5;
 		}
-		
+
 		// update aging conditions
 		double progress = (age + 0.0) / (lifespan + 0.0);
 		if (progress < 0.3) {
@@ -155,16 +139,16 @@ public abstract class Animal {
 		else if (progress > 0.6) {
 			speed -= (int) (Math.random() * 2);
 		}
-		
+
 		System.out.println(this.hunger + ", " + this.thirst + ", " + this.health);
 
 	}
-	
+
 	// accessors
 	public int health() {
 		return this.health;
 	}
-	
+
 	public int size() {
 		return this.size;
 	}

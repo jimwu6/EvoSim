@@ -5,7 +5,7 @@ public class Mammal extends Animal {
 	
 	public Mammal(String imageName, int size, int speed, int lifespan, String gender) {
 		super (imageName, size, speed, lifespan, gender);
-		type = "mammal";
+		hornSize = 0;
 	}
 	
 	public Mammal(Mammal m) {
@@ -14,7 +14,6 @@ public class Mammal extends Animal {
 		furLength = m.furLength;
 		hornSize = m.hornSize;
 		intelligence = m.intelligence;
-		type = "mammal";
 	}
 	
 	public Mammal(Mammal m, boolean canMate) {
@@ -23,10 +22,11 @@ public class Mammal extends Animal {
 		furLength = m.furLength;
 		hornSize = m.hornSize;
 		intelligence = m.intelligence;
-		type = "mammal";
 	}
 
 	public Animal mate(Animal mate) {
-		return new Mammal(this, this.canMate(mate));
+		if (this.canMate(mate))
+			return new Mammal(this, this.canMate(mate));
+		return null;	
 	}
 }
