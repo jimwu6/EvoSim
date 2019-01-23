@@ -114,7 +114,7 @@ public class Landscape {
 						g.drawImage(land[r][c].territory.plantImg, c * 10 -land[r][c].territory.plant.size/2 , r * 10 - land[r][c].territory.plant.size/2, land[r][c].territory.plant.size, land[r][c].territory.plant.size, null);
 					if (land[r][c].territory.hasResource())
 					{
-						for (int x = 0; x < land[r][c].territory.resourceList().size() -1; x++) 
+						for (int x = 0; x < land[r][c].territory.resourceList().size(); x++) 
 							g.drawImage(land[r][c].territory.resourceList().get(x).resourceImage, c * 10 - 15, r * 10 - 15, 30, 30, null);
 								
 					}
@@ -182,6 +182,10 @@ public class Landscape {
 
 		Pair vis[][] = new Pair[land.length][land[0].length];
 		
+		for (int row = 0; row < land.length; row++)
+			for (int col = 0; col < land[0].length; col++)
+				vis[r][c] = new Pair();
+		
 		vis[r][c].x = -1;
 		vis[r][c].y = -1;
 		vis[r][c].visited = true;
@@ -197,17 +201,17 @@ public class Landscape {
 			boolean keepSearching = true;
 			
 			Pair cur = q.poll();
-			
-			ArrayList<Resource> res = land[cur.x][cur.y].territory.resources();
-			if (res.contains(resource)){
-				wantX = cur.x;
-				wantY = cur.y;
-				while (!q.isEmpty()) {
-					q.poll();
+			if (cur.x != -1) {
+				ArrayList<Resource> res = land[cur.x][cur.y].territory.resources();
+				if (res.contains(resource)){
+					wantX = cur.x;
+					wantY = cur.y;
+					while (!q.isEmpty()) {
+						q.poll();
+					}
+					keepSearching = false;
 				}
-				keepSearching = false;
 			}
-			
 			// mark the wanted thing with -1
 			
 			if (keepSearching) {
@@ -475,6 +479,11 @@ class Pair {
 	public int x, y;
 	public boolean visited = false;
 	
+	public Pair() {
+		this.x = 0;
+		this.y = 0;
+	}
+		
 	public Pair(int x, int y) {
 		this.x = x;
 		this.y = y;
