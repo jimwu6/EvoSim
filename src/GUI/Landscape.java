@@ -165,6 +165,7 @@ public class Landscape {
 				else {
 					instruct.add(0, "down");
 				}
+				cur = vis[cur.x][cur.y];
 			}
 		}
 		
@@ -307,11 +308,20 @@ public class Landscape {
 		{
 			for (int col = 0; col < nextGen[0].length; col++)
 			{
-				Animal baby = null;
+				//Animal baby = null;
 				
+<<<<<<< HEAD
 				if (row > 0 && nextGen[row - 1][col].occupied())
 					baby = new Mammal((Mammal) nextGen[row + 1][col].animal);
 						
+=======
+				//if (row > 0 && nextGen[row - 1][col].occupied())
+				//	baby = new Mammal((Mammal) nextGen[row + 1][col].animal);
+				
+				
+				
+				
+>>>>>>> 4e1fb7d68811972599ab77ff3a054de509c1a0a5
 				/*if (nextGen[row][col].occupied())
 				{
 					Animal baby = null;
