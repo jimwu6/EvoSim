@@ -8,20 +8,17 @@ public class Hooved extends Mammal implements Herbivore{
 		furDensity = 40;
 		furLength = 20;
 		intelligence = 20;
+		hornStrength = 50;
 	}
 	
 	public Hooved(Hooved hooved) {
 		super(hooved);
-		this.furDensity = hooved.furDensity;
-		this.furLength = hooved.furLength;
-		this.intelligence = hooved.intelligence;
+		this.hornSize = hooved.hornStrength;
 	}
 	
 	public Hooved(Hooved hooved, boolean canMate) {
 		super(hooved, canMate);
-		this.furDensity = hooved.furDensity;
-		this.furLength = hooved.furLength;
-		this.intelligence = hooved.intelligence;
+		this.hornSize = hooved.hornStrength;
 	}
 	
 	public Animal mate(Animal mate) {
