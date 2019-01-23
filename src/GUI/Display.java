@@ -101,11 +101,11 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		window.setVisible(true);
 		window.setResizable(false);
 		
-		ArrayList <String> test = window.game.landscape.findResource(50, 50, window.game.landscape.land[40][50].territory.resources.get(0), window.game.landscape.land[50][50].animal);
+		ArrayList <String> test = window.game.landscape.findResource(50, 50, window.game.landscape.land[40][50].territory.resources().get(0), window.game.landscape.land[50][50].animal);
 		if (test.isEmpty())
 			System.out.println("EMPTY");
-		for (int i = 0; i < test.size();i ++)
-			System.out.println(test.get(i));
+//		for (int i = 0; i < test.size();i ++)
+//			System.out.println(test.get(i));
     }
 
 	@Override
