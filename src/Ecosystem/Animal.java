@@ -41,11 +41,11 @@ public abstract class Animal {
 		this.gender = gender;
 
 		bodyParts = new ArrayList<String>();
-		bodyParts.add(type);
-		//bodyParts.add("Mammal\\Head\\head5");
-		//bodyParts.add("Mammal\\Leg\\leg3");
-		//bodyParts.add("Mammal\\Tail\\tail3");
-		//bodyParts.add("Animals\\animal2");
+//		bodyParts.add(type);
+		bodyParts.add("Mammal\\Head\\head5");
+		bodyParts.add("Mammal\\Leg\\leg3");
+		bodyParts.add("Mammal\\Tail\\tail3");
+		bodyParts.add("animal2");
 		appearance = makeImage(bodyParts);// make it access package
 
 		disease = new ArrayList<Disease>();
