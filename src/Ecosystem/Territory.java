@@ -59,5 +59,9 @@ public class Territory{
     public void release() {
     	resources.add(plant.resource);
     }
+    
+    public ArrayList<Resource> resources() {
+    	return resources;
+    }
 
 }

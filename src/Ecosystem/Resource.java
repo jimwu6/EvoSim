@@ -2,8 +2,8 @@ package Ecosystem;
 
 public class Resource {
 	
-	int heal;
-	String name;
+	protected int heal;
+	protected String name;
 	
 	public Resource(String n) {
 		name = n;
@@ -11,5 +11,9 @@ public class Resource {
 	
 	public int heal() {
 		return heal;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }
