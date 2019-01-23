@@ -42,11 +42,6 @@ public class Territory{
 		}
     }
     
-    public ArrayList<Resource> resourceList()
-    {
-    	return resources;
-    }
-    
     public void grow(String pName, int size) {
     	if (plant == null) {
 	    	plant = new Plant(pName, size);

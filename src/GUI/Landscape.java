@@ -114,8 +114,8 @@ public class Landscape {
 						g.drawImage(land[r][c].territory.plantImg, c * 10 -land[r][c].territory.plant.size/2 , r * 10 - land[r][c].territory.plant.size/2, land[r][c].territory.plant.size, land[r][c].territory.plant.size, null);
 					if (land[r][c].territory.hasResource())
 					{
-						for (int x = 0; x < land[r][c].territory.resourceList().size(); x++) 
-							g.drawImage(land[r][c].territory.resourceList().get(x).resourceImage, c * 10 - 15, r * 10 - 15, 30, 30, null);
+						for (int x = 0; x < land[r][c].territory.resources().size(); x++) 
+							g.drawImage(land[r][c].territory.resources().get(x).resourceImage, c * 10 - 15, r * 10 - 15, 30, 30, null);
 
 					}
 

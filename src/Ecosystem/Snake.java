@@ -1,6 +1,6 @@
 package Ecosystem;
 
-public class Snake extends Reptile implements Carnivore{
+public class Snake extends Reptile{
 	public boolean venomous, hooded;
 	
 	public Snake(String imageName, int size, int speed, int lifespan, String gender) {
