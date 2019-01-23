@@ -40,7 +40,7 @@ public abstract class Animal {
 		this.gender = gender;
 
 		bodyParts = new ArrayList<String>();
-		bodyParts.add("cellular");
+		bodyParts.add(type);
 		//bodyParts.add("Mammal\\Head\\head5");
 		//bodyParts.add("Mammal\\Leg\\leg3");
 		//bodyParts.add("Mammal\\Tail\\tail3");

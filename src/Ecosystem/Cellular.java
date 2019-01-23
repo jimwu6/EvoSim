@@ -22,7 +22,7 @@ public class Cellular extends Animal {
 		if (this.canMate(mate))
 		{
 			this.mateTimer = 1;
-			if (membrane >= 5 && Math.random() > 0.5) {
+			if (membrane >= 5) {
 				if (this.water())
 					return new Fish(this, this.canMate(mate));
 				else

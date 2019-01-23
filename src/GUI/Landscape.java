@@ -139,7 +139,7 @@ public class Landscape {
 		{
 			for (int c = 0 ; c < land[0].length ; c++)
 			{
-				if (Math.floor(Math.random () * 650) < 1)
+				if (Math.floor(Math.random () * 200) < 1)
 				{
 					Animal newAnimal = null;
 					if (animal.type().equals("cellular"))
@@ -209,7 +209,9 @@ public class Landscape {
 				cury = cur.y;
 				cur = vis[curx][cury];
 			}
-			instruct.remove(instruct.size()-1);
+			
+			if (!instruct.isEmpty())
+				instruct.remove(instruct.size()-1);
 		}
 
 		return instruct;
@@ -465,13 +467,13 @@ public class Landscape {
 							land[r][c].territory.resources.remove(land[r+1][c].territory.resources.indexOf("waterResource"));
 						}
 						
-						else if (c != 0 && land[r][-1].territory.resources.contains("waterResource"))
+						else if (c != 0 && land[r][c-1].territory.resources.contains("waterResource"))
 						{
 							land[r][c].animal.drink();
 							land[r][c].territory.resources.remove(land[r][c-1].territory.resources.indexOf("waterResource"));
 						}
 						
-						else if (c != land.length-1 && land[r][c+1].territory.resources.contains("waterResource"))
+						else if (c != land[0].length-1 && land[r][c+1].territory.resources.contains("waterResource"))
 						{
 							land[r][c].animal.drink();
 							land[r][c].territory.resources.remove(land[r][c+1].territory.resources.indexOf("waterResource"));
@@ -492,13 +494,13 @@ public class Landscape {
 							land[r][c].territory.resources.remove(land[r+1][c].territory.resources.indexOf("waterResource"));
 						}
 						
-						else if (c != 0 && land[r][-1].territory.resources.contains("waterResource"))
+						else if (c != 0 && land[r][c-1].territory.resources.contains("waterResource"))
 						{
 							land[r][c].animal.drink();
 							land[r][c].territory.resources.remove(land[r][c-1].territory.resources.indexOf("waterResource"));
 						}
 						
-						else if (c != land.length-1 && land[r][c+1].territory.resources.contains("waterResource"))
+						else if (c != land[0].length-1 && land[r][c+1].territory.resources.contains("waterResource"))
 						{
 							land[r][c].animal.drink();
 							land[r][c].territory.resources.remove(land[r][c+1].territory.resources.indexOf("waterResource"));
@@ -575,7 +577,7 @@ public class Landscape {
 						compare++;
 					}
 
-					if (baby != null && emptyRow != -1 && Math.random() < 0.3) {
+					if (baby != null && emptyRow != -1 && Math.random() > 0.4) {
 						nextGen[emptyRow][emptyCol].add(baby);
 						System.out.println("BABY MADE" + emptyRow + emptyCol);
 					}
