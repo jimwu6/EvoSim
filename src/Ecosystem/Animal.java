@@ -17,7 +17,7 @@ public abstract class Animal {
 	protected boolean controlled, land, water;
 
 	protected String gender, type;
-	ArrayList<String> bodyParts;
+	ArrayList<String> bodyParts = new ArrayList<String>();
 
 	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
@@ -38,6 +38,7 @@ public abstract class Animal {
 		this.mateTimer = 4;
 		
 		this.gender = gender;
+<<<<<<< HEAD
 
 		bodyParts = new ArrayList<String>();
 		bodyParts.add("Mammal\\Body\\body1");
@@ -45,10 +46,14 @@ public abstract class Animal {
 		bodyParts.add("Mammal\\Leg\\leg3");
 		bodyParts.add("Mammal\\Tail\\tail3");
 		
+=======
+		bodyParts.add("Animals\\animal2");
+>>>>>>> 5dda9e518ebb636f72d5308d5870788f2b42bb3c
 		appearance = makeImage(bodyParts);// make it access package
 
 		disease = new ArrayList<Disease>();
 		moveList = new ArrayList<String>();
+		
 	}
 
 	public Animal(Animal animal) {	// copy constructor
@@ -205,13 +210,17 @@ public abstract class Animal {
 
 	public BufferedImage makeImage(ArrayList<String> strings)
     {
+<<<<<<< HEAD
     	BufferedImage[] input = new BufferedImage[strings.size()];
+=======
+    	BufferedImage[] input = new BufferedImage[1];
+>>>>>>> 5dda9e518ebb636f72d5308d5870788f2b42bb3c
         for ( int i = 0; i < input.length; i++ ) {
             try {
                 File f = new File( "Summative Graphics\\Animals\\" + strings.get(i) + ".png" );
                 input[i] = ImageIO.read( f );
             }
-            catch ( IOException x ) {
+            catch ( Exception x ) {
                 // Complain if there is any problem loading 
                 // an input image.
                 x.printStackTrace();
