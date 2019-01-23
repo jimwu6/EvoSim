@@ -27,6 +27,8 @@ public class Canine extends Mammal implements Carnivore{
 	
 	public Canine(Mammal mammal, boolean canMate) {
 		super(mammal, canMate);
+		this.fangSize = 5;
+		this.claw = 5;
 	}
 
 	public Animal mate(Animal mate) {

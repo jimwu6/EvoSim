@@ -30,13 +30,15 @@ public class Feline extends Mammal implements Carnivore{
 	}
 
 	public Animal mate(Animal mate) {
-		if (this.canMate(mate))
+		Animal a = super.mate(mate);
+		
+		if (a == null && this.canMate(mate))
 		{
 			this.mateTimer = 3;
 			return new Feline(this, this.canMate(mate));
 		}
 		
-		return null;	
+		return a;
 	}
 	
 	public void update() {

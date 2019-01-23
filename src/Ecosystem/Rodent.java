@@ -29,14 +29,22 @@ public class Rodent extends Mammal implements Herbivore{
 		super(mammal, canMate);
 	}
 
+	public Rodent(smallBird smallBird, boolean canMate) {
+		super("rodent", smallBird.size(), smallBird.speed(), smallBird.lifespan(), Math.random() < 0.5? "Male" : "Female");
+		claw = 5;
+		disease = false;
+	}
+
 	public Animal mate(Animal mate) {
-		if (this.canMate(mate))
+		Animal a = super.mate(mate);
+		
+		if (a == null && this.canMate(mate))
 		{
-			this.mateTimer = 2;
+			this.mateTimer = 3;
 			return new Rodent(this, this.canMate(mate));
 		}
 		
-		return null;
+		return a;
 	}
 	
 	public void update() {
