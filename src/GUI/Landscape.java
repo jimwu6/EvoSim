@@ -414,13 +414,12 @@ public class Landscape {
 		{
 			for (int c = 0; c < land[0].length; c++)
 			{
-				if (land[r][c].planted() || land[r][c].territory.ground.equals("water"))
-				{
+				if (land[r][c].planted() || land[r][c].territory.ground.equals("water")) {
 					land[r][c].territory.release();
 				}
 				
 				if (land[r][c].occupied() && land[r][c].animal.health() >= 1 
-						&& (land[r][c].animal.age() < land[r][c].animal.lifespan() || Math.random() < 0.7 - 0.2 * (land[r][c].animal.age() - land[r][c].animal.lifespan())))
+						&& (land[r][c].animal.age() < land[r][c].animal.lifespan() || Math.random() < 0.7 - 0.2 * (land[r][c].animal.age() - land[r][c].animal.lifespan()))) 
 				{	
 					//System.out.println(r + ", " + c);
 					land[r][c].animal.update();

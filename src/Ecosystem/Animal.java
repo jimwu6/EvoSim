@@ -202,7 +202,7 @@ public abstract class Animal {
     	BufferedImage[] input = new BufferedImage[3];
         for ( int i = 0; i < input.length; i++ ) {
             try {
-                File f = new File( "Summative Graphics\\" + strings[i] + ".png" );
+                File f = new File( "Summative Graphics\\" + strings.get(i) + ".png" );
                 input[i] = ImageIO.read( f );
             }
             catch ( IOException x ) {
