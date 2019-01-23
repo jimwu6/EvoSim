@@ -94,7 +94,7 @@ public abstract class Animal {
 		catch (Exception ex) {}
 	}
 
-	protected void drink(){
+	public void drink(){
 		thirst += Math.random() * 5 + 8;
 		thirst = Math.min(thirst, maxStat);
 	}

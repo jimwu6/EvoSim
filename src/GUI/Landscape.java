@@ -421,7 +421,7 @@ public class Landscape {
 							land[r][c].territory.resources.remove(land[r][c].territory.resources.indexOf("waterResource"));
 						}
 						
-						else if (r != 0 && land[r][c].territory.resources.contains("waterResource"))
+						else if (r != land.length-1 && land[r][c].territory.resources.contains("waterResource"))
 						{
 							land[r][c].animal.drink();
 							land[r][c].territory.resources.remove(land[r][c].territory.resources.indexOf("waterResource"));
