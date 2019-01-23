@@ -175,6 +175,7 @@ public class Landscape {
 				cury = cur.y;
 				cur = vis[curx][cury];
 			}
+			instruct.remove(instruct.size()-1);
 		}
 		
 		return instruct;
@@ -192,18 +193,16 @@ public class Landscape {
 		vis[r][c].y = -1;
 		vis[r][c].visited = true;
 		
-//		Queue<Pair> q = new LinkedList<Pair>();
-
-//		q.add(vis[r][c]);
 		Queue<Integer> q = new LinkedList<Integer>();
 		q.add(r);
 		q.add(c);
+		
 		int wantX = -1, wantY = -1;
 		
 		while (!q.isEmpty()) {
+			
 			boolean keepSearching = true;
 			
-//			Pair cur = q.poll();
 			int curx = q.poll();
 			int cury = q.poll();
 			
@@ -276,10 +275,6 @@ public class Landscape {
 			}
 		}
 		
-		ArrayList<String> z = makeInstructions(vis, wantX, wantY);
-		for (int i = 0; i < z.size(); i++) {
-			System.out.println(z.get(i));
-		}
 		return makeInstructions(vis, wantX, wantY);
 	}
 	
@@ -287,16 +282,18 @@ public class Landscape {
 
 		Pair vis[][] = new Pair[land.length][land[0].length];
 		
+		for (int row = 0; row < land.length; row++)
+			for (int col = 0; col < land[0].length; col++)
+				vis[row][col] = new Pair();
+		
 		vis[r][c].x = -1;
 		vis[r][c].y = -1;
 		vis[r][c].visited = true;
 		
-//		Queue<Pair> q = new LinkedList<Pair>();
 		Queue<Integer> q = new LinkedList<Integer>();
-//		q.add(vis[r][c]);
-
 		q.add(r);
 		q.add(c);
+		
 		int wantX = -1, wantY = -1;
 		
 		while (!q.isEmpty()) {
@@ -306,13 +303,15 @@ public class Landscape {
 			int curx = q.poll();
 			int cury = q.poll();
 			
-			if (land[curx][cury].animal.type().equals(animal.type())){
-				wantX = curx;
-				wantY = cury;
-				while (!q.isEmpty()) {
-					q.poll();
+			if (curx != -1) {
+				if (land[curx][cury].animal.type().equals(animal.type())){
+					wantX = curx;
+					wantY = cury;
+					while (!q.isEmpty()) {
+						q.poll();
+					}
+					keepSearching = false;
 				}
-				keepSearching = false;
 			}
 			
 			// mark the wanted thing with -1
