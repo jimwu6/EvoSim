@@ -307,10 +307,10 @@ public class Landscape {
 		{
 			for (int col = 0; col < nextGen[0].length; col++)
 			{
-				Animal baby = null;
+				//Animal baby = null;
 				
-				if (row > 0 && nextGen[row - 1][col].occupied())
-					baby = new Mammal((Mammal) nextGen[row + 1][col].animal);
+				//if (row > 0 && nextGen[row - 1][col].occupied())
+				//	baby = new Mammal((Mammal) nextGen[row + 1][col].animal);
 				
 				
 				

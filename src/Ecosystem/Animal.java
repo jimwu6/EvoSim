@@ -6,7 +6,7 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 
-public class Animal {
+public abstract class Animal {
 
 	//fields
 
@@ -15,12 +15,12 @@ public class Animal {
 
 	protected boolean controlled;
 
-	public String gender, imageName;
+	protected String gender, type, imageName;
 
 	protected ArrayList<Disease> disease;
 	public ArrayList<String> moveList;
 	
-	protected static int maxStat = 100;
+	protected static final int maxStat = 100;
 	
 	// constructors
 	public Animal (String imageName, int size, int speed, int lifespan, String gender) {	// new animal
@@ -106,12 +106,10 @@ public class Animal {
 		thirst = Math.min(thirst, maxStat);
 	}
 
-	public Animal mate(Animal mate) {
-		return new Animal(mate, this.canMate(mate));
-	}
+	public abstract Animal mate(Animal mate);
 
 	public boolean canMate(Animal mate) {
-		return !this.gender.equals(mate.gender);
+		return this.type.equals(mate.type) && !this.gender.equals(mate.gender);
 	}
 	
 	public void flee (Animal predator) {
