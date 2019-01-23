@@ -10,7 +10,7 @@ public abstract class Animal {
 
 	//fields
 
-	protected int health, size, speed, age, lifespan, hunger, thirst;
+	protected int health, size, speed, age, lifespan, hunger, thirst, mateTimer;
 	public Image appearance = null;
 
 	protected boolean controlled;
@@ -33,6 +33,8 @@ public abstract class Animal {
 		this.age = 0;
 		this.lifespan = lifespan;
 
+		this.mateTimer = 4;
+		
 		this.gender = gender;
 
 		try {
@@ -75,6 +77,7 @@ public abstract class Animal {
 		this.thirst = maxStat;
 		this.size = 10;
 		this.age = 0;
+		this.mateTimer = 4;
 	}
 
 	// methods
@@ -93,9 +96,14 @@ public abstract class Animal {
 	public abstract Animal mate(Animal mate);
 
 	public boolean canMate(Animal mate) {
-		return this.imageName.equals(mate.imageName) && !this.gender.equals(mate.gender);
+		return this.imageName.equals(mate.imageName) && !this.gender.equals(mate.gender) && mateTimer == 0 && mate.mateTimer == 0;
 	}
 
+	public void mateUpdate() {
+		if (mateTimer > 0)
+			mateTimer --;
+	}
+	
 	public void flee (Animal predator) {
 
 	}
