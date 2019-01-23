@@ -1,6 +1,6 @@
 package Ecosystem;
 
-public class Amphibian extends Animal implements Herbivore, Carnivore {
+public class Amphibian extends Animal {
 	protected int hydration;
 	public boolean poisonous, venomous;
 	

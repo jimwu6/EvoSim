@@ -14,7 +14,7 @@ public abstract class Animal {
 	protected int health, size, speed, age, lifespan, hunger, thirst, mateTimer;
 	public BufferedImage appearance = null;
 
-	protected boolean controlled, land, water;
+	protected boolean controlled, land, water, carnivore, herbivore;
 
 	protected String gender, type;
 	ArrayList<String> bodyParts = new ArrayList<String>();
@@ -212,6 +212,19 @@ public abstract class Animal {
 		return hunger;
 	}
 	
+	public void feed() {
+		hunger += Math.random() * 15 + 5;
+		hunger = Math.min(hunger, maxStat);
+	}
+	
+	public boolean carnivore() {
+		return carnivore;
+	}
+	
+	public boolean herbivore() {
+		return herbivore;
+	}
+	
 	public BufferedImage makeImage(ArrayList<String> strings)
     {
     	BufferedImage[] input = new BufferedImage[strings.size()];
@@ -264,13 +277,4 @@ public abstract class Animal {
         
         return output;           
     }
-}
-
-interface Herbivore {
-	public void feed (String food);
-}
-
-interface Carnivore {
-	public void feed (Animal prey);
-	public void chase (Animal prey);
 }

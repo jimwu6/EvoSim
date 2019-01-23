@@ -1,11 +1,13 @@
 package Ecosystem;
 
-public class Lizard extends Reptile implements Carnivore{
+public class Lizard extends Reptile {
 	public boolean tailDecoy;
 
 	public Lizard(String imageName, int size, int speed, int lifespan, String gender) {
 		super(imageName, size, speed, lifespan, gender);
 		tailDecoy = true;
+		carnivore = true;
+		herbivore = false;
 	}
 
 	public Lizard(Lizard i) {
@@ -68,11 +70,4 @@ public class Lizard extends Reptile implements Carnivore{
 
 	}
 
-	public void chase(Animal prey){
-
-	}
-
-	public void feed (Animal prey){
-
-	}
 }

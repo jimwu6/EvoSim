@@ -1,12 +1,14 @@
 package Ecosystem;
 
-public class Raptor extends Bird implements Carnivore{
+public class Raptor extends Bird {
 	private int talonSize, beakStrength;
 	
 	public Raptor(String imageName, int size, int speed, int lifespan, String gender, boolean flight) {
 		super(imageName, size, speed, lifespan, gender, flight);
 		talonSize = 30;
 		beakStrength = 40;
+		carnivore = true;
+		herbivore = false;
 	}
 	
 	public Raptor(Raptor raptor) {

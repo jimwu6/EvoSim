@@ -439,8 +439,10 @@ public class Landscape {
 					if (land[r][c].animal != null && (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty())) {
 						if (land[r][c].animal.thirst() < 75 ) 
 							land[r][c].animal.moveList = findResource(r, c, new Resource ("waterResource"), land[r][c].animal);
-						else if (land[r][c].animal.hunger() < 60 ) 
+						else if (land[r][c].animal.hunger() < 60 && land[r][c].animal.land()) 
 							land[r][c].animal.moveList = findResource(r, c, new Resource ("fruit"), land[r][c].animal);
+						else if (land[r][c].animal.hunger() < 60 && land[r][c].animal.water()) 
+							land[r][c].animal.moveList = findResource(r, c, new Resource ("seaweed"), land[r][c].animal);
 						
 //						else if (needanimal) {
 //							land[r][c].animal.moveList = findAnimal(r, c, ANIMAL, land[r][c].animal);

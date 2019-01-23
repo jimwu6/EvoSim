@@ -1,6 +1,6 @@
 package Ecosystem;
 
-public class Rodent extends Mammal implements Herbivore{
+public class Rodent extends Mammal{
 
 	public int claw;
 	public boolean disease;
@@ -11,6 +11,8 @@ public class Rodent extends Mammal implements Herbivore{
 		furLength = 5;
 		intelligence = 5;
 		claw = 5;
+		carnivore = false;
+		herbivore = true;
 	}
 	
 	public Rodent(Rodent rodent) {
