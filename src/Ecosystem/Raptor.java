@@ -3,8 +3,8 @@ package Ecosystem;
 public class Raptor extends Bird implements Carnivore{
 	private int talonSize, beakStrength;
 	
-	public Raptor(String imageName, int size, int speed, int lifespan, String gender, boolean flight, boolean aquatic) {
-		super(imageName, size, speed, lifespan, gender, flight, aquatic);
+	public Raptor(String imageName, int size, int speed, int lifespan, String gender, boolean flight) {
+		super(imageName, size, speed, lifespan, gender, flight);
 		talonSize = 30;
 		beakStrength = 40;
 	}
@@ -22,6 +22,12 @@ public class Raptor extends Bird implements Carnivore{
 		this.beakStrength = raptor.beakStrength;
 	}
 
+	public Raptor(smallBird smallBird, boolean canMate) {
+		super("raptor", smallBird.size(), smallBird.speed(), smallBird.lifespan() + 10, Math.random() < 0.5? "Male" : "Female", smallBird.flight);
+		this.talonSize = 20;
+		this.beakStrength = 30;
+	}
+
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
 		{
@@ -30,6 +36,13 @@ public class Raptor extends Bird implements Carnivore{
 		}
 		
 		return null;	
+	}
+	
+	public void update() {
+		super.update();
+		
+		talonSize += (int) (Math.random() * 4 - 1);
+		beakStrength++;
 	}
 	
 	public void encircle(){

@@ -17,18 +17,32 @@ public class Snake extends Reptile implements Carnivore{
 	
 	public Snake(Snake s, boolean canMate) {
 		super(s, canMate);
-		this.venomous = s.venomous;
-		this.hooded = s.hooded;
+		this.venomous = Math.random() > 0.9;
+		this.hooded = Math.random() > 0.7? true : false;
+	}
+
+	public Snake(Reptile reptile, boolean canMate) {
+		super(reptile, canMate);
+		this.venomous = Math.random() > 0.9;
+		this.hooded = Math.random() > 0.7? true : false;
 	}
 
 	public Animal mate(Animal mate) {
-		if (this.canMate(mate))
+		Animal a = super.mate(mate);
+		
+		if (a == null && this.canMate(mate))
 		{
 			this.mateTimer = 2;
 			return new Snake(this, this.canMate(mate));
 		}
 		
-		return null;
+		return a;
+	}
+	
+	public void update() {
+		super.update();
+		
+		
 	}
 	
 	public void stalk(){

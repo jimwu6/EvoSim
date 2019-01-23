@@ -26,13 +26,15 @@ public class Hooved extends Mammal implements Herbivore{
 	}
 
 	public Animal mate(Animal mate) {
-		if (this.canMate(mate))
+		Animal a = super.mate(mate);
+		
+		if (a == null && this.canMate(mate))
 		{
 			this.mateTimer = 3;
 			return new Hooved(this, this.canMate(mate));
 		}
 		
-		return null;
+		return a;
 	}
 	
 	public void update() {

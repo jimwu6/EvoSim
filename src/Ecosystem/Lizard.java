@@ -2,50 +2,77 @@ package Ecosystem;
 
 public class Lizard extends Reptile implements Carnivore{
 	public boolean tailDecoy;
-	
+
 	public Lizard(String imageName, int size, int speed, int lifespan, String gender) {
 		super(imageName, size, speed, lifespan, gender);
-		tailDecoy = false;
-
+		tailDecoy = true;
 	}
-	
+
 	public Lizard(Lizard i) {
 		super(i);
 		this.tailDecoy = i.tailDecoy;
 	}
-	
+
 	public Lizard(Lizard i, boolean canMate) {
 		super(i, canMate);
 		this.tailDecoy = i.tailDecoy;
 	}
-	
-	public Animal mate(Animal mate) {
-		if (this.canMate(mate))
-		{
-			this.mateTimer = 2;
-			return new Lizard(this, this.canMate(mate));
-		}
-		
-		return null;
+
+	public Lizard(Amphibian amph, boolean canMate) {
+		super(amph);
+		this.tailDecoy = true;
 	}
-	
-	public void visDisplay(){
+
+	public Lizard(Cellular cellular, boolean canMate) {
+		super(cellular);
+		this.tailDecoy = true;
+	}
+
+	public Lizard(Reptile reptile, boolean canMate) {
+		super(reptile, canMate);
+		this.tailDecoy = true;
+	}
+
+	public Animal mate(Animal mate) {
+
+		Animal a;
 		
+		if (scaleHardness > 85){
+			return new smallBird(this, this.canMate(mate));
+		}
+		else {
+			a = super.mate(mate);
+
+			if (a == null && this.canMate(mate))
+			{
+				this.mateTimer = 2;
+				return new Lizard(this, this.canMate(mate));
+			}
+		}
+		return a;
+	}
+
+	public void update() {
+		super.update();
+	}
+
+	public void visDisplay(){
+
 	}
 
 	public void camouflage(){
-		
+
 	}
-	
+
 	public void decoy(){
-		
+
 	}
-	
+
 	public void chase(Animal prey){
-		
+
 	}
-	
+
 	public void feed (Animal prey){
-		
+
 	}
 }
