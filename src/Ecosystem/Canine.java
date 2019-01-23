@@ -30,7 +30,7 @@ public class Canine extends Mammal implements Carnivore{
 	}
 
 	public Animal mate(Animal mate) {
-//		Animal a = super.mate(mate);
+		Animal a = super.mate(mate);
 		
 		if (a != null && this.canMate(mate))
 		{
