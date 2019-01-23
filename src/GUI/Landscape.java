@@ -401,16 +401,27 @@ public class Landscape {
 						&& (land[r][c].animal.age() < land[r][c].animal.lifespan() || Math.random() < 0.7 - 0.2 * (land[r][c].animal.age() - land[r][c].animal.lifespan()))) 
 				{	
 					if (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty()) {
-						if (needresource) {
-							land[r][c].animal.moveList = findResource(r, c, resource, land[r][c].animal);
-						}
-						else if (needanimal) {
-							land[r][c].animal.moveList = findAnimal(r, c, ANIMAL, land[r][c].animal);
-						}
+						if (land[r][c].animal.thirst() < 60 ) 
+							land[r][c].animal.moveList = findResource(r, c, new Resource ("waterResource"), land[r][c].animal);
+						else if (land[r][c].animal.hunger() < 50 ) 
+							land[r][c].animal.moveList = findResource(r, c, new Resource ("fruit"), land[r][c].animal);
+						
+//						else if (needanimal) {
+//							land[r][c].animal.moveList = findAnimal(r, c, ANIMAL, land[r][c].animal);
+//						}
 					}
 					
 					if (land[r][c].animal.moveList == null || land[r][c].animal.moveList.isEmpty()) {
+						String dir = land[r][c].animal.moveList.remove(0);
 						
+						if (dir.equals("up"))
+							nextGen[r][c-1].add(land[r][c].animal);
+						else if (dir.equals("down"))
+							nextGen[r][c+1].add(land[r][c].animal);
+						else if (dir.equals("left"))
+							nextGen[r-1][c].add(land[r][c].animal);
+						else if (dir.equals("right"))
+							nextGen[r+1][c].add(land[r][c].animal);
 					}
 					else {
 						int upDown = 0, leftRight = 0;
@@ -426,9 +437,7 @@ public class Landscape {
 							upDown = 1;
 						
 						// MOVE USING UP DOWN (OR SOME OTHER WAY)
-					}
-					
-					
+					}					
 						//System.out.println(r + ", " + c);
 					land[r][c].animal.update();
 					
