@@ -7,7 +7,7 @@ public class Amphibian extends Animal {
 	public Amphibian(String imageName, int size, int speed, int lifespan, String gender) {
 		super (imageName, size, speed, lifespan, gender);
 		hydration = 100;
-		poisonous = false;
+		poisonous = Math.random() > 0.93;
 		venomous = false;
 	}
 	
@@ -21,7 +21,7 @@ public class Amphibian extends Animal {
 	public Amphibian(Amphibian a, boolean canMate) {
 		super(a, canMate);
 		hydration = a.hydration;
-		poisonous = Math.random() > 0.93;
+		poisonous = a.poisonous? true : Math.random() > 0.93;
 		venomous = a.venomous;
 	}
 

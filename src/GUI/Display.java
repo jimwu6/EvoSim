@@ -32,7 +32,7 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		menu.simMode.addActionListener(this);
 		menu.gameMode.addActionListener(this);
 		
-		Animal cell = new Cellular("cellular", 1, 1, 10000, "Female");
+		Animal cell = new Amphibian("amphibian", 1, 1, 10000, "Female");
 		game.landscape.populate(cell);
 		
 		//setContentPane(game);
