@@ -28,4 +28,8 @@ public class Resource {
 	public int heal() {
 		return heal;
 	}
+	
+	public String getName() {
+		return name;
+	}
 }

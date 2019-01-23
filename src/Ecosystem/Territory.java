@@ -72,5 +72,9 @@ public class Territory{
     public boolean hasResource() {
     	return resources != null;
     }
+    
+    public ArrayList<Resource> resources() {
+    	return resources;
+    }
 
 }

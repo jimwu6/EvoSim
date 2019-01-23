@@ -68,7 +68,7 @@ public class Animal {
 		moveList = animal.moveList;
 	}
 	
-	public Animal(Animal animal, boolean birth) {
+	public Animal(Animal animal, boolean birth) {	// construct newborn
 		if (birth)
 		{			
 			this.health = maxStat;
@@ -106,12 +106,12 @@ public class Animal {
 		thirst = Math.min(thirst, maxStat);
 	}
 
-	public Animal mate(Animal mate){
+	public Animal mate(Animal mate) {
 		return new Animal(mate, this.canMate(mate));
 	}
 
 	public boolean canMate(Animal mate) {
-		return !gender.equals(mate.gender);
+		return !this.gender.equals(mate.gender);
 	}
 	
 	public void flee (Animal predator) {

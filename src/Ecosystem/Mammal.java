@@ -14,4 +14,12 @@ public class Mammal extends Animal {
 		hornSize = m.hornSize;
 		intelligence = m.intelligence;
 	}
+	
+	public Mammal(Mammal m, boolean canMate) {
+		super(m, canMate);
+		furDensity = m.furDensity;
+		furLength = m.furLength;
+		hornSize = m.hornSize;
+		intelligence = m.intelligence;
+	}
 }

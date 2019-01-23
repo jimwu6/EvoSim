@@ -145,52 +145,107 @@ public class Landscape {
 		}
 	}
 
-	public  ArrayList<String> findResource(int row, int col, Resource r) {
-		ArrayList<String> arr = new ArrayList<String>();
-
-		int vis[][] = new int[land.length][land[0].length];
-		Queue<Integer> q = new LinkedList<Integer>();
-
-		q.add(row);
-		q.add(col);
-
-		while (!q.isEmpty()) {
-			int curX = q.poll();
-			int curY = q.poll();
-
-			// mark the wanted thing with -1
-
-			//left
-			if (curY-1 > 0) {
-				if (vis[curX][curY] == 0) {
-					q.add(curX);
-					q.add(curY-1);
+	public ArrayList<String> makeInstructions(Pair[][] vis, int wantX, int wantY) {
+		ArrayList<String> instruct = new ArrayList<String>();
+		
+		if (wantX != -1) {
+			Pair cur = vis[wantX][wantY];
+			int curx = wantX, cury = wantY;
+			
+			while (cur.x != -1) {
+				if (cur.x == curx + 1) {
+					instruct.add(0, "left");
 				}
-			}
-			// right
-			if (curY+1 > 0) {
-				if (vis[curX][curY+1] == 0) {
-					q.add(curX);
-					q.add(curY+1);
+				else if (cur.x == curx - 1) {
+					instruct.add(0, "right");
 				}
-			}
-			// up
-			if (curX-1 > 0) {
-				if (vis[curX-1][curY] == 0) {
-					q.add(curX-1);
-					q.add(curY);
+				else if (cur.y == cury + 1) {
+					instruct.add(0, "up");
 				}
-			}
-			// down
-			if (curX+1 > 0) {
-				if (vis[curX+1][curY] == 0) {
-					q.add(curX+1);
-					q.add(curY);
+				else {
+					instruct.add(0, "down");
 				}
 			}
 		}
+		
+		return instruct;
+	}
+	
+	public ArrayList<String> findResource(int row, int col, Resource r) {
 
-		return arr;
+		Pair vis[][] = new Pair[land.length][land[0].length];
+		
+		vis[row][col].x = -1;
+		vis[row][col].y = -1;
+		vis[row][col].visited = true;
+		
+		Queue<Pair> q = new LinkedList<Pair>();
+
+		q.add(vis[row][col]);
+
+		int wantX = -1, wantY = -1;
+		
+		while (!q.isEmpty()) {
+			
+			boolean keepSearching = true;
+			
+			Pair cur = q.poll();
+			
+			ArrayList<Resource> res = land[cur.x][cur.y].territory.resources();
+			for (int i = 0; i < res.size(); i++) {
+				if (res.get(i).getName() == r.getName()){
+					wantX = cur.x;
+					wantY = cur.y;
+					while (!q.isEmpty()) {
+						q.poll();
+					}
+					keepSearching = false;
+				}
+			}
+			
+			// mark the wanted thing with -1
+			
+			if (keepSearching) {
+				//left
+				if (cur.y-1 > 0) {
+					if (!vis[cur.x][cur.y-1].visited) {
+						q.add(new Pair(cur.x, cur.y-1));
+						vis[cur.x][cur.y-1].x = cur.x;
+						vis[cur.x][cur.y-1].y = cur.y;
+						vis[cur.x][cur.y-1].visited = true;
+					}
+				}
+				// right
+				if (cur.y+1 > 0) {
+					if (vis[cur.x][cur.y+1].visited) {
+						q.add(new Pair(cur.x, cur.y+1));
+						vis[cur.x][cur.y+1].x = cur.x;
+						vis[cur.x][cur.y+1].y = cur.y;
+						vis[cur.x][cur.y+1].visited = true;
+					}
+				}
+				// up
+				if (cur.x-1 > 0) {
+					if (vis[cur.x-1][cur.y].visited) {
+						q.add(new Pair(cur.x-1, cur.y));
+						vis[cur.x-1][cur.y].x = cur.x;
+						vis[cur.x-1][cur.y].y = cur.y;
+						vis[cur.x-1][cur.y].visited = true;
+					}
+				}
+				// down
+				if (cur.x+1 > 0) {
+					if (vis[cur.x+1][cur.y].visited) {
+						q.add(new Pair(cur.x+1, cur.y));
+						vis[cur.x+1][cur.y].x = cur.x;
+						vis[cur.x+1][cur.y].y = cur.y;
+						vis[cur.x+1][cur.y].visited = true;
+					}
+				}
+			}
+		}
+		
+		return makeInstructions(vis, wantX, wantY);
 	}
 
 	public void advance() {
@@ -252,7 +307,15 @@ public class Landscape {
 		{
 			for (int col = 0; col < nextGen[0].length; col++)
 			{
-				if (nextGen[row][col].occupied())
+				Animal baby = null;
+				
+				if (row > 0 && nextGen[row - 1][col].occupied())
+					baby = new Mammal((Mammal) nextGen[row + 1][col].animal);
+				
+				
+				
+				
+				/*if (nextGen[row][col].occupied())
 				{
 					Animal baby = null;
 					int emptyRow = -1, emptyCol = -1;
@@ -281,6 +344,7 @@ public class Landscape {
 						System.out.println("BABY MADE" + emptyRow + emptyCol);
 					}
 				}
+				*/
 			}
 		}
 
@@ -290,9 +354,10 @@ public class Landscape {
 	public Animal find(int r, int c, Tile[][] nextGen) {
 		for(int i = 0; i < 8; i ++)
 		{
-			try		//check the different edges once
+			// check each surrounding tile for animal
+			try
 			{
-				if (i == 0 && nextGen[r][c - 1].occupied())		//check the 8 different edges
+				if (i == 0 && nextGen[r][c - 1].occupied())
 					return nextGen[r][c - 1].animal;
 				else if (i == 1 && nextGen [r - 1][c].occupied())
 					return nextGen[r -1][c].animal;
@@ -309,7 +374,7 @@ public class Landscape {
 				else if (i == 7 && nextGen [r][c + 1].occupied())
 					return nextGen[r][c + 1].animal;
 			}
-			catch (ArrayIndexOutOfBoundsException e)		//catch the exception
+			catch (ArrayIndexOutOfBoundsException e)
 			{
 				System.out.println("out of bounds");
 			}
@@ -317,4 +382,17 @@ public class Landscape {
 
 		return null;
 	}
+}
+
+class Pair {
+	
+	public int x, y;
+	public boolean visited = false;
+	
+	public Pair(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	
 }
