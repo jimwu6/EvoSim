@@ -23,9 +23,12 @@ public class Landscape {
 
 	Tile[][] land;
 	String weather = "none";
-	int temperature = 50;
 	boolean natDisToggle = false, disaster;
 	double disRate = .005;
+
+	int weatherCnt = 0, weatherLimit = 2000;
+	
+	int temperature = 50, tempDir = 1;
 
 	/**
 	 * Creates a default landscape of a size 100x120. 
@@ -570,6 +573,32 @@ public class Landscape {
 		}
 		else
 			disaster = false;
+		
+		if (weatherCnt < weatherLimit) {
+			weatherCnt++;
+		}
+		else {
+			double randomWeather = Math.random();
+			if (randomWeather <= 0.02) {
+				weather = "cloud";
+			}
+			else if (randomWeather <= 0.04) {
+				weather = "sun";
+			}
+			else if (randomWeather <= 0.06) {
+				weather = "rain";
+			}
+			else  {
+				weather = "none";
+			}
+			weatherCnt = 0;
+		}
+		
+		if (weatherCnt % 100 == 0) {
+			if (Math.random() < 0.25) 
+				tempDir = -tempDir;
+			temperature += 1 * tempDir;
+		}
 		
 		// set up nextGen array
 		Tile nextGen[][] = new Tile [land.length][land[0].length];
