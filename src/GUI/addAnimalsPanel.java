@@ -25,10 +25,13 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class addAnimalsPanel extends JLayeredPane implements MouseListener, ActionListener {
-	//field
-	gameBtn addAmphibian, addCanine, addCellular, addFeline, addFish, addHooved, addLizard, addPrimate, addRaptor, addRodent, addSmallBird, addSnake, addTurtle, s1, s2, s3;
-	ArrayList<gameBtn> list;
-	Image image = null;
+	
+	/**
+	 * 
+	 */
+	public gameBtn addAmphibian, addCanine, addCellular, addFeline, addFish, addHooved, addLizard, addPrimate, addRaptor, addRodent, addSmallBird, addSnake, addTurtle, s1, s2, s3;
+	public ArrayList<gameBtn> list;
+	private Image image = null;
 	
 	/**
 	 * Constructs the panel with gameBtn objects that the user may select to add animals to the game.
@@ -123,7 +126,6 @@ public class addAnimalsPanel extends JLayeredPane implements MouseListener, Acti
 		frame.setSize(1200, 1200);
 		frame.setVisible(true);
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

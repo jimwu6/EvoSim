@@ -21,10 +21,11 @@ import Ecosystem.*;
  */
 @SuppressWarnings("serial")
 public class Display extends JFrame implements MouseListener, ActionListener{
-	Game game;
-	MainMenu menu;
-	int w,h;
-	boolean selected = false;
+
+	private Game game;
+	private MainMenu menu;
+	private int w,h;
+	private boolean selected = false;
 	
 	/**
 	 * Constructs each of the game components and layers them into a single JFrame to be displayed as a GUI.
@@ -47,10 +48,12 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		menu.simMode.addActionListener(this);
 		menu.gameMode.addActionListener(this);
 		
-		Animal cell = new Cellular("cellular", 1, 1, 10000, "Female");
-		Animal cell2 = new Cellular ("cellular", 1, 1, 10000, "Male");
-		game.landscape.populate(cell);
-		game.landscape.populate(cell2);
+		Animal pred = new Raptor("raptor", 15, 1, 10000, "Female", true);
+		Animal pred2 = new Feline ("feline", 11, 1, 10000, "Male");
+		Animal prey = new Rodent ("rodent", 1, 1, 10000, "Male");
+		game.landscape.populate(pred);
+		game.landscape.populate(pred2);
+		game.landscape.populate(prey);
 		
 		
 		//setContentPane(game);
