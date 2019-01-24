@@ -148,10 +148,8 @@ public abstract class Animal {
 			this.hunger -= 3;
 			if (Math.random() < .25) 
 				this.thirst -= 2;
-			
-			
 		}
-		System.out.println(this.thirst + " " + this.hunger);
+		
 		if (thirst < 25) {
 			this.health -= 5;
 		}

@@ -574,23 +574,24 @@ public class Landscape {
 		else
 			disaster = false;
 		
-		if (weatherCnt < weatherLimit) {
+		if (weatherCnt < weatherLimit) {	
 			weatherCnt++;
 		}
 		else {
 			double randomWeather = Math.random();
-			if (randomWeather <= 0.02) {
+			if (randomWeather <= 0.05) {
 				weather = "cloud";
 			}
-			else if (randomWeather <= 0.04) {
+			else if (randomWeather <= 0.10) {
 				weather = "sun";
 			}
-			else if (randomWeather <= 0.06) {
+			else if (randomWeather <= 0.15) {
 				weather = "rain";
 			}
 			else  {
 				weather = "none";
 			}
+			System.out.println(weather);
 			weatherCnt = 0;
 		}
 		
@@ -640,10 +641,6 @@ public class Landscape {
 						}
 						else if (curAnimal.hunger() < 60 && curAnimal.water()&& curAnimal.herbivore()) {
 							curAnimal.moveList = findResource(r, c, new Resource ("seaweed"), curAnimal);
-							System.out.print("Target seaweed " + r + " " + c + "\n"); 
-							for (int i = 0; i < curAnimal.moveList.size(); i++)
-								System.out.println(curAnimal.moveList.get(i));
-							System.out.println(curAnimal.moveList.size());
 						}
 						
 					}
@@ -686,7 +683,6 @@ public class Landscape {
 								curAnimal.hurt(land[r-1][c].animal);
 								if (land[r-1][c].animal.health() <= 0 && land[r-1][c].animal.size() < curAnimal.size()) {
 									curAnimal.feed();
-									System.out.println("Animal hunted");
 									land[r-1][c].animal = null;	
 								}
 							}
@@ -701,7 +697,6 @@ public class Landscape {
 								for (int i = 0; i < res.size() && !stopSearch; i++) {
 									if (res.get(i).getName().equals(resourceWant)) {
 										curAnimal.feed();
-										System.out.println("eat ");
 										res.remove(i);
 										stopSearch = true;
 									}
@@ -724,8 +719,6 @@ public class Landscape {
 								curAnimal.hurt(land[r+1][c].animal);
 								if (land[r+1][c].animal.health() <= 0 && land[r+1][c].animal.size() < curAnimal.size()) {
 									curAnimal.feed();
-	
-									System.out.println("Animal fed");
 									land[r+1][c].animal = null;	
 								}
 							}
@@ -741,8 +734,6 @@ public class Landscape {
 									if (res.get(i).getName().equals(resourceWant)) {
 										curAnimal.feed();
 										res.remove(i);
-										System.out.println("eat ");
-											
 										stopSearch = true;
 									}
 								}
@@ -756,8 +747,6 @@ public class Landscape {
 								if (land[r][c-1].animal.health() <= 0 && land[r][c-1].animal.size() < curAnimal.size()) {
 									curAnimal.feed();
 									land[r][c-1].animal = null;	
-	
-									System.out.println("Animal fed");
 								}
 							}
 							else {
@@ -772,7 +761,6 @@ public class Landscape {
 									if (res.get(i).getName().equals(resourceWant)) {
 										curAnimal.feed();
 										res.remove(i);
-										System.out.println("eat ");
 										stopSearch = true;				
 									}
 								}
@@ -787,7 +775,6 @@ public class Landscape {
 									land[r][c+1].animal = null;	
 								}
 	
-								System.out.println("Animal fed");
 							}
 							else {
 								ArrayList<Resource> res = land[r][c+1].territory.resources();
@@ -801,7 +788,6 @@ public class Landscape {
 									if (res.get(i).getName().equals(resourceWant)) {
 										curAnimal.feed();
 										res.remove(i);
-										System.out.println("eat ");
 										stopSearch = true;
 									}
 								}
