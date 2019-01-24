@@ -113,7 +113,7 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 //        	repaint();
 //        }
 //    }
-
+	 
     public static void main (String[] args) {
     	Display window = new Display(1200);
 		window.setVisible(true);

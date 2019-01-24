@@ -602,13 +602,20 @@ public class Landscape {
 				{	
 					if (curAnimal != null && (curAnimal.moveList == null || curAnimal.moveList.isEmpty())) {
 						if (curAnimal.thirst() < 66 ) {
-							curAnimal.moveList = findResource(r, c, new Resource ("waterResource"), curAnimal); }
+							curAnimal.moveList = findResource(r, c, new Resource ("waterResource"), curAnimal); 
+							System.out.println("target water");
+						}
 						else if (curAnimal.hunger() < 60 && curAnimal.land()&& curAnimal.herbivore()) { 
 							System.out.println("Target fruit");
-							curAnimal.moveList = findResource(r, c, new Resource ("fruit"), curAnimal); }
+							curAnimal.moveList = findResource(r, c, new Resource ("fruit"), curAnimal); 
+						}
 						else if (curAnimal.hunger() < 60 && curAnimal.water()&& curAnimal.herbivore()) {
 							curAnimal.moveList = findResource(r, c, new Resource ("seaweed"), curAnimal);
-							System.out.print("Target seaweed"); }
+							System.out.print("Target seaweed " + r + " " + c + "\n"); 
+							for (int i = 0; i < curAnimal.moveList.size(); i++)
+								System.out.println(curAnimal.moveList.get(i));
+							System.out.println(curAnimal.moveList.size());
+						}
 						
 					}
 					
@@ -655,124 +662,129 @@ public class Landscape {
 								}
 							}
 							else {
-//								ArrayList<Resource> res = land[r-1][c].territory.resources();
-//								boolean stopSearch = false;
-//
-//								String resourceWant = "fruit";
-//								if (curAnimal.water()) 
-//									resourceWant = "seaweed";
-//								
-//								for (int i = 0; i < res.size() && !stopSearch; i++) {
-//									if (res.get(i).equals(resourceWant)) {
-//										curAnimal.feed();
-//										
-//										res.remove(i);
-//										stopSearch = true;
-								if (land[r-1][c].territory.resources.contains(new Resource ("fruit"))){
-									curAnimal.feed();
-									land[r-1][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf(new Resource ("fruit")));
-								}
-								else if (land[r-1][c].territory.resources.contains(new Resource ("seaweed"))){
-									curAnimal.feed();
-									land[r-1][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf(new Resource ("seaweed")));
-								}
-							}
-						}
-					}
-						
-					else if (r != land.length-1)
-					{
-						if (curAnimal.carnivore() && land[r+1][c].animal != null) {
-							curAnimal.hurt(land[r+1][c].animal);
-							if (land[r+1][c].animal.health() <= 0 && land[r+1][c].animal.size() < curAnimal.size()) {
-								curAnimal.feed();
+								ArrayList<Resource> res = land[r-1][c].territory.resources();
+								boolean stopSearch = false;
 
-								System.out.println("Animal fed");
-								land[r+1][c].animal = null;	
-							}
-						}
-						else {
-							ArrayList<Resource> res = land[r+1][c].territory.resources();
-							boolean stopSearch = false;
-
-							String resourceWant = "fruit";
-							if (curAnimal.water()) 
-								resourceWant = "seaweed";
+								String resourceWant = "fruit";
+								if (curAnimal.water()) 
+									resourceWant = "seaweed";
 								
-							for (int i = 0; i < res.size() && !stopSearch; i++) {
-								if (res.get(i).getName().equals(resourceWant)) {
-									curAnimal.feed();
-									res.remove(i);
-
-										
-									stopSearch = true;
-								}
-							}
-						}
-					}
-						
-					else if (c != 0)
-					{
-						if (curAnimal.carnivore() && land[r][c-1].animal != null) {
-							curAnimal.hurt(land[r][c-1].animal);
-							if (land[r][c-1].animal.health() <= 0 && land[r][c-1].animal.size() < curAnimal.size()) {
-								curAnimal.feed();
-								land[r][c-1].animal = null;	
-
-								System.out.println("Animal fed");
-							}
-						}
-						else {
-							ArrayList<Resource> res = land[r][c-1].territory.resources();
-							boolean stopSearch = false;
-
-							String resourceWant = "fruit";
-							if (curAnimal.water()) 
-								resourceWant = "seaweed";
-								
-							for (int i = 0; i < res.size() && !stopSearch; i++) {
-								if (res.get(i).getName().equals(resourceWant)) {
-									curAnimal.feed();
-									res.remove(i);
-									stopSearch = true;				
+								for (int i = 0; i < res.size() && !stopSearch; i++) {
+									if (res.get(i).getName().equals(resourceWant)) {
+										curAnimal.feed();
+										System.out.println("eat ");
+										res.remove(i);
+										stopSearch = true;
 									}
+								// if (land[r-1][c].territory.resources.contains(new Resource ("fruit"))){
+								// 	curAnimal.feed();
+								// 	System.out.println("eat fruit");
+								// 	land[r-1][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf(new Resource ("fruit")));
+								// }
+								// else if (land[r-1][c].territory.resources.contains(new Resource ("seaweed"))){
+								// 	curAnimal.feed();
+								// 	System.out.println("eat seaweed");
+								// 	land[r-1][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf(new Resource ("seaweed")));
+								}
 							}
 						}
-					}
-					else if (c != land[0].length-1)
-					{
-						if (curAnimal.carnivore() && land[r][c+1].animal != null) {
-							curAnimal.hurt(land[r][c+1].animal);
-							if (land[r][c+1].animal.health() <= 0 && land[r][c+1].animal.size() < curAnimal.size()) {
-								curAnimal.feed();
-								land[r][c+1].animal = null;	
-							}
 
-							System.out.println("Animal fed");
-						}
-						else {
-							ArrayList<Resource> res = land[r][c+1].territory.resources();
-							boolean stopSearch = false;
-
-							String resourceWant = "fruit";
-							if (curAnimal.water()) 
-								resourceWant = "seaweed";
-								
-							for (int i = 0; i < res.size() && !stopSearch; i++) {
-								if (res.get(i).getName().equals(resourceWant)) {
+						else if (r != land.length-1)
+						{
+							if (curAnimal.carnivore() && land[r+1][c].animal != null) {
+								curAnimal.hurt(land[r+1][c].animal);
+								if (land[r+1][c].animal.health() <= 0 && land[r+1][c].animal.size() < curAnimal.size()) {
 									curAnimal.feed();
-									res.remove(i);
-									stopSearch = true;
+	
+									System.out.println("Animal fed");
+									land[r+1][c].animal = null;	
+								}
+							}
+							else {
+								ArrayList<Resource> res = land[r+1][c].territory.resources();
+								boolean stopSearch = false;
+	
+								String resourceWant = "fruit";
+								if (curAnimal.water()) 
+									resourceWant = "seaweed";
+									
+								for (int i = 0; i < res.size() && !stopSearch; i++) {
+									if (res.get(i).getName().equals(resourceWant)) {
+										curAnimal.feed();
+										res.remove(i);
+										System.out.println("eat ");
+											
+										stopSearch = true;
+									}
+								}
+							}
+						}
+							
+						else if (c != 0)
+						{
+							if (curAnimal.carnivore() && land[r][c-1].animal != null) {
+								curAnimal.hurt(land[r][c-1].animal);
+								if (land[r][c-1].animal.health() <= 0 && land[r][c-1].animal.size() < curAnimal.size()) {
+									curAnimal.feed();
+									land[r][c-1].animal = null;	
+	
+									System.out.println("Animal fed");
+								}
+							}
+							else {
+								ArrayList<Resource> res = land[r][c-1].territory.resources();
+								boolean stopSearch = false;
+	
+								String resourceWant = "fruit";
+								if (curAnimal.water()) 
+									resourceWant = "seaweed";
+									
+								for (int i = 0; i < res.size() && !stopSearch; i++) {
+									if (res.get(i).getName().equals(resourceWant)) {
+										curAnimal.feed();
+										res.remove(i);
+										System.out.println("eat ");
+										stopSearch = true;				
+									}
+								}
+							}
+						}
+						else if (c != land[0].length-1)
+						{
+							if (curAnimal.carnivore() && land[r][c+1].animal != null) {
+								curAnimal.hurt(land[r][c+1].animal);
+								if (land[r][c+1].animal.health() <= 0 && land[r][c+1].animal.size() < curAnimal.size()) {
+									curAnimal.feed();
+									land[r][c+1].animal = null;	
+								}
+	
+								System.out.println("Animal fed");
+							}
+							else {
+								ArrayList<Resource> res = land[r][c+1].territory.resources();
+								boolean stopSearch = false;
+	
+								String resourceWant = "fruit";
+								if (curAnimal.water()) 
+									resourceWant = "seaweed";
+									
+								for (int i = 0; i < res.size() && !stopSearch; i++) {
+									if (res.get(i).getName().equals(resourceWant)) {
+										curAnimal.feed();
+										res.remove(i);
+										System.out.println("eat ");
+										stopSearch = true;
+									}
 								}
 							}
 						}
 					}
-					
 					
 					if (curAnimal.thirst() < 50)
 					{
 						if (r != 0 && land[r-1][c].territory.resources.contains(new Resource("waterResource")))
 						{
+							System.out.println("drink");
 							curAnimal.drink();
 							land[r-1][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf(new Resource("waterResource")));
 						}
@@ -780,6 +792,7 @@ public class Landscape {
 						else if (r != land.length-1 && land[r+1][c].territory.resources.contains(new Resource ("waterResource")))
 						{
 							curAnimal.drink();
+							System.out.println("drink");
 							land[r+1][c].territory.resources.remove(land[r+1][c].territory.resources.indexOf(new Resource ("waterResource")));
 							
 						}
@@ -787,6 +800,7 @@ public class Landscape {
 						else if (c != 0 && land[r][c-1].territory.resources.contains(new Resource ("waterResource")))
 						{
 							curAnimal.drink();
+							System.out.println("drink");
 							land[r][c-1].territory.resources.remove(land[r][c-1].territory.resources.indexOf(new Resource ("waterResource")));
 							
 						}
@@ -794,6 +808,7 @@ public class Landscape {
 						else if (c != land[0].length-1 && land[r][c+1].territory.resources.contains(new Resource ("waterResource")))
 						{
 							curAnimal.drink();
+							System.out.println("drink");
 							land[r][c+1].territory.resources.remove(land[r][c+1].territory.resources.indexOf(new Resource ("waterResource")));
 							
 						}

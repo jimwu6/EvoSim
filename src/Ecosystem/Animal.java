@@ -110,7 +110,7 @@ public abstract class Animal {
 	public abstract Animal mate(Animal animal, boolean b);
 	
 	public void calculateDamage() {
-		damage = 0;
+		damage = 2;
 	}
 
 	public boolean canMate(Animal mate) {
@@ -145,13 +145,13 @@ public abstract class Animal {
 
 		// update health
 		if (Math.random() < .5) {
-			this.thirst -= 3;
+			this.hunger -= 3;
 			if (Math.random() < .25) 
-				this.hunger -= 2;
-			thirst = Math.max(0, thirst);
-			health = Math.max(0, health);
+				this.thirst -= 2;
+			
+			
 		}
-
+		System.out.println(this.thirst + " " + this.hunger);
 		if (thirst < 25) {
 			this.health -= 5;
 		}
@@ -159,7 +159,11 @@ public abstract class Animal {
 		if (hunger < 25) {
 			this.health -= 5;
 		}
-
+		
+		hunger = Math.max(0, hunger);
+		thirst = Math.max(0, thirst);
+		health = Math.max(0, health);
+		
 		// update aging conditions
 		double progress = (age + 0.0) / (lifespan + 0.0);
 		if (progress < 0.3) {
@@ -245,7 +249,6 @@ public abstract class Animal {
             try {
                 File f = new File( "Summative Graphics\\Animals\\" + strings.get(i) + ".png" );
                 input[i] = ImageIO.read( f );
-                System.out.println("x");
             }
             catch ( Exception x ) {
                 // Complain if there is any problem loading 
