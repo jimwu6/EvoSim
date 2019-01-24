@@ -3,8 +3,8 @@ package Ecosystem;
 public class Raptor extends Bird {
 	private int talonSize, beakStrength;
 	
-	public Raptor(String imageName, int size, int speed, int lifespan, String gender, boolean flight) {
-		super(imageName, size, speed, lifespan, gender, flight);
+	public Raptor(String type, int size, int speed, int lifespan, String gender, boolean flight) {
+		super(type, size, speed, lifespan, gender, flight);
 		talonSize = 30;
 		beakStrength = 40;
 		carnivore = true;
@@ -17,6 +17,10 @@ public class Raptor extends Bird {
 		this.beakStrength = raptor.beakStrength;
 		carnivore = true;
 		herbivore = false;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("raptor");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Raptor(Raptor raptor, boolean canMate) {
@@ -26,6 +30,10 @@ public class Raptor extends Bird {
 		this.beakStrength = raptor.beakStrength;
 		carnivore = true;
 		herbivore = false;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("raptor");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Raptor(smallBird smallBird, boolean canMate) {
@@ -35,6 +43,9 @@ public class Raptor extends Bird {
 		type = "raptor";
 		carnivore = true;
 		herbivore = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("raptor");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {

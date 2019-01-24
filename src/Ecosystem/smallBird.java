@@ -4,11 +4,15 @@ public class smallBird extends Bird {
 
 	public int featherVibrance;
 
-	public smallBird(String imageName, int size, int speed, int lifespan, String gender, boolean flight) {
-		super(imageName, size, speed, lifespan, gender, flight);
+	public smallBird(String type, int size, int speed, int lifespan, String gender, boolean flight) {
+		super(type, size, speed, lifespan, gender, flight);
 		featherVibrance = 20;
 		carnivore = true;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("smallBird");
+		appearance = makeImage(bodyParts);
 	}
 
 	public smallBird(smallBird bird) {
@@ -16,6 +20,10 @@ public class smallBird extends Bird {
 		this.featherVibrance = bird.featherVibrance;
 		carnivore = true;
 		herbivore = true;
+		
+		this.bodyParts.clear();
+		this.bodyParts.add("smallBird");
+		appearance = makeImage(bodyParts);
 	}
 
 	public smallBird(smallBird bird, boolean canMate) {
@@ -23,6 +31,10 @@ public class smallBird extends Bird {
 		this.featherVibrance = 20;
 		carnivore = true;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("smallBird");
+		appearance = makeImage(bodyParts);
 	}
 
 	public smallBird(Lizard lizard, boolean canMate) {
@@ -30,6 +42,10 @@ public class smallBird extends Bird {
 		type = "smallBird";
 		carnivore = true;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("smallBird");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {

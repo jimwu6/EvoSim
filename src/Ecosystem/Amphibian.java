@@ -4,8 +4,8 @@ public class Amphibian extends Animal {
 	protected int hydration;
 	public boolean poisonous, venomous;
 	
-	public Amphibian(String imageName, int size, int speed, int lifespan, String gender) {
-		super (imageName, size, speed, lifespan, gender);
+	public Amphibian(String type, int size, int speed, int lifespan, String gender) {
+		super (type, size, speed, lifespan, gender);
 		hydration = 100;
 		poisonous = Math.random() > 0.93;
 		venomous = false;
@@ -13,6 +13,9 @@ public class Amphibian extends Animal {
 		carnivore = true;
 		this.water = true;
 		this.land = true;
+		this.bodyParts.clear();
+		this.bodyParts.add("amphibian");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Amphibian(Amphibian a) {
@@ -24,6 +27,9 @@ public class Amphibian extends Animal {
 		carnivore = true;
 		this.water = true;
 		this.land = true;
+		this.bodyParts.clear();
+		this.bodyParts.add("amphibian");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Amphibian(Amphibian a, boolean canMate) {
@@ -35,6 +41,9 @@ public class Amphibian extends Animal {
 		carnivore = true;
 		this.water = true;
 		this.land = true;
+		this.bodyParts.clear();
+		this.bodyParts.add("amphibian");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Amphibian(Fish fish, boolean canMate) {
@@ -46,6 +55,9 @@ public class Amphibian extends Animal {
 		carnivore = true;
 		this.water = true;
 		this.land = true;
+		this.bodyParts.clear();
+		this.bodyParts.add("amphibian");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Animal mate(Animal mate) {

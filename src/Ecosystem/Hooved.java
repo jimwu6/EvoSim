@@ -3,14 +3,17 @@ package Ecosystem;
 public class Hooved extends Mammal {
 	public int hornStrength;
 	
-	public Hooved(String imageName, int size, int speed, int lifespan, String gender) {
-		super(imageName, size, speed, lifespan, gender);
+	public Hooved(String type, int size, int speed, int lifespan, String gender) {
+		super(type, size, speed, lifespan, gender);
 		furDensity = 40;
 		furLength = 20;
 		intelligence = 20;
 		hornStrength = 50;
 		carnivore = false;
 		herbivore = true;
+		this.bodyParts.clear();
+		this.bodyParts.add("hooved");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Hooved(Hooved hooved) {
@@ -18,6 +21,10 @@ public class Hooved extends Mammal {
 		this.hornSize = hooved.hornStrength;
 		carnivore = false;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("hooved");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Hooved(Hooved hooved, boolean canMate) {
@@ -25,6 +32,10 @@ public class Hooved extends Mammal {
 		this.hornSize = hooved.hornStrength;
 		carnivore = false;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("hooved");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Hooved(Mammal mammal, boolean canMate) {
@@ -32,6 +43,10 @@ public class Hooved extends Mammal {
 		type = "hooved";
 		carnivore = false;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("hooved");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {

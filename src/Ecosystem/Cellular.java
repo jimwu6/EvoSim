@@ -3,13 +3,16 @@ package Ecosystem;
 public class Cellular extends Animal {
 	public int membrane;
 	
-	public Cellular(String imageName, int size, int speed, int lifespan, String gender) {
-		super (imageName, size, speed, lifespan, gender);
+	public Cellular(String type, int size, int speed, int lifespan, String gender) {
+		super (type, size, speed, lifespan, gender);
 		membrane = 1;
 		herbivore = true;
 		carnivore = false;
 		water = true;
 		land = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("cellular");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Cellular(Cellular c) {
@@ -19,6 +22,10 @@ public class Cellular extends Animal {
 		carnivore = false;
 		water = true;
 		land = false;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("cellular");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Cellular(Cellular c, boolean canMate) {
@@ -28,6 +35,10 @@ public class Cellular extends Animal {
 		carnivore = false;
 		water = true;
 		land = false;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("cellular");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {
@@ -37,7 +48,7 @@ public class Cellular extends Animal {
 	public Animal mate(Animal mate, boolean landSafe) {
 		if (this.canMate(mate))
 		{
-			if (membrane >= 5 && Math.random() > 0.5) {
+			if (membrane >= 4 && Math.random() > 0.5) {
 				if (landSafe)
 					return new Fish(this, this.canMate(mate));
 				else

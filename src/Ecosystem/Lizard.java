@@ -3,13 +3,17 @@ package Ecosystem;
 public class Lizard extends Reptile {
 	public boolean tailDecoy;
 
-	public Lizard(String imageName, int size, int speed, int lifespan, String gender) {
-		super(imageName, size, speed, lifespan, gender);
+	public Lizard(String type, int size, int speed, int lifespan, String gender) {
+		super(type, size, speed, lifespan, gender);
 		tailDecoy = true;
 		carnivore = true;
 		herbivore = false;
 		land = true;
 		water = false;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("lizard");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Lizard(Lizard i) {
@@ -19,6 +23,10 @@ public class Lizard extends Reptile {
 		herbivore = false;
 		land = true;
 		water = false;
+		
+		this.bodyParts.clear();
+		this.bodyParts.add("lizard");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Lizard(Lizard i, boolean canMate) {
@@ -28,6 +36,9 @@ public class Lizard extends Reptile {
 		herbivore = false;
 		land = true;
 		water = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("lizard");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Lizard(Amphibian amph, boolean canMate) {
@@ -38,6 +49,9 @@ public class Lizard extends Reptile {
 		herbivore = false;
 		land = true;
 		water = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("lizard");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Lizard(Cellular cellular, boolean canMate) {
@@ -48,6 +62,9 @@ public class Lizard extends Reptile {
 		herbivore = false;
 		land = true;
 		water = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("lizard");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Lizard(Reptile reptile, boolean canMate) {
@@ -58,6 +75,9 @@ public class Lizard extends Reptile {
 		herbivore = false;
 		land = true;
 		water = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("lizard");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {

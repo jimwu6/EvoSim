@@ -5,14 +5,18 @@ public class Rodent extends Mammal{
 	public int claw;
 	public boolean disease;
 	
-	public Rodent(String imageName, int size, int speed, int lifespan, String gender) {
-		super(imageName, size, speed, lifespan, gender);
+	public Rodent(String type, int size, int speed, int lifespan, String gender) {
+		super(type, size, speed, lifespan, gender);
 		furDensity = 10;
 		furLength = 5;
 		intelligence = 5;
 		claw = 5;
 		carnivore = false;
 		herbivore = true;
+		
+		this.bodyParts.clear();
+		this.bodyParts.add("rodent");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Rodent(Rodent rodent) {
@@ -21,6 +25,10 @@ public class Rodent extends Mammal{
 		this.disease = rodent.disease;
 		carnivore = false;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("rodent");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Rodent(Rodent rodent, boolean canMate) {
@@ -29,6 +37,11 @@ public class Rodent extends Mammal{
 		this.disease = rodent.disease;
 		carnivore = false;
 		herbivore = true;
+		
+
+		this.bodyParts.clear();
+		this.bodyParts.add("rodent");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Rodent(Mammal mammal, boolean canMate) {
@@ -36,6 +49,10 @@ public class Rodent extends Mammal{
 		type = "rodent";
 		carnivore = false;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("rodent");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Rodent(smallBird smallBird, boolean canMate) {
@@ -45,6 +62,10 @@ public class Rodent extends Mammal{
 		type = "rodent";
 		carnivore = false;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("rodent");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {

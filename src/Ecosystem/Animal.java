@@ -43,9 +43,8 @@ public abstract class Animal {
 
 		//bodyParts.add("cellular");
 
-		bodyParts.add("Mammal\\Head\\head5");
-		bodyParts.add("Mammal\\Leg\\leg3");
-		bodyParts.add("Mammal\\Tail\\tail3");
+		bodyParts.add("cellular");
+
 		
 		appearance = makeImage(bodyParts);// make it access package
 
@@ -110,7 +109,7 @@ public abstract class Animal {
 	public abstract Animal mate(Animal animal, boolean b);
 	
 	public void calculateDamage() {
-		damage = 10;
+		damage = 0;
 	}
 
 	public boolean canMate(Animal mate) {
@@ -146,7 +145,8 @@ public abstract class Animal {
 		// update health
 		if (Math.random() < .5) {
 			this.thirst -= 3;
-			this.hunger -= 2;
+			if (Math.random() < .25) 
+				this.hunger -= 2;
 			thirst = Math.max(0, thirst);
 			health = Math.max(0, health);
 		}
@@ -222,7 +222,7 @@ public abstract class Animal {
 	}
 	
 	public void feed() {
-		hunger += Math.random() * 25 + 5;
+		hunger += Math.random() * 25 + 15;
 		hunger = Math.min(hunger, maxStat);
 		health +=  Math.random() * 33 + 5;
 		health = Math.min(health, maxStat);

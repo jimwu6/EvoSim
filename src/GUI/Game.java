@@ -193,7 +193,7 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         if (e.getSource().equals(t))
         {
             landscape.advance();
-           // System.out.println("_____________________________________");
+          // System.out.println("_____________________________________");
         }
 		
         else if (e.getSource().equals(settings))
@@ -314,6 +314,52 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         {
         	landscape.natDisToggle = true;
         }
+
+        else if (e.getSource().equals(settingsMenu.onB) || e.getSource().equals(settingsMenu.offA))
+        {
+        	landscape.natDisToggle = true;
+        }
+
+        else if (e.getSource().equals(settingsMenu.onB) || e.getSource().equals(settingsMenu.offA))
+        {
+        	landscape.natDisToggle = true;
+        }
+        
+        //scenario one adds many cellular organisms to showcase evolution
+        else if (e.getSource().equals(animalMenu.s1))
+        {
+        	Landscape newLand = new Landscape();
+        	newLand.populate((new Cellular("cellular", 1, 1, 100000, "Male")));
+        	newLand.populate((new Cellular("cellular", 1, 1, 100000, "Female")));
+        	newLand.populate((new Cellular("cellular", 1, 1, 100000, "Female")));
+        	landscape = newLand;
+        	
+        }
+        
+        //sim 2 shows the impact of natural disaster
+        else if (e.getSource().equals(animalMenu.s2))
+        {
+        	Landscape newLand = new Landscape();
+        	newLand.setDRate(.5);
+        	newLand.natDisToggle = true;
+        	newLand.weather = "cloud";
+        	newLand.populate((new Rodent("rodent", 1, 1, 100000, "Male")));
+        	newLand.populate((new Raptor("raptor", 1, 1, 100000, "Female", true)));
+        	newLand.populate((new Canine("canine", 1, 1, 100000, "Female")));
+        	landscape = newLand;
+        	
+        } 
+        
+        //scenario 3 shows the predator/prey relationship of rodents and raptors
+        else if (e.getSource().equals(animalMenu.s2))
+        {
+        	Landscape newLand = new Landscape();
+        	newLand.weather = "cloud";
+        	newLand.populate((new Rodent("rodent", 1, 1, 100000, "Male")));
+        	newLand.populate((new Raptor("raptor", 1, 1, 100000, "Female", true)));
+        	landscape = newLand;
+        	
+        }
         
         if (!simMode)
 		{
@@ -325,8 +371,9 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		{
 			disP.setVisible(true);
 		} 
+        else
+        	disP.setVisible(false);
         
-        System.out.println(landscape.natDisToggle);
         this.repaint();
 	}
 
@@ -395,7 +442,6 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         {
            	int temp = settingsMenu.temp.value();
         	landscape.updateTemp(temp);
-        	System.out.println(temp);
         	if (landscape.temperature <= 25)
             {
             	coldP.setVisible(true);

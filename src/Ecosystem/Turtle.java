@@ -3,13 +3,17 @@ package Ecosystem;
 public class Turtle extends Reptile{
 	private int shellHardness;
 	
-	public Turtle(String imageName, int size, int speed, int lifespan, String gender) {
-		super(imageName, size, speed, lifespan, gender);
+	public Turtle(String type, int size, int speed, int lifespan, String gender) {
+		super(type, size, speed, lifespan, gender);
 		shellHardness = 50;
 		carnivore = false;
 		herbivore = true;
 		land = true;
 		water = true;
+		
+		this.bodyParts.clear();
+		this.bodyParts.add("turtle");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Turtle(Turtle t) {
@@ -19,6 +23,10 @@ public class Turtle extends Reptile{
 		herbivore = true;
 		land = true;
 		water = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("turtle");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Turtle(Turtle t, boolean canMate) {
@@ -28,6 +36,10 @@ public class Turtle extends Reptile{
 		herbivore = true;
 		land = true;
 		water = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("turtle");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Turtle(Reptile reptile, boolean canMate) {
@@ -38,6 +50,10 @@ public class Turtle extends Reptile{
 		herbivore = true;
 		land = true;
 		water = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("turtle");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {

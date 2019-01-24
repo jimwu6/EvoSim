@@ -3,14 +3,18 @@ package Ecosystem;
 public class Snake extends Reptile{
 	public boolean venomous, hooded;
 	
-	public Snake(String imageName, int size, int speed, int lifespan, String gender) {
-		super(imageName, size, speed, lifespan, gender);
+	public Snake(String type, int size, int speed, int lifespan, String gender) {
+		super(type, size, speed, lifespan, gender);
 		venomous = false;
 		hooded = false;
 		carnivore = true;
 		herbivore = false;
 		land = true;
 		water = false;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("snake");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Snake(Snake s) {
@@ -21,6 +25,9 @@ public class Snake extends Reptile{
 		herbivore = false;
 		land = true;
 		water = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("snake");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Snake(Snake s, boolean canMate) {
@@ -31,6 +38,9 @@ public class Snake extends Reptile{
 		herbivore = false;
 		land = true;
 		water = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("snake");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Snake(Reptile reptile, boolean canMate) {
@@ -42,6 +52,9 @@ public class Snake extends Reptile{
 		herbivore = false;
 		land = true;
 		water = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("snake");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {

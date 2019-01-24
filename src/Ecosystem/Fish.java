@@ -4,13 +4,17 @@ public class Fish extends Animal {
 	public int scaleHardness;
 	public boolean poisonous, luminant;
 	
-	public Fish(String imageName, int size, int speed, int lifespan, String gender) {
-		super (imageName, size, speed, lifespan, gender);
+	public Fish(String type, int size, int speed, int lifespan, String gender) {
+		super (type, size, speed, lifespan, gender);
 		scaleHardness = 20;
 		poisonous = false;
 		luminant = false;
 		herbivore = true;
 		carnivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("fish");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Fish(Fish f) {
@@ -20,6 +24,9 @@ public class Fish extends Animal {
 		luminant = f.luminant;
 		herbivore = true;
 		carnivore = true;
+		this.bodyParts.clear();
+		this.bodyParts.add("fish");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Fish(Fish f, boolean canMate) {
@@ -29,12 +36,18 @@ public class Fish extends Animal {
 		luminant = Math.random() > 0.9? !f.luminant : f.luminant;
 		herbivore = true;
 		carnivore = true;
+		this.bodyParts.clear();
+		this.bodyParts.add("fish");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Fish(Cellular cellular, boolean canMate) {
 		super("fish", 10, 20, 50 + (int) (Math.random() * 21 - 10), cellular.gender());
 		herbivore = true;
 		carnivore = true;
+		this.bodyParts.clear();
+		this.bodyParts.add("fish");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {

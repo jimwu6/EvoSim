@@ -4,8 +4,8 @@ public class Feline extends Mammal{
 
 	public int fangSize, claw;
 	
-	public Feline(String imageName, int size, int speed, int lifespan, String gender) {
-		super(imageName, size, speed, lifespan, gender);
+	public Feline(String type, int size, int speed, int lifespan, String gender) {
+		super(type, size, speed, lifespan, gender);
 		furDensity = 20;
 		furLength = 30;
 		intelligence = 30;
@@ -13,6 +13,10 @@ public class Feline extends Mammal{
 		claw = 30;
 		carnivore = true;
 		herbivore = false;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("feline");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Feline(Feline feline) {
@@ -21,6 +25,10 @@ public class Feline extends Mammal{
 		this.claw = feline.claw;
 		carnivore = true;
 		herbivore = false;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("feline");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Feline(Feline feline, boolean canMate) {
@@ -29,6 +37,10 @@ public class Feline extends Mammal{
 		this.claw = feline.claw;
 		carnivore = true;
 		herbivore = false;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("feline");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Feline(Mammal mammal, boolean canMate) {

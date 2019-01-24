@@ -13,6 +13,9 @@ public class Canine extends Mammal{
 		claw = 5;
 		carnivore = true;
 		herbivore = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("canine");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Canine(Canine canine) {
@@ -21,6 +24,9 @@ public class Canine extends Mammal{
 		this.claw = canine.claw;
 		carnivore = true;
 		herbivore = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("canine");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Canine(Canine canine, boolean canMate) {
@@ -29,6 +35,9 @@ public class Canine extends Mammal{
 		this.claw = 5;
 		carnivore = true;
 		herbivore = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("canine");
+		appearance = makeImage(bodyParts);
 	}
 	
 	public Canine(Mammal mammal, boolean canMate) {
@@ -38,6 +47,9 @@ public class Canine extends Mammal{
 		type = "canine";
 		carnivore = true;
 		herbivore = false;
+		this.bodyParts.clear();
+		this.bodyParts.add("canine");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Animal mate(Animal mate) {

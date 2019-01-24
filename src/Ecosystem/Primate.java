@@ -3,14 +3,17 @@ package Ecosystem;
 public class Primate extends Mammal {
 	public int toolStrength;
 
-	public Primate(String imageName, int size, int speed, int lifespan, String gender) {
-		super(imageName, size, speed, lifespan, gender);
+	public Primate(String type, int size, int speed, int lifespan, String gender) {
+		super(type, size, speed, lifespan, gender);
 		furDensity = 30;
 		furLength = 15;
 		intelligence = 50;
 		toolStrength = 10;
 		carnivore = true;
 		herbivore = true;
+		this.bodyParts.clear();
+		this.bodyParts.add("primate");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Primate(Primate primate) {
@@ -18,6 +21,10 @@ public class Primate extends Mammal {
 		this.toolStrength = primate.toolStrength;
 		carnivore = true;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("primate");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Primate(Mammal mammal, boolean canMate) {
@@ -26,6 +33,10 @@ public class Primate extends Mammal {
 		this.toolStrength = 10;
 		carnivore = true;
 		herbivore = true;
+
+		this.bodyParts.clear();
+		this.bodyParts.add("primate");
+		appearance = makeImage(bodyParts);
 	}
 
 	public Primate(Primate primate, boolean canMate) {
