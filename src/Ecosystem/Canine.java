@@ -55,15 +55,11 @@ public class Canine extends Mammal{
 		}
 	}
 	
+	public void calculateDamage() {
+		damage += fangSize * 2 + claw * 2;
+	}
+	
 	public void findPack(Canine pack){
-		
-	}
-
-	public void chase(Animal prey){
-		
-	}
-
-	public void feed(Animal prey){
 		
 	}
 }

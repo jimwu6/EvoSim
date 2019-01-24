@@ -53,13 +53,11 @@ public class Feline extends Mammal{
 		}
 	}
 	
+	public void calculateDamage() {
+		damage += fangSize + claw;
+	}
+	
 	public void stalk(){
-		
-	}
-	public void chase(Animal prey){
-		
-	}
-	public void feed(Animal prey){
 		
 	}
 }
