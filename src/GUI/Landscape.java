@@ -26,7 +26,7 @@ public class Landscape {
 	boolean natDisToggle = false, disaster;
 	double disRate = .005;
 
-	int weatherCnt = 0, weatherLimit = 2000;
+	int weatherCnt = 0, weatherLimit = 3;
 	
 	int temperature = 50, tempDir = 1;
 
@@ -594,8 +594,8 @@ public class Landscape {
 			weatherCnt = 0;
 		}
 		
-		if (weatherCnt % 100 == 0) {
-			if (Math.random() < 0.25) 
+		if (weatherCnt % 2 == 0) {
+			if (Math.random() < 0.15) 
 				tempDir = -tempDir;
 			temperature += 1 * tempDir;
 		}
