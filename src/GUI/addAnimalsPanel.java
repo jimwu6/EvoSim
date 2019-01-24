@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
 public class addAnimalsPanel extends JLayeredPane implements MouseListener, ActionListener {
 	//field
 	gameBtn addAmphibian, addCanine, addCellular, addFeline, addFish, addHooved, addLizard, addPrimate, addRaptor, addRodent, addSmallBird, addSnake, addTurtle, s1, s2, s3;
+	ArrayList<gameBtn> list;
 	Image image = null;
 	
 	public addAnimalsPanel(int w) {
@@ -49,18 +51,31 @@ public class addAnimalsPanel extends JLayeredPane implements MouseListener, Acti
 		s1 = new gameBtn("Summative Graphics\\addAnimal\\scenario1.png",this.getSize().width/4, this.getSize().height/8);
 		s2 = new gameBtn("Summative Graphics\\addAnimal\\scenario2.png",this.getSize().width/4, this.getSize().height/8);
 		s3 = new gameBtn("Summative Graphics\\addAnimal\\scenario3.png",this.getSize().width/4, this.getSize().height/8);
+	
+		list = new ArrayList<gameBtn>(13);
+		list.add(addAmphibian);
+		list.add(addCanine);
+		list.add(addCellular);
+		list.add(addFeline);
+		list.add(addFish);
+		list.add(addHooved);
+		list.add(addLizard);
+		list.add(addPrimate);
+		list.add(addRaptor);
+		list.add(addRodent);
+		list.add(addSmallBird);
+		list.add(addSnake);
+		list.add(addTurtle);
 		
-		gameBtn[] list = {addAmphibian, addCanine, addCellular, addFeline, addFish, addHooved, addLizard, addPrimate, addRaptor, addRodent, addSmallBird, addSnake, addTurtle};
-		
-		for (int x = 0; x < list.length; x++)
+		for (int x = 0; x < list.size(); x++)
 		{
-			list[x].setBounds(this.getSize().height/16 *( (x % 3) + 1) + this.getSize().width/4 *(x % 3), this.getSize().height/12 + this.getSize().height/21*((x / 3) + 1) + this.getSize().height/15 *(x / 3), this.getSize().width/4, this.getSize().height/8);
+			list.get(x).setBounds(this.getSize().height/16 *( (x % 3) + 1) + this.getSize().width/4 *(x % 3), this.getSize().height/12 + this.getSize().height/21*((x / 3) + 1) + this.getSize().height/15 *(x / 3), this.getSize().width/4, this.getSize().height/8);
 			
 		}
 		
-		s1.setBounds(this.getSize().height/16, 6*this.getSize().height/8, this.getSize().width/4, this.getSize().height/8);
-		s2.setBounds(this.getSize().height/16*2 + this.getSize().width/4  , 6*this.getSize().height/8, this.getSize().width/4, this.getSize().height/8);
-		s3.setBounds(this.getSize().height/16*3 + 2*this.getSize().width/4, 6*this.getSize().height/8, this.getSize().width/4, this.getSize().height/8);
+		s1.setBounds(this.getSize().height/16, 6*this.getSize().height/8 + this.getSize().height/16 , this.getSize().width/4, this.getSize().height/8);
+		s2.setBounds(this.getSize().height/16*2 + this.getSize().width/4  , 6*this.getSize().height/8 + this.getSize().height/16, this.getSize().width/4, this.getSize().height/8);
+		s3.setBounds(this.getSize().height/16*3 + 2*this.getSize().width/4, 6*this.getSize().height/8 + this.getSize().height/16, this.getSize().width/4, this.getSize().height/8);
 				
 		Image newImage = image.getScaledInstance(this.getSize().width-20, this.getSize().height-50, Image.SCALE_DEFAULT);
 		ImageIcon icon = new ImageIcon(newImage);
@@ -73,9 +88,9 @@ public class addAnimalsPanel extends JLayeredPane implements MouseListener, Acti
 		bg.setBounds(10, 10, getSize().width-20, getSize().height-20);
 		
 		add(bg, new Integer(0));
-		for (int x = 0; x < list.length; x++)
+		for (int x = 0; x < list.size(); x++)
 		{
-			this.add(list[x], new Integer(1));
+			this.add(list.get(x), new Integer(1));
 		}
 
 		add(s1, new Integer(1));

@@ -142,14 +142,38 @@ public class Landscape {
 				if (Math.floor(Math.random () * 200) < 1)
 				{
 					Animal newAnimal = null;
-					if (animal.type().equals("cellular"))
+					if (animal.type().equals("cellular") && (land[r][c].territory.ground.equals("water") || land[r][c].territory.ground.equals("grass") && Math.random() < .04))
 						newAnimal = new Cellular((Cellular) animal);
 					else if (animal.type().equals("mammal") && !land[r][c].territory.ground.equals("water"))
 						newAnimal = new Mammal((Mammal) animal);
 					else if (animal.type().equals("fish") && land[r][c].territory.ground.equals("water"))
 						newAnimal = new Fish((Fish) animal);
-					else if (animal.type().equals("amphibian") && !land[r][c].territory.ground.equals("water"))
+					else if (animal.type().equals("amphibian") )
 						newAnimal = new Amphibian((Amphibian) animal);
+					else if (animal.type().equals("bird") )
+						newAnimal = new Bird((Bird) animal);
+					else if (animal.type().equals("reptile")&& !land[r][c].territory.ground.equals("water") )
+						newAnimal = new Reptile((Reptile) animal);
+					else if (animal.type().equals("canine")&& !land[r][c].territory.ground.equals("water") )
+						newAnimal = new Canine((Canine) animal);
+					else if (animal.type().equals("feline")&& !land[r][c].territory.ground.equals("water") )
+						newAnimal = new Feline((Feline) animal);
+					else if (animal.type().equals("hooved")&& !land[r][c].territory.ground.equals("water") )
+						newAnimal = new Hooved((Hooved) animal);
+					else if (animal.type().equals("lizard")&& !land[r][c].territory.ground.equals("water") )
+						newAnimal = new Lizard((Lizard) animal);
+					else if (animal.type().equals("primate")&& !land[r][c].territory.ground.equals("water") )
+						newAnimal = new Primate((Primate) animal);
+					else if (animal.type().equals("raptor"))
+						newAnimal = new Raptor((Raptor) animal);
+					else if (animal.type().equals("rodent")&& !land[r][c].territory.ground.equals("water") )
+						newAnimal = new Rodent((Rodent) animal);
+					else if (animal.type().equals("smallBird") )
+						newAnimal = new smallBird((smallBird) animal);
+					else if (animal.type().equals("snake") && !land[r][c].territory.ground.equals("water"))
+						newAnimal = new Snake((Snake) animal);
+					else if (animal.type().equals("turtle") )
+						newAnimal = new Turtle((Turtle) animal);
 					land[r][c].add(newAnimal);
 				}
 			}

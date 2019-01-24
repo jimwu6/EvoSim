@@ -15,10 +15,11 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 	int w, h;
 	Landscape landscape;
 	static Timer t;
-	gameBtn settings;
+	gameBtn settings, addAnimal;
+	addAnimalsPanel animalMenu;
 	DrawArea board;
 	boolean settingOn = false;
-	boolean simMode = true;
+	boolean simMode = false;
 	Settings settingsMenu;
 	
 	public Game(int width) {
@@ -39,18 +40,39 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		settingsMenu.addMouseListener(this);
 		settingsMenu.setVisible(false);
 		
+		animalMenu = new addAnimalsPanel(this.w*4/5);
+		animalMenu.setBounds(this.getSize().height/24, this.getSize().height/12, settingsMenu.getWidth(), settingsMenu.getHeight()); 
+		animalMenu.addMouseListener(this);
+		animalMenu.setVisible(false);
+		
 		// create things to add to pane  --------------------- PICK A DIFFERENT BUTTON
 		settings = new gameBtn("Summative Graphics\\Menu\\settings.png",this.getSize().height/8, this.getSize().height/8);
+		addAnimal = new gameBtn("Summative Graphics\\addAnimal\\ownAnimalButton.png",this.getSize().height/8, this.getSize().height/8);
+		addAnimal.setBounds(this.getSize().height, 13 * this.getSize().height/16, this.getSize().height/8, this.getSize().height/8);
 		settings.setBounds(this.getSize().height, this.getSize().height/16, this.getSize().height/8, this.getSize().height/8);
-
+		settings.setVisible(false);
+		addAnimal.setVisible(false);
+	
 		settings.addActionListener(this);
+		addAnimal.addActionListener(this);
 		settingsMenu.simSpeed.addMouseListener(this);
 		settingsMenu.RR.addMouseListener(this);
+		
+		for (int x = 0; x < animalMenu.list.size(); x++)
+		{
+			animalMenu.list.get(x).addActionListener(this);
+		}
+		
+		animalMenu.s1.addActionListener(this);
+		animalMenu.s2.addActionListener(this);
+		animalMenu.s3.addActionListener(this);
 		
 		// panels to add
 		board = new DrawArea(w, h);
 		
 		add(settings);
+		add(addAnimal);
+		add(animalMenu);
 		add(settingsMenu);
 		add(board);	
 	}
@@ -96,6 +118,82 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 
             	settingsMenu.setVisible(settingOn);
         }
+        
+        else if (e.getSource().equals(addAnimal))
+        {
+        	animalMenu.setVisible(!animalMenu.isVisible());
+        }
+        
+        else if (e.getSource().equals(animalMenu.addAmphibian))
+        {
+        	landscape.populate(new Amphibian("amphibian", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addCanine))
+        {
+        	landscape.populate(new Canine("canine", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addCellular))
+        {
+        	landscape.populate(new Cellular("cellular", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addFeline))
+        {
+        	landscape.populate(new Feline("feline", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addFish))
+        {
+        	landscape.populate(new Fish("fish", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addHooved))
+        {
+        	landscape.populate(new Hooved("hooved", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addLizard))
+        {
+        	landscape.populate(new Lizard("lizard", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addPrimate))
+        {
+        	landscape.populate(new Primate("primate", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addRaptor))
+        {
+        	landscape.populate(new Raptor("raptor", 1,1,1, "male", true));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addRodent))
+        {
+        	landscape.populate(new Rodent("rodent", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addSmallBird))
+        {
+        	landscape.populate(new smallBird("smallBird", 1,1,1, "male", true));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addSnake))
+        {
+        	landscape.populate(new Snake("snake", 1,1,1, "male"));
+        }
+        
+        else if (e.getSource().equals(animalMenu.addTurtle))
+        {
+        	landscape.populate(new Turtle("turtle", 1,1,1, "male"));
+        }
+        
+        if (!simMode)
+		{
+			settings.setVisible(true);
+			addAnimal.setVisible(true);
+		}
         
         this.repaint();
 	}
