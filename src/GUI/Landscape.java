@@ -676,99 +676,97 @@ public class Landscape {
 									curAnimal.feed();
 									land[r-1][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf(new Resource ("seaweed")));
 								}
-								}
 							}
 						}
+					}
 						
-						else if (r != land.length-1)
-						{
-							if (curAnimal.carnivore() && land[r+1][c].animal != null) {
-								curAnimal.hurt(land[r+1][c].animal);
-								if (land[r+1][c].animal.health() <= 0 && land[r+1][c].animal.size() < curAnimal.size()) {
-									curAnimal.feed();
+					else if (r != land.length-1)
+					{
+						if (curAnimal.carnivore() && land[r+1][c].animal != null) {
+							curAnimal.hurt(land[r+1][c].animal);
+							if (land[r+1][c].animal.health() <= 0 && land[r+1][c].animal.size() < curAnimal.size()) {
+								curAnimal.feed();
 
-									System.out.println("Animal fed");
-									land[r+1][c].animal = null;	
-								}
+								System.out.println("Animal fed");
+								land[r+1][c].animal = null;	
 							}
-							else {
-								ArrayList<Resource> res = land[r+1][c].territory.resources();
-								boolean stopSearch = false;
+						}
+						else {
+							ArrayList<Resource> res = land[r+1][c].territory.resources();
+							boolean stopSearch = false;
 
-								String resourceWant = "fruit";
-								if (curAnimal.water()) 
-									resourceWant = "seaweed";
+							String resourceWant = "fruit";
+							if (curAnimal.water()) 
+								resourceWant = "seaweed";
 								
-								for (int i = 0; i < res.size() && !stopSearch; i++) {
-									if (res.get(i).getName().equals(resourceWant)) {
-										curAnimal.feed();
-										res.remove(i);
+							for (int i = 0; i < res.size() && !stopSearch; i++) {
+								if (res.get(i).getName().equals(resourceWant)) {
+									curAnimal.feed();
+									res.remove(i);
 
 										
-										stopSearch = true;
-									}
+									stopSearch = true;
 								}
 							}
 						}
+					}
 						
-						else if (c != 0)
-						{
-							if (curAnimal.carnivore() && land[r][c-1].animal != null) {
-								curAnimal.hurt(land[r][c-1].animal);
-								if (land[r][c-1].animal.health() <= 0 && land[r][c-1].animal.size() < curAnimal.size()) {
-									curAnimal.feed();
-									land[r][c-1].animal = null;	
-
-									System.out.println("Animal fed");
-								}
-							}
-							else {
-								ArrayList<Resource> res = land[r][c-1].territory.resources();
-								boolean stopSearch = false;
-
-								String resourceWant = "fruit";
-								if (curAnimal.water()) 
-									resourceWant = "seaweed";
-								
-								for (int i = 0; i < res.size() && !stopSearch; i++) {
-									if (res.get(i).getName().equals(resourceWant)) {
-										curAnimal.feed();
-										res.remove(i);
-										stopSearch = true;
-
-										
-									}
-								}
-							}
-						}
-						else if (c != land[0].length-1)
-						{
-							if (curAnimal.carnivore() && land[r][c+1].animal != null) {
-								curAnimal.hurt(land[r][c+1].animal);
-								if (land[r][c+1].animal.health() <= 0 && land[r][c+1].animal.size() < curAnimal.size()) {
-									curAnimal.feed();
-									land[r][c+1].animal = null;	
-								}
+					else if (c != 0)
+					{
+						if (curAnimal.carnivore() && land[r][c-1].animal != null) {
+							curAnimal.hurt(land[r][c-1].animal);
+							if (land[r][c-1].animal.health() <= 0 && land[r][c-1].animal.size() < curAnimal.size()) {
+								curAnimal.feed();
+								land[r][c-1].animal = null;	
 
 								System.out.println("Animal fed");
 							}
-							else {
-								ArrayList<Resource> res = land[r][c+1].territory.resources();
-								boolean stopSearch = false;
+						}
+						else {
+							ArrayList<Resource> res = land[r][c-1].territory.resources();
+							boolean stopSearch = false;
 
-								String resourceWant = "fruit";
-								if (curAnimal.water()) 
-									resourceWant = "seaweed";
+							String resourceWant = "fruit";
+							if (curAnimal.water()) 
+								resourceWant = "seaweed";
 								
-								for (int i = 0; i < res.size() && !stopSearch; i++) {
-									if (res.get(i).getName().equals(resourceWant)) {
-										curAnimal.feed();
-										res.remove(i);
-										stopSearch = true;
+							for (int i = 0; i < res.size() && !stopSearch; i++) {
+								if (res.get(i).getName().equals(resourceWant)) {
+									curAnimal.feed();
+									res.remove(i);
+									stopSearch = true;				
 									}
+							}
+						}
+					}
+					else if (c != land[0].length-1)
+					{
+						if (curAnimal.carnivore() && land[r][c+1].animal != null) {
+							curAnimal.hurt(land[r][c+1].animal);
+							if (land[r][c+1].animal.health() <= 0 && land[r][c+1].animal.size() < curAnimal.size()) {
+								curAnimal.feed();
+								land[r][c+1].animal = null;	
+							}
+
+							System.out.println("Animal fed");
+						}
+						else {
+							ArrayList<Resource> res = land[r][c+1].territory.resources();
+							boolean stopSearch = false;
+
+							String resourceWant = "fruit";
+							if (curAnimal.water()) 
+								resourceWant = "seaweed";
+								
+							for (int i = 0; i < res.size() && !stopSearch; i++) {
+								if (res.get(i).getName().equals(resourceWant)) {
+									curAnimal.feed();
+									res.remove(i);
+									stopSearch = true;
 								}
 							}
 						}
+					}
 					
 					
 					if (curAnimal.thirst() < 50)
@@ -924,7 +922,7 @@ public class Landscape {
 }
 
 /**
- * Defines a single pair of Cartesian coordinates in the form (x, y).
+ * Defines a single pair of Row-Major coordinates for a 2D array in the form [x][y].
  * <p>
  * Rectangular coordinates may be stored, as well as whether the position has been visited or not in the course of traversing the landscape.
  */
@@ -934,7 +932,7 @@ class Pair {
 	public boolean visited = false;
 
 	/**
-	 * Constructs a set of x and y coordinates centered at the origin, (0, 0).
+	 * Constructs a set of x and y coordinates centered at the "first" element on the array (top left), [0][0].
 	 */
 	public Pair() {
 		this.x = 0;
