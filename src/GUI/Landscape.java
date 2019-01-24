@@ -25,17 +25,18 @@ import Ecosystem.*;
  */
 public class Landscape {
 
-	Tile[][] land;
-	String weather = "none";
-	boolean natDisToggle = false, disaster, userWeather = true;
-	double disRate = .005;
+	/**
+	 * 2D array of Tiles to represent the overall landscape
+	 */
+	public Tile[][] land;
+	private String weather = "none";
+	private boolean natDisToggle = false, disaster, userWeather = true;
+	private double disRate = .005;
 
-	int weatherCnt = 0, weatherLimit = 3;
+	private int weatherCnt = 0, weatherLimit = 3;
 	
-	int temperature = 50, tempDir = 1;
+	private int temperature = 50, tempDir = 1;
 	
-	
-
 	/**
 	 * Creates a default landscape of a size 100x120. 
 	 * The landscape tiling is based of a text file in the project folder, which contains the ordered list of tile names to be read.
@@ -966,7 +967,42 @@ public class Landscape {
 
 		}
 	}
-
+	
+	/**Sets the weather of the landscape based on the passed parameter
+	 * @param w represents the string describing the weather
+	 */
+	public void setWeather(String w) {
+		weather = w;
+	}
+	
+	/**Sets whether or not landscape will have natural disasters
+	 * @param nd represents whether or not natural disasters will occur
+	 */
+	public void natDisSet(boolean nd){
+		natDisToggle = nd;
+	}
+	
+	/**
+	 * @return String representing landscape's current weather
+	 */
+	public String weather() {
+		return weather;
+	}
+	
+	/**
+	 * @return boolean representing if disaster is possible
+	 */
+	public boolean disaster() {
+		return disaster;
+	}
+	
+	/**
+	 * @return landscape's temperature
+	 */
+	public int temperature() {
+		return temperature;
+	}
+	
 	/**
 	 * Sets the new temperature of the landscape based on the passed parameter.
 	 * 

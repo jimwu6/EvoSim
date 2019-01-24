@@ -31,19 +31,19 @@ import Ecosystem.*;
 @SuppressWarnings("serial")
 public class Game extends JInternalFrame implements MouseListener, KeyListener, ActionListener {
 
-	int w, h;
-	Landscape landscape;
-	static Timer t;
-	gameBtn settings, addAnimal;
-	addAnimalsPanel animalMenu;
-	DrawArea board;
-	boolean settingOn = false;
-	boolean simMode = false;
-	Settings settingsMenu;
-	Image cold = null, hot = null, sun = null, cloud = null, rain = null, dis = null;
-	JPanel coldP, hotP, sunP, cloudP, rainP, disP;
+	private int w, h;
+	private Landscape landscape;
+	private static Timer t;
+	private gameBtn settings, addAnimal;
+	private addAnimalsPanel animalMenu;
+	private DrawArea board;
+	private boolean settingOn = false;
+	private boolean simMode = false;
+	private Settings settingsMenu;
+	private Image cold = null, hot = null, sun = null, cloud = null, rain = null, dis = null;
+	private JPanel coldP, hotP, sunP, cloudP, rainP, disP;
 	
-	boolean userWeather = true;
+	private boolean userWeather = true;
 	
 	/**
 	 * Constructs a Game screen instance with animals and environment based on passed width of screen.
@@ -271,79 +271,82 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         	landscape.populate(new Turtle("turtle", 1, 1, 100000, "male"));
         }
         else if (e.getSource().equals(settingsMenu.sun)) {
-        	landscape.weather = "sun";
-        	sunP.setVisible(true);
-        	cloudP.setVisible(false);
-        	rainP.setVisible(false);
+        	landscape.setWeather("sun");
         }
         else if (e.getSource().equals(settingsMenu.cloud)) {
-        	landscape.weather = "cloud";
-        	sunP.setVisible(false);
-        	cloudP.setVisible(true);
-        	rainP.setVisible(false);
+        	landscape.setWeather("cloud");;
         }
         else if (e.getSource().equals(settingsMenu.rain)) {
-        	landscape.weather = "rain";
-        	sunP.setVisible(false);
-        	cloudP.setVisible(false);
-        	rainP.setVisible(true);
+        	landscape.setWeather("rain");;
         }
         else if (e.getSource().equals(settingsMenu.reset)) {
-        	landscape.weather = "none";
-        	sunP.setVisible(false);
-        	cloudP.setVisible(false);
-        	rainP.setVisible(false);
+        	landscape.setWeather("none");;
         }
         else if (e.getSource().equals(settingsMenu.onA) || e.getSource().equals(settingsMenu.offB)) {
-        	landscape.natDisToggle = false;
+        	landscape.natDisSet(false);
         }
         else if (e.getSource().equals(settingsMenu.onB) || e.getSource().equals(settingsMenu.offA)) {
-        	landscape.natDisToggle = true;
+        	landscape.natDisSet(true);
         }
 
-        else if (e.getSource().equals(settingsMenu.onB) || e.getSource().equals(settingsMenu.offA))
-        {
-        	landscape.natDisToggle = true;
-        }
-
-        else if (e.getSource().equals(settingsMenu.onB) || e.getSource().equals(settingsMenu.offA))
-        {
-        	landscape.natDisToggle = true;
-        }
-        
         //scenario one adds many cellular organisms to showcase evolution
         else if (e.getSource().equals(animalMenu.s1))
         {
-        	Landscape newLand = new Landscape();
-        	newLand.populate((new Cellular("cellular", 1, 1, 100000, "Male")));
-        	newLand.populate((new Cellular("cellular", 1, 1, 100000, "Female")));
-        	newLand.populate((new Cellular("cellular", 1, 1, 100000, "Female")));
-        	landscape = newLand;
+
+        	for (int x = 0; x < landscape.land.length; x++)
+        	{
+        		for (int y = 0; y < landscape.land[0].length; y++)
+        			if (landscape.land[x][y].occupied())
+        				landscape.land[x][y].removeAnimal();
+        	}
+        	
+        	for (int x = 0; x < 6; x++)
+            	landscape.populate((new Cellular("cellular", 1, 1, 100000, "Female")));
+            	
+        	landscape.setDRate(.005);
+        	landscape.natDisSet(false);
+        	landscape.setWeather("none");
         	
         }
         
         //sim 2 shows the impact of natural disaster
         else if (e.getSource().equals(animalMenu.s2))
         {
-        	Landscape newLand = new Landscape();
-        	newLand.setDRate(.5);
-        	newLand.natDisToggle = true;
-        	newLand.weather = "cloud";
-        	newLand.populate((new Rodent("rodent", 1, 1, 100000, "Male")));
-        	newLand.populate((new Raptor("raptor", 1, 1, 100000, "Female", true)));
-        	newLand.populate((new Canine("canine", 1, 1, 100000, "Female")));
-        	landscape = newLand;
+        	for (int x = 0; x < landscape.land.length; x++)
+        	{
+        		for (int y = 0; y < landscape.land[0].length; y++)
+        			if (landscape.land[x][y].occupied())
+        				landscape.land[x][y].removeAnimal();
+        	}
+        	
+        	landscape.setDRate(.5);
+        	landscape.natDisSet(true);
+        	landscape.setWeather("cloud");
+        	
+        	landscape.populate((new Rodent("rodent", 1, 1, 100000, "Male")));
+        	landscape.populate((new Raptor("raptor", 1, 1, 100000, "Female", true)));
+        	landscape.populate((new Canine("canine", 1, 1, 100000, "Female")));
         	
         } 
         
         //scenario 3 shows the predator/prey relationship of rodents and raptors
         else if (e.getSource().equals(animalMenu.s3))
         {
-        	Landscape newLand = new Landscape();
-        	newLand.weather = "cloud";
-        	newLand.populate((new Rodent("rodent", 1, 1, 100000, "Male")));
-        	newLand.populate((new Raptor("raptor", 1, 1, 100000, "Female", true)));
-        	landscape = newLand;
+        	for (int x = 0; x < landscape.land.length; x++)
+        	{
+        		for (int y = 0; y < landscape.land[0].length; y++)
+        			if (landscape.land[x][y].occupied())
+        				landscape.land[x][y].removeAnimal();
+        		
+        		landscape.setDRate(.005);
+            	landscape.natDisSet(false);
+            	landscape.setWeather("none");
+            	
+        	}
+        	
+        	landscape.populate((new Rodent("rodent", 1, 1, 100000, "Male")));
+        	landscape.populate((new Raptor("raptor", 1, 1, 100000, "Female", true)));
+
         	
         }
         
@@ -352,11 +355,49 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 			addAnimal.setVisible(true);
 		}
        
-        if (landscape.disaster) {
+        if (landscape.disaster()) {
 			disP.setVisible(true);
 		} 
         else
         	disP.setVisible(false);
+        
+        if (landscape.weather().equals("sun")) {
+	    	sunP.setVisible(true);
+	    	cloudP.setVisible(false);
+	    	rainP.setVisible(false);
+        }
+        else if (landscape.weather().equals("cloud")) {
+	    	sunP.setVisible(false);
+	    	cloudP.setVisible(true);
+	    	rainP.setVisible(false);
+        }
+        else if (landscape.weather().equals("rain")) {
+	    	sunP.setVisible(false);
+	    	cloudP.setVisible(false);
+	    	rainP.setVisible(true);
+        }
+        else if (landscape.weather().equals("none")) {
+	    	sunP.setVisible(false);
+	    	cloudP.setVisible(false);
+	    	rainP.setVisible(false);
+        }
+        
+        if (landscape.temperature() <= 25)
+        {
+        	coldP.setVisible(true);
+        	hotP.setVisible(false);
+        }
+    	
+    	else if (landscape.temperature() >= 75)
+        {
+        	coldP.setVisible(false);
+        	hotP.setVisible(true);
+        }
+    	else
+        {
+        	coldP.setVisible(false);
+        	hotP.setVisible(false);
+        }
         
         this.repaint();
 	}
@@ -431,22 +472,7 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         {
            	int temp = settingsMenu.temp.value();
         	landscape.updateTemp(temp);
-        	if (landscape.temperature <= 25)
-            {
-            	coldP.setVisible(true);
-            	hotP.setVisible(false);
-            }
         	
-        	else if (landscape.temperature >= 75)
-            {
-            	coldP.setVisible(false);
-            	hotP.setVisible(true);
-            }
-        	else
-            {
-            	coldP.setVisible(false);
-            	hotP.setVisible(false);
-            }
         }		
         
 		repaint();
@@ -462,6 +488,13 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		
 	}
 
+	/**
+	 * @return the game's Landscape
+	 */
+	public Landscape landscape (){
+		return landscape;	
+	}
+	
 //	public static void main(String[] args) {
 //		Game game = new Game(1200);
 //		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 50, "Male");

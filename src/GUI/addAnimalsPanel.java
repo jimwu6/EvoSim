@@ -26,10 +26,16 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class addAnimalsPanel extends JLayeredPane implements MouseListener, ActionListener {
 	
-	/**
-	 * 
+	/** Buttons for each of the individual types of animal that can be added to the landscape
 	 */
-	public gameBtn addAmphibian, addCanine, addCellular, addFeline, addFish, addHooved, addLizard, addPrimate, addRaptor, addRodent, addSmallBird, addSnake, addTurtle, s1, s2, s3;
+	public gameBtn addAmphibian, addCanine, addCellular, addFeline, addFish, addHooved, addLizard, addPrimate, addRaptor, addRodent, addSmallBird, addSnake, addTurtle;
+	
+	/**3 game buttons for three loadable scenarios
+	 */
+	public gameBtn s1, s2, s3;
+	
+	/**Field representing a list of all the buttons that are used to populate the landscape 
+	 */
 	public ArrayList<gameBtn> list;
 	private Image image = null;
 	
@@ -115,17 +121,17 @@ public class addAnimalsPanel extends JLayeredPane implements MouseListener, Acti
 		this.setBackground(new Color (0,0,0,0));
 	}
 	
-	public static void main (String[] args) {
-		addAnimalsPanel window = new addAnimalsPanel(625);
-		// Create a frame in which to show the button.
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(window);
-
-		//frame.getContentPane().setLayout(new FlowLayout());
-		frame.setSize(1200, 1200);
-		frame.setVisible(true);
-	}
+//	public static void main (String[] args) {
+//		addAnimalsPanel window = new addAnimalsPanel(625);
+//		// Create a frame in which to show the button.
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().setLayout(null);
+//		frame.getContentPane().add(window);
+//
+//		//frame.getContentPane().setLayout(new FlowLayout());
+//		frame.setSize(1200, 1200);
+//		frame.setVisible(true);
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

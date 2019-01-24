@@ -51,33 +51,14 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		Animal pred = new Raptor("raptor", 15, 1, 10000, "Female", true);
 		Animal pred2 = new Feline ("feline", 11, 1, 10000, "Male");
 		Animal prey = new Rodent ("rodent", 1, 1, 10000, "Male");
-		game.landscape.populate(pred);
-		game.landscape.populate(pred2);
-		game.landscape.populate(prey);
-		
+		game.landscape().populate(pred);
+		game.landscape().populate(pred2);
+		game.landscape().populate(prey);
 		
 		//setContentPane(game);
 		setContentPane(menu);
 		
 	}
-/*
-	class drawArea extends JPanel {
-
-    	public drawArea (int width, int height)
-		{
-			// set size 
-			this.setPreferredSize(new Dimension (width, height));
-		}
-
-		public void paintComponent (Graphics g)
-		{			
-			Color green = new Color (0, 255, 0);
-			g.setColor(green);
-			g.fillRect(0, 0, 700, 700);
-			
-		}
-    }
-    */
 
 	 public void actionPerformed(ActionEvent e) {
 		 if (e.getSource().equals(menu.simMode))

@@ -19,11 +19,17 @@ import javax.swing.event.*;
  */
 @SuppressWarnings("serial")
 public class Settings extends JLayeredPane implements MouseListener, ActionListener {
-	//field
-	gameBtn sun, cloud, rain, reset, onA, onB, offA, offB, exit;
-	Slider RR, simSpeed, temp;
-	boolean ndOn;
-	Image image = null;
+	/**	
+	 * list of game buttons on the menu that allow users to click different options
+	 */
+	public gameBtn sun, cloud, rain, reset, onA, onB, offA, offB, exit;
+	
+	/**
+	 * list of sliders on the settings menu that allows user to modify the environment
+	 */
+	public Slider RR, simSpeed, temp;
+	private boolean ndOn;
+	private Image image = null;
 
 	/**
 	 * Constructs a settings screen using defined gameBtn and Slider objects, which allow for the user to select conditions using mouse clicks.
@@ -103,40 +109,40 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 
 	protected void paintComponent(Graphics g) {
 
-		if (onA.clicked)
+		if (onA.clicked())
 		{
 			onA.setVisible(false);
 			onB.setVisible(true);
 			offB.setVisible(false);
 			offA.setVisible(true);
-			onA.clicked = false;
+			onA.unclick();
 		}
 
-		if (onB.clicked)
+		if (onB.clicked())
 		{
 			onB.setVisible(false);
 			onA.setVisible(true);
 			offA.setVisible(false);
 			offB.setVisible(true);
-			onB.clicked = false;
+			onB.unclick();
 		}
 
-		if (offA.clicked)
+		if (offA.clicked())
 		{
 			offA.setVisible(false);
 			offB.setVisible(true);
 			onB.setVisible(false);
 			onA.setVisible(true);
-			offA.clicked = false;
+			offA.unclick();
 		}
 
-		if (offB.clicked)
+		if (offB.clicked())
 		{
 			offB.setVisible(false);
 			offA.setVisible(true);
 			onA.setVisible(false);
 			onB.setVisible(true);
-			offB.clicked = false;
+			offB.unclick();
 		}
 
 		this.setOpaque(false);
@@ -181,16 +187,16 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 		this.setVisible(false);
 	}
 
-	public static void main (String[] args) {
-		Settings window = new Settings(625);
-		// Create a frame in which to show the button.
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(window);
-
-		//frame.getContentPane().setLayout(new FlowLayout());
-		frame.setSize(1200, 1200);
-		frame.setVisible(true);
+//	public static void main (String[] args) {
+//		Settings window = new Settings(625);
+//		// Create a frame in which to show the button.
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().setLayout(null);
+//		frame.getContentPane().add(window);
+//
+//		//frame.getContentPane().setLayout(new FlowLayout());
+//		frame.setSize(1200, 1200);
+//		frame.setVisible(true);
 
 
 		//		MouseListener mouseListener = new MouseAdapter() {
@@ -219,8 +225,8 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 		//			}
 		//		};
 		//		window.onA.addMouseListener( mouseListener );
-
-	}
+//
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

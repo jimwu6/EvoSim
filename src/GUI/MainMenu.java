@@ -19,11 +19,14 @@ import javax.swing.event.*;
  */
 public class MainMenu extends JLayeredPane implements MouseListener, ActionListener {
 
+	/**
+	 * list of game buttons on the main menu that allow users to click different options
+	 */
+	public gameBtn gameMode, simMode, howTo, creds, exit;
 	private int btnChoice = -1;
-	int w, h;
-	Image bg = null, title = null, instructions = null, credits = null;
-	gameBtn gameMode, simMode, howTo, creds, exit;
-	JLabel howToLbl, credsLbl;
+	private int w, h;
+	private Image bg = null, title = null, instructions = null, credits = null;
+	private JLabel howToLbl, credsLbl;
 	
 	/**
 	 * Constructs a screen with a nature background, title, and buttons centered on the screen.
@@ -168,18 +171,18 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 		
 	}
 	
-	public static void main(String[] args) {
-		MainMenu menu = new MainMenu(611);
-		
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(menu);
-
-		//frame.getContentPane().setLayout(new FlowLayout());
-		frame.setSize(1200, 1000);
-		frame.setVisible(true);
-	}
-
+//	public static void main(String[] args) {
+//		MainMenu menu = new MainMenu(611);
+//		
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().setLayout(null);
+//		frame.getContentPane().add(menu);
+//
+//		//frame.getContentPane().setLayout(new FlowLayout());
+//		frame.setSize(1200, 1000);
+//		frame.setVisible(true);
+//	}
+//
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(simMode))
         {
