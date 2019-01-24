@@ -107,6 +107,8 @@ public abstract class Animal {
 
 	public abstract Animal mate(Animal mate);
 	
+	public abstract Animal mate(Animal animal, boolean b);
+	
 	public void calculateDamage() {
 		damage = 10;
 	}

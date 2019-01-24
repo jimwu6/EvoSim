@@ -40,6 +40,12 @@ public class Bird extends Animal {
 		return null;
 	}
 	
+	public Animal mate(Animal animal, boolean canMate) {
+		if (canMate)
+			return this.mate(animal);
+		return null;
+	}
+	
 	public void update() {
 		super.update();
 	}

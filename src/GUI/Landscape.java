@@ -660,13 +660,13 @@ public class Landscape {
 					if (curAnimal != null && !(curAnimal.moveList == null || curAnimal.moveList.isEmpty())) {
 						String dir = curAnimal.moveList.remove(0);
 						
-						if (dir.equals("up"))
+						if (dir.equals("left"))
 							nextGen[r][c-1].add(curAnimal);
-						else if (dir.equals("down"))
-							nextGen[r][c+1].add(curAnimal);
-						else if (dir.equals("left"))
-							nextGen[r-1][c].add(curAnimal);
 						else if (dir.equals("right"))
+							nextGen[r][c+1].add(curAnimal);
+						else if (dir.equals("up"))
+							nextGen[r-1][c].add(curAnimal);
+						else if (dir.equals("down"))
 							nextGen[r+1][c].add(curAnimal);
 					}
 					else {					
@@ -712,26 +712,28 @@ public class Landscape {
 					int emptyRow = -1, emptyCol = -1;
 
 					if (r + 1 < nextGen.length && nextGen[r + 1][c].occupied())
-						baby = nextGen[r][c].animal.mate(nextGen[r + 1][c].animal);
-					else {
-						emptyRow = r + 1;
-						emptyCol = c;
-					}
+						baby = nextGen[r][c].animal.mate(nextGen[r + 1][c].animal, (nextGen[r][c].animal.land() && land[r][c].territory.ground.equals("land") || (nextGen[r][c].animal.water() && land[r][c].territory.ground.equals("water"))));
 
 					int compare = r - 1;				
 					while (c + 1 < nextGen[0].length && compare <= r + 1 && compare > -1 && compare < nextGen.length) {
 						if (nextGen[compare][c + 1].occupied() && baby == null) {
-							baby = nextGen[r][c].animal.mate(nextGen[compare][c + 1].animal);
+							baby = nextGen[r][c].animal.mate(nextGen[compare][c + 1].animal, (nextGen[r][c].animal.land() && land[r][c].territory.ground.equals("land") || (nextGen[r][c].animal.water() && land[r][c].territory.ground.equals("water"))));
 						}
-						else {
-							emptyRow = compare;
-							emptyCol = c + 1;
-						}
-
+						
 						compare++;
 					}
 
-					if (baby != null && emptyRow != -1 && Math.random() > 0.7) {
+					for (int row = r - 1; row < r + 2; row++) {
+						for (int col = c - 1; col < c + 2; col++) {
+							if (row > -1 && row < land.length - 1 && col > -1 && col < land[0].length - 1
+									&& !nextGen[row][col].occupied()) {
+								emptyRow = row;
+								emptyCol = col;
+							}
+						}
+					}
+					
+					if (baby != null && emptyRow != -1) {
 						nextGen[emptyRow][emptyCol].add(baby);
 						System.out.println(baby.type() + " made " + emptyRow + ", " + emptyCol);
 					}
