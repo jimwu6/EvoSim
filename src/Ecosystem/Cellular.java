@@ -8,6 +8,8 @@ public class Cellular extends Animal {
 		membrane = 1;
 		herbivore = true;
 		carnivore = false;
+		water = true;
+		land = false;
 	}
 
 	public Cellular(Cellular c) {
@@ -15,6 +17,8 @@ public class Cellular extends Animal {
 		membrane = c.membrane;
 		herbivore = true;
 		carnivore = false;
+		water = true;
+		land = false;
 	}
 
 	public Cellular(Cellular c, boolean canMate) {
@@ -22,28 +26,27 @@ public class Cellular extends Animal {
 		membrane = 1;
 		herbivore = true;
 		carnivore = false;
+		water = true;
+		land = false;
 	}
 
 	public Animal mate(Animal mate) {
+		return null;
+	}
+	
+	public Animal mate(Animal mate, boolean landSafe) {
 		if (this.canMate(mate))
 		{
-			this.mateTimer = 1;
 			if (membrane >= 5 && Math.random() > 0.5) {
-				if (this.water())
+				if (landSafe)
 					return new Fish(this, this.canMate(mate));
 				else
 					return new Lizard(this, this.canMate(mate));
 			}
 			return new Cellular(this, this.canMate(mate));
 		}
-
+		
 		return null;	
-	}
-	
-	public Animal mate(Animal mate, boolean landSafe) {
-		if (landSafe)
-			return this.mate(mate);
-		return null;
 	}
 	
 	public void update() {

@@ -33,6 +33,12 @@ public class Mammal extends Animal {
 			hornSize++;
 	}
 
+	public Animal mate(Animal animal, boolean canMate) {
+		if (canMate)
+			return this.mate(animal);
+		return null;
+	}
+	
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate)) {
 
