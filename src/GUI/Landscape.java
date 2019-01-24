@@ -16,8 +16,9 @@ import Ecosystem.*;
 public class Landscape {
 
 	Tile[][] land;
-	String weather;
+	String weather = "none";
 	int temperature = 50;
+	boolean natDisToggle = false, disaster;
 
 	public Landscape() {
 		land = new Tile[100][120];
@@ -103,12 +104,8 @@ public class Landscape {
 				// draw ground and plant --> maybe move this somewhere?
 				try {	
 					if (land[r][c].occupied())
-					{
-						if (land[r][c].animal.controlled())
-							g.drawImage(land[r][c].animal.appearance, c * 10 - 20, r * 10 - 20, 60, 60, null);					
-						else
+					{				
 							g.drawImage(land[r][c].animal.appearance, c * 10 - 10, r * 10 - 10, 40, 40, null);					
-
 					}
 					if (land[r][c].territory.plant != null)
 						g.drawImage(land[r][c].territory.plantImg, c * 10 -land[r][c].territory.plant.size/2 , r * 10 - land[r][c].territory.plant.size/2, land[r][c].territory.plant.size, land[r][c].territory.plant.size, null);
@@ -439,6 +436,16 @@ public class Landscape {
 
 	public void advance() {
 
+		if (natDisToggle && Math.random() < .005)
+		{
+			disaster = true;
+		}
+		
+		if (natDisToggle && weather.equals("cloud")  && Math.random() < .005)
+		{
+			disaster = true;
+		}
+		
 		// set up nextGen array
 		Tile nextGen[][] = new Tile [land.length][land[0].length];
 
@@ -449,7 +456,7 @@ public class Landscape {
 				nextGen[r][c].animal = null;
 			}
 		}
-
+		
 		// coordinate animal movement
 		for (int r = 0; r < land.length; r++)
 		{
@@ -459,9 +466,13 @@ public class Landscape {
 				
 				if (land[r][c].planted() || land[r][c].territory.ground.equals("water")) {
 					land[r][c].territory.release();
+					if (weather.equals("rain")&& land[r][c].territory.ground.equals("water") && Math.random() < .5)
+						land[r][c].territory.release();
+					if (weather.equals("sun") && land[r][c].planted() && Math.random() < .5)
+						land[r][c].territory.release();
 				}
 
-				if (land[r][c].occupied() && curAnimal.health() >= 1 
+				if (land[r][c].occupied() && curAnimal.health() >= 1 && (!disaster || Math.random() < .66)
 						&& (curAnimal.age() < curAnimal.lifespan() || Math.random() < 0.7 - 0.2 * (curAnimal.age() - curAnimal.lifespan()))) 
 				{	
 					if (curAnimal != null && (curAnimal.moveList == null || curAnimal.moveList.isEmpty())) {
@@ -641,6 +652,11 @@ public class Landscape {
 						}
 					}
 					
+					if (temperature >= 75 || temperature <= 25)
+					{
+						land[r][c].animal.injured(2);
+					}
+					
 					if (curAnimal != null && !(curAnimal.moveList == null || curAnimal.moveList.isEmpty())) {
 						String dir = curAnimal.moveList.remove(0);
 						
@@ -678,9 +694,13 @@ public class Landscape {
 					}
 				}					
 			}
+			
+			if  (disaster)
+			{
+				disaster = !disaster;
+			}
 		}
 		
-
 		// coordinate animal interactions
 		for (int r = 0; r < nextGen.length; r++)
 		{

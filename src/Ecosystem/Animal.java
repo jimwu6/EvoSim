@@ -14,7 +14,7 @@ public abstract class Animal {
 	protected int health, size, speed, age, lifespan, hunger, thirst, mateTimer, damage;
 	public BufferedImage appearance = null;
 
-	protected boolean controlled, land, water, carnivore, herbivore;
+	protected boolean land, water, carnivore, herbivore;
 
 	protected String gender, type;
 	ArrayList<String> bodyParts = new ArrayList<String>();
@@ -101,6 +101,8 @@ public abstract class Animal {
 	public void drink(){
 		thirst += Math.random() * 5 + 8;
 		thirst = Math.min(thirst, maxStat);
+		health += 20;
+		health = Math.min(health, maxStat);	
 	}
 
 	public abstract Animal mate(Animal mate);
@@ -126,20 +128,12 @@ public abstract class Animal {
 
 	}
 
-	public void injured (Integer damage) {
+	public void injured (int damage) {
 		health -= damage;
 	}
 	
 	public void hurt (Animal prey) {
 		prey.injured(damage);
-	}
-
-	public boolean controlled() {
-		return controlled;
-	}
-	
-	public void underControl() {
-		controlled = true;
 	}
 	
 	public void update () {
@@ -151,13 +145,15 @@ public abstract class Animal {
 		if (Math.random() < .5) {
 			this.thirst -= 3;
 			this.hunger -= 2;
+			thirst = Math.max(0, thirst);
+			health = Math.max(0, health);
 		}
 
-		if (thirst < 35) {
+		if (thirst < 25) {
 			this.health -= 5;
 		}
 
-		if (hunger < 35) {
+		if (hunger < 25) {
 			this.health -= 5;
 		}
 
@@ -224,8 +220,11 @@ public abstract class Animal {
 	}
 	
 	public void feed() {
-		hunger += Math.random() * 15 + 5;
+		hunger += Math.random() * 25 + 5;
 		hunger = Math.min(hunger, maxStat);
+		health +=  Math.random() * 33 + 5;
+		health = Math.min(health, maxStat);
+		
 	}
 	
 	public boolean carnivore() {
