@@ -25,6 +25,7 @@ import Ecosystem.*;
  */
 public class Landscape {
 
+	//fields
 	/**
 	 * 2D array of Tiles to represent the overall landscape
 	 */
@@ -42,12 +43,14 @@ public class Landscape {
 	 * The landscape tiling is based of a text file in the project folder, which contains the ordered list of tile names to be read.
 	 * Plants are then randomly generated with moderate probability and general variety.
 	 */
-	
 	public Landscape() {
+		
+		//initialize variables
 		land = new Tile[100][120];
 		String[] tiles = null;
 		int counter = 0;
 
+		//load in preset landscape from text file
 		try
 		{
 			Scanner reader = new Scanner(new File("Summative Graphics\\landscape.txt"));
@@ -78,32 +81,27 @@ public class Landscape {
 			System.out.println("error landscape");
 		}
 
-		// generate plants
+		// generate plants randomly on grass tiles using loops
 		for (int r = 0; r < land.length; r++)
 		{
 			for (int c = 0; c < land[0].length; c++)
 			{
-				if (land[r][c].territory.ground.equals("grass"))
+				if (land[r][c].territory.ground.equals("grass"))		//check for grass
 				{
-					int chance = (int) (Math.random() * 401);
+					int chance = (int) (Math.random() * 401);		//random generation
 
 					if(chance == 91 || chance == 92)
 						land[r][c].territory.grow("shrub", 44);
 					else if (chance == 93)
 						land[r][c].territory.grow("tree", 111);
-
-					/*else if (chance >= 70)									OTHER PLANTs
-						land[r][c].territory.grow("tree");
-					else if (chance >= 60)
-						land[r][c].territory.grow("tree");
-					else if (chance >= 50)
-						land[r][c].territory.grow("tree");
-					 */
 				}
 			}
 		}
 	}
 
+	/**Sets landscape's disaster rate
+	 * @param r represents the new disaster rate of the landscape
+	 */
 	public void setDRate(double r) {
 		disRate = r ;
 	}
@@ -123,6 +121,7 @@ public class Landscape {
 				// draw ground and plant --> maybe move this somewhere?
 				try 
 				{	
+					//draws image for each tile on ground
 					g.drawImage(land[r][c].territory.groundImg, c * 10, r * 10, 10, 10, null);
 
 				} 
@@ -134,7 +133,7 @@ public class Landscape {
 		{
 			for (int c = 0; c < land[0].length; c++)
 			{
-				// draw ground and plant --> maybe move this somewhere?
+				// draw plant, resource, and animal if they exist on the given tile
 				try {
 					if (land[r][c].territory.plant != null)
 						g.drawImage(land[r][c].territory.plantImg, c * 10 -land[r][c].territory.plant.size/2 , r * 10 - land[r][c].territory.plant.size/2, land[r][c].territory.plant.size, land[r][c].territory.plant.size, null);
@@ -154,14 +153,6 @@ public class Landscape {
 				} catch (NullPointerException e) {}
 			}
 		}
-
-		//		Image appearance = null;
-		//		try {
-		//			appearance = ImageIO.read(new File("Summative Graphics\\animal2.png"));
-		//		}
-		//		catch (Exception ex) {}
-		//
-		//		g.drawImage(appearance, 12, 12, 111,111, null);
 	}
 
 	/**
@@ -176,8 +167,10 @@ public class Landscape {
 		{
 			for (int c = 0 ; c < land[0].length ; c++)
 			{
+				//randomly populates 1 in 2 hundred squares
 				if (Math.floor(Math.random () * 200) < 1)
 				{
+					//case by case generation of animals depending on user input
 					Animal newAnimal = null;
 					if (animal.type().equals("cellular") && (land[r][c].territory.ground.equals("water") || land[r][c].territory.ground.equals("grass") && Math.random() < .04))
 						newAnimal = new Cellular((Cellular) animal);
@@ -225,6 +218,7 @@ public class Landscape {
 		{
 			for (int c = 0 ; c < land[0].length ; c++)
 			{
+				//random generation
 				if (Math.floor(Math.random () * 650) < 1)
 				{
 					double rand = Math.random();
@@ -619,6 +613,7 @@ public class Landscape {
 	 */
 	public void advance() {
 
+		//checks if a natural disaster will occur based on the disaster rate
 		if (natDisToggle && Math.random() < disRate)
 		{
 			disaster = true;
@@ -626,18 +621,20 @@ public class Landscape {
 		else
 			disaster = false;
 		
-		if (natDisToggle && weather.equals("cloud")  && Math.random() < disRate)
+		if (natDisToggle && weather.equals("cloud")  && Math.random() < disRate)		//if cloudy, chance for a natural disaster doubles
 		{
 			disaster = true;
 		}
 		else
 			disaster = false;
 		
+		//update temperature
 		updateWeatherTemp();
 		
 		// set up nextGen array
 		Tile nextGen[][] = new Tile [land.length][land[0].length];
 
+		//maks a duplicate array of tiles to update into
 		for (int r = 0; r < land.length; r++) {
 			for (int c = 0; c < land[0].length; c++)
 			{
@@ -646,34 +643,41 @@ public class Landscape {
 			}
 		}
 		
-		// coordinate animal movement
+		// coordinate animal movement with loops --> each animal in array
 		for (int r = 0; r < land.length; r++)
 		{
 			for (int c = 0; c < land[0].length; c++)
 			{
+				//set curAnimal to be the current animal
 				Animal curAnimal = land[r][c].animal;
 				
+				//if possible, release resources
 				if (land[r][c].planted() || land[r][c].territory.ground.equals("water")) {
 					land[r][c].territory.release();
-					if (weather.equals("rain")&& land[r][c].territory.ground.equals("water") && Math.random() < .5)
+					if (weather.equals("rain")&& land[r][c].territory.ground.equals("water") && Math.random() < .5)		//check if it's raining --> water squares may double again
 						land[r][c].territory.release();
-					if (weather.equals("sun") && land[r][c].planted() && Math.random() < .5)
+					if (weather.equals("sun") && land[r][c].planted() && Math.random() < .5)		//check if sunny --> sun squares may double again
 						land[r][c].territory.release();
 				}
 
+				//check if an animal should be updated --> there's an animal and the health is high enough and lifespan not yet met and disaster hasn't struck/animal survived
 				if (land[r][c].occupied() && curAnimal.health() >= 1 && (!disaster || Math.random() < .66)
 						&& (curAnimal.age() < curAnimal.lifespan() || Math.random() < 0.7 - 0.2 * (curAnimal.age() - curAnimal.lifespan()))) 
 				{	
+					//sets movelist based on animal's needs
 					if (curAnimal != null && (curAnimal.moveList == null || curAnimal.moveList.isEmpty())) {
 						if (curAnimal.thirst() < 66 ) {
+							//if thirsty, target water
 							curAnimal.moveList = findResource(r, c, new Resource ("waterResource"), curAnimal); 
 							System.out.println("target water");
 						}
 						else if (curAnimal.hunger() < 60 && curAnimal.land()&& curAnimal.herbivore()) { 
+							//if hungry and on land, target fruit and herbivore
 							System.out.println("Target fruit");
 							curAnimal.moveList = findResource(r, c, new Resource ("fruit"), curAnimal); 
 						}
 						else if (curAnimal.hunger() < 60 && curAnimal.water()&& curAnimal.herbivore()) {
+							//if hungry and on water and herbivore, target seaweed
 							curAnimal.moveList = findResource(r, c, new Resource ("seaweed"), curAnimal);
 						}
 						
@@ -708,11 +712,12 @@ public class Landscape {
 					else if (type.equals("cellular"))
 						((Cellular)curAnimal).update();
 					
+					//if animal is hungry, will either chase after food if carnivore or move towards plant food --> four cases for each boundary 
 					if (curAnimal.hunger() < 60)
 					{
 						if (r != 0)
 						{
-							
+							//hunts for food by hurting and eating if possible
 							if (curAnimal.carnivore() && land[r-1][c].animal != null) {
 								curAnimal.hurt(land[r-1][c].animal);
 								if (land[r-1][c].animal.health() <= 0 && land[r-1][c].animal.size() < curAnimal.size()) {
@@ -720,6 +725,7 @@ public class Landscape {
 									land[r-1][c].animal = null;	
 								}
 							}
+							//searches for plant if not a carnivore
 							else {
 								ArrayList<Resource> res = land[r-1][c].territory.resources();
 								boolean stopSearch = false;
@@ -734,21 +740,13 @@ public class Landscape {
 										res.remove(i);
 										stopSearch = true;
 									}
-								// if (land[r-1][c].territory.resources.contains(new Resource ("fruit"))){
-								// 	curAnimal.feed();
-								// 	System.out.println("eat fruit");
-								// 	land[r-1][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf(new Resource ("fruit")));
-								// }
-								// else if (land[r-1][c].territory.resources.contains(new Resource ("seaweed"))){
-								// 	curAnimal.feed();
-								// 	System.out.println("eat seaweed");
-								// 	land[r-1][c].territory.resources.remove(land[r-1][c].territory.resources.indexOf(new Resource ("seaweed")));
 								}
 							}
 						}
 
 						else if (r != land.length-1)
 						{
+							//case for carnivores
 							if (curAnimal.carnivore() && land[r+1][c].animal != null) {
 								curAnimal.hurt(land[r+1][c].animal);
 								if (land[r+1][c].animal.health() <= 0 && land[r+1][c].animal.size() < curAnimal.size()) {
@@ -756,6 +754,7 @@ public class Landscape {
 									land[r+1][c].animal = null;	
 								}
 							}
+							//case for herbivores
 							else {
 								ArrayList<Resource> res = land[r+1][c].territory.resources();
 								boolean stopSearch = false;
@@ -776,6 +775,7 @@ public class Landscape {
 							
 						else if (c != 0)
 						{
+							//case for carnivores
 							if (curAnimal.carnivore() && land[r][c-1].animal != null) {
 								curAnimal.hurt(land[r][c-1].animal);
 								if (land[r][c-1].animal.health() <= 0 && land[r][c-1].animal.size() < curAnimal.size()) {
@@ -784,6 +784,7 @@ public class Landscape {
 								}
 							}
 							else {
+								//case for herbivores
 								ArrayList<Resource> res = land[r][c-1].territory.resources();
 								boolean stopSearch = false;
 	
@@ -802,6 +803,7 @@ public class Landscape {
 						}
 						else if (c != land[0].length-1)
 						{
+							//case for carnivores
 							if (curAnimal.carnivore() && land[r][c+1].animal != null) {
 								curAnimal.hurt(land[r][c+1].animal);
 								if (land[r][c+1].animal.health() <= 0 && land[r][c+1].animal.size() < curAnimal.size()) {
@@ -811,6 +813,7 @@ public class Landscape {
 	
 							}
 							else {
+								//case for herbivores
 								ArrayList<Resource> res = land[r][c+1].territory.resources();
 								boolean stopSearch = false;
 	
@@ -829,6 +832,7 @@ public class Landscape {
 						}
 					}
 					
+					//if thirsty, check sides to see if water is nearby --> if yes, drink water
 					if (curAnimal.thirst() < 50)
 					{
 						if (r != 0 && land[r-1][c].territory.resources.contains(new Resource("waterResource")))
@@ -863,11 +867,13 @@ public class Landscape {
 						}
 					}
 					
+					//if temperature is extreme, damage the animal by 2
 					if (temperature >= 75 || temperature <= 25)
 					{
 						land[r][c].animal.injured(2);
 					}
 					
+					//motion for animal based on move list if it exists
 					if (curAnimal != null && !(curAnimal.moveList == null || curAnimal.moveList.isEmpty())) {
 						String dir = curAnimal.moveList.remove(0);
 						
@@ -880,6 +886,7 @@ public class Landscape {
 						else if (dir.equals("down"))
 							nextGen[r+1][c].add(curAnimal);
 					}
+					//otherwise, randomly generate animal's movement
 					else {					
 						int upDown = (int) (Math.random() * 3) - 1;
 						int leftRight = (int) (Math.random() * 3) - 1;
@@ -894,6 +901,7 @@ public class Landscape {
 						if (r == land.length-1 && upDown == 1)
 							upDown = -1;
 	
+						//move to designated square
 						if (!nextGen[r + upDown][c + leftRight].occupied() && !nextGen[r + upDown][c + leftRight].territory.ground.equals("water"))
 							nextGen[r + upDown][c + leftRight].add(curAnimal);
 						else if (!nextGen[r + upDown][c].occupied() && !nextGen[r + upDown][c].territory.ground.equals("water"))
@@ -907,11 +915,12 @@ public class Landscape {
 			}
 		}
 			
-		// coordinate animal interactions
+		// coordinate animal mating
 		for (int r = 0; r < nextGen.length; r++)
 		{
 			for (int c = 0; c < nextGen[0].length; c++)
 			{
+				//check if square is occupied; if so, check for mating
 				if (nextGen[r][c].occupied())
 				{
 					Animal baby = null;

@@ -24,6 +24,8 @@ public class Slider extends JButton implements MouseListener {
 	 */
 	public Slider(int w) {
 		addMouseListener(this);
+		
+		//set size
 		width = w;
 		height = w/6;
 
@@ -31,8 +33,9 @@ public class Slider extends JButton implements MouseListener {
 		size.width = size.height = Math.max(size.width, size.height);
 		setPreferredSize(size);
 		setBounds(0, 0, width, height);
+		
+		//establish default values so that slider starts at fifty
 		mouseX = this.getSize().width/2 - this.getSize().width/32;
-
 		sliderL = getSize().width/16;
 		value = mouseX * 100 / getSize().width;
 		
@@ -43,10 +46,12 @@ public class Slider extends JButton implements MouseListener {
 	
 	// Paint the round background and label.
 	protected void paintComponent(Graphics g) {
+		//draws a dark bar that is horizontal
 		Color bar = new Color(75,55,35);
 		g.setColor(bar);
 		g.fillRect(0, 5*getSize().height/12, getSize().width, getSize().height/6);
 		
+		//draw a light rectangle as the slider at the mouse coordinate
 		Color slider = new Color(155,155,155);
 		g.setColor(slider);
 		g.fillRect(mouseX, 0, sliderL, getSize().height);
@@ -89,14 +94,16 @@ public class Slider extends JButton implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 	}
 
+	//listener for when mouse is pressed
 	public void mousePressed(MouseEvent e) {
-		mouseX = (int) (e.getXOnScreen() - this.getLocationOnScreen().getX());
+		mouseX = (int) (e.getXOnScreen() - this.getLocationOnScreen().getX());		//gets a mouse coordinate relative to left bound of slider
 		
-		if (mouseX > 15*getSize().width/16)
+		if (mouseX > 15*getSize().width/16)		//if the coordinate is too high, lower to 15/16 of the width
 			mouseX = 15*getSize().width/16;
-		if (mouseX < 0 )
+		if (mouseX < 0 )		//if it's too low, bring value to zero
 			mouseX = 0;
-		//System.out.println(e.getXOnScreen() + ", " + this.getLocationOnScreen().getX() + ", " + mouseX);
+		
+		//let the value on the slider be the mouse coordinate relative to total width
 		value = mouseX * 100 / getSize().width;
 	
 	

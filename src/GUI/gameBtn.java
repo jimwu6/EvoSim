@@ -30,6 +30,8 @@ public class gameBtn extends JButton implements MouseListener {
 	 * @param h Height of the desired button
 	 */
 	public gameBtn(String fileName, int w, int h) {
+
+		//set size of button
 		addMouseListener(this);
 		width = w;
 		height = h;
@@ -68,20 +70,21 @@ public class gameBtn extends JButton implements MouseListener {
 	
 	// Paint the round background and label.
 	protected void paintComponent(Graphics g) {
+		//create a highlight colour and highlight button if it's entered
 		Color highlight = new Color(234,221,146);
 		g.setColor(highlight);
 		if (entered)
 			g.fillRoundRect(0, 0, getSize().width-10, getSize().height-10, 30, 30);
+		//draw the button image
 		g.drawImage(i, 5, 5, width-20, height-20, this);
 
 		// This call will paint the label and the focus rectangle.
 		super.paintComponent(g);
 	}
 
-	// Paint the border of the button using a simple stroke.
+	// Paint the border of the button 
 	protected void paintBorder(Graphics g) {
 		g.setColor(getForeground());
-		// g.drawOval(0, 0, getSize().width-1, getSize().height-1);
 	}
 
 	// Hit detection.
@@ -95,16 +98,16 @@ public class gameBtn extends JButton implements MouseListener {
 	}
 	
 	public void mouseClicked(MouseEvent arg0) {
-		clicked = true;
+		clicked = true;		//when mouse is clicked, set clicked to true
 	}
 
 
 	public void mouseEntered(MouseEvent arg0) {
-		entered = true;
+		entered = true;		//when mouse enters element, entered is true
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		entered = false;
+		entered = false;		//when mouse leaves, entered is false
 		
 	}
 

@@ -40,14 +40,17 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		w = width;
 		h = w * 5 / 6;
 		setSize(w, h);
-				
+			
+		//initialize new game and main menu
 		game = new Game(this.getSize().width);
 		game.pauseTimer();
 		menu = new MainMenu(this.getSize().width);
 		
+		//add action listeners
 		menu.simMode.addActionListener(this);
 		menu.gameMode.addActionListener(this);
 		
+		//populate the game with animals
 		Animal pred = new Raptor("raptor", 15, 1, 10000, "Female", true);
 		Animal pred2 = new Feline ("feline", 11, 1, 10000, "Male");
 		Animal prey = new Rodent ("rodent", 1, 1, 10000, "Male");
@@ -56,11 +59,12 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		game.landscape().populate(prey);
 		
 		//setContentPane(game);
-		setContentPane(menu);
+		setContentPane(menu);		//add main menu to the pain as a default
 		
 	}
 
 	 public void actionPerformed(ActionEvent e) {
+		 //if simMode is pressed, start game with sim mode
 		 if (e.getSource().equals(menu.simMode))
          {
           	  game.changeMode(true);
@@ -71,7 +75,8 @@ public class Display extends JFrame implements MouseListener, ActionListener{
            	  game.resumeTimer();
          }   
 		 
-		 if (e.getSource().equals(menu.gameMode))
+		 //if game mode is pressed, start simulation with game mode
+		 else if (e.getSource().equals(menu.gameMode))
          {
           	  game.changeMode(false);
            	  selected = true;
@@ -83,20 +88,6 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		 
 		 this.repaint();
 	 }
-	 
-//    class Advance implements ActionListener {
-//    	
-//        Landscape landscape;
-//        
-//        public Advance(Landscape l) {
-//        	this.landscape = l;
-//        }
-//        
-//        public void actionPerformed(ActionEvent e) {     	
-//        	landscape.advance();
-//        	repaint();
-//        }
-//    }
 	 
     public static void main (String[] args) {
     	Display window = new Display(1200);

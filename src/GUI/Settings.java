@@ -19,6 +19,7 @@ import javax.swing.event.*;
  */
 @SuppressWarnings("serial")
 public class Settings extends JLayeredPane implements MouseListener, ActionListener {
+	//fields
 	/**	
 	 * list of game buttons on the menu that allow users to click different options
 	 */
@@ -39,7 +40,9 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	 */
 	public Settings(int w)
 	{
-		setSize(w, w*5 / 6);
+		setSize(w, w*5 / 6);		//sets size of Settings
+		
+		//load in background image
 		try
 		{
 			image = ImageIO.read(new File("Summative Graphics\\Menu\\png\\settings bg.png"));
@@ -57,29 +60,32 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 		onB = new gameBtn("Summative Graphics\\Menu\\png\\onButtonB.png",this.getSize().height/4, this.getSize().height/8);
 		offA = new gameBtn("Summative Graphics\\Menu\\png\\offButtonA.png",this.getSize().height/4, this.getSize().height/8);
 		offB = new gameBtn("Summative Graphics\\Menu\\png\\offButtonB.png",this.getSize().height/4, this.getSize().height/8);
-		//  exit = new gameBtn("Summative Graphics\\exitBtn.png",this.getSize().height/8, this.getSize().height/8);
-
+		
+		//create new sliders for different environmental factors
 		simSpeed = new Slider(this.getSize().height/2);
 		RR = new Slider(this.getSize().height/2);
 		temp = new Slider(this.getSize().height/2);
 
+		//set sizes for weather buttons
 		sun.setBounds(this.getSize().height/5, this.getSize().height/3 + this.getSize().height/25, this.getSize().height/5, this.getSize().height/5);
 		cloud.setBounds(2*this.getSize().height/5, this.getSize().height/3 + this.getSize().height/25, this.getSize().height/5, this.getSize().height/5);
 		rain.setBounds(3*this.getSize().height/5, this.getSize().height/3 + this.getSize().height/25, this.getSize().height/5, this.getSize().height/5);
 		reset.setBounds(4*this.getSize().height/5, this.getSize().height/3 + this.getSize().height/25, this.getSize().height/5, this.getSize().height/5);
 
+		//set sizes for natural disaster buttons
 		onA.setBounds(5*this.getSize().height/6 + this.getSize().height/16, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
 		onB.setBounds(5*this.getSize().height/6 + this.getSize().height/16, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
 		offA.setBounds(4*this.getSize().height/6 - this.getSize().height/12, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
 		offB.setBounds(4*this.getSize().height/6 - this.getSize().height/12, 2*this.getSize().height/3, this.getSize().height/4, this.getSize().height/8);
 
+		//set sizes for sliders
 		simSpeed.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/6 + this.getSize().height/88, this.getSize().height/2, this.getSize().height/12);
 		temp.setBounds(this.getSize().height/2 + this.getSize().height/12, this.getSize().height/2 + 17*this.getSize().height/256, this.getSize().height/2, this.getSize().height/12);
 		RR.setBounds(this.getSize().height/2 + this.getSize().height/12, 2*this.getSize().height/3+4*this.getSize().height/30, this.getSize().height/2, this.getSize().height/12);
 
+		//create layout of background and background image
 		Image newImage = image.getScaledInstance(this.getSize().width-20, this.getSize().height-50, Image.SCALE_DEFAULT);
 		ImageIcon icon = new ImageIcon(newImage);
-
 		JLabel pic = new JLabel(icon);	 
 		JPanel bg = new JPanel();
 		bg.setOpaque(false);
@@ -87,28 +93,33 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 		bg.setVisible(true);
 		bg.setBounds(10, 10, getSize().width-20, getSize().height-20);
 
-		// Place the buttons in different layers
+		// Place the background on base layer
+		add(bg, new Integer(0));
+		
+		//place buttons on different layers
 		add(sun, new Integer(2));
 		add(cloud, new Integer(2));
-		add(bg, new Integer(0));
 		add(rain, new Integer(2));
 		add(reset, new Integer(2));
 		add(onB, new Integer(3));
 		add(onA, new Integer(3));
 		add(offA, new Integer(3));
 		add(offB, new Integer(3));
-		//   add(exit, new Integer(3));
-
+		
+		//add sliders to layer 3
 		add(simSpeed, new Integer(3));
 		add(RR, new Integer(3));
 		add(temp, new Integer(3));
 
+		//set background colour to fully transparent
 		this.setBackground(new Color (0,0,0,0));
 
 	}
 
+	//display method
 	protected void paintComponent(Graphics g) {
 
+		//if onA is clicked, redraw the natural disaster buttons accordingly
 		if (onA.clicked())
 		{
 			onA.setVisible(false);
@@ -118,6 +129,7 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 			onA.unclick();
 		}
 
+		//if onB is clicked, redraw the natural disaster buttons accordingly
 		if (onB.clicked())
 		{
 			onB.setVisible(false);
@@ -127,6 +139,7 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 			onB.unclick();
 		}
 
+		//if offA is clicked, redraw the natural disaster buttons accordingly
 		if (offA.clicked())
 		{
 			offA.setVisible(false);
@@ -136,6 +149,7 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 			offA.unclick();
 		}
 
+		//if offB is clicked, redraw the natural disaster buttons accordingly
 		if (offB.clicked())
 		{
 			offB.setVisible(false);
@@ -145,6 +159,7 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 			offB.unclick();
 		}
 
+		//sets background to transparent
 		this.setOpaque(false);
 		// This call will paint the label and the focus rectangle.
 		super.paintComponent(g);
@@ -179,6 +194,12 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
 
 	/**
 	 * Set the settings screen to invisible.
@@ -197,41 +218,9 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 //		//frame.getContentPane().setLayout(new FlowLayout());
 //		frame.setSize(1200, 1200);
 //		frame.setVisible(true);
-
-
-		//		MouseListener mouseListener = new MouseAdapter() {
-		//			public void mouseEntered( MouseEvent e )
-		//			{
-		//				System.out.println( window.onA.wasClicked ());
-		//			}
-		//
-		//			public void mouseExited( MouseEvent e )
-		//			{}
-		//
-		//			public void mouseClicked( MouseEvent e )
-		//			{
-		//				System.out.println( "clicked " + window.onA.wasClicked ());
-		//				window.onA.clicked = false;
-		//			}
-		//
-		//			public void mousePressed( MouseEvent e )
-		//			{
-		//				System.out.println( "pressed " );
-		//			}
-		//
-		//			public void mouseReleased( MouseEvent e )
-		//			{
-		//				System.out.println( "released ");
-		//			}
-		//		};
-		//		window.onA.addMouseListener( mouseListener );
 //
 //	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 
-	}
 }
 
