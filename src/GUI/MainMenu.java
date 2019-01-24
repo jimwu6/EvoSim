@@ -12,6 +12,11 @@ import java.io.IOException;
 
 import javax.swing.event.*;
 
+/**
+ * Defines a screen for the main menu of the game. 
+ * <p>
+ * The menu includes a large title and four button options for the game aspects on top of a nature background.
+ */
 public class MainMenu extends JLayeredPane implements MouseListener, ActionListener {
 
 	private int btnChoice = -1;
@@ -20,6 +25,12 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 	gameBtn gameMode, simMode, howTo, creds, exit;
 	JLabel howToLbl, credsLbl;
 	
+	/**
+	 * Constructs a screen with a nature background, title, and buttons centered on the screen.
+	 * The buttons are interactive and lead to the other aspects of the game display that are unified in the Display class upon pressing.
+	 * 
+	 * @param width Size of the menu screen
+	 */
 	public MainMenu(int width) {
 		w = width;
 		h = w * 5 / 6;
@@ -125,6 +136,9 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 		super.paintComponent(g);
 	}
 	
+	/**
+	 * @return An integer representing the button of choice
+	 */
 	public int buttonChoice() 
 	{
 		return btnChoice;

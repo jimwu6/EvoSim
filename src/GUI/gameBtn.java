@@ -7,12 +7,27 @@ import javax.swing.*;
 import java.io.*; // allows file access
 import javax.imageio.*; // allows image loading
 
+/**
+ * Defines a JButton to be used by the game class.
+ * <p>
+ * Game buttons contain an image and size, and can be constructed to create a button responsive to mouse actions that are relevant to the button.
+ * Visually, the button is rounded and has a transparent background which does not block any underlying graphics.
+ */
+@SuppressWarnings("serial")
 public class gameBtn extends JButton implements MouseListener {
 	Image i;
 	public boolean entered, clicked = false;
 	int width, height;
 	int value;
 
+	/**
+	 * Constructs a button with a transparent background and a set image. 
+	 * The button has rounded edges and takes on the appearance of the image being read.
+	 * 
+	 * @param fileName Shortcut name of the image file to be read
+	 * @param w Width of the desired button
+	 * @param h Height of the desired button
+	 */
 	public gameBtn(String fileName, int w, int h) {
 		addMouseListener(this);
 		width = w;
@@ -37,9 +52,17 @@ public class gameBtn extends JButton implements MouseListener {
 		setContentAreaFilled(false);
 	}
 
+	/**
+	 * Constructs a button with a preset image and an inherent value that is returned to assess the character of the button.
+	 * 
+	 * @param fileName Shortcut name of image file to be read
+	 * @param w Width of the button
+	 * @param h Height of the button
+	 * @param selection Value of button to be assessed upon button actions
+	 */
 	public gameBtn(String fileName, int w, int h, int selection) {
 		this(fileName, w, h);
-		
+		value = selection;
 	}
 	
 	// Paint the round background and label.

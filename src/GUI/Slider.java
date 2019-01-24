@@ -7,9 +7,21 @@ import javax.swing.*;
 import java.io.*; // allows file access
 import javax.imageio.*; // allows image loading
 
+/**
+ * Defines a JButton that visually appears like a slider with a toggle.
+ * <p>
+ * The graphics of the slider are designed to fit the theme of the game as a whole.
+ */
+@SuppressWarnings("serial")
 public class Slider extends JButton implements MouseListener {
 	private int width, height, value = 50, sliderL, mouseX;
 
+	/**
+	 * Constructs a slider with a horizontal bar and vertical toggle bar to indicate the current relative position of the slider.
+	 * The toggle bar is automatically centered on the slider and the toggle is responsive to the position when the mouse was first pressed.
+	 * 
+	 * @param w Length of the slider from left to right
+	 */
 	public Slider(int w) {
 		addMouseListener(this);
 		width = w;
@@ -59,20 +71,22 @@ public class Slider extends JButton implements MouseListener {
 		return shape.contains(x, y);
 	}
 	
+	/**
+	 * @return The value that the slider is currently set to
+	 */
 	public int value()
 	{
 		return value;
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		}
+	}
 
 
 	public void mouseEntered(MouseEvent e) {
 	}
 
 	public void mouseExited(MouseEvent e) {
-
 	}
 
 	public void mousePressed(MouseEvent e) {
