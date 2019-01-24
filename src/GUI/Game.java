@@ -3,9 +3,16 @@ package GUI;
 import java.util.*;
 
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.swing.event.*;
 import Ecosystem.*;
 
@@ -21,7 +28,8 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 	boolean settingOn = false;
 	boolean simMode = false;
 	Settings settingsMenu;
-	
+	Image cold = null, hot = null, sun = null, cloud = null, rain = null, dis = null;
+	JPanel coldP, hotP, sunP, cloudP, rainP, disP;
 	public Game(int width) {
 		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		
@@ -34,11 +42,28 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		w = width;
 		h = w * 5 / 6;
 		setSize(w, h);
-		
+	
+		try
+		{
+			cold = ImageIO.read(new File ("Summative Graphics\\cold.png"));
+			hot = ImageIO.read(new File ("Summative Graphics\\hot.png"));
+			rain = ImageIO.read(new File ("Summative Graphics\\rain.png"));
+			sun = ImageIO.read(new File ("Summative Graphics\\sun.png"));
+			cloud = ImageIO.read(new File ("Summative Graphics\\cloud.png"));
+			dis = ImageIO.read(new File ("Summative Graphics\\natDis.png"));
+		}
+		catch (IOException e)
+		{
+			
+		}
 		settingsMenu = new Settings(this.w*4/5);
 		settingsMenu.setBounds(this.getSize().height/24, this.getSize().height/12, settingsMenu.getWidth(), settingsMenu.getHeight()); 
 		settingsMenu.addMouseListener(this);
 		settingsMenu.setVisible(false);
+		settingsMenu.sun.addActionListener(this);
+		settingsMenu.cloud.addActionListener(this);
+		settingsMenu.rain.addActionListener(this);
+		settingsMenu.reset.addActionListener(this);
 		
 		animalMenu = new addAnimalsPanel(this.w*4/5);
 		animalMenu.setBounds(this.getSize().height/24, this.getSize().height/12, settingsMenu.getWidth(), settingsMenu.getHeight()); 
@@ -53,10 +78,63 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		settings.setVisible(false);
 		addAnimal.setVisible(false);
 	
+		coldP = new JPanel();
+		cold = cold.getScaledInstance(this.getSize().width, this.getSize().width, Image.SCALE_DEFAULT);
+		JLabel coldL = new JLabel(new ImageIcon(cold));
+		coldP.add(coldL);
+		coldP.setSize(this.getSize().width, this.getSize().height);
+		coldP.setVisible(false);
+		coldP.setOpaque(false);
+		
+		hotP = new JPanel();
+		hot = hot.getScaledInstance(this.getSize().width, this.getSize().width, Image.SCALE_DEFAULT);
+		JLabel hotL = new JLabel(new ImageIcon(hot));
+		hotP.add(hotL);
+		hotP.setSize(this.getSize().width, this.getSize().height);
+		hotP.setVisible(false);
+		hotP.setOpaque(false);
+		
+		sunP = new JPanel();
+		sun = sun.getScaledInstance(this.getSize().width, this.getSize().width, Image.SCALE_DEFAULT);
+		JLabel sunL = new JLabel(new ImageIcon(sun));
+		sunP.add(sunL);
+		sunP.setSize(this.getSize().width, this.getSize().height);
+		sunP.setVisible(false);
+		sunP.setOpaque(false);
+		
+		cloudP = new JPanel();
+		cloud = cloud.getScaledInstance(this.getSize().width, this.getSize().width, Image.SCALE_DEFAULT);
+		JLabel cloudL = new JLabel(new ImageIcon(cloud));
+		cloudP.add(cloudL);
+		cloudP.setSize(this.getSize().width, this.getSize().height);
+		cloudP.setVisible(false);
+		cloudP.setOpaque(false);
+		
+		rainP = new JPanel();
+		rain = rain.getScaledInstance(this.getSize().width, this.getSize().width, Image.SCALE_DEFAULT);
+		JLabel rainL = new JLabel(new ImageIcon(rain));
+		rainP.add(rainL);
+		rainP.setSize(this.getSize().width, this.getSize().height);
+		rainP.setVisible(false);
+		rainP.setOpaque(false);
+		
 		settings.addActionListener(this);
 		addAnimal.addActionListener(this);
 		settingsMenu.simSpeed.addMouseListener(this);
 		settingsMenu.RR.addMouseListener(this);
+		settingsMenu.temp.addMouseListener(this);
+		settingsMenu.onA.addActionListener(this);
+		settingsMenu.onB.addActionListener(this);
+		settingsMenu.offA.addActionListener(this);
+		settingsMenu.offB.addActionListener(this);
+		
+		disP = new JPanel();
+		dis = dis.getScaledInstance(this.getSize().width, this.getSize().width, Image.SCALE_DEFAULT);
+		JLabel disL = new JLabel(new ImageIcon(dis));
+		disP.add(disL);
+		disP.setSize(this.getSize().width, this.getSize().height);
+		disP.setVisible(false);
+		disP.setOpaque(false);
 		
 		for (int x = 0; x < animalMenu.list.size(); x++)
 		{
@@ -74,6 +152,12 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		add(addAnimal);
 		add(animalMenu);
 		add(settingsMenu);
+		add(coldP);
+		add(hotP);
+		add(sunP);
+		add(cloudP);
+		add(rainP);
+		add(disP);
 		add(board);	
 	}
 	
@@ -189,12 +273,60 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         	landscape.populate(new Turtle("turtle", 1,1,1, "male"));
         }
         
+        else if (e.getSource().equals(settingsMenu.sun))
+        {
+        	landscape.weather = "sun";
+        	sunP.setVisible(true);
+        	cloudP.setVisible(false);
+        	rainP.setVisible(false);
+        }
+        
+        else if (e.getSource().equals(settingsMenu.cloud))
+        {
+        	landscape.weather = "cloud";
+        	sunP.setVisible(false);
+        	cloudP.setVisible(true);
+        	rainP.setVisible(false);
+        }
+        
+        else if (e.getSource().equals(settingsMenu.rain))
+        {
+        	landscape.weather = "rain";
+        	sunP.setVisible(false);
+        	cloudP.setVisible(false);
+        	rainP.setVisible(true);
+        }
+        
+        else if (e.getSource().equals(settingsMenu.reset))
+        {
+        	landscape.weather = "none";
+        	sunP.setVisible(false);
+        	cloudP.setVisible(false);
+        	rainP.setVisible(false);
+        }
+        
+        else if (e.getSource().equals(settingsMenu.onA) || e.getSource().equals(settingsMenu.offB))
+        {
+        	landscape.natDisToggle = false;
+        }
+        
+        else if (e.getSource().equals(settingsMenu.onB) || e.getSource().equals(settingsMenu.offA))
+        {
+        	landscape.natDisToggle = true;
+        }
+        
         if (!simMode)
 		{
 			settings.setVisible(true);
 			addAnimal.setVisible(true);
 		}
+       
+        if (landscape.disaster)
+		{
+			disP.setVisible(true);
+		} 
         
+        System.out.println(landscape.natDisToggle);
         this.repaint();
 	}
 
@@ -263,8 +395,25 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         {
            	int temp = settingsMenu.temp.value();
         	landscape.updateTemp(temp);
-        }
-		
+        	System.out.println(temp);
+        	if (landscape.temperature <= 25)
+            {
+            	coldP.setVisible(true);
+            	hotP.setVisible(false);
+            }
+        	
+        	else if (landscape.temperature >= 75)
+            {
+            	coldP.setVisible(false);
+            	hotP.setVisible(true);
+            }
+        	else
+            {
+            	coldP.setVisible(false);
+            	hotP.setVisible(false);
+            }
+        }		
+        
 		repaint();
 	}
 
