@@ -73,7 +73,6 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		}
 		catch (IOException e)
 		{
-			
 		}
 		settingsMenu = new Settings(this.w*4/5);
 		settingsMenu.setBounds(this.getSize().height/24, this.getSize().height/12, settingsMenu.getWidth(), settingsMenu.getHeight()); 
@@ -461,18 +460,18 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		
 	}
 
-//	public static void main(String[] args) {
-//		Game game = new Game(1200);
-//		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 50, "Male");
-//		game.landscape.populate(animal);
-//		game.setVisible(true);
-//		
-//		JFrame frame = new JFrame();
-//		frame.getContentPane().setLayout(null);
-//		frame.getContentPane().add(game);
-//
-//		frame.setSize(1200, 1000);
-//		frame.setVisible(true);
-//		
-	//}
+	public static void main(String[] args) {
+		Game game = new Game(1200);
+		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 50, "Male");
+		game.landscape.populate(animal);
+		game.setVisible(true);
+		
+		JFrame frame = new JFrame();
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(game);
+
+		frame.setSize(1200, 1000);
+		frame.setVisible(true);
+		
+	}
 }

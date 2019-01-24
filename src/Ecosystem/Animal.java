@@ -46,7 +46,7 @@ public abstract class Animal {
 		bodyParts.add("cellular");
 
 		
-		appearance = makeImage(bodyParts);// make it access package
+		appearance = makeImage(bodyParts); // make it access package
 
 		moveList = new ArrayList<String>();
 		
@@ -94,7 +94,8 @@ public abstract class Animal {
 		try {
 			appearance = ImageIO.read(new File(imageName));
 		}
-		catch (Exception ex) {}
+		catch (Exception ex) {
+		}
 	}
 
 	public void drink(){
@@ -244,6 +245,7 @@ public abstract class Animal {
             try {
                 File f = new File( "Summative Graphics\\Animals\\" + strings.get(i) + ".png" );
                 input[i] = ImageIO.read( f );
+                System.out.println("x");
             }
             catch ( Exception x ) {
                 // Complain if there is any problem loading 
