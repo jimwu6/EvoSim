@@ -13,6 +13,12 @@ import javax.swing.*;
 
 import Ecosystem.*;
 
+/**
+ * Defines a 2D Tile array with animals and the ground type both defined, as well as qualities of weather.
+ * <p>
+ * The Landscape class defines the main grid used for the game, housing both animals and territory, the latter of which defines the ground and resources on the tile.
+ * Interactions between the factors of the environment are coordinated in methods within this class, as well as environmental factors such as weather that can act directly on interactions.
+ */
 public class Landscape {
 
 	Tile[][] land;
@@ -21,6 +27,12 @@ public class Landscape {
 	boolean natDisToggle = false, disaster;
 	double disRate = .005;
 
+	/**
+	 * Creates a default landscape of a size 100x120. 
+	 * The landscape tiling is based of a text file in the project folder, which contains the ordered list of tile names to be read.
+	 * Plants are then randomly generated with moderate probability and general variety.
+	 */
+	
 	public Landscape() {
 		land = new Tile[100][120];
 		String[] tiles = null;
@@ -86,6 +98,12 @@ public class Landscape {
 		disRate = r ;
 	}
 	
+	/**
+	 * Draws the floor, animal, plant, and resources of each tile from the ground up in a grid formation.
+	 * Each tile is a 10x10 square on the component object being drawn on; animals and plants are drawn larger for visibility.
+	 * 
+	 * @param g The graphics object used to draw
+	 */
 	public void show(Graphics g) {
 
 		for (int r = 0; r < land.length; r++)
@@ -136,6 +154,11 @@ public class Landscape {
 		//		g.drawImage(appearance, 12, 12, 111,111, null);
 	}
 
+	/**
+	 * Populates the grid, tile by tile, with relatively low probability of populating an individual tile.
+	 * 
+	 * @param animal Desired animal to populate the grid
+	 */
 	public void populate(Animal animal) {
 
 		//for every cell in the grid, place true or false value --> true is more likely with a higher density
@@ -184,6 +207,9 @@ public class Landscape {
 		}
 	}
 
+	/**
+	 * Populates the grid with a variety of animals that are equally probable.
+	 */
 	public void populate() {
 		for (int r = 0 ; r < land.length ; r++)
 		{
@@ -213,6 +239,17 @@ public class Landscape {
 		}
 	}
 
+	/**
+	 * Creates a set of instructions for an animal to reach the desired object. 
+	 * The set appears as an ArrayList with the commands "up", "down", "left", or "right" to denote the direction in which the animal should move 1 index.
+	 * Helper method for findResource and findAnimal for animals to determine optimal move sets.
+	 * 
+	 * @param vis The array of coordinates of the optimal path to the desired animal or resource
+	 * @param wantX The desired x coordinate of the animal or resource
+	 * @param wantY The desired y coordinate of the animal or resource
+	 * 
+	 * @return A string ArrayList containing the correct movement pattern in chronological order to reach the object
+	 */
 	public ArrayList<String> makeInstructions(Pair[][] vis, int wantX, int wantY) {
 		ArrayList<String> instruct = new ArrayList<String>();
 
@@ -245,6 +282,16 @@ public class Landscape {
 		return instruct;
 	}
 
+	/**
+	 * Finds the path to the nearest desired resource and returns an ordered ArrayList of instructions to arrive there.
+	 * A breadth first search is conducted from the position of the animal until the resource is found, upon which the set of instructions is created.
+	 * 
+	 * @param r The row of the animal
+	 * @param c The column of the animal
+	 * @param resource The resource that is desired
+	 * @param a The animal in the given position
+	 * @return A string ArrayList containing the correct movement pattern in chronological order to reach the object
+	 */
 	public ArrayList<String> findResource(int r, int c, Resource resource, Animal a) {
 
 		Pair vis[][] = new Pair[land.length][land[0].length];
@@ -342,6 +389,16 @@ public class Landscape {
 		return makeInstructions(vis, wantX, wantY);
 	}
 
+	/**
+	 * Finds the path to the nearest desired animal and returns an ordered ArrayList of instructions to arrive there.
+	 * A breadth first search is conducted from the position of the animal until another animal is found, upon which the set of instructions is created.
+	 * 
+	 * @param r The row of the current animal
+	 * @param c The column of the current animal
+	 * @param animal The animal that is desired
+	 * @param a The animal in the given position
+	 * @return A string ArrayList containing the correct movement pattern in chronological order to reach the object
+	 */
 	public ArrayList<String> findAnimal(int r, int c, Animal animal, Animal a) {
 
 		Pair vis[][] = new Pair[land.length][land[0].length];
@@ -441,6 +498,11 @@ public class Landscape {
 		return makeInstructions(vis, wantX, wantY);
 	}
 
+	/**
+	 * Sets the next generation of the landscape after all factors are considered.
+	 * The changes in animal placement and conditions, as well as resources and weather impacts on the ecosystem, are all orchestrated and the new landscape replaces the original landscape.
+	 * Animals must also mate and actively move with purpose.
+	 */
 	public void advance() {
 
 		if (natDisToggle && Math.random() < disRate)
@@ -775,6 +837,11 @@ public class Landscape {
 		land = nextGen; 
 	}
 
+	/**
+	 * Sets the new rate for resource production on the landscape based on the passed parameter.
+	 * 
+	 * @param rate The desired rate of resource creation
+	 */
 	public void updateRR(double rate)
 	{
 		for (int row = 0; row < land.length; row++)
@@ -787,29 +854,48 @@ public class Landscape {
 		}
 	}
 
+	/**
+	 * Sets the new temperature of the landscape based on the passed parameter.
+	 * 
+	 * @param temp The desired temperature of the environment
+	 */
 	public void updateTemp(int temp)
 	{
 		temperature = temp;
 	}
 
-	public static void main(String[] args) {
-		Landscape landscape = new Landscape();
-		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
-		landscape.populate(animal);
-	}
+//	public static void main(String[] args) {
+//		Landscape landscape = new Landscape();
+//		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 1, "Male");
+//		landscape.populate(animal);
+//	}
 }
 
+/**
+ * Defines a single pair of Cartesian coordinates in the form (x, y).
+ * <p>
+ * Rectangular coordinates may be stored, as well as whether the position has been visited or not in the course of traversing the landscape.
+ */
 class Pair {
 
 	public int x, y;
 	public boolean visited = false;
 
+	/**
+	 * Constructs a set of x and y coordinates centered at the origin, (0, 0).
+	 */
 	public Pair() {
 		this.x = 0;
 		this.y = 0;
 		visited = false;
 	}
 
+	/**
+	 * Constructs a set of x and y coordinates for a point based on the passed values.
+	 * 
+	 * @param x The x-coordinate
+	 * @param y The y-coordinate
+	 */
 	public Pair(int x, int y) {
 		this.x = x;
 		this.y = y;

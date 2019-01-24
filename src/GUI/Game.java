@@ -17,7 +17,19 @@ import javax.swing.event.*;
 import Ecosystem.*;
 
 
-public class Game extends JInternalFrame implements MouseListener, KeyListener, ActionListener, ChangeListener {
+/**
+ * Defines a game screen that runs the automated simulation and receives user input to change various conditions.
+ * <p>
+ * The game class initializes a screen based on a JInternalFrame to be accepted by the Display class, showing the environment with animals and their interactions with it.
+ * A timer orchestrates the generational advance of the environment and populations, responding to both internal and external factors.
+ * 
+ */
+/**
+ * @author r_li
+ *
+ */
+@SuppressWarnings("serial")
+public class Game extends JInternalFrame implements MouseListener, KeyListener, ActionListener {
 
 	int w, h;
 	Landscape landscape;
@@ -30,6 +42,13 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 	Settings settingsMenu;
 	Image cold = null, hot = null, sun = null, cloud = null, rain = null, dis = null;
 	JPanel coldP, hotP, sunP, cloudP, rainP, disP;
+	
+	/**
+	 * Constructs a Game screen instance with animals and environment based on passed width of screen.
+	 * The screen also contains toggle buttons in corners for interaction with user, as to change settings and personalize the game aspects.
+	 * 
+	 * @param width The width of the screen
+	 */
 	public Game(int width) {
 		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		
@@ -161,8 +180,17 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		add(board);	
 	}
 	
+	/**
+	 * Defines a drawing area for the Graphics class to draw items that appear.
+	 */
 	class DrawArea extends JPanel									// drawarea class for drawing landscape
 	{
+		/**
+		 * Constructs an area for the graphics to appear.
+		 * 
+		 * @param width The width of the DrawArea board
+		 * @param height The height of the DrawArea board
+		 */
 		public DrawArea (int width, int height)
 		{
 			// set size 
@@ -175,143 +203,100 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		}
 	}
 	
-	public void stateChanged(ChangeEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * Stops the game's timer.
+	 */
 	public void pauseTimer() {
 		t.stop();
 	}
 	
+	/**
+	 * Starts the game's timer.
+	 */
 	public void resumeTimer() {
 		t.start();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource().equals(t))
-        {
+        if (e.getSource().equals(t)) {
             landscape.advance();
           // System.out.println("_____________________________________");
         }
-		
-        else if (e.getSource().equals(settings))
-        {
+        else if (e.getSource().equals(settings)) {
             settingOn = !settingOn;
-
-            	settingsMenu.setVisible(settingOn);
+            settingsMenu.setVisible(settingOn);
         }
-        
-        else if (e.getSource().equals(addAnimal))
-        {
+        else if (e.getSource().equals(addAnimal)) {
         	animalMenu.setVisible(!animalMenu.isVisible());
         }
-        
-        else if (e.getSource().equals(animalMenu.addAmphibian))
-        {
+        else if (e.getSource().equals(animalMenu.addAmphibian)) {
         	landscape.populate(new Amphibian("amphibian", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addCanine))
-        {
+        else if (e.getSource().equals(animalMenu.addCanine)) {
         	landscape.populate(new Canine("canine", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addCellular))
-        {
+        else if (e.getSource().equals(animalMenu.addCellular)) {
         	landscape.populate(new Cellular("cellular", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addFeline))
-        {
+        else if (e.getSource().equals(animalMenu.addFeline)) {
         	landscape.populate(new Feline("feline", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addFish))
-        {
+        else if (e.getSource().equals(animalMenu.addFish)) {
         	landscape.populate(new Fish("fish", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addHooved))
-        {
+        else if (e.getSource().equals(animalMenu.addHooved)) {
         	landscape.populate(new Hooved("hooved", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addLizard))
-        {
+        else if (e.getSource().equals(animalMenu.addLizard)) {
         	landscape.populate(new Lizard("lizard", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addPrimate))
-        {
+        else if (e.getSource().equals(animalMenu.addPrimate)) {
         	landscape.populate(new Primate("primate", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addRaptor))
-        {
+        else if (e.getSource().equals(animalMenu.addRaptor)) {
         	landscape.populate(new Raptor("raptor", 1, 1, 100000, "male", true));
         }
-        
-        else if (e.getSource().equals(animalMenu.addRodent))
-        {
+        else if (e.getSource().equals(animalMenu.addRodent)) {
         	landscape.populate(new Rodent("rodent", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addSmallBird))
-        {
+        else if (e.getSource().equals(animalMenu.addSmallBird)) {
         	landscape.populate(new smallBird("smallBird", 1, 1, 100000, "male", true));
         }
-        
-        else if (e.getSource().equals(animalMenu.addSnake))
-        {
+        else if (e.getSource().equals(animalMenu.addSnake)) {
         	landscape.populate(new Snake("snake", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(animalMenu.addTurtle))
-        {
+        else if (e.getSource().equals(animalMenu.addTurtle)) {
         	landscape.populate(new Turtle("turtle", 1, 1, 100000, "male"));
         }
-        
-        else if (e.getSource().equals(settingsMenu.sun))
-        {
+        else if (e.getSource().equals(settingsMenu.sun)) {
         	landscape.weather = "sun";
         	sunP.setVisible(true);
         	cloudP.setVisible(false);
         	rainP.setVisible(false);
         }
-        
-        else if (e.getSource().equals(settingsMenu.cloud))
-        {
+        else if (e.getSource().equals(settingsMenu.cloud)) {
         	landscape.weather = "cloud";
         	sunP.setVisible(false);
         	cloudP.setVisible(true);
         	rainP.setVisible(false);
         }
-        
-        else if (e.getSource().equals(settingsMenu.rain))
-        {
+        else if (e.getSource().equals(settingsMenu.rain)) {
         	landscape.weather = "rain";
         	sunP.setVisible(false);
         	cloudP.setVisible(false);
         	rainP.setVisible(true);
         }
-        
-        else if (e.getSource().equals(settingsMenu.reset))
-        {
+        else if (e.getSource().equals(settingsMenu.reset)) {
         	landscape.weather = "none";
         	sunP.setVisible(false);
         	cloudP.setVisible(false);
         	rainP.setVisible(false);
         }
-        
-        else if (e.getSource().equals(settingsMenu.onA) || e.getSource().equals(settingsMenu.offB))
-        {
+        else if (e.getSource().equals(settingsMenu.onA) || e.getSource().equals(settingsMenu.offB)) {
         	landscape.natDisToggle = false;
         }
-        
-        else if (e.getSource().equals(settingsMenu.onB) || e.getSource().equals(settingsMenu.offA))
-        {
+        else if (e.getSource().equals(settingsMenu.onB) || e.getSource().equals(settingsMenu.offA)) {
         	landscape.natDisToggle = true;
         }
 
@@ -351,7 +336,7 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         } 
         
         //scenario 3 shows the predator/prey relationship of rodents and raptors
-        else if (e.getSource().equals(animalMenu.s2))
+        else if (e.getSource().equals(animalMenu.s3))
         {
         	Landscape newLand = new Landscape();
         	newLand.weather = "cloud";
@@ -361,14 +346,12 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         	
         }
         
-        if (!simMode)
-		{
+        if (!simMode) {
 			settings.setVisible(true);
 			addAnimal.setVisible(true);
 		}
        
-        if (landscape.disaster)
-		{
+        if (landscape.disaster) {
 			disP.setVisible(true);
 		} 
         else
@@ -400,6 +383,11 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		
 	}
 
+	/**
+	 * Changes the status of the game between simulation and game mode based on the accepted parameter.
+	 * 
+	 * @param sim If simulation mode was selected
+	 */
 	public void changeMode(boolean sim) {
 		simMode = sim;
 	}
@@ -473,18 +461,18 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 		
 	}
 
-	public static void main(String[] args) {
-		Game game = new Game(1200);
-		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 50, "Male");
-		game.landscape.populate(animal);
-		game.setVisible(true);
-		
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(game);
-
-		frame.setSize(1200, 1000);
-		frame.setVisible(true);
-		
-	}
+//	public static void main(String[] args) {
+//		Game game = new Game(1200);
+//		Animal animal = new Mammal("Summative Graphics\\Animals\\animal2.png", 1, 1, 50, "Male");
+//		game.landscape.populate(animal);
+//		game.setVisible(true);
+//		
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().setLayout(null);
+//		frame.getContentPane().add(game);
+//
+//		frame.setSize(1200, 1000);
+//		frame.setVisible(true);
+//		
+	//}
 }

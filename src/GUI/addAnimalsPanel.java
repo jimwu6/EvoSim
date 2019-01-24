@@ -17,12 +17,24 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+/**
+ * Represents a component of the overall display class to be used as a user interaction component in the game.
+ * <p>
+ * The panel is incorporated in the game mode and allows for users to select to add a type of animal to the landscape.
+ * Existing patterns and scenarios can also be accessed for examples of various possibilities within the game.
+ */
+@SuppressWarnings("serial")
 public class addAnimalsPanel extends JLayeredPane implements MouseListener, ActionListener {
 	//field
 	gameBtn addAmphibian, addCanine, addCellular, addFeline, addFish, addHooved, addLizard, addPrimate, addRaptor, addRodent, addSmallBird, addSnake, addTurtle, s1, s2, s3;
 	ArrayList<gameBtn> list;
 	Image image = null;
 	
+	/**
+	 * Constructs the panel with gameBtn objects that the user may select to add animals to the game.
+	 * 
+	 * @param w Desired width of the screen
+	 */
 	public addAnimalsPanel(int w) {
 		setSize(w, w*5 / 6);
 		

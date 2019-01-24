@@ -11,6 +11,13 @@ import java.io.IOException;
 
 import javax.swing.event.*;
 
+/**
+ * Creates a settings screen that displays interactive options for the ecosystem in the Game class.
+ * <p>
+ * The Settings class defines a JLayeredPane that contains sliders for the simulation speed, temperature, and resource rate of the simulation.
+ * There are also button selections that can change weather conditions to alter the state of the ecosystem.
+ */
+@SuppressWarnings("serial")
 public class Settings extends JLayeredPane implements MouseListener, ActionListener {
 	//field
 	gameBtn sun, cloud, rain, reset, onA, onB, offA, offB, exit;
@@ -18,6 +25,12 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 	boolean ndOn;
 	Image image = null;
 
+	/**
+	 * Constructs a settings screen using defined gameBtn and Slider objects, which allow for the user to select conditions using mouse clicks.
+	 * The width defines the size of the screen.
+	 * 
+	 * @param w Width of the screen
+	 */
 	public Settings(int w)
 	{
 		setSize(w, w*5 / 6);
@@ -161,6 +174,9 @@ public class Settings extends JLayeredPane implements MouseListener, ActionListe
 
 	}
 
+	/**
+	 * Set the settings screen to invisible.
+	 */
 	public void makeInvisible() {
 		this.setVisible(false);
 	}

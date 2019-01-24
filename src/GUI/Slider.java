@@ -7,9 +7,21 @@ import javax.swing.*;
 import java.io.*; // allows file access
 import javax.imageio.*; // allows image loading
 
+/**
+ * Defines a JButton that visually appears like a slider with a toggle.
+ * <p>
+ * The graphics of the slider are designed to fit the theme of the game as a whole.
+ */
+@SuppressWarnings("serial")
 public class Slider extends JButton implements MouseListener {
 	private int width, height, value = 50, sliderL, mouseX;
 
+	/**
+	 * Constructs a slider with a horizontal bar and vertical toggle bar to indicate the current relative position of the slider.
+	 * The toggle bar is automatically centered on the slider and the toggle is responsive to the position when the mouse was first pressed.
+	 * 
+	 * @param w Length of the slider from left to right
+	 */
 	public Slider(int w) {
 		addMouseListener(this);
 		width = w;
@@ -59,20 +71,22 @@ public class Slider extends JButton implements MouseListener {
 		return shape.contains(x, y);
 	}
 	
+	/**
+	 * @return The value that the slider is currently set to
+	 */
 	public int value()
 	{
 		return value;
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		}
+	}
 
 
 	public void mouseEntered(MouseEvent e) {
 	}
 
 	public void mouseExited(MouseEvent e) {
-
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -92,42 +106,42 @@ public class Slider extends JButton implements MouseListener {
 		}
 
 	//-------------------------------------------------------------------------------------------------------------
-	// Test routine.
-	public static void main(String[] args) {
-		// Create a button with the label "Jackpot".
-		Slider button = new Slider(414);
-		//button = new Slider("C://work//Projects//2018//EvoSim//src//settings.png", 114, 114);
-
-		// Create a frame in which to show the button.
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(button);
-
-		//        frame.getContentPane().setLayout(new FlowLayout());
-		frame.setSize(500, 500);
-		frame.setVisible(true);
-
-		MouseListener mouseListener = new MouseAdapter() {
-			public void mouseEntered( MouseEvent e )
-			{}
-
-			public void mouseExited( MouseEvent e )
-			{}
-
-			public void mouseClicked( MouseEvent e )
-			{
-			}
-
-			public void mousePressed( MouseEvent e )
-			{
-			}
-
-			public void mouseReleased( MouseEvent e )
-			{
-				System.out.println(button.value());
-			}
-		};
-		button.addMouseListener( mouseListener );
-
-	}
+//	// Test routine.
+//	public static void main(String[] args) {
+//		// Create a button with the label "Jackpot".
+//		Slider button = new Slider(414);
+//		//button = new Slider("C://work//Projects//2018//EvoSim//src//settings.png", 114, 114);
+//
+//		// Create a frame in which to show the button.
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().setLayout(null);
+//		frame.getContentPane().add(button);
+//
+//		//        frame.getContentPane().setLayout(new FlowLayout());
+//		frame.setSize(500, 500);
+//		frame.setVisible(true);
+//
+//		MouseListener mouseListener = new MouseAdapter() {
+//			public void mouseEntered( MouseEvent e )
+//			{}
+//
+//			public void mouseExited( MouseEvent e )
+//			{}
+//
+//			public void mouseClicked( MouseEvent e )
+//			{
+//			}
+//
+//			public void mousePressed( MouseEvent e )
+//			{
+//			}
+//
+//			public void mouseReleased( MouseEvent e )
+//			{
+//				System.out.println(button.value());
+//			}
+//		};
+//		button.addMouseListener( mouseListener );
+//
+//	}
 }

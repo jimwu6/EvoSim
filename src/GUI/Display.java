@@ -12,12 +12,27 @@ import javax.swing.event.*;
 
 import Ecosystem.*;
 
+/**
+ * The Display class represents the class containing and harmonizing all the components of the game.
+ * <p>
+ * Each of the GUI components of the game are assembled into a user event-based game experience.
+ * The user may traverse to panels for instructions, credits, and the various game modes as well.
+ * The game is collectively named "EvoSim".
+ */
+@SuppressWarnings("serial")
 public class Display extends JFrame implements MouseListener, ActionListener{
 	Game game;
 	MainMenu menu;
 	int w,h;
 	boolean selected = false;
 	
+	/**
+	 * Constructs each of the game components and layers them into a single JFrame to be displayed as a GUI.
+	 * User interactions on each of the screens will set other screens as visible or invisible based on choice.
+	 * Events occurring on each of the respective screens will be interpreted by the component classes that construct each screen.
+	 * 
+	 * @param width The width of the desired screen
+	 */
 	public Display(int width)
 	{
 		// set size
@@ -42,7 +57,7 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		setContentPane(menu);
 		
 	}
-
+/*
 	class drawArea extends JPanel {
 
     	public drawArea (int width, int height)
@@ -59,6 +74,7 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 			
 		}
     }
+    */
 
 	 public void actionPerformed(ActionEvent e) {
 		 if (e.getSource().equals(menu.simMode))
