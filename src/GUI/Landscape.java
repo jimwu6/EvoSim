@@ -19,16 +19,22 @@ import Ecosystem.*;
  * The Landscape class defines the main grid used for the game, housing both animals and territory, the latter of which defines the ground and resources on the tile.
  * Interactions between the factors of the environment are coordinated in methods within this class, as well as environmental factors such as weather that can act directly on interactions.
  */
+/**
+ * @author Jim
+ *
+ */
 public class Landscape {
 
 	Tile[][] land;
 	String weather = "none";
-	boolean natDisToggle = false, disaster;
+	boolean natDisToggle = false, disaster, userWeather = true;
 	double disRate = .005;
 
 	int weatherCnt = 0, weatherLimit = 3;
 	
 	int temperature = 50, tempDir = 1;
+	
+	
 
 	/**
 	 * Creates a default landscape of a size 100x120. 
@@ -256,11 +262,13 @@ public class Landscape {
 	public ArrayList<String> makeInstructions(Pair[][] vis, int wantX, int wantY) {
 		ArrayList<String> instruct = new ArrayList<String>();
 
+		// keep generating instructions if the parent one is not reached
 		if (wantX != -1) {
 			Pair cur = vis[wantX][wantY];
 			int curx = wantX, cury = wantY;
 
 			while (cur.x != -1) {
+				// add up, down, left, or right depending on where the animal should move
 				if (cur.x == curx + 1) {
 					instruct.add(0, "up");
 				}
@@ -273,15 +281,20 @@ public class Landscape {
 				else {
 					instruct.add(0, "right");
 				}
+				
+				// go back up the path
 				curx = cur.x;
 				cury = cur.y;
+				// get the next pair
 				cur = vis[curx][cury];
 			}
 			
+			// remove the first instruction since the resource can be accessed on an adjcanet square
 			if (!instruct.isEmpty())
 				instruct.remove(instruct.size()-1);
 		}
-
+		
+		// return the instructions
 		return instruct;
 	}
 
@@ -552,6 +565,51 @@ public class Landscape {
 		// use a helper method to generate instructions through the parent nodes found 
 		return makeInstructions(vis, wantX, wantY);
 	}
+	
+	
+	/**
+	 * Updates the weather and temperature if the user has not chosen to control the settings.
+	 * Uses ticks to determine when to update the temperature and weather.
+	 * Random numbers are used as probability to choose a type of weather.
+	 */
+	public void updateWeatherTemp() {
+
+		// every other tick, change the temperature
+		if (weatherCnt % 2 == 0) {
+			// 15% chance the the weather will start going the other way (e.g. add to subtract)
+			if (Math.random() < 0.15) 
+				tempDir = -tempDir;
+			temperature += tempDir;
+		}
+		
+		// only change weather if user did not change it
+		if (!userWeather) {
+			// keep adding ticks until it reaches limit
+			if (weatherCnt < weatherLimit) {	
+				weatherCnt++;
+			}
+			else {
+				// get number to determine probability
+				// 0.05 percent chance for all weather types
+				double randomWeather = Math.random();
+				if (randomWeather <= 0.05) {
+					weather = "cloud";
+				}
+				else if (randomWeather <= 0.10) {
+					weather = "sun";
+				}
+				else if (randomWeather <= 0.15) {
+					weather = "rain";
+				}
+				else  {
+					weather = "none";
+				}
+				System.out.println(weather);
+				weatherCnt = 0;
+			}
+		}
+	}
+	
 
 	/**
 	 * Sets the next generation of the landscape after all factors are considered.
@@ -574,32 +632,7 @@ public class Landscape {
 		else
 			disaster = false;
 		
-		if (weatherCnt < weatherLimit) {	
-			weatherCnt++;
-		}
-		else {
-			double randomWeather = Math.random();
-			if (randomWeather <= 0.05) {
-				weather = "cloud";
-			}
-			else if (randomWeather <= 0.10) {
-				weather = "sun";
-			}
-			else if (randomWeather <= 0.15) {
-				weather = "rain";
-			}
-			else  {
-				weather = "none";
-			}
-			System.out.println(weather);
-			weatherCnt = 0;
-		}
-		
-		if (weatherCnt % 2 == 0) {
-			if (Math.random() < 0.15) 
-				tempDir = -tempDir;
-			temperature += 1 * tempDir;
-		}
+		updateWeatherTemp();
 		
 		// set up nextGen array
 		Tile nextGen[][] = new Tile [land.length][land[0].length];

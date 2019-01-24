@@ -43,6 +43,8 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
 	Image cold = null, hot = null, sun = null, cloud = null, rain = null, dis = null;
 	JPanel coldP, hotP, sunP, cloudP, rainP, disP;
 	
+	boolean userWeather = true;
+	
 	/**
 	 * Constructs a Game screen instance with animals and environment based on passed width of screen.
 	 * The screen also contains toggle buttons in corners for interaction with user, as to change settings and personalize the game aspects.
