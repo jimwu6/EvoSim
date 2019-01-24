@@ -11,6 +11,8 @@ public class Amphibian extends Animal {
 		venomous = false;
 		herbivore = true;
 		carnivore = true;
+		this.water = true;
+		this.land = true;
 	}
 	
 	public Amphibian(Amphibian a) {
@@ -18,13 +20,21 @@ public class Amphibian extends Animal {
 		hydration = a.hydration;
 		poisonous = a.poisonous;
 		venomous = a.venomous;
+		herbivore = true;
+		carnivore = true;
+		this.water = true;
+		this.land = true;
 	}
 	
 	public Amphibian(Amphibian a, boolean canMate) {
 		super(a, canMate);
 		hydration = a.hydration;
-		poisonous = a.poisonous? true : Math.random() > 0.93;
+		poisonous = a.poisonous? true : Math.random() > 0.8;
 		venomous = a.venomous;
+		herbivore = true;
+		carnivore = true;
+		this.water = true;
+		this.land = true;
 	}
 
 	public Amphibian(Fish fish, boolean canMate) {
@@ -32,6 +42,10 @@ public class Amphibian extends Animal {
 		hydration = 100;
 		poisonous = fish.poisonous;
 		venomous = Math.random() > 0.8;
+		herbivore = true;
+		carnivore = true;
+		this.water = true;
+		this.land = true;
 	}
 	
 	public Animal mate(Animal mate) {
@@ -39,7 +53,7 @@ public class Amphibian extends Animal {
 		{
 			this.mateTimer = 2;
 			
-			if (Math.random() > 0.9 && this.poisonous)
+			if (Math.random() > 0.6 && this.poisonous)
 				return new Lizard(this, this.canMate(mate));
 			return new Amphibian(this, this.canMate(mate));
 		}
@@ -47,6 +61,12 @@ public class Amphibian extends Animal {
 		return null;	
 	}
 
+	public Animal mate(Animal mate, boolean landSafe) {
+		if (landSafe)
+			return this.mate(mate);
+		return null;
+	}
+	
 	public void update() {
 		super.update();
 		hydration--;

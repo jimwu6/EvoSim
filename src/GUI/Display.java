@@ -39,7 +39,6 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		setContentPane(menu);
 		
 	}
-    
 
 	class drawArea extends JPanel {
 
@@ -61,6 +60,7 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 	 public void actionPerformed(ActionEvent e) {
 		 if (e.getSource().equals(menu.simMode))
          {
+          	  game.changeMode(true);
            	  selected = true;
            	  menu.setVisible(false);
            	  game.setVisible(true);
@@ -70,10 +70,10 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		 
 		 if (e.getSource().equals(menu.gameMode))
          {
+          	  game.changeMode(false);
            	  selected = true;
            	  menu.setVisible(false);
            	  game.setVisible(true);
-           	  game.changeMode();
            	  setContentPane(game);
            	  game.resumeTimer();
          }   

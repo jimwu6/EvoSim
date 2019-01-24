@@ -19,16 +19,23 @@ public class Feline extends Mammal{
 		super(feline);
 		this.fangSize = feline.fangSize;
 		this.claw = feline.claw;
+		carnivore = true;
+		herbivore = false;
 	}
 	
 	public Feline(Feline feline, boolean canMate) {
 		super(feline, canMate);
 		this.fangSize = feline.fangSize;
 		this.claw = feline.claw;
+		carnivore = true;
+		herbivore = false;
 	}
 	
 	public Feline(Mammal mammal, boolean canMate) {
 		super(mammal, canMate);
+		type = "feline";
+		carnivore = true;
+		herbivore = false;
 	}
 
 	public Animal mate(Animal mate) {
@@ -41,6 +48,12 @@ public class Feline extends Mammal{
 		}
 		
 		return a;
+	}
+	
+	public Animal mate(Animal mate, boolean landSafe) {
+		if (landSafe)
+			return this.mate(mate);
+		return null;
 	}
 	
 	public void update() {

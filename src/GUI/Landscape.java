@@ -474,7 +474,34 @@ public class Landscape {
 						
 					}
 					
-					curAnimal.update();
+					// update for each animal type
+					String type = curAnimal.type();
+					if (type.equals("rodent"))
+						((Rodent)curAnimal).update();
+					else if (type.equals("canine"))
+						((Canine)curAnimal).update();
+					else if (type.equals("feline"))
+						((Feline)curAnimal).update();
+					else if (type.equals("hooved"))
+						((Hooved)curAnimal).update();
+					else if (type.equals("primate"))
+						((Primate)curAnimal).update();
+					else if (type.equals("fish"))
+						((Fish)curAnimal).update();
+					else if (type.equals("amphibian"))
+						((Amphibian)curAnimal).update();
+					else if (type.equals("lizard"))
+						((Lizard)curAnimal).update();
+					else if (type.equals("snake"))
+						((Snake)curAnimal).update();
+					else if (type.equals("turtle"))
+						((Turtle)curAnimal).update();
+					else if (type.equals("smallBird"))
+						((smallBird)curAnimal).update();
+					else if (type.equals("raptor"))
+						((Raptor)curAnimal).update();
+					else if (type.equals("cellular"))
+						((Cellular)curAnimal).update();
 					
 					if (curAnimal.hunger() < 60)
 					{
@@ -686,7 +713,7 @@ public class Landscape {
 
 					if (baby != null && emptyRow != -1 && Math.random() > 0.7) {
 						nextGen[emptyRow][emptyCol].add(baby);
-						System.out.println("BABY MADE" + emptyRow + emptyCol);
+						System.out.println(baby.type() + " made " + emptyRow + ", " + emptyCol);
 					}
 				}
 

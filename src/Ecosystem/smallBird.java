@@ -14,15 +14,22 @@ public class smallBird extends Bird {
 	public smallBird(smallBird bird) {
 		super (bird);
 		this.featherVibrance = bird.featherVibrance;
+		carnivore = true;
+		herbivore = true;
 	}
 
 	public smallBird(smallBird bird, boolean canMate) {
 		super(bird, canMate);
 		this.featherVibrance = 20;
+		carnivore = true;
+		herbivore = true;
 	}
 
 	public smallBird(Lizard lizard, boolean canMate) {
 		super(lizard, canMate);
+		type = "smallBird";
+		carnivore = true;
+		herbivore = true;
 	}
 
 	public Animal mate(Animal mate) {
@@ -42,6 +49,12 @@ public class smallBird extends Bird {
 		return null;
 	}
 
+	public Animal mate(Animal mate, boolean landSafe) {
+		if (landSafe)
+			return this.mate(mate);
+		return null;
+	}
+	
 	public void update() {
 		super.update();
 

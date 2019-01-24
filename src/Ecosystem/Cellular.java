@@ -13,11 +13,15 @@ public class Cellular extends Animal {
 	public Cellular(Cellular c) {
 		super (c);
 		membrane = c.membrane;
+		herbivore = true;
+		carnivore = false;
 	}
 
 	public Cellular(Cellular c, boolean canMate) {
 		super(c, canMate);
 		membrane = 1;
+		herbivore = true;
+		carnivore = false;
 	}
 
 	public Animal mate(Animal mate) {
@@ -34,6 +38,12 @@ public class Cellular extends Animal {
 		}
 
 		return null;	
+	}
+	
+	public Animal mate(Animal mate, boolean landSafe) {
+		if (landSafe)
+			return this.mate(mate);
+		return null;
 	}
 	
 	public void update() {

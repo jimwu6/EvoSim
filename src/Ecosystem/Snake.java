@@ -9,24 +9,39 @@ public class Snake extends Reptile{
 		hooded = false;
 		carnivore = true;
 		herbivore = false;
+		land = true;
+		water = false;
 	}
 	
 	public Snake(Snake s) {
 		super (s);
 		this.venomous = s.venomous;
 		this.hooded = s.hooded;
+		carnivore = true;
+		herbivore = false;
+		land = true;
+		water = false;
 	}
 	
 	public Snake(Snake s, boolean canMate) {
 		super(s, canMate);
 		this.venomous = Math.random() > 0.9;
 		this.hooded = Math.random() > 0.7? true : false;
+		carnivore = true;
+		herbivore = false;
+		land = true;
+		water = false;
 	}
 
 	public Snake(Reptile reptile, boolean canMate) {
 		super(reptile, canMate);
 		this.venomous = Math.random() > 0.9;
 		this.hooded = Math.random() > 0.7? true : false;
+		type = "snake";
+		carnivore = true;
+		herbivore = false;
+		land = true;
+		water = false;
 	}
 
 	public Animal mate(Animal mate) {
@@ -39,6 +54,12 @@ public class Snake extends Reptile{
 		}
 		
 		return a;
+	}
+	
+	public Animal mate(Animal mate, boolean landSafe) {
+		if (landSafe)
+			return this.mate(mate);
+		return null;
 	}
 	
 	public void update() {

@@ -16,15 +16,22 @@ public class Hooved extends Mammal {
 	public Hooved(Hooved hooved) {
 		super(hooved);
 		this.hornSize = hooved.hornStrength;
+		carnivore = false;
+		herbivore = true;
 	}
 	
 	public Hooved(Hooved hooved, boolean canMate) {
 		super(hooved, canMate);
 		this.hornSize = hooved.hornStrength;
+		carnivore = false;
+		herbivore = true;
 	}
 	
 	public Hooved(Mammal mammal, boolean canMate) {
 		super(mammal, canMate);
+		type = "hooved";
+		carnivore = false;
+		herbivore = true;
 	}
 
 	public Animal mate(Animal mate) {
@@ -37,6 +44,12 @@ public class Hooved extends Mammal {
 		}
 		
 		return a;
+	}
+	
+	public Animal mate(Animal mate, boolean landSafe) {
+		if (landSafe)
+			return this.mate(mate);
+		return null;
 	}
 	
 	public void update() {

@@ -110,7 +110,7 @@ public abstract class Animal {
 	}
 
 	public boolean canMate(Animal mate) {
-		return this.type.equals(mate.type) && !this.gender.equals(mate.gender) && mateTimer == 0 && mate.mateTimer == 0;
+		return this.type().equals(mate.type()) && !this.gender.equals(mate.gender) && mateTimer == 0 && mate.mateTimer == 0;
 	}
 
 	public void mateUpdate() {

@@ -16,6 +16,8 @@ public class Mammal extends Animal {
 		furLength = m.furLength;
 		hornSize = m.hornSize;
 		intelligence = m.intelligence;
+		land = true;
+		water = false;
 	}
 
 	public Mammal(Mammal m, boolean canMate) {
@@ -24,31 +26,32 @@ public class Mammal extends Animal {
 		furLength = m.furLength;
 		hornSize = m.hornSize;
 		intelligence = m.intelligence;
+		land = true;
+		water = false;
 
 		if (Math.random() > 0.95)
 			hornSize++;
 	}
 
 	public Animal mate(Animal mate) {
-		if (this.canMate(mate))
-		{
-			this.mateTimer = 3;
-			if (this.intelligence > 70) {
-				double chance = Math.random();
-				if(chance > 0.97)
-					return new Primate(this, this.canMate(mate));
-				else if (chance > 0.95) 
-					return new Feline(this, this.canMate(mate));
-				else if (chance > 0.93) 
-					return new Canine(this, this.canMate(mate));
-				else if (chance > 0.91) 
-					return new Rodent(this, this.canMate(mate));
-				else if (chance > 0.89)
-					return new Hooved(this, this.canMate(mate));
-				else return null;
-			}
+		if (this.canMate(mate)) {
 
-			return new Mammal(this, this.canMate(mate));
+			this.mateTimer = 3;
+
+			double chance = Math.random();
+
+			if(intelligence > 65 && chance > 0.9)
+				return new Primate(this, this.canMate(mate));
+			else if (intelligence > 55 && chance > 0.8) 
+				return new Canine(this, this.canMate(mate));
+			else if (intelligence > 40 && chance > 0.7) 
+				return new Feline(this, this.canMate(mate));
+			else if (intelligence > 30 && chance > 0.75) 
+				return new Hooved(this, this.canMate(mate));
+			else if (chance > 0.65)
+				return new Rodent(this, this.canMate(mate));
+
+			return null;	
 		}
 
 		return null;	

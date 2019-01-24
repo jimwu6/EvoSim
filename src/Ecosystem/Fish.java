@@ -18,6 +18,8 @@ public class Fish extends Animal {
 		scaleHardness = f.scaleHardness;
 		poisonous = f.poisonous;
 		luminant = f.luminant;
+		herbivore = true;
+		carnivore = true;
 	}
 	
 	public Fish(Fish f, boolean canMate) {
@@ -25,10 +27,14 @@ public class Fish extends Animal {
 		scaleHardness = f.scaleHardness;
 		poisonous = f.poisonous? f.poisonous : Math.random() > 0.9;
 		luminant = Math.random() > 0.9? !f.luminant : f.luminant;
+		herbivore = true;
+		carnivore = true;
 	}
 
 	public Fish(Cellular cellular, boolean canMate) {
 		super("fish", 10, 20, 50 + (int) (Math.random() * 21 - 10), cellular.gender());
+		herbivore = true;
+		carnivore = true;
 	}
 
 	public Animal mate(Animal mate) {
@@ -41,6 +47,12 @@ public class Fish extends Animal {
 			return new Fish(this, this.canMate(mate));
 		}
 		return null;	
+	}
+	
+	public Animal mate(Animal mate, boolean landSafe) {
+		if (landSafe)
+			return this.mate(mate);
+		return null;
 	}
 	
 	public void update() {

@@ -15,6 +15,8 @@ public class Raptor extends Bird {
 		super (raptor);
 		this.talonSize = raptor.talonSize;
 		this.beakStrength = raptor.beakStrength;
+		carnivore = true;
+		herbivore = false;
 	}
 	
 	public Raptor(Raptor raptor, boolean canMate) {
@@ -22,12 +24,17 @@ public class Raptor extends Bird {
 
 		this.talonSize = raptor.talonSize;
 		this.beakStrength = raptor.beakStrength;
+		carnivore = true;
+		herbivore = false;
 	}
 
 	public Raptor(smallBird smallBird, boolean canMate) {
 		super("raptor", smallBird.size(), smallBird.speed(), smallBird.lifespan() + 10, Math.random() < 0.5? "Male" : "Female", smallBird.flight);
 		this.talonSize = 20;
 		this.beakStrength = 30;
+		type = "raptor";
+		carnivore = true;
+		herbivore = false;
 	}
 
 	public Animal mate(Animal mate) {
@@ -38,6 +45,12 @@ public class Raptor extends Bird {
 		}
 		
 		return null;	
+	}
+	
+	public Animal mate(Animal mate, boolean landSafe) {
+		if (landSafe)
+			return this.mate(mate);
+		return null;
 	}
 	
 	public void update() {
