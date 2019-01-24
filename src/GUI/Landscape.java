@@ -284,7 +284,7 @@ public class Landscape {
 
 	/**
 	 * Finds the path to the nearest desired resource and returns an ordered ArrayList of instructions to arrive there.
-	 * A breadth first search is conducted from the position of the animal until the resource is found, upon which the set of instructions is created.
+	 * A breadth first search (BFS) is conducted from the position of the animal until the resource is found, upon which the set of instructions is created.
 	 * 
 	 * @param r The row of the animal
 	 * @param c The column of the animal
@@ -293,67 +293,92 @@ public class Landscape {
 	 * @return A string ArrayList containing the correct movement pattern in chronological order to reach the object
 	 */
 	public ArrayList<String> findResource(int r, int c, Resource resource, Animal a) {
-
+		
+		// Pair for each coordinate that tracks the parent coordinates
+		// vis --> visited
 		Pair vis[][] = new Pair[land.length][land[0].length];
 
+		// instantiate pair objects inside of vis
 		for (int row = 0; row < land.length; row++)
 			for (int col = 0; col < land[0].length; col++)
 				vis[row][col] = new Pair();
 
+		// set the parent of the starting coordinates as -1, -1 (to indicate it is the starting point)
 		vis[r][c].x = -1;
 		vis[r][c].y = -1;
 		vis[r][c].visited = true;
 
+		// create queue for that tracks x and y coordinates of the bfs
 		Queue<Integer> q = new LinkedList<Integer>();
+		// add the starting coordinates to the queue
 		q.add(r);
 		q.add(c);
 		
+		// start coordinates of the resource it will look for as -1, 1
 		int wantX = -1, wantY = -1;
 
+		// keep running BFS while there are still nodes to look for
 		while (!q.isEmpty()) {
 			
+			// boolean to check if the algorithm should keep running
 			boolean keepSearching = true;
 
+			// assign curx and cury to be the current coordinates from queue
 			int curx = q.poll();
 			int cury = q.poll();
 
+			// only check the animal wanted if coordinates are not the original
 			if (curx != -1) {
 				ArrayList<Resource> res = land[curx][cury].territory.resources();
+				// if the resource is found
 				if (res.contains(resource)){
+					// assign the wanted resource's coordinates to the wanted variables
 					wantX = curx;
 					wantY = cury;
+					// remove every thing in the queue because there is no need to search anymore
 					while (!q.isEmpty()) {
 						q.poll();
 					}
+					// stop searching
 					keepSearching = false;
 				}
 			}
-			// mark the wanted thing with -1
 
 			if (keepSearching) {
-				//left
+				
+				// for each side, check if the target square has not been visited and if
+					// the target square contains the resource wanted or the animal can traverse it 
+					// (e.g. a primate can't go through water but it can go on land)
+				
+				// left side
 				if (cury-1 >= 0) {
 					if (!vis[curx][cury-1].visited
 							&& (land[curx][cury-1].territory.resources().contains(resource) 
 									|| (a.land() && !land[curx][cury-1].territory.ground.equals("water"))
 									|| (a.water() && land[curx][cury-1].territory.ground.equals("water")))) {
+						// push the new coordinates to visit
 						q.add(curx);
 						q.add(cury-1);
+						// set the target coordinate's parents to the current coordinates
 						vis[curx][cury-1].x = curx;
 						vis[curx][cury-1].y = cury;
+						// mark target coordinate as visited
 						vis[curx][cury-1].visited = true;
 					}
 				}
-				// right
+				// right side
 				if (cury+1 < land[0].length) {
 					if (!vis[curx][cury+1].visited 
 							&& (land[curx][cury+1].territory.resources().contains(resource) 
 									|| (a.land() && !land[curx][cury+1].territory.ground.equals("water"))
 									|| (a.water() && land[curx][cury+1].territory.ground.equals("water")))) {
+						// push the new coordinates to visit
 						q.add(curx);
 						q.add(cury+1);
+						// set the target coordinate's parents to the current coordinates
 						vis[curx][cury+1].x = curx;
 						vis[curx][cury+1].y = cury;
+						// mark target coordinate as visited
 						vis[curx][cury+1].visited = true;
 					}
 				}
@@ -363,10 +388,13 @@ public class Landscape {
 							&& (land[curx-1][cury].territory.resources().contains(resource) 
 									|| (a.land() && !land[curx-1][cury].territory.ground.equals("water"))
 									|| (a.water() && land[curx-1][cury].territory.ground.equals("water")))) {
+						// push the new coordinates to visit
 						q.add(curx-1);
 						q.add(cury);
+						// set the target coordinate's parents to the current coordinates
 						vis[curx-1][cury].x = curx;
 						vis[curx-1][cury].y = cury;
+						// mark target coordinate as visited
 						vis[curx-1][cury].visited = true;
 					}
 				}
@@ -376,16 +404,20 @@ public class Landscape {
 							&& (land[curx+1][cury].territory.resources().contains(resource) 
 									|| (a.land() && !land[curx+1][cury].territory.ground.equals("water"))
 									|| (a.water() && land[curx+1][cury].territory.ground.equals("water")))) {
+						// push the new coordinates to visit
 						q.add(curx+1);
 						q.add(cury);
+						// set the target coordinate's parents to the current coordinates
 						vis[curx+1][cury].x = curx;
 						vis[curx+1][cury].y = cury;
+						// mark target coordinate as visited
 						vis[curx+1][cury].visited = true;
 					}
 				}
 			}
 		}
 
+		// use a helper method to generate instructions through the parent nodes found 
 		return makeInstructions(vis, wantX, wantY);
 	}
 
@@ -401,31 +433,40 @@ public class Landscape {
 	 */
 	public ArrayList<String> findAnimal(int r, int c, Animal animal, Animal a) {
 
+		// Pair for each coordinate that tracks the parent coordinates
+		// vis --> visited
 		Pair vis[][] = new Pair[land.length][land[0].length];
 		
+		// instantiate pair objects inside of vis
 		for (int row = 0; row < land.length; row++)
 			for (int col = 0; col < land[0].length; col++)
 				vis[row][col] = new Pair();
 		
+		// set the parent of the starting coordinates as -1, -1 (to indicate it is the starting point)
 		vis[r][c].x = -1;
 		vis[r][c].y = -1;
 		vis[r][c].visited = true;
 		
+		// create queue for that tracks x and y coordinates of the bfs
 		Queue<Integer> q = new LinkedList<Integer>();
+		// add the starting coordinates to the queue
 		q.add(r);
 		q.add(c);
 		
+		// create queue for that tracks x and y coordinates of the bfs
 		int wantX = -1, wantY = -1;
 
+		// keep running BFS while there are still nodes to look for
 		while (!q.isEmpty()) {
 
+			// boolean to check if the algorithm should keep running
 			boolean keepSearching = true;
 
+			// assign curx and cury to be the current coordinates from queue
 			int curx = q.poll();
 			int cury = q.poll();
 
-
-	
+			// only check the animal wanted if coordinates are not the original
 			if (curx != -1) {
 				if (land[curx][cury].animal.type().equals(animal.type())){
 					wantX = curx;
@@ -437,17 +478,21 @@ public class Landscape {
 				}
 			}
 
-			// mark the wanted thing with -1
-
+			// for each side, check if the target square has not been visited and if
+			// the target square contains the resource wanted or the animal can traverse it 
+			// (e.g. a primate can't go through water but it can go on land)
+			
 			if (keepSearching) {
-				//left
+				// left
 				if (cury-1 > 0) {
 					if (!vis[curx][cury-1].visited 
 							&& (land[curx][cury-1].animal.type().equals(animal.type())
 									|| (a.land() && !land[curx][cury-1].territory.ground.equals("water"))
 									|| (a.water() && land[curx][cury-1].territory.ground.equals("water")))) {
+						// push the new coordinates to visit
 						q.add(curx);
 						q.add(cury-1);
+						// set the target coordinate's parents to the current coordinates
 						vis[curx][cury-1].x = curx;
 						vis[curx][cury-1].y = cury;
 						vis[curx][cury-1].visited = true;
@@ -459,8 +504,10 @@ public class Landscape {
 							&& (land[curx][cury+1].animal.type().equals(animal.type())
 									|| (a.land() && !land[curx][cury+1].territory.ground.equals("water"))
 									|| (a.water() && land[curx][cury+1].territory.ground.equals("water")))) {
+						// push the new coordinates to visit
 						q.add(curx);
 						q.add(cury+1);
+						// set the target coordinate's parents to the current coordinates
 						vis[curx][cury+1].x = curx;
 						vis[curx][cury+1].y = cury;
 						vis[curx][cury+1].visited = true;
@@ -472,8 +519,10 @@ public class Landscape {
 							&& (land[curx-1][cury].animal.type().equals(animal.type()) 
 									|| (a.land() && !land[curx-1][cury].territory.ground.equals("water"))
 									|| (a.water() && land[curx-1][cury].territory.ground.equals("water")))) {
+						// push the new coordinates to visit
 						q.add(curx-1);
 						q.add(cury);
+						// set the target coordinate's parents to the current coordinates
 						vis[curx-1][cury].x = curx;
 						vis[curx-1][cury].y = cury;
 						vis[curx-1][cury].visited = true;
@@ -485,8 +534,10 @@ public class Landscape {
 							&& (land[curx+1][cury].animal.type().equals(animal.type())
 									|| (a.land() && !land[curx+1][cury].territory.ground.equals("water"))
 									|| (a.water() && land[curx+1][cury].territory.ground.equals("water")))) {
+						// push the new coordinates to visit
 						q.add(curx+1);
 						q.add(cury);
+						// set the target coordinate's parents to the current coordinates
 						vis[curx+1][cury].x = curx;
 						vis[curx+1][cury].y = cury;
 						vis[curx+1][cury].visited = true;
@@ -495,6 +546,7 @@ public class Landscape {
 			}
 		}
 
+		// use a helper method to generate instructions through the parent nodes found 
 		return makeInstructions(vis, wantX, wantY);
 	}
 
