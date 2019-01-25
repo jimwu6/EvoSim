@@ -127,19 +127,42 @@ public class Display extends JFrame implements MouseListener, KeyListener, Actio
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
+	public void keyPressed(KeyEvent e) {
+		//gets keyCode of event
+		
+		int keyCode = e.getKeyCode();
+		
+		//checks if enter was pressed
+		if (keyCode == KeyEvent.VK_ENTER) {						
+			if (menu.buttonChoice() == 1) 	//if yes and menu button is on button 1, initialize a simMode 
+			{
+				game.changeMode(true);
+				selected = true;
+		      	menu.setVisible(false);
+		      	game.setVisible(true);
+		      	setContentPane(game);
+		       	game.resumeTimer();
+			}
+			else if (menu.buttonChoice() == 2) 	//if yes and menu button is on 2, initialize a gameMode
+			{
+				game.changeMode(false);
+	         	selected = true;
+	         	menu.setVisible(false);
+	         	game.setVisible(true);
+	         	setContentPane(game);
+	         	game.resumeTimer();
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

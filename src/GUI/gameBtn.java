@@ -137,12 +137,25 @@ public class gameBtn extends JButton implements MouseListener {
 		clicked = false;
 	}
 	
+	/**
+	 * sets highlight to true
+	 */
 	public void highlight() {
 		highlighted = true;
 	}
 	
+	/**
+	 * when called, sets highlight to false
+	 */
 	public void unhighlight() {
 		highlighted = false;
+	}
+	
+	/**
+	 * @return boolean of if a button is highlighted
+	 */
+	public boolean highlighted() {
+		return highlighted;
 	}
 }
 

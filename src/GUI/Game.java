@@ -371,8 +371,6 @@ public class Game extends JInternalFrame implements MouseListener, ActionListene
         	//populate with rodents and raptors
         	landscape.populate((new Rodent("rodent", 1, 1, 100000, "Male")));
         	landscape.populate((new Raptor("raptor", 1, 1, 100000, "Female", true)));
-
-        	
         }
         
         //if simMode is false --> gameMode is selected, set visibility of settings and animal menu to true

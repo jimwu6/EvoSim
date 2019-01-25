@@ -28,6 +28,7 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 	private int w, h;
 	private Image bg = null, title = null, instructions = null, credits = null;
 	private JLabel howToLbl, credsLbl;
+	private JPanel popup;
 	
 	/**
 	 * Constructs a screen with a nature background, title, and buttons centered on the screen.
@@ -43,6 +44,7 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 		
 		addMouseListener(this);
 		addKeyListener(this);
+		setFocusable(true);
 		
 		//load in images
 		try
@@ -152,37 +154,6 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 			credsLbl.setVisible(false);
 			exit.setVisible(false);
 		}
-		
-		if (selectedBtn == 1)
-		{
-			simMode.highlight();
-			gameMode.unhighlight();
-			howTo.unhighlight();
-			creds.unhighlight();
-		}
-		
-		else if (selectedBtn == 2)
-		{
-			simMode.unhighlight();
-			gameMode.highlight();
-			howTo.unhighlight();
-			creds.unhighlight();
-		}
-		else if (selectedBtn == 3)
-		{
-			simMode.unhighlight();
-			gameMode.unhighlight();
-			howTo.highlight();
-			creds.unhighlight();
-		}
-			
-		if (selectedBtn == 4)
-		{
-			simMode.unhighlight();
-			gameMode.unhighlight();
-			howTo.unhighlight();
-			creds.highlight();
-		}
 		// This call will paint the label and the focus rectangle.
 		super.paintComponent(g);
 	}
@@ -248,68 +219,150 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
             btnChoice = -1;
         }
 		
-		
 		repaint();
 		
 	}
 
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+	public void keyTyped(KeyEvent e) {			
+		//draws desired windows based on the selected button from the menu
+		if (btnChoice == 3)
+		{
+			//if how to is pushed, how to and exit are visible
+			howToLbl.setVisible(true);
+			credsLbl.setVisible(false);
+			exit.setVisible(true);
+		}
 		
+		else if (btnChoice == 4)
+		{
+			//if creds is selected, creds and exit are visible
+			howToLbl.setVisible(false);
+			credsLbl.setVisible(true);
+			exit.setVisible(true);
+		}
+		
+		else if (btnChoice == -1)
+		{
+			//reset if exit is clicked
+			howToLbl.setVisible(false);
+			credsLbl.setVisible(false);
+			exit.setVisible(false);
+		}
+		
+		this.repaint();
 	}
 
 	public void keyPressed(KeyEvent e) {
-		
+		//gets keyCode of event
 		int keyCode = e.getKeyCode();
-		
-		if (keyCode == KeyEvent.VK_UP) {						// for movement
-			if (selectedBtn == -1)
+
+		//checks if button pressed was up
+		if (keyCode == KeyEvent.VK_UP) {						// if yes, select appropriate button
+			if (howToLbl.isVisible() || credsLbl.isVisible())
+				selectedBtn = 5;
+			else if (selectedBtn == -1)
 				selectedBtn = 1;
 			else if (selectedBtn == 3)
 				selectedBtn = 1;
 			else if (selectedBtn == 4)
 				selectedBtn = 2;
-			System.out.println("UP");
 		} 
+		//if button was left, highlight appropriate button by changing selected button
 		else if(keyCode == KeyEvent.VK_LEFT) {
-			if (selectedBtn == -1)
+			if (howToLbl.isVisible() || credsLbl.isVisible())
+				selectedBtn = 5;
+			else if (selectedBtn == -1)
 				selectedBtn = 1;
 			else if (selectedBtn == 2)
 				selectedBtn = 1;
 			else if (selectedBtn == 4)
 				selectedBtn = 3;
-			System.out.println("LEFT");
 		}
+		//if button was right, select and highlight appropriate button
 		else if(keyCode == KeyEvent.VK_RIGHT) {
-			if (selectedBtn == -1)
+			if (howToLbl.isVisible() || credsLbl.isVisible())
+				selectedBtn = 5;
+			else if (selectedBtn == -1)
 				selectedBtn = 1;
 			else if (selectedBtn == 1)
 				selectedBtn = 2;
 			else if (selectedBtn == 3)
 				selectedBtn = 4;
-			System.out.println("RIGHT");
 		}
+		//if button was down, select and highlight appropriate button
 		else if(keyCode == KeyEvent.VK_DOWN) {
-			if (selectedBtn == -1)
+			if (howToLbl.isVisible() || credsLbl.isVisible())
+				selectedBtn = 5;
+			else if (selectedBtn == -1)
 				selectedBtn = 1;
 			else if (selectedBtn == 1)
 				selectedBtn = 3;
 			else if (selectedBtn == 2)
 				selectedBtn = 4;
-			System.out.println("DOWN");
 		}
+		
+		//if button was enter, select and highlight appropriate button
 		else if (keyCode == KeyEvent.VK_ENTER) {
-			btnChoice = selectedBtn;
-			selectedBtn = -1;
-			System.out.println("ENTER");
+			if (selectedBtn == 5)		//turn button choice to -1 if exit selected
+				btnChoice = -1;
+			else {		//otherwise, button choice is the selected button
+				btnChoice = selectedBtn;
+			}
+				selectedBtn = -1;	//turn selected button to -1
 		}
+		
+		//checks for what number selectedBtn is
+		//display appropriate windows and highlight approproate buttons based on selectedBtn
+		if (selectedBtn == 1)		//1 corresponds to simMode
+		{
+			simMode.highlight();
+			gameMode.unhighlight();
+			howTo.unhighlight();
+			creds.unhighlight();
+		}
+		
+		else if (selectedBtn == 2)		//2 relates to gameMode
+		{
+			simMode.unhighlight();
+			gameMode.highlight();
+			howTo.unhighlight();
+			creds.unhighlight();
+		}
+		else if (selectedBtn == 3)		//3 relates to howTo
+		{
+			simMode.unhighlight();
+			gameMode.unhighlight();
+			howTo.highlight();
+			creds.unhighlight();
+		}
+			
+		else if (selectedBtn == 4)		//4 relates to the creds
+		{
+			simMode.unhighlight();
+			gameMode.unhighlight();
+			howTo.unhighlight();
+			creds.highlight();
+		}
+		
+		else if (selectedBtn == 5)		//5 relates to exit
+		{
+			exit.highlight();
+		}
+		
+		else if (selectedBtn ==-1)		//-1 relates to no highlight
+		{
+			simMode.unhighlight();
+			gameMode.unhighlight();
+			howTo.unhighlight();
+			creds.unhighlight();
+			exit.unhighlight();
+		}
+		this.repaint();
+		
 	}
 	
-
-	@Override
 	public void keyReleased(KeyEvent arg0) {
-		System.out.println("hi");
-		
+
 	}
 	
 	public static void main(String[] args) {
