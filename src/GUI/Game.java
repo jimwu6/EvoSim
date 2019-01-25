@@ -29,7 +29,7 @@ import Ecosystem.*;
  *
  */
 @SuppressWarnings("serial")
-public class Game extends JInternalFrame implements MouseListener, KeyListener, ActionListener {
+public class Game extends JInternalFrame implements MouseListener, ActionListener {
 
 	private int w, h;
 	private Landscape landscape;
@@ -431,28 +431,6 @@ public class Game extends JInternalFrame implements MouseListener, KeyListener, 
         this.repaint();
 	}
 
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		
-		if (keyCode == KeyEvent.VK_UP) {						// for movement
-			
-		} 
-		else if(keyCode == KeyEvent.VK_LEFT) {
-			
-		}
-		else if(keyCode == KeyEvent.VK_RIGHT) {
-			
-		}
-		else if(keyCode == KeyEvent.VK_DOWN) {
-			
-		}
-		
-	}
 
 	/**
 	 * Changes the status of the game between simulation and game mode based on the accepted parameter.

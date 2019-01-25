@@ -17,13 +17,14 @@ import javax.swing.event.*;
  * <p>
  * The menu includes a large title and four button options for the game aspects on top of a nature background.
  */
-public class MainMenu extends JLayeredPane implements MouseListener, ActionListener {
+public class MainMenu extends JLayeredPane implements MouseListener, ActionListener, KeyListener {
 
 	/**
 	 * list of game buttons on the main menu that allow users to click different options
 	 */
 	public gameBtn gameMode, simMode, howTo, creds, exit;
 	private int btnChoice = -1;
+	private int selectedBtn = -1;
 	private int w, h;
 	private Image bg = null, title = null, instructions = null, credits = null;
 	private JLabel howToLbl, credsLbl;
@@ -41,6 +42,7 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 		setSize(w, h);
 		
 		addMouseListener(this);
+		addKeyListener(this);
 		
 		//load in images
 		try
@@ -150,6 +152,37 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 			credsLbl.setVisible(false);
 			exit.setVisible(false);
 		}
+		
+		if (selectedBtn == 1)
+		{
+			simMode.highlight();
+			gameMode.unhighlight();
+			howTo.unhighlight();
+			creds.unhighlight();
+		}
+		
+		else if (selectedBtn == 2)
+		{
+			simMode.unhighlight();
+			gameMode.highlight();
+			howTo.unhighlight();
+			creds.unhighlight();
+		}
+		else if (selectedBtn == 3)
+		{
+			simMode.unhighlight();
+			gameMode.unhighlight();
+			howTo.highlight();
+			creds.unhighlight();
+		}
+			
+		if (selectedBtn == 4)
+		{
+			simMode.unhighlight();
+			gameMode.unhighlight();
+			howTo.unhighlight();
+			creds.highlight();
+		}
 		// This call will paint the label and the focus rectangle.
 		super.paintComponent(g);
 	}
@@ -215,21 +248,82 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
             btnChoice = -1;
         }
 		
+		
 		repaint();
 		
 	}
 
-//	public static void main(String[] args) {
-//		MainMenu menu = new MainMenu(611);
-//		
-//		JFrame frame = new JFrame();
-//		frame.getContentPane().setLayout(null);
-//		frame.getContentPane().add(menu);
-//
-//		//frame.getContentPane().setLayout(new FlowLayout());
-//		frame.setSize(1200, 1000);
-//		frame.setVisible(true);
-//	}
-//
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void keyPressed(KeyEvent e) {
+		
+		int keyCode = e.getKeyCode();
+		
+		if (keyCode == KeyEvent.VK_UP) {						// for movement
+			if (selectedBtn == -1)
+				selectedBtn = 1;
+			else if (selectedBtn == 3)
+				selectedBtn = 1;
+			else if (selectedBtn == 4)
+				selectedBtn = 2;
+			System.out.println("UP");
+		} 
+		else if(keyCode == KeyEvent.VK_LEFT) {
+			if (selectedBtn == -1)
+				selectedBtn = 1;
+			else if (selectedBtn == 2)
+				selectedBtn = 1;
+			else if (selectedBtn == 4)
+				selectedBtn = 3;
+			System.out.println("LEFT");
+		}
+		else if(keyCode == KeyEvent.VK_RIGHT) {
+			if (selectedBtn == -1)
+				selectedBtn = 1;
+			else if (selectedBtn == 1)
+				selectedBtn = 2;
+			else if (selectedBtn == 3)
+				selectedBtn = 4;
+			System.out.println("RIGHT");
+		}
+		else if(keyCode == KeyEvent.VK_DOWN) {
+			if (selectedBtn == -1)
+				selectedBtn = 1;
+			else if (selectedBtn == 1)
+				selectedBtn = 3;
+			else if (selectedBtn == 2)
+				selectedBtn = 4;
+			System.out.println("DOWN");
+		}
+		else if (keyCode == KeyEvent.VK_ENTER) {
+			btnChoice = selectedBtn;
+			selectedBtn = -1;
+			System.out.println("ENTER");
+		}
+	}
+	
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void main(String[] args) {
+		MainMenu menu = new MainMenu(611);
+		
+		JFrame frame = new JFrame();
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(menu);
+
+		//frame.getContentPane().setLayout(new FlowLayout());
+		frame.setSize(1200, 1000);
+		frame.setVisible(true);
+	}
+
+
 
 }

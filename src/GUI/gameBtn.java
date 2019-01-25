@@ -17,7 +17,7 @@ import javax.imageio.*; // allows image loading
 public class gameBtn extends JButton implements MouseListener {
 	
 	private Image i = null;
-	private boolean entered, clicked = false;
+	private boolean entered, clicked = false, highlighted = false;
 	private int width, height;
 	private int value;
 
@@ -73,7 +73,7 @@ public class gameBtn extends JButton implements MouseListener {
 		//create a highlight colour and highlight button if it's entered
 		Color highlight = new Color(234,221,146);
 		g.setColor(highlight);
-		if (entered)
+		if (entered || highlighted)
 			g.fillRoundRect(0, 0, getSize().width-10, getSize().height-10, 30, 30);
 		//draw the button image
 		g.drawImage(i, 5, 5, width-20, height-20, this);
@@ -135,6 +135,14 @@ public class gameBtn extends JButton implements MouseListener {
 	 */
 	public void unclick() {
 		clicked = false;
+	}
+	
+	public void highlight() {
+		highlighted = true;
+	}
+	
+	public void unhighlight() {
+		highlighted = false;
 	}
 }
 
