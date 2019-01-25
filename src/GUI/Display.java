@@ -20,7 +20,7 @@ import Ecosystem.*;
  * The game is collectively named "EvoSim".
  */
 @SuppressWarnings("serial")
-public class Display extends JFrame implements MouseListener, ActionListener{
+public class Display extends JFrame implements MouseListener, KeyListener, ActionListener{
 
 	private Game game;
 	private MainMenu menu;
@@ -49,6 +49,7 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		//add action listeners
 		menu.simMode.addActionListener(this);
 		menu.gameMode.addActionListener(this);
+		menu.addKeyListener(this);
 		
 		//populate the game with animals
 		Animal pred = new Raptor("raptor", 15, 1, 10000, "Female", true);
@@ -121,6 +122,24 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
