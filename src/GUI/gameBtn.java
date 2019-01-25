@@ -15,10 +15,11 @@ import javax.imageio.*; // allows image loading
  */
 @SuppressWarnings("serial")
 public class gameBtn extends JButton implements MouseListener {
-	Image i;
-	public boolean entered, clicked = false;
-	int width, height;
-	int value;
+	
+	private Image i = null;
+	private boolean entered, clicked = false, highlighted = false;
+	private int width, height;
+	private int value;
 
 	/**
 	 * Constructs a button with a transparent background and a set image. 
@@ -29,6 +30,8 @@ public class gameBtn extends JButton implements MouseListener {
 	 * @param h Height of the desired button
 	 */
 	public gameBtn(String fileName, int w, int h) {
+
+		//set size of button
 		addMouseListener(this);
 		width = w;
 		height = h;
@@ -67,20 +70,21 @@ public class gameBtn extends JButton implements MouseListener {
 	
 	// Paint the round background and label.
 	protected void paintComponent(Graphics g) {
+		//create a highlight colour and highlight button if it's entered
 		Color highlight = new Color(234,221,146);
 		g.setColor(highlight);
-		if (entered)
+		if (entered || highlighted)
 			g.fillRoundRect(0, 0, getSize().width-10, getSize().height-10, 30, 30);
+		//draw the button image
 		g.drawImage(i, 5, 5, width-20, height-20, this);
 
 		// This call will paint the label and the focus rectangle.
 		super.paintComponent(g);
 	}
 
-	// Paint the border of the button using a simple stroke.
+	// Paint the border of the button 
 	protected void paintBorder(Graphics g) {
 		g.setColor(getForeground());
-		// g.drawOval(0, 0, getSize().width-1, getSize().height-1);
 	}
 
 	// Hit detection.
@@ -94,16 +98,16 @@ public class gameBtn extends JButton implements MouseListener {
 	}
 	
 	public void mouseClicked(MouseEvent arg0) {
-		clicked = true;
+		clicked = true;		//when mouse is clicked, set clicked to true
 	}
 
 
 	public void mouseEntered(MouseEvent arg0) {
-		entered = true;
+		entered = true;		//when mouse enters element, entered is true
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		entered = false;
+		entered = false;		//when mouse leaves, entered is false
 		
 	}
 
@@ -118,46 +122,82 @@ public class gameBtn extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
-
-	//-------------------------------------------------------------------------------------------------------------
-	// Test routine.
-	public static void main(String[] args) {
-		// Create a button with the label "Jackpot".
-		gameBtn button = new gameBtn("src\\settings.png", 214, 214);
-		//button = new gameBtn("C://work//Projects//2018//EvoSim//src//settings.png", 114, 114);
-
-		// Create a frame in which to show the button.
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(button);
-
-		//        frame.getContentPane().setLayout(new FlowLayout());
-		frame.setSize(500, 500);
-		frame.setVisible(true);
-
-		MouseListener mouseListener = new MouseAdapter() {
-			public void mouseEntered( MouseEvent e )
-			{}
-
-			public void mouseExited( MouseEvent e )
-			{}
-
-			public void mouseClicked( MouseEvent e )
-			{
-				System.out.println( "clicked " );
-			}
-
-			public void mousePressed( MouseEvent e )
-			{
-				System.out.println( "pressed " );
-			}
-
-			public void mouseReleased( MouseEvent e )
-			{
-				System.out.println( "released " + button.entered);
-			}
-		};
-		button.addMouseListener( mouseListener );
-
+	
+	/**
+	 * @return a boolean representing if the button has been clicked
+	 */
+	public boolean clicked() {
+		return clicked;
+	}
+	
+	/**
+	 * when called, sets clicked value to false
+	 */
+	public void unclick() {
+		clicked = false;
+	}
+	
+	/**
+	 * sets highlight to true
+	 */
+	public void highlight() {
+		highlighted = true;
+	}
+	
+	/**
+	 * when called, sets highlight to false
+	 */
+	public void unhighlight() {
+		highlighted = false;
+	}
+	
+	/**
+	 * @return boolean of if a button is highlighted
+	 */
+	public boolean highlighted() {
+		return highlighted;
 	}
 }
+
+//	//-------------------------------------------------------------------------------------------------------------
+//	// Test routine.
+//	public static void main(String[] args) {
+//		// Create a button with the label "Jackpot".
+//		gameBtn button = new gameBtn("src\\settings.png", 214, 214);
+//		//button = new gameBtn("C://work//Projects//2018//EvoSim//src//settings.png", 114, 114);
+//
+//		// Create a frame in which to show the button.
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().setLayout(null);
+//		frame.getContentPane().add(button);
+//
+//		//        frame.getContentPane().setLayout(new FlowLayout());
+//		frame.setSize(500, 500);
+//		frame.setVisible(true);
+//
+//		MouseListener mouseListener = new MouseAdapter() {
+//			public void mouseEntered( MouseEvent e )
+//			{}
+//
+//			public void mouseExited( MouseEvent e )
+//			{}
+//
+//			public void mouseClicked( MouseEvent e )
+//			{
+//				System.out.println( "clicked " );
+//			}
+//
+//			public void mousePressed( MouseEvent e )
+//			{
+//				System.out.println( "pressed " );
+//			}
+//
+//			public void mouseReleased( MouseEvent e )
+//			{
+//				System.out.println( "released " + button.entered);
+//			}
+//		};
+//		button.addMouseListener( mouseListener );
+//
+//	}
+//}

@@ -19,8 +19,14 @@ import Ecosystem.*;
  * The tile uses the Territory class to define the ground; all other fields are not required to be initialized.
  */
 public class Tile {
-
+    /**
+     * Represents animal that inhabits the tile
+     */
     public Animal animal = null;
+    
+    /**
+     * Represents the territory that the tile displays
+     */
     public Territory territory;
 
     /**
@@ -78,5 +84,12 @@ public class Tile {
      */
     public boolean occupied() {
     	return animal != null;
+    }
+    
+    /**
+     * removes animal from the Tile
+     */
+    public void removeAnimal(){
+    	animal = null;
     }
 }

@@ -26,10 +26,16 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class addAnimalsPanel extends JLayeredPane implements MouseListener, ActionListener {
 	
-	/**
-	 * 
+	/** Buttons for each of the individual types of animal that can be added to the landscape
 	 */
-	public gameBtn addAmphibian, addCanine, addCellular, addFeline, addFish, addHooved, addLizard, addPrimate, addRaptor, addRodent, addSmallBird, addSnake, addTurtle, s1, s2, s3;
+	public gameBtn addAmphibian, addCanine, addCellular, addFeline, addFish, addHooved, addLizard, addPrimate, addRaptor, addRodent, addSmallBird, addSnake, addTurtle;
+	
+	/**3 game buttons for three loadable scenarios
+	 */
+	public gameBtn s1, s2, s3;
+	
+	/**Field representing a list of all the buttons that are used to populate the landscape 
+	 */
 	public ArrayList<gameBtn> list;
 	private Image image = null;
 	
@@ -39,8 +45,9 @@ public class addAnimalsPanel extends JLayeredPane implements MouseListener, Acti
 	 * @param w Desired width of the screen
 	 */
 	public addAnimalsPanel(int w) {
-		setSize(w, w*5 / 6);
+		setSize(w, w*5 / 6);		//set size
 		
+		//load image for background
 		try
 		{
 			image = ImageIO.read(new File("Summative Graphics\\addAnimal\\background.png"));
@@ -67,6 +74,7 @@ public class addAnimalsPanel extends JLayeredPane implements MouseListener, Acti
 		s2 = new gameBtn("Summative Graphics\\addAnimal\\scenario2.png",this.getSize().width/4, this.getSize().height/8);
 		s3 = new gameBtn("Summative Graphics\\addAnimal\\scenario3.png",this.getSize().width/4, this.getSize().height/8);
 	
+		//add buttons for adding animals into the arraylist
 		list = new ArrayList<gameBtn>(13);
 		list.add(addAmphibian);
 		list.add(addCanine);
@@ -82,16 +90,19 @@ public class addAnimalsPanel extends JLayeredPane implements MouseListener, Acti
 		list.add(addSnake);
 		list.add(addTurtle);
 		
+		//set sizes and locations of animal buttons
 		for (int x = 0; x < list.size(); x++)
 		{
 			list.get(x).setBounds(this.getSize().height/16 *( (x % 3) + 1) + this.getSize().width/4 *(x % 3), this.getSize().height/12 + this.getSize().height/21*((x / 3) + 1) + this.getSize().height/15 *(x / 3), this.getSize().width/4, this.getSize().height/8);
 			
 		}
 		
+		//set sizes and locations for settings buttons
 		s1.setBounds(this.getSize().height/16, 6*this.getSize().height/8 + this.getSize().height/16 , this.getSize().width/4, this.getSize().height/8);
 		s2.setBounds(this.getSize().height/16*2 + this.getSize().width/4  , 6*this.getSize().height/8 + this.getSize().height/16, this.getSize().width/4, this.getSize().height/8);
 		s3.setBounds(this.getSize().height/16*3 + 2*this.getSize().width/4, 6*this.getSize().height/8 + this.getSize().height/16, this.getSize().width/4, this.getSize().height/8);
 				
+		//make JPanel for the background and make it visible
 		Image newImage = image.getScaledInstance(this.getSize().width-20, this.getSize().height-50, Image.SCALE_DEFAULT);
 		ImageIcon icon = new ImageIcon(newImage);
 
@@ -102,30 +113,34 @@ public class addAnimalsPanel extends JLayeredPane implements MouseListener, Acti
 		bg.setVisible(true);
 		bg.setBounds(10, 10, getSize().width-20, getSize().height-20);
 		
-		add(bg, new Integer(0));
+		add(bg, new Integer(0));		//add the background to the panel
+		
+		//add buttons
 		for (int x = 0; x < list.size(); x++)
 		{
 			this.add(list.get(x), new Integer(1));
 		}
 
+		//add buttons
 		add(s1, new Integer(1));
 		add(s2, new Integer(1));
 		add(s3, new Integer(1));
 
+		//make background transparent
 		this.setBackground(new Color (0,0,0,0));
 	}
 	
-	public static void main (String[] args) {
-		addAnimalsPanel window = new addAnimalsPanel(625);
-		// Create a frame in which to show the button.
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(window);
-
-		//frame.getContentPane().setLayout(new FlowLayout());
-		frame.setSize(1200, 1200);
-		frame.setVisible(true);
-	}
+//	public static void main (String[] args) {
+//		addAnimalsPanel window = new addAnimalsPanel(625);
+//		// Create a frame in which to show the button.
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().setLayout(null);
+//		frame.getContentPane().add(window);
+//
+//		//frame.getContentPane().setLayout(new FlowLayout());
+//		frame.setSize(1200, 1200);
+//		frame.setVisible(true);
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

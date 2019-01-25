@@ -2,6 +2,9 @@ package GUI;
 
 import Ecosystem.*;
 
+/**
+ * class used for testing of the program
+ */
 public class Test {
 
 	public static void main(String[] args) {

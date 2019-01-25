@@ -20,10 +20,19 @@ import Ecosystem.*;
  * The game is collectively named "EvoSim".
  */
 @SuppressWarnings("serial")
-public class Display extends JFrame implements MouseListener, ActionListener{
+public class Display extends JFrame implements MouseListener, KeyListener, ActionListener{
 
+	/**
+	 * Game object to display and play the simulation itself.
+	 */
 	private Game game;
+	/**
+	 * MainMenu object that displays the menu with game options.
+	 */
 	private MainMenu menu;
+	/**
+	 * Dimension for the display window.
+	 */
 	private int w,h;
 	private boolean selected = false;
 	
@@ -40,46 +49,37 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		w = width;
 		h = w * 5 / 6;
 		setSize(w, h);
-				
+			
+		//initialize new game and main menu
 		game = new Game(this.getSize().width);
 		game.pauseTimer();
 		menu = new MainMenu(this.getSize().width);
 		
+		//add action listeners
 		menu.simMode.addActionListener(this);
 		menu.gameMode.addActionListener(this);
+		menu.addKeyListener(this);
 		
+		//populate the game with animals
 		Animal pred = new Raptor("raptor", 15, 1, 10000, "Female", true);
 		Animal pred2 = new Feline ("feline", 11, 1, 10000, "Male");
 		Animal prey = new Rodent ("rodent", 1, 1, 10000, "Male");
-		game.landscape.populate(pred);
-		game.landscape.populate(pred2);
-		game.landscape.populate(prey);
-		
+		game.landscape().populate(pred);
+		game.landscape().populate(pred2);
+		game.landscape().populate(prey);
 		
 		//setContentPane(game);
-		setContentPane(menu);
+		setContentPane(menu);		//add main menu to the pain as a default
 		
 	}
-/*
-	class drawArea extends JPanel {
 
-    	public drawArea (int width, int height)
-		{
-			// set size 
-			this.setPreferredSize(new Dimension (width, height));
-		}
-
-		public void paintComponent (Graphics g)
-		{			
-			Color green = new Color (0, 255, 0);
-			g.setColor(green);
-			g.fillRect(0, 0, 700, 700);
-			
-		}
-    }
-    */
-
-	 public void actionPerformed(ActionEvent e) {
+	 /**
+	  * 
+	  * 
+	  * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	  */
+	public void actionPerformed(ActionEvent e) {
+		 //if simMode is pressed, start game with sim mode
 		 if (e.getSource().equals(menu.simMode))
          {
           	  game.changeMode(true);
@@ -90,7 +90,8 @@ public class Display extends JFrame implements MouseListener, ActionListener{
            	  game.resumeTimer();
          }   
 		 
-		 if (e.getSource().equals(menu.gameMode))
+		 //if game mode is pressed, start simulation with game mode
+		 else if (e.getSource().equals(menu.gameMode))
          {
           	  game.changeMode(false);
            	  selected = true;
@@ -102,20 +103,6 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 		 
 		 this.repaint();
 	 }
-	 
-//    class Advance implements ActionListener {
-//    	
-//        Landscape landscape;
-//        
-//        public Advance(Landscape l) {
-//        	this.landscape = l;
-//        }
-//        
-//        public void actionPerformed(ActionEvent e) {     	
-//        	landscape.advance();
-//        	repaint();
-//        }
-//    }
 	 
     public static void main (String[] args) {
     	Display window = new Display(1200);
@@ -149,6 +136,47 @@ public class Display extends JFrame implements MouseListener, ActionListener{
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		//gets keyCode of event
+		
+		int keyCode = e.getKeyCode();
+		
+		//checks if enter was pressed
+		if (keyCode == KeyEvent.VK_ENTER) {						
+			if (menu.buttonChoice() == 1) 	//if yes and menu button is on button 1, initialize a simMode 
+			{
+				game.changeMode(true);
+				selected = true;
+		      	menu.setVisible(false);
+		      	game.setVisible(true);
+		      	setContentPane(game);
+		       	game.resumeTimer();
+			}
+			else if (menu.buttonChoice() == 2) 	//if yes and menu button is on 2, initialize a gameMode
+			{
+				game.changeMode(false);
+	         	selected = true;
+	         	menu.setVisible(false);
+	         	game.setVisible(true);
+	         	setContentPane(game);
+	         	game.resumeTimer();
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

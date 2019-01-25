@@ -1,7 +1,17 @@
 package Ecosystem;
 
+/**
+ * @author Justin
+ *The Amphibian Class represents animals that are amphibians, such as frogs
+ *Considered to be omnivores and have the ability to traverse both land territories and water territories
+ */
 public class Amphibian extends Animal {
+	//fields
 	protected int hydration;
+	
+	/**
+	 * Fields that represent animal's ability to do damage when hunting - venomous- or when hunted -poisonous-
+	 */
 	public boolean poisonous, venomous;
 	
 	public Amphibian(String type, int size, int speed, int lifespan, String gender) {
