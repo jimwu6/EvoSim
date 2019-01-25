@@ -20,7 +20,7 @@ import javax.swing.event.*;
 public class MainMenu extends JLayeredPane implements MouseListener, ActionListener, KeyListener {
 
 	/**
-	 * list of game buttons on the main menu that allow users to click different options
+	 * Game button on the main menu that allow users to click different options.
 	 */
 	public gameBtn gameMode, simMode, howTo, creds, exit;
 	private int btnChoice = -1;
@@ -222,7 +222,7 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 	//listens for actions
 	public void actionPerformed(ActionEvent e) {
 		
-		//listens for which soource enacted the actionListener and then sets btnChoice accordingly
+		//listens for which source enacted the actionListener and then sets btnChoice accordingly
 		if (e.getSource().equals(simMode))
         {
             btnChoice = 1;
@@ -308,12 +308,12 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		System.out.println("hi");
 		
 	}
 	
 	public static void main(String[] args) {
-		MainMenu menu = new MainMenu(611);
+		MainMenu menu = new MainMenu(1200);
 		
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);
