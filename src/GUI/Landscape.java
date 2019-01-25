@@ -716,6 +716,7 @@ public class Landscape {
 								curAnimal.hurt(land[r-1][c].animal);
 								if (land[r-1][c].animal.health() <= 0 && land[r-1][c].animal.size() < curAnimal.size()) {
 									curAnimal.feed();
+									System.out.println("eat");
 									land[r-1][c].animal = null;	
 								}
 							}
