@@ -22,8 +22,17 @@ import Ecosystem.*;
 @SuppressWarnings("serial")
 public class Display extends JFrame implements MouseListener, KeyListener, ActionListener{
 
+	/**
+	 * Game object to display and play the simulation itself.
+	 */
 	private Game game;
+	/**
+	 * MainMenu object that displays the menu with game options.
+	 */
 	private MainMenu menu;
+	/**
+	 * Dimension for the display window.
+	 */
 	private int w,h;
 	private boolean selected = false;
 	
@@ -64,7 +73,12 @@ public class Display extends JFrame implements MouseListener, KeyListener, Actio
 		
 	}
 
-	 public void actionPerformed(ActionEvent e) {
+	 /**
+	  * 
+	  * 
+	  * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	  */
+	public void actionPerformed(ActionEvent e) {
 		 //if simMode is pressed, start game with sim mode
 		 if (e.getSource().equals(menu.simMode))
          {
