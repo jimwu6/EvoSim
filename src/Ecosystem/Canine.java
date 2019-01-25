@@ -1,9 +1,20 @@
 package Ecosystem;
 
+/**
+ * Class that represents dog-like creatures
+ *these creates have the ability walk on land and hunt
+ */
 public class Canine extends Mammal{
 
-	public int fangSize, claw;
+	private int fangSize, claw;
 
+	/**creates a new ce that can live on land
+	 * @param type refers to the type of animal this is - a canine
+	 * @param size - how large the animal is, which impacts the hunting
+	 * @param speed - the speed at which the animal moves
+	 * @param lifespan represents the animal's lifespan
+	 * @param gender the animal is either male or female
+	 */
 	public Canine(String imageName, int size, int speed, int lifespan, String gender) {
 		super(imageName, size, speed, lifespan, gender);
 		furDensity = 15;
@@ -18,6 +29,9 @@ public class Canine extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 	
+	/**creates a copy of another canine
+	 * @param a represents the canine that this constructor duplicates
+	 */
 	public Canine(Canine canine) {
 		super(canine);
 		this.fangSize = canine.fangSize;
@@ -29,6 +43,12 @@ public class Canine extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 	
+	
+	/**
+	 * creates a duplicate of a parent canine with slight chances to mutate
+	 * @param a represents the parent canine that the canine duplicates
+	 * @param canMate represents the parent canine's ability to mate
+	 */
 	public Canine(Canine canine, boolean canMate) {
 		super(canine, canMate);
 		this.fangSize = 5;
@@ -40,6 +60,12 @@ public class Canine extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 	
+	
+	/**
+	 * creates a duplicate of a parent mammal with slight chances to mutate
+	 * @param a represents the parent mammal that the canine duplicates
+	 * @param canMate represents the parent mammal's ability to mate
+	 */
 	public Canine(Mammal mammal, boolean canMate) {
 		super(mammal, canMate);
 		this.fangSize = 5;
@@ -52,6 +78,9 @@ public class Canine extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 
+	/* (non-Javadoc)
+	 * @see Ecosystem.Mammal#mate(Ecosystem.Animal)
+	 */
 	public Animal mate(Animal mate) {
 		Animal a = super.mate(mate);
 		
@@ -70,6 +99,10 @@ public class Canine extends Mammal{
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see Ecosystem.Mammal#update()
+	 * updates dogs health and allows its claws and fangs to grow
+	 */
 	public void update() {
 		super.update();
 		double rand = Math.random();
@@ -80,11 +113,12 @@ public class Canine extends Mammal{
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#calculateDamage()
+	 * calculates damage based on fang and claw sizes
+	 */
 	public void calculateDamage() {
 		damage += fangSize * 2 + claw * 2;
 	}
-	
-	public void findPack(Canine pack){
-		
-	}
+
 }

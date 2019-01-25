@@ -1,9 +1,23 @@
 package Ecosystem;
 
+/**
+ * class for fish animals that can only live in water
+ *swim around and eat both other animals and plants
+ */
 public class Fish extends Animal {
-	public int scaleHardness;
-	public boolean poisonous, luminant;
+	//fields
+	private int scaleHardness;
+	private boolean poisonous, luminant;
 	
+	/**
+	 * creates a new fish that can live in water
+	 * @param type refers to the type of animal this is - a fish
+	 * @param size - how large the animal is, which impacts the hunting
+	 * @param speed - the speed at which the animal moves
+	 * @param lifespan represents the animal's lifespan
+	 * @param gender the animal is either male or female
+	 
+	 */
 	public Fish(String type, int size, int speed, int lifespan, String gender) {
 		super (type, size, speed, lifespan, gender);
 		scaleHardness = 20;
@@ -17,6 +31,9 @@ public class Fish extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 	
+	/** copy constructor for a fish that creates a duplicate of it
+	 * @param f is the fish that is being duplicated
+	 */
 	public Fish(Fish f) {
 		super (f);
 		scaleHardness = f.scaleHardness;
@@ -29,6 +46,10 @@ public class Fish extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 	
+	/** method for the birth of a fish from a fish parent
+	 * @param f is the parent fish
+	 * @param canMate checks if the fish can mate
+	 */
 	public Fish(Fish f, boolean canMate) {
 		super(f, canMate);
 		scaleHardness = f.scaleHardness;
@@ -41,6 +62,10 @@ public class Fish extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 
+	/** method to birth a fish from cellular animals 
+	 * @param cellular is the cellular parent
+	 * @param canMate checks if the parent can mate
+	 */
 	public Fish(Cellular cellular, boolean canMate) {
 		super("fish", 10, 20, 50 + (int) (Math.random() * 21 - 10), cellular.gender());
 		herbivore = true;
@@ -50,6 +75,10 @@ public class Fish extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#mate(Ecosystem.Animal)
+	 * mating method for the animal that allows it to construct a baby fish or lizard with another mate
+	 */
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
 		{
@@ -62,21 +91,37 @@ public class Fish extends Animal {
 		return null;	
 	}
 	
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#mate(Ecosystem.Animal, boolean)
+	 * checks if the animal can mate and if it is on appropriate terrain
+	 * creates a new animal if true
+	 */
 	public Animal mate(Animal mate, boolean landSafe) {
 		if (landSafe)
 			return this.mate(mate);
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#update()
+	 * updates fish's health and appetite, traits
+	 */
 	public void update() {
 		super.update();
 		double rand = Math.random();
 		
+		//random chance to mutate scale hardness
 		if (rand > 0.7)
 			scaleHardness += 4;
 		else if (rand > 0.4)
 			scaleHardness -= 4;
-		
+	}
+	
+	/**
+	 * @return if the fish is poisonous or not
+	 */
+	public boolean poisonous () {
+		return poisonous;
 	}
 
 }

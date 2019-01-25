@@ -12,7 +12,7 @@ public class Territory{
     public ArrayList <Resource> resources;
     public String ground;
     public Image groundImg = null, plantImg = null;
-    double rRate = .04;
+    double rRate = .014;
     
     public Territory(String gName) {
         resources = new ArrayList<Resource>();

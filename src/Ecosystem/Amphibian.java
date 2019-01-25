@@ -14,6 +14,13 @@ public class Amphibian extends Animal {
 	 */
 	public boolean poisonous, venomous;
 	
+	/** creates a new amphibian that can live on land or in water
+	 * @param type refers to the type of animal this is - an amphibian
+	 * @param size - how large the animal is, which impacts the hunting
+	 * @param speed - the speed at which the animal moves
+	 * @param lifespan represents the animal's lifespan
+	 * @param gender the animal is either male or female
+	 */
 	public Amphibian(String type, int size, int speed, int lifespan, String gender) {
 		super (type, size, speed, lifespan, gender);
 		hydration = 100;
@@ -28,6 +35,9 @@ public class Amphibian extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 	
+	/**creates a copy of another amphibian
+	 * @param a represents the amphibian that this constructor duplicates
+	 */
 	public Amphibian(Amphibian a) {
 		super (a);
 		hydration = a.hydration;
@@ -42,6 +52,10 @@ public class Amphibian extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 	
+	/** creates a duplicate of a parent amphibian with slight chances to mutate
+	 * @param a represents the parent amphibian that the amphibian duplicates
+	 * @param canMate represents the parent amphibian's ability to mate
+	 */
 	public Amphibian(Amphibian a, boolean canMate) {
 		super(a, canMate);
 		hydration = a.hydration;
@@ -56,10 +70,14 @@ public class Amphibian extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 
+	/**
+	 * @param fish represents the fish that gives birth to an amphibian through mutation
+	 * @param canMate represents the parent's ability to mate
+	 */
 	public Amphibian(Fish fish, boolean canMate) {
 		super("frog", fish.size(), fish.speed(), fish.lifespan(), fish.gender());
 		hydration = 100;
-		poisonous = fish.poisonous;
+		poisonous = fish.poisonous();
 		venomous = Math.random() > 0.8;
 		herbivore = true;
 		carnivore = true;
@@ -70,6 +88,10 @@ public class Amphibian extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 	
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#mate(Ecosystem.Animal)
+	 * Creates a new animal based on amphibian's traits
+	 */
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
 		{
@@ -83,15 +105,28 @@ public class Amphibian extends Animal {
 		return null;	
 	}
 
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#mate(Ecosystem.Animal, boolean)
+	 * Method checks if animal can mate and create a land animal
+	 */
 	public Animal mate(Animal mate, boolean landSafe) {
 		if (landSafe)
 			return this.mate(mate);
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#update()
+	 * updates an amphibian's hydration levels
+	 */
 	public void update() {
 		super.update();
 		hydration--;
+		
+		if (hydration < 33)
+		{
+			health -=2;
+		}
 	}
 
 }

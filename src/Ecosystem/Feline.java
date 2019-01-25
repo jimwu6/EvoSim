@@ -1,5 +1,9 @@
 package Ecosystem;
 
+/**
+ * represents feline animals that are carnivorous and 
+ *
+ */
 public class Feline extends Mammal{
 
 	public int fangSize, claw;
