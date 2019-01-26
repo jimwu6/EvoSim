@@ -718,7 +718,7 @@ public class Landscape {
 						if (r != 0)
 						{
 							//hunts for food by hurting and eating if possible
-							if (curAnimal.carnivore() && land[r-1][c].animal != null && !land[r-1][c].animal.type().equals(land[r-1][c].animal.type())) {
+							if (curAnimal.carnivore() && land[r-1][c].animal != null && !land[r][c].animal.type().equals(land[r-1][c].animal.type())) {
 								curAnimal.hurt(land[r-1][c].animal);
 								if (land[r-1][c].animal.health() <= 0 && land[r-1][c].animal.size() < curAnimal.size()) {
 									curAnimal.feed();
@@ -750,7 +750,7 @@ public class Landscape {
 							//case for carnivores
 							if (curAnimal.carnivore() && land[r+1][c].animal != null) {
 								curAnimal.hurt(land[r+1][c].animal);
-								if (land[r+1][c].animal.health() <= 0 && land[r+1][c].animal.size() < curAnimal.size() && !land[r-1][c].animal.type().equals(land[r+1][c].animal.type())) {
+								if (land[r+1][c].animal.health() <= 0 && land[r+1][c].animal.size() < curAnimal.size() && !land[r][c].animal.type().equals(land[r+1][c].animal.type())) {
 									curAnimal.feed();
 									land[r+1][c].animal = null;	
 								}
@@ -779,7 +779,7 @@ public class Landscape {
 							//case for carnivores
 							if (curAnimal.carnivore() && land[r][c-1].animal != null) {
 								curAnimal.hurt(land[r][c-1].animal);
-								if (land[r][c-1].animal.health() <= 0 && land[r][c-1].animal.size() < curAnimal.size()&& !land[r-1][c].animal.type().equals(land[r][c-1].animal.type())) {
+								if (land[r][c-1].animal.health() <= 0 && land[r][c-1].animal.size() < curAnimal.size()&& !land[r][c].animal.type().equals(land[r][c-1].animal.type())) {
 									curAnimal.feed();
 									land[r][c-1].animal = null;	
 								}
@@ -805,7 +805,7 @@ public class Landscape {
 						else if (c != land[0].length-1)
 						{
 							//case for carnivores
-							if (curAnimal.carnivore() && land[r][c+1].animal != null && !land[r][c+1].animal.type().equals(land[r-1][c].animal.type())) {
+							if (curAnimal.carnivore() && land[r][c+1].animal != null && !land[r][c].animal.type().equals(land[r][c+1].animal.type())) {
 								curAnimal.hurt(land[r][c+1].animal);
 								if (land[r][c+1].animal.health() <= 0 && land[r][c+1].animal.size() < curAnimal.size()) {
 									curAnimal.feed();
