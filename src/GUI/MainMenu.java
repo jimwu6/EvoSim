@@ -365,17 +365,17 @@ public class MainMenu extends JLayeredPane implements MouseListener, ActionListe
 
 	}
 	
-	public static void main(String[] args) {
-		MainMenu menu = new MainMenu(1200);
-		
-		JFrame frame = new JFrame();
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(menu);
-
-		//frame.getContentPane().setLayout(new FlowLayout());
-		frame.setSize(1200, 1000);
-		frame.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		MainMenu menu = new MainMenu(1200);
+//		
+//		JFrame frame = new JFrame();
+//		frame.getContentPane().setLayout(null);
+//		frame.getContentPane().add(menu);
+//
+//		//frame.getContentPane().setLayout(new FlowLayout());
+//		frame.setSize(1200, 1000);
+//		frame.setVisible(true);
+//	}
 
 
 
