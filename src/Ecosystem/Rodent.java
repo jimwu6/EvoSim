@@ -1,10 +1,22 @@
 package Ecosystem;
 
+/**
+ * class representing small mammals like mice
+ *
+ */
 public class Rodent extends Mammal{
 
-	public int claw;
+	//fields
+	private int claw;
 	public boolean disease;
 	
+	/** creates a new rodent that can live on land and eat plants
+	 * @param type refers to the type of animal this is - a rodent
+	 * @param size - how large the animal is, which impacts the hunting
+	 * @param speed - the speed at which the animal moves
+	 * @param lifespan represents the animal's lifespan
+	 * @param gender the animal is either male or female
+	 */
 	public Rodent(String type, int size, int speed, int lifespan, String gender) {
 		super(type, size, speed, lifespan, gender);
 		furDensity = 10;
@@ -19,6 +31,9 @@ public class Rodent extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 	
+	/** creates a copy of another rodent
+	 * @param rodent is the rodent being copied
+	 */
 	public Rodent(Rodent rodent) {
 		super(rodent);
 		this.claw = rodent.claw;
@@ -31,6 +46,10 @@ public class Rodent extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 	
+	/**creates a new rodent as a child  
+	 * @param rodent is the parent rodent
+	 * @param canMate checks if the parent could mate
+	 */
 	public Rodent(Rodent rodent, boolean canMate) {
 		super(rodent, canMate);
 		this.claw = rodent.claw;
@@ -38,12 +57,15 @@ public class Rodent extends Mammal{
 		carnivore = false;
 		herbivore = true;
 		
-
 		this.bodyParts.clear();
 		this.bodyParts.add("rodent");
 		appearance = makeImage(bodyParts);
 	}
 	
+	/** creates a new rodent from a mammal parent
+	 * @param mammal is the parent mammal
+	 * @param canMate checks if the animal can mate
+	 */
 	public Rodent(Mammal mammal, boolean canMate) {
 		super(mammal, canMate);
 		type = "rodent";
@@ -55,6 +77,10 @@ public class Rodent extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 
+	/**creates rodent evolved from small birds
+	 * @param smallBird is the parent animal
+	 * @param canMate checks if the parent could mate
+	 */
 	public Rodent(smallBird smallBird, boolean canMate) {
 		super("rodent", smallBird.size(), smallBird.speed(), smallBird.lifespan(), Math.random() < 0.5? "Male" : "Female");
 		claw = 5;

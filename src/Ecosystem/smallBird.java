@@ -1,9 +1,21 @@
 package Ecosystem;
 
+/**
+ * class for small bird animals
+ *
+ */
 public class smallBird extends Bird {
 
-	public int featherVibrance;
+	private int featherVibrance;
 
+	/** creates a new small bird that can live on land or fly over water
+	 * @param type refers to the type of animal this is - a small bird
+	 * @param size - how large the animal is, which impacts the hunting
+	 * @param speed - the speed at which the animal moves
+	 * @param lifespan represents the animal's lifespan
+	 * @param gender the animal is either male or female
+	 * @param flight represents if the bird can fly - almost always true
+	 */
 	public smallBird(String type, int size, int speed, int lifespan, String gender, boolean flight) {
 		super(type, size, speed, lifespan, gender, flight);
 		featherVibrance = 20;
@@ -15,6 +27,9 @@ public class smallBird extends Bird {
 		appearance = makeImage(bodyParts);
 	}
 
+	/** creates a copy of a small bird animal
+	 * @param bird is the bird being copied
+	 */
 	public smallBird(smallBird bird) {
 		super (bird);
 		this.featherVibrance = bird.featherVibrance;
@@ -26,6 +41,10 @@ public class smallBird extends Bird {
 		appearance = makeImage(bodyParts);
 	}
 
+	/** method to create new baby bird
+	 * @param bird is the parent bird
+	 * @param canMate checks if parent can mate
+	 */
 	public smallBird(smallBird bird, boolean canMate) {
 		super(bird, canMate);
 		this.featherVibrance = 20;
@@ -37,6 +56,10 @@ public class smallBird extends Bird {
 		appearance = makeImage(bodyParts);
 	}
 
+	/** makes a small bird animal from parent lizards
+	 * @param lizard is the parent lizard
+	 * @param canMate checks if parent could mate
+	 */
 	public smallBird(Lizard lizard, boolean canMate) {
 		super(lizard, canMate);
 		type = "smallBird";

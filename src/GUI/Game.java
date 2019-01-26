@@ -470,7 +470,7 @@ public class Game extends JInternalFrame implements MouseListener, ActionListene
 		//if RR slider is clicked on, set RR to new value
 		else if (e.getSource().equals(settingsMenu.RR))
         {
-           	double rate = (settingsMenu.RR.value()) * .001;
+           	double rate = (settingsMenu.RR.value()) * .001 / 3;
         	landscape.updateRR(rate);
         }
 		

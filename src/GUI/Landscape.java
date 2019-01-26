@@ -136,7 +136,7 @@ public class Landscape {
 				// draw plant, resource, and animal if they exist on the given tile
 				try {
 					if (land[r][c].territory.plant != null)
-						g.drawImage(land[r][c].territory.plantImg, c * 10 -land[r][c].territory.plant.size/2 , r * 10 - land[r][c].territory.plant.size/2, land[r][c].territory.plant.size, land[r][c].territory.plant.size, null);
+						g.drawImage(land[r][c].territory.plantImg, c * 10 -land[r][c].territory.plant.size()/2 , r * 10 - land[r][c].territory.plant.size()/2, land[r][c].territory.plant.size(), land[r][c].territory.plant.size(), null);
 					
 					if (land[r][c].territory.hasResource())
 					{

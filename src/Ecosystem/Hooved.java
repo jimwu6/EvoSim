@@ -60,7 +60,7 @@ public class Hooved extends Mammal {
 	
 	/**
 	 * @param mammal represents the parent mammal
-	 * @param canMate 
+	 * @param canMate represents if the parent could mate properly
 	 */
 	public Hooved(Mammal mammal, boolean canMate) {
 		super(mammal, canMate);
@@ -73,6 +73,10 @@ public class Hooved extends Mammal {
 		appearance = makeImage(bodyParts);
 	}
 
+	/* (non-Javadoc)
+	 * @see Ecosystem.Mammal#mate(Ecosystem.Animal)
+	 * mating method that gives birth to a new hooved animal
+	 */
 	public Animal mate(Animal mate) {
 		Animal a = super.mate(mate);
 		
@@ -85,14 +89,23 @@ public class Hooved extends Mammal {
 		return a;
 	}
 	
+	/* (non-Javadoc)
+	 * @see Ecosystem.Mammal#mate(Ecosystem.Animal, boolean)
+	 * mating method that checks for the land being appropriate land before giving birth
+	 */
 	public Animal mate(Animal mate, boolean landSafe) {
 		if (landSafe)
 			return this.mate(mate);
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see Ecosystem.Mammal#update()
+	 * update hooved animal
+	 */
 	public void update() {
 		super.update();
+		//random chance to strengthen horn
 		double rand = Math.random();
 		
 		if (hornSize > 0 && rand > 0.5)

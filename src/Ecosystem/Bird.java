@@ -10,7 +10,7 @@ public class Bird extends Animal {
 	
 	/**
 	 * creates a new bird that can live on land or in water
-	 * @param type refers to the type of animal this is - an amphibian
+	 * @param type refers to the type of animal this is - a bird
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
 	 * @param lifespan represents the animal's lifespan
@@ -36,7 +36,7 @@ public class Bird extends Animal {
 	
 	/**
 	 *  creates a duplicate of a parent bird with slight chances to mutate
-	 * @param bird represents the parent bird that the amphibian duplicates
+	 * @param bird represents the parent bird that the bird duplicates
 	 * @param canMate represents the parent bird's ability to mate
 	 */
 	public Bird(Bird bird, boolean canMate) {

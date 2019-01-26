@@ -8,8 +8,9 @@ public class Canine extends Mammal{
 
 	private int fangSize, claw;
 
-	/**creates a new ce that can live on land
-	 * @param type refers to the type of animal this is - a canine
+	/**
+	 * creates a new mammal that can live on land
+	 * @param type refers to the type of animal this is - a mammal
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
 	 * @param lifespan represents the animal's lifespan
