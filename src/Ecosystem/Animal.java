@@ -157,14 +157,6 @@ public abstract class Animal {
 		return this.type().equals(mate.type()) && !this.gender.equals(mate.gender) && mateTimer == 0 && mate.mateTimer == 0;
 	}
 
-	/**
-	 * updates the mate timer on animals, which allows them to mate after time passes
-	 */
-	public void mateUpdate() {
-		if (mateTimer > 0)
-			mateTimer --;
-	}
-
 	/** decreases an animal's health
 	 * @param damage represents amount that health decreases
 	 */
@@ -220,6 +212,7 @@ public abstract class Animal {
 			speed -= (int) (Math.random() * 2);
 		}
 
+		mateTimer--;
 		//System.out.println(this.hunger + ", " + this.thirst + ", " + this.health);
 	}
 
