@@ -1,17 +1,15 @@
 package Ecosystem;
 
 /**
- * class for reptile animals
- */
-/**
- * @author Justin
+ * The Reptile class represents reptilian animals.
+ * Reptiles are generally terrestrial animals.
  *
  */
 public class Reptile extends Animal {
 	protected int scaleHardness, fangSize, biteStrength;
 
 	/**
-	 * creates a new reptile that lives on land
+	 * This constructor creates a new Reptile that lives on land.
 	 * @param type refers to the type of animal this is - a reptile
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves

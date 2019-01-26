@@ -2,8 +2,9 @@ package Ecosystem;
 
 /**
  * @author Justin
- * plant class represents trees and shrubs in landscape that can drop resources
- * Plants are randomly generated and randomly spawn food
+ * The Plant class represents trees and shrubs in landscape that can drop resources.
+ * They are one of the main sources of animal interactions.
+ * Plants are randomly generated and randomly spawn food.
  */
 public class Plant {
 
@@ -11,7 +12,7 @@ public class Plant {
 	private String name;
 	private int size;
 
-	/**creates a new plant
+	/**This constructor creates a new Plant.
 	 * @param plantName is a String representing what type of plant is made
 	 * @param s represents the size of the plant
 	 */
@@ -21,8 +22,8 @@ public class Plant {
 	}
 	
 	/**
-	 * grow method updates the size of the plant
-	 * plants grow when they are small and slowly fluctuate in size after maturation
+	 * The grow method updates the size of the plant.
+	 * Plants grow when they are small and slowly fluctuate in size after maturation.
 	 */
 	public void grow() {
 		if (size < 20)

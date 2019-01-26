@@ -1,14 +1,14 @@
 package Ecosystem;
 
 /**
- * class for small bird animals
+ * The smallBird class represents small-sized, herbivorous birds
  *
  */
 public class smallBird extends Bird {
 
 	private int featherVibrance;
 
-	/** creates a new small bird that can live on land or fly over water
+	/** This constructor creates a new small bird that can live on land or fly over water.
 	 * @param type refers to the type of animal this is - a small bird
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
@@ -27,7 +27,7 @@ public class smallBird extends Bird {
 		appearance = makeImage(bodyParts);
 	}
 
-	/** creates a copy of a small bird animal
+	/**This constructor creates a copy of a small bird animal that is passed as a parameter.
 	 * @param bird is the bird being copied
 	 */
 	public smallBird(smallBird bird) {
@@ -41,7 +41,7 @@ public class smallBird extends Bird {
 		appearance = makeImage(bodyParts);
 	}
 
-	/** method to create new baby bird
+	/**This method creates a new baby bird that was born from parents that are also smallBirds.
 	 * @param bird is the parent bird
 	 * @param canMate checks if parent can mate
 	 */
@@ -56,7 +56,7 @@ public class smallBird extends Bird {
 		appearance = makeImage(bodyParts);
 	}
 
-	/** makes a small bird animal from parent lizards
+	/**This method makes a small bird animal from lizard parents through the use of evolution.
 	 * @param lizard is the parent lizard
 	 * @param canMate checks if parent could mate
 	 */
@@ -99,20 +99,5 @@ public class smallBird extends Bird {
 
 		if (Math.random() > 0.8)
 			featherVibrance++;
-	}
-
-	public void sing(){
-
-	}
-
-	public void feed(String plant){
-
-	}
-
-	public void chase(Animal prey){
-
-	}
-	public void feed(Animal prey){
-
 	}
 }

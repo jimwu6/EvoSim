@@ -1,19 +1,19 @@
 package Ecosystem;
 
 /**
- * class for snakes
- *
+ * The Snake class represents reptilian animals that are similar to Snakes
  */
 public class Snake extends Reptile{
+	//fields
 	private boolean venomous, hooded;
 	
 	/**
-	 * creates a new snake that can live on land 
-	 * @param type refers to the type of animal this is - a snake
-	 * @param size - how large the animal is, which impacts the hunting
-	 * @param speed - the speed at which the animal moves
-	 * @param lifespan represents the animal's lifespan
-	 * @param gender the animal is either male or female
+	 * This constructor creates a new Snake that can live on land.
+	 * @param type refers to the type of animal this is - a Snake.
+	 * @param size depicts how large the animal is, which impacts the hunting.
+	 * @param speed is an integer showing the speed at which the animal moves.
+	 * @param lifespan represents the animal's lifespan.
+	 * @param gender is a String that shows if the animal is either male or female.
 	 */
 	public Snake(String type, int size, int speed, int lifespan, String gender) {
 		super(type, size, speed, lifespan, gender);
@@ -25,12 +25,12 @@ public class Snake extends Reptile{
 		water = false;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("snake");
+		this.bodyParts.add("Snake");
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**creates a copy of another snake animal
-	 * @param s is the snake being copied
+	/**This constructor creates a copy of another Snake animal.
+	 * @param s is the Snake being copied.
 	 */
 	public Snake(Snake s) {
 		super (s);
@@ -41,13 +41,13 @@ public class Snake extends Reptile{
 		land = true;
 		water = false;
 		this.bodyParts.clear();
-		this.bodyParts.add("snake");
+		this.bodyParts.add("Snake");
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**creates a new snake baby from a parent if it can mate
-	 * @param s is the parent snake
-	 * @param canMate checks if the parent can mate
+	/**This constructor creates a new Snake baby from a parent if it can mate.
+	 * @param s is the parent Snake that gave birth to a new Snake.
+	 * @param canMate is a boolean value that checks if the parent can mate.
 	 */
 	public Snake(Snake s, boolean canMate) {
 		super(s, canMate);
@@ -58,25 +58,25 @@ public class Snake extends Reptile{
 		land = true;
 		water = false;
 		this.bodyParts.clear();
-		this.bodyParts.add("snake");
+		this.bodyParts.add("Snake");
 		appearance = makeImage(bodyParts);
 	}
 
-	/**creates a snake baby from a parent reptile
-	 * @param reptile is the parent 
-	 * @param canMate checks if parent can mate
+	/**This constructor creates a Snake baby from a parent reptile.
+	 * @param reptile is the parent.
+	 * @param canMate is a boolean value that checks if parent can mate.
 	 */
 	public Snake(Reptile reptile, boolean canMate) {
 		super(reptile, canMate);
 		this.venomous = Math.random() > 0.9;
 		this.hooded = Math.random() > 0.7? true : false;
-		type = "snake";
+		type = "Snake";
 		carnivore = true;
 		herbivore = false;
 		land = true;
 		water = false;
 		this.bodyParts.clear();
-		this.bodyParts.add("snake");
+		this.bodyParts.add("Snake");
 		appearance = makeImage(bodyParts);
 	}
 
@@ -101,22 +101,6 @@ public class Snake extends Reptile{
 	public void update() {
 		super.update();
 		
-		
-	}
-	
-	public void stalk(){
-		
-	}
-	
-	public void hoodDisplay(){
-		
-	}
-	
-	public void chase(Animal prey){
-		
-	}
-	
-	public void feed(Animal prey){
 		
 	}
 }
