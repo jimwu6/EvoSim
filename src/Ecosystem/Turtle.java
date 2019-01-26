@@ -14,7 +14,6 @@ public class Turtle extends Reptile{
 	 * @param speed - the speed at which the animal moves
 	 * @param lifespan represents the animal's lifespan
 	 * @param gender the animal is either male or female
-	 * @param flight represents if the bird can fly - almost always true
 	 */
 	public Turtle(String type, int size, int speed, int lifespan, String gender) {
 		super(type, size, speed, lifespan, gender);

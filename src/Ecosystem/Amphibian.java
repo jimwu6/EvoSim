@@ -1,9 +1,8 @@
 package Ecosystem;
 
 /**
- * @author Justin
- *The Amphibian Class represents animals that are amphibians, such as frogs
- *Considered to be omnivores and have the ability to traverse both land territories and water territories
+ * The Amphibian Class represents animals that are amphibians, such as frogs.
+ * These animals are considered to be omnivores and have the ability to traverse both land territories and water territories.
  */
 public class Amphibian extends Animal {
 	//fields
@@ -14,12 +13,14 @@ public class Amphibian extends Animal {
 	 */
 	public boolean poisonous, venomous;
 	
-	/** creates a new amphibian that can live on land or in water
-	 * @param type refers to the type of animal this is - an amphibian
-	 * @param size - how large the animal is, which impacts the hunting
-	 * @param speed - the speed at which the animal moves
-	 * @param lifespan represents the animal's lifespan
-	 * @param gender the animal is either male or female
+	/** 
+	 * Creates a new amphibian that can live on land or in water, inheriting the given parameters.
+	 * 
+	 * @param type Refers to the type of animal this is - an amphibian
+	 * @param size How large the animal is, which impacts the hunting
+	 * @param speed The speed at which the animal moves
+	 * @param lifespan Represents the animal's lifespan
+	 * @param gender The animal is either male or female
 	 */
 	public Amphibian(String type, int size, int speed, int lifespan, String gender) {
 		super (type, size, speed, lifespan, gender);
@@ -35,8 +36,10 @@ public class Amphibian extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**creates a copy of another amphibian
-	 * @param a represents the amphibian that this constructor duplicates
+	/**
+	 * Creates a copy of another amphibian.
+	 * 
+	 * @param a The amphibian that this constructor duplicates
 	 */
 	public Amphibian(Amphibian a) {
 		super (a);
@@ -52,9 +55,11 @@ public class Amphibian extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 	
-	/** creates a duplicate of a parent amphibian with slight chances to mutate
-	 * @param a represents the parent amphibian that the amphibian duplicates
-	 * @param canMate represents the parent amphibian's ability to mate
+	/** 
+	 * Creates a duplicate of a parent amphibian with slight chances to mutate.
+	 * 
+	 * @param a The parent amphibian that the amphibian duplicates
+	 * @param canMate The parent amphibian's ability to mate
 	 */
 	public Amphibian(Amphibian a, boolean canMate) {
 		super(a, canMate);
@@ -71,8 +76,10 @@ public class Amphibian extends Animal {
 	}
 
 	/**
-	 * @param fish represents the fish that gives birth to an amphibian through mutation
-	 * @param canMate represents the parent's ability to mate
+	 * Constructs a newborn amphibian evolved from a fish.
+	 * 
+	 * @param fish The fish that gives birth to an amphibian through mutation
+	 * @param canMate The parent's ability to mate
 	 */
 	public Amphibian(Fish fish, boolean canMate) {
 		super("frog", fish.size(), fish.speed(), fish.lifespan(), fish.gender());
@@ -90,7 +97,7 @@ public class Amphibian extends Animal {
 	
 	/* (non-Javadoc)
 	 * @see Ecosystem.Animal#mate(Ecosystem.Animal)
-	 * Creates a new animal based on amphibian's traits
+	 * Creates a new animal based on amphibian's traits.
 	 */
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate))
@@ -107,7 +114,7 @@ public class Amphibian extends Animal {
 
 	/* (non-Javadoc)
 	 * @see Ecosystem.Animal#mate(Ecosystem.Animal, boolean)
-	 * Method checks if animal can mate and create a land animal
+	 * Method checks if animal can mate and create a land animal.
 	 */
 	public Animal mate(Animal mate, boolean landSafe) {
 		if (landSafe)
@@ -117,7 +124,7 @@ public class Amphibian extends Animal {
 	
 	/* (non-Javadoc)
 	 * @see Ecosystem.Animal#update()
-	 * updates an amphibian's hydration levels
+	 * Updates an amphibian's hydration levels.
 	 */
 	public void update() {
 		super.update();

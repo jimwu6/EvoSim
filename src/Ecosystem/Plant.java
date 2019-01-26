@@ -1,9 +1,8 @@
 package Ecosystem;
 
 /**
- * @author Justin
- * plant class represents trees and shrubs in landscape that can drop resources
- * Plants are randomly generated and randomly spawn food
+ * The Plant class represents trees and shrubs in landscape that can drop resources.
+ * Plants are randomly generated and randomly spawn food.
  */
 public class Plant {
 

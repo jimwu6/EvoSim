@@ -58,7 +58,7 @@ public class Primate extends Mammal {
 
 	/**
 	 * birth method that returns a new primate 
-	 * @param mammal is the parent primate
+	 * @param primate is the parent primate
 	 * @param canMate checks if mammal can mate
 	 */
 	public Primate(Primate primate, boolean canMate) {

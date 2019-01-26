@@ -1,23 +1,24 @@
 package Ecosystem;
 
 /**
- * Class that represents dog-like creatures
- *these creates have the ability walk on land and hunt
+ * Class that represents dog-like creatures.
+ * These creatures have the ability walk on land and hunt prey.
  */
 public class Canine extends Mammal{
 
 	private int fangSize, claw;
 
 	/**
-	 * creates a new mammal that can live on land
+	 * Creates a new mammal that can live on land.
+	 * 
 	 * @param type refers to the type of animal this is - a mammal
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
 	 * @param lifespan represents the animal's lifespan
 	 * @param gender the animal is either male or female
 	 */
-	public Canine(String imageName, int size, int speed, int lifespan, String gender) {
-		super(imageName, size, speed, lifespan, gender);
+	public Canine(String type, int size, int speed, int lifespan, String gender) {
+		super(type, size, speed, lifespan, gender);
 		furDensity = 15;
 		furLength = 30;
 		intelligence = 35;
@@ -30,8 +31,10 @@ public class Canine extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**creates a copy of another canine
-	 * @param a represents the canine that this constructor duplicates
+	/**
+	 * Creates a copy of another canine.
+	 * 
+	 * @param canine represents the canine that this constructor duplicates
 	 */
 	public Canine(Canine canine) {
 		super(canine);
@@ -46,8 +49,9 @@ public class Canine extends Mammal{
 	
 	
 	/**
-	 * creates a duplicate of a parent canine with slight chances to mutate
-	 * @param a represents the parent canine that the canine duplicates
+	 * Creates a duplicate of a parent canine with slight chances to mutate.
+	 * 
+	 * @param canine represents the parent canine that the canine duplicates
 	 * @param canMate represents the parent canine's ability to mate
 	 */
 	public Canine(Canine canine, boolean canMate) {
@@ -63,8 +67,9 @@ public class Canine extends Mammal{
 	
 	
 	/**
-	 * creates a duplicate of a parent mammal with slight chances to mutate
-	 * @param a represents the parent mammal that the canine duplicates
+	 * Creates a duplicate of a parent mammal with slight chances to mutate.
+	 * 
+	 * @param mammal represents the parent mammal that the canine duplicates
 	 * @param canMate represents the parent mammal's ability to mate
 	 */
 	public Canine(Mammal mammal, boolean canMate) {

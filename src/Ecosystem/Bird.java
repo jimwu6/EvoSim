@@ -1,15 +1,16 @@
 package Ecosystem;
 
 /**
- * Class that represents avian creatures
- *these creates have the ability to fly over water or walk on land
+ * Class that represents avian creatures.
+ * These creates have the ability to fly over water or walk on land.
  */
 public class Bird extends Animal {
 	
 	protected boolean flight;
 	
 	/**
-	 * creates a new bird that can live on land or in water
+	 * Creates a new bird that can live on land or in water.
+	 * 
 	 * @param type refers to the type of animal this is - a bird
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
@@ -17,14 +18,16 @@ public class Bird extends Animal {
 	 * @param gender the animal is either male or female
 	 * @param flight represents if the bird can fly - almost always true
 	 */
-	public Bird(String imageName, int size, int speed, int lifespan, String gender, boolean flight) {
-		super(imageName, size, speed, lifespan, gender);
+	public Bird(String type, int size, int speed, int lifespan, String gender, boolean flight) {
+		super(type, size, speed, lifespan, gender);
 		this.flight = flight;
 		this.water = true;
 		this.land = true;
 	}
 	
-	/** copy constructor for a bird that creates a duplicate instance of another bird
+	/** 
+	 * Copy constructor for a bird that creates a duplicate instance of another bird.
+	 * 
 	 * @param bird - variable for the bird that is being copied
 	 */
 	public Bird(Bird bird) {
@@ -35,7 +38,8 @@ public class Bird extends Animal {
 	}
 	
 	/**
-	 *  creates a duplicate of a parent bird with slight chances to mutate
+	 * Creates a duplicate of a parent bird with slight chances to mutate.
+	 * 
 	 * @param bird represents the parent bird that the bird duplicates
 	 * @param canMate represents the parent bird's ability to mate
 	 */
@@ -46,7 +50,9 @@ public class Bird extends Animal {
 		this.land = true;
 	}
 
-	/** constructor for a bird created from lizards mating
+	/** 
+	 * Constructor for a bird created from lizards mating.
+	 * 
 	 * @param lizard represents a parent lizard that evolved into a bird
 	 * @param canMate parameter dictating if the parent could mate
 	 */

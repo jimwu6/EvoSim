@@ -1,8 +1,8 @@
 package Ecosystem;
 
 /**
- * class for fish animals that can only live in water
- *swim around and eat both other animals and plants
+ * Class for fish animals that live in water.
+ * Fish can swim around and eat both other animals and plants.
  */
 public class Fish extends Animal {
 	//fields
@@ -10,13 +10,13 @@ public class Fish extends Animal {
 	private boolean poisonous, luminant;
 	
 	/**
-	 * creates a new fish that can live in water
+	 * Creates a new fish that can live in water.
+	 * 
 	 * @param type refers to the type of animal this is - a fish
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
 	 * @param lifespan represents the animal's lifespan
 	 * @param gender the animal is either male or female
-	 
 	 */
 	public Fish(String type, int size, int speed, int lifespan, String gender) {
 		super (type, size, speed, lifespan, gender);
@@ -31,7 +31,9 @@ public class Fish extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 	
-	/** copy constructor for a fish that creates a duplicate of it
+	/** 
+	 * Copy constructor for a fish that creates a duplicate of it.
+	 * 
 	 * @param f is the fish that is being duplicated
 	 */
 	public Fish(Fish f) {
@@ -46,7 +48,9 @@ public class Fish extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 	
-	/** method for the birth of a fish from a fish parent
+	/** 
+	 * Gives birth to a fish from a fish parent.
+	 * 
 	 * @param f is the parent fish
 	 * @param canMate checks if the fish can mate
 	 */
@@ -62,7 +66,9 @@ public class Fish extends Animal {
 		appearance = makeImage(bodyParts);
 	}
 
-	/** method to birth a fish from cellular animals 
+	/** 
+	 * Constructs a fish from cellular animals.
+	 * 
 	 * @param cellular is the cellular parent
 	 * @param canMate checks if the parent can mate
 	 */

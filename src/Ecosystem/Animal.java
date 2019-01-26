@@ -13,7 +13,7 @@ public abstract class Animal {
 
 	protected int health, size, speed, age, lifespan, hunger, thirst, mateTimer, damage;
 	/**
-	 * represents the outward appearance of an animal
+	 * The outward appearance of the animal.
 	 */
 	public BufferedImage appearance = null;
 
@@ -23,17 +23,19 @@ public abstract class Animal {
 	protected ArrayList<String> bodyParts = new ArrayList<String>();
 
 	/**
-	 * Represents an animal's list of moves it will take to move 
+	 * Represents an animal's list of moves it will take to move.
 	 */
 	public ArrayList<String> moveList;
 
 	protected static final int maxStat = 100;
 
 	// constructors
-	/** main constructor for an animal
-	 * an animal is an organism that can move around the ecosystem, and eat and drink to maintain it's health
-	 * animals also interact with others through hunting and mating
-	 * this constructor initializes all of the necessary variables for an effective animal
+	/** 
+	 * Main constructor for an animal.
+	 * An animal is an organism that can move around the ecosystem, and eat and drink to maintain its health.
+	 * Animals also interact with others through hunting and mating.
+	 * This constructor initializes all of the necessary variables for an effective animal.
+	 * 
 	 * @param type - String representing what class or kind of animal it is
 	 * @param size - integer representing how large the animal it is
 	 * @param speed - integer representing the speed of the animal's movement
@@ -68,7 +70,9 @@ public abstract class Animal {
 		
 	}
 
-	/**copy constructor for an animal
+	/**
+	 * Copy constructor to construct an animal with identical base traits.
+	 * 
 	 * @param animal represents the instance that is being duplicated
 	 */
 	public Animal(Animal animal) {	// copy constructor
@@ -96,7 +100,9 @@ public abstract class Animal {
 		moveList = animal.moveList;
 	}
 
-	/** constructor for newborn animals from mating
+	/** 
+	 * Constructor for newborn animals from mating.
+	 * 
 	 * @param animal is the parent animal 
 	 * @param birth represents if a birth occurred
 	 */
@@ -113,7 +119,10 @@ public abstract class Animal {
 	}
 
 	// methods
-	/**changes the appearance of an animal
+	
+	/**
+	 * Changes the appearance of an animal by accepting a new image name.
+	 * 
 	 * @param imageName is the string representing the name of the new image
 	 */
 	public void updateImage(String imageName) {
@@ -125,9 +134,9 @@ public abstract class Animal {
 	}
 
 	/**
-	 * updates an animal's thirst and health when it drinks
+	 * Updates an animal's thirst and health values when it drinks.
 	 */
-	public void drink(){
+	public void drink() {
 		thirst += Math.random() * 5 + 8;
 		thirst = Math.min(thirst, maxStat);
 		health += 20;
@@ -135,6 +144,9 @@ public abstract class Animal {
 	}
 
 	/**
+	 * Mating between two animals, upon verification of the valid mating process, produces a newborn with base stats.
+	 * Newborns may or may not be the same type as their parents, as evolution may occur to produce a new type.
+	 * 
 	 * @param mate represents the mate of an animal
 	 * @return a new instance of an animal created by the mating process
 	 */
@@ -143,38 +155,44 @@ public abstract class Animal {
 	public abstract Animal mate(Animal animal, boolean b);
 	
 	/**
-	 * represents the standard amount of damage an animal can inflict to other animals
+	 * Inflicts the standard amount of damage that an animal can inflict to other animals.
 	 */
 	public void calculateDamage() {
 		damage = 2;
 	}
 
 	/**
-	 * @param mate represents the animal that this animal is attempting to mate with
-	 * @return a boolean representing if mating is viable
+	 * Checks whether two animals share the same type, opposite genders, and are both fertile to validate mating.
+	 * 
+	 * @param mate The animal that this animal is attempting to mate with
+	 * @return A boolean representing if mating is viable
 	 */
 	public boolean canMate(Animal mate) {
 		return this.type().equals(mate.type()) && !this.gender.equals(mate.gender) && mateTimer == 0 && mate.mateTimer == 0;
 	}
 
-	/** decreases an animal's health
-	 * @param damage represents amount that health decreases
+	/** 
+	 * Decreases an animal's health by injury.
+	 * 
+	 * @param damage The amount that health decreases
 	 */
 	public void injured (int damage) {
 		health -= damage;
 	}
 	
-	/** does damage to another animal
-	 * @param prey represents the animal being hunted
+	/** 
+	 * Inflicts damage to another animal. Hurt calls upon injured to remove health points from the prey.
+	 * 
+	 * @param prey The animal being hunted
 	 */
 	public void hurt (Animal prey) {
 		prey.injured(damage);
 	}
 	
 	/**
-	 * updates an animal's status 
-	 * includes an animal's aging process, getting hungry, and getting thirsty
-	 * also hurts the animal if conditions are not met
+	 * Updates an animal's status, including an animal's aging process, getting hungry, and getting thirsty.
+	 * Updating also hurts the animal if conditions are not met. Specific aspects of individual animal types are also considered.
+	 * Updating usually takes place once per generation, or per timer tick.
 	 */
 	public void update () {
 		// aging
@@ -219,35 +237,35 @@ public abstract class Animal {
 
 	// accessors
 	/**
-	 * @return integer representing animal's health
+	 * @return Integer representing animal's health
 	 */
 	public int health() {
 		return this.health;
 	}
 	
 	/**
-	 * @return integer representing an animal's age
+	 * @return Integer representing an animal's age
 	 */
 	public int age() {
 		return this.age;
 	}
 	
 	/**
-	 * @return integer representing animal's lifespan
+	 * @return Integer representing animal's lifespan
 	 */
 	public int lifespan() {
 		return this.lifespan;
 	}
 
 	/**
-	 * @return integer representing the size of the animal
+	 * @return Integer representing the size of the animal
 	 */
 	public int size() {
 		return this.size;
 	}
 
 	/**
-	 * @return integer representing the animal's speed
+	 * @return Integer representing the animal's speed
 	 */
 	public int speed() {
 		return this.speed;
@@ -261,14 +279,14 @@ public abstract class Animal {
 	}
 
 	/**
-	 * @return boolean representing if animal can walk on land
+	 * @return Boolean representing if animal can walk on land
 	 */
 	public boolean land() {
 		return land;
 	}
 	
 	/**
-	 * @return boolean representing if animal can walk on water
+	 * @return Boolean representing if animal can walk on water
 	 */
 	public boolean water() {
 		return water;
@@ -282,21 +300,21 @@ public abstract class Animal {
 	}
 
 	/**
-	 * @return integer representing the thirst level of an animal
+	 * @return Integer representing the thirst level of an animal
 	 */
 	public int thirst() {
 		return thirst;
 	}
 	
 	/**
-	 * @return integer representing the hunger level of an animal
+	 * @return Integer representing the hunger level of an animal
 	 */
 	public int hunger() {
 		return hunger;
 	}
 	
 	/**
-	 * method that updates an animal's health and hunger levels after eating
+	 * Updates an animal's health and hunger levels after eating.
 	 */
 	public void feed() {
 		hunger += Math.random() * 25 + 15;
@@ -307,22 +325,24 @@ public abstract class Animal {
 	}
 	
 	/**
-	 * @return a boolean representing whether an animal hunts 
+	 * @return A boolean representing whether an animal hunts 
 	 */
 	public boolean carnivore() {
 		return carnivore;
 	}
 	
 	/**
-	 * @return boolean representing if an animal is an herbivore
+	 * @return Boolean representing if an animal is an herbivore
 	 */
 	public boolean herbivore() {
 		return herbivore;
 	}
 	
 	/**
-	 * @param strings represents a list of body parts that make up the animal's image
-	 * @return a Buffered Image that draws out the complete animal
+	 * Creates the animal's image. The method may be repurposed to put together images of body parts to constitute the entire image.
+	 * 
+	 * @param strings List of body parts that make up the animal's image
+	 * @return A Buffered Image that draws out the complete animal
 	 */
 	public BufferedImage makeImage(ArrayList<String> strings)
     {

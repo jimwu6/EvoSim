@@ -1,14 +1,15 @@
 package Ecosystem;
 
 /**
- * Mammal class represents all mammalian forms of life such as canine, felines, and so on
+ * Mammal class represents all mammalian forms of life such as canine, felines, and so on.
  */
 public class Mammal extends Animal {
 	//fields
 	protected int furDensity, furLength, hornSize, intelligence;
 
 	/**
-	 * creates a new mammal that can live on land
+	 * Creates a new mammal that can live on land.
+	 * 
 	 * @param type refers to the type of animal this is - a mammal
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
@@ -22,7 +23,9 @@ public class Mammal extends Animal {
 		water = false;
 	}
 
-	/** takes a mammal and makes a copy of it
+	/** 
+	 * Takes a mammal and makes a copy of it.
+	 * 
 	 * @param m is the duplicated mammal
 	 */
 	public Mammal(Mammal m) {
@@ -35,7 +38,9 @@ public class Mammal extends Animal {
 		water = false;
 	}
 
-	/**creates a new child mammal if parent can mate
+	/**
+	 * Creates a new child mammal with the parents stats, enabling statistical growth over generations.
+	 * 
 	 * @param m is the parent mammal
 	 * @param canMate checks if the mammal can mate
 	 */

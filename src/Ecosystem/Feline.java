@@ -1,7 +1,7 @@
 package Ecosystem;
 
 /**
- * represents feline animals that are carnivorous and can traverse land
+ * Represents feline animals that are carnivorous and can traverse land.
  *
  */
 public class Feline extends Mammal{
@@ -10,7 +10,8 @@ public class Feline extends Mammal{
 	private int fangSize, claw;
 	
 	/**
-	 * creates a new canine that can live on land 
+	 * Creates a new canine that can live on land.
+	 * 
 	 * @param type refers to the type of animal this is - a feline
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
@@ -32,7 +33,9 @@ public class Feline extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**copy constructor for felines that replicate a passed parameter
+	/**
+	 * Copy constructor for felines that replicate a passed parameter.
+	 * 
 	 * @param feline is the animal that is being duplicated
 	 */
 	public Feline(Feline feline) {
@@ -47,7 +50,9 @@ public class Feline extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**creates a new feline animal from a parent if it can mate
+	/**
+	 * Creates a new feline animal from a parent if it can mate.
+	 * 
 	 * @param feline is the parent feline
 	 * @param canMate checks if the animal can mate
 	 */
@@ -63,7 +68,9 @@ public class Feline extends Mammal{
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**creates a new feline child from a parent mammal
+	/**
+	 * Creates a new feline child from a parent mammal.
+	 * 
 	 * @param mammal is a parent mammal
 	 * @param canMate checks if the parent can mate
 	 */

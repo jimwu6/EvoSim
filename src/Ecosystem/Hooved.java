@@ -1,15 +1,15 @@
 package Ecosystem;
 
 /**
- * Class for herbivorous, hooved animals such as horses
- *
+ * Class for herbivorous, hooved animals such as horse.
  */
 public class Hooved extends Mammal {
 	//fields
 	private int hornStrength;
 	
 	/**
-	 * creates a new horse that can live on land
+	 * Creates a new horse that can live on land.
+	 * 
 	 * @param type refers to the type of animal this is - a horse
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
@@ -29,7 +29,9 @@ public class Hooved extends Mammal {
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**takes a hooved animal and creates a copy of it
+	/**
+	 * Takes a hooved animal and creates a copy of it.
+	 * 
 	 * @param hooved represents the hooved animal being copied
 	 */
 	public Hooved(Hooved hooved) {
@@ -44,6 +46,8 @@ public class Hooved extends Mammal {
 	}
 	
 	/**
+	 * Constructs a baby hooved animal based on parent's characteristics.
+	 * 
 	 * @param hooved is the parent hooved animal
 	 * @param canMate is a boolean for if the parent can mate or not
 	 */
@@ -59,6 +63,8 @@ public class Hooved extends Mammal {
 	}
 	
 	/**
+	 * Creates a hooved animal baby based on random mutations of other mammals.
+	 * 
 	 * @param mammal represents the parent mammal
 	 * @param canMate represents if the parent could mate properly
 	 */

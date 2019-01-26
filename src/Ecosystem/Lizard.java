@@ -1,22 +1,14 @@
 package Ecosystem;
 
 /**
- *class that represents lizard organisms
- *they are land based and can eat other animals
- */
-/**
- * @author Justin
- *
- */
-/**
- * @author Justin
- *
+ * Class that represents lizard organisms. They are land based and can eat other animals.
  */
 public class Lizard extends Reptile {
 	private boolean tailDecoy;
 
 	/**
-	 * creates a new lizard that can live on land
+	 * Creates a new lizard that can live on land.
+	 * 
 	 * @param type refers to the type of animal this is - a lizard
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
@@ -36,7 +28,9 @@ public class Lizard extends Reptile {
 		appearance = makeImage(bodyParts);
 	}
 
-	/**creates a copy of a lizard
+	/**
+	 * Creates a copy of a lizard.
+	 * 
 	 * @param i represents the lizard that is being duplicated
 	 */
 	public Lizard(Lizard i) {
@@ -52,7 +46,9 @@ public class Lizard extends Reptile {
 		appearance = makeImage(bodyParts);
 	}
 
-	/**method to create a lizard through mating
+	/**
+	 * Method to create a lizard through mating.
+	 * 
 	 * @param i is the parent lizard
 	 * @param canMate checks if the parent could properly mate
 	 */
@@ -68,7 +64,9 @@ public class Lizard extends Reptile {
 		appearance = makeImage(bodyParts);
 	}
 
-	/** method to birth a new lizard from an amphibian
+	/** 
+	 * Method to birth a new lizard from an amphibian.
+	 * 
 	 * @param amph is the parent amphibian
 	 * @param canMate checks if the parent can properly mate
 	 */
@@ -85,7 +83,9 @@ public class Lizard extends Reptile {
 		appearance = makeImage(bodyParts);
 	}
 
-	/** method to birth a new lizard from a cellular organism
+	/** 
+	 * Constructs a new lizard from a cellular organism.
+	 * 
 	 * @param cellular is the parent cellular
 	 * @param canMate checks if the parent can properly mate
 	 
@@ -103,7 +103,9 @@ public class Lizard extends Reptile {
 		appearance = makeImage(bodyParts);
 	}
 
-	/** method to birth a new lizard from a reptile
+	/** 
+	 * Births a new lizard from a base reptile by evolution.
+	 * 
 	 * @param reptile is the parent reptile
 	 * @param canMate checks if the parent can properly mate
 	 */

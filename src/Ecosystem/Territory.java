@@ -35,8 +35,9 @@ public class Territory{
      */
     double rRate = .014;
     
-    /**creates a new territory --> an individual block of land
-     * contains resources and a plant
+    /**
+     * Creates a new territory, or an individual block of land.
+     * The territory can contain resources and a plant.
      * @param gName represents the type of land being built
      */
     public Territory(String gName) {

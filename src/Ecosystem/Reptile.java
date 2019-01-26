@@ -11,22 +11,25 @@ public class Reptile extends Animal {
 	protected int scaleHardness, fangSize, biteStrength;
 
 	/**
-	 * creates a new reptile that lives on land
-	 * @param type refers to the type of animal this is - a reptile
+	 * Creates a new reptile that lives on land.
+	 * 
+	 * @param type The type of animal this is - a reptile
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
 	 * @param lifespan represents the animal's lifespan
 	 * @param gender the animal is either male or female
 	 */
-	public Reptile(String imageName, int size, int speed, int lifespan, String gender) {
-		super (imageName, size, speed, lifespan, gender);
+	public Reptile(String type, int size, int speed, int lifespan, String gender) {
+		super (type, size, speed, lifespan, gender);
 		scaleHardness = 50;
 		fangSize = 30;
 		biteStrength = 50;
 	}
 
-	/**creates a copy of a reptile
-	 * @param r is the reptile being copied
+	/**
+	 * Creates a copy of a reptile and its stats.
+	 * 
+	 * @param r The reptile being copied
 	 */ 
 	public Reptile(Reptile r) {
 		super (r);
@@ -35,7 +38,9 @@ public class Reptile extends Animal {
 		this.biteStrength = r.biteStrength;
 	}
 
-	/** creates a new reptile through mating
+	/** 
+	 * Creates a new reptile through mating.
+	 * 
 	 * @param r is the parent reptile
 	 * @param canMate checks if the parent can reproduce
 	 */
@@ -46,7 +51,9 @@ public class Reptile extends Animal {
 		this.biteStrength = r.biteStrength;
 	}
 
-	/**creates a new reptile from an amphibian parent
+	/**
+	 * Creates a new reptile from an amphibian parent as a result of evolution.
+	 * 
 	 * @param amph is the parent amphibian
 	 */
 	public Reptile(Amphibian amph) {
@@ -57,7 +64,9 @@ public class Reptile extends Animal {
 	}
 
 	
-	/** creates a reptile from a cellular animal
+	/** 
+	 * Creates a lizard from a cellular animal.
+	 * 
 	 * @param cellular is the parental cellular animal
 	 */
 	public Reptile(Cellular cellular) {
