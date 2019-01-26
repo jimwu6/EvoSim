@@ -43,11 +43,11 @@ public class Reptile extends Animal {
 		{
 			this.mateTimer = 3;
 			double chance = Math.random();
-			if(scaleHardness > 60 && chance > 0.9)
+			if(scaleHardness > 60 && chance > 0.8)
 				return new Turtle(this, this.canMate(mate));
-			else if (scaleHardness > 40 && chance > 0.8) 
+			else if (scaleHardness > 40 && chance > 0.6) 
 				return new Snake(this, this.canMate(mate));
-			else if (chance > 0.7) 
+			else if (chance > 0.4) 
 				return new Lizard(this, this.canMate(mate));				
 			return null;
 		}
@@ -63,7 +63,7 @@ public class Reptile extends Animal {
 	
 	public void update() {
 		super.update();
-		scaleHardness += (int) (Math.random() * 4 - 1);
+		scaleHardness++;
 		fangSize++;
 		biteStrength++;
 	}

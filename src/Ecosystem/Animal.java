@@ -182,17 +182,17 @@ public abstract class Animal {
 
 		// update health
 		if (Math.random() < .5) {
-			this.hunger -= 3;
+			this.hunger -= 2;
 			if (Math.random() < .25) 
-				this.thirst -= 2;
+				this.thirst -= 1;
 		}
 		
 		if (thirst < 25) {
-			this.health -= 5;
+			this.health -= 2;
 		}
 
 		if (hunger < 25) {
-			this.health -= 5;
+			this.health -= 2;
 		}
 		
 		hunger = Math.max(0, hunger);
@@ -212,7 +212,7 @@ public abstract class Animal {
 			speed -= (int) (Math.random() * 2);
 		}
 
-		if (mateTimer > 0 && Math.random() < .5) 
+		if (mateTimer > 0 && Math.random() < .8) 
 			mateTimer--;
 		//System.out.println(this.hunger + ", " + this.thirst + ", " + this.health);
 	}
