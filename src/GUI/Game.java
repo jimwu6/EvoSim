@@ -245,43 +245,43 @@ public class Game extends JInternalFrame implements MouseListener, ActionListene
         }
         //check if source was a button to add animals --> add appropriate animal if true
         else if (e.getSource().equals(animalMenu.addAmphibian)) {
-        	landscape.populate(new Amphibian("amphibian", 1, 1, 100000, "male"));
+        	landscape.populate(new Amphibian("amphibian", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addCanine)) {
-        	landscape.populate(new Canine("canine", 1, 1, 100000, "male"));
+        	landscape.populate(new Canine("canine", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addCellular)) {
-        	landscape.populate(new Cellular("cellular", 1, 1, 100000, "male"));
+        	landscape.populate(new Cellular("cellular", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addFeline)) {
-        	landscape.populate(new Feline("feline", 1, 1, 100000, "male"));
+        	landscape.populate(new Feline("feline", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addFish)) {
-        	landscape.populate(new Fish("fish", 1, 1, 100000, "male"));
+        	landscape.populate(new Fish("fish", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addHooved)) {
-        	landscape.populate(new Hooved("hooved", 1, 1, 100000, "male"));
+        	landscape.populate(new Hooved("hooved", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addLizard)) {
-        	landscape.populate(new Lizard("lizard", 1, 1, 100000, "male"));
+        	landscape.populate(new Lizard("lizard", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addPrimate)) {
-        	landscape.populate(new Primate("primate", 1, 1, 100000, "male"));
+        	landscape.populate(new Primate("primate", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addRaptor)) {
-        	landscape.populate(new Raptor("raptor", 1, 1, 100000, "male", true));
+        	landscape.populate(new Raptor("raptor", 1, 1, 1000000, "male", true));
         }
         else if (e.getSource().equals(animalMenu.addRodent)) {
-        	landscape.populate(new Rodent("rodent", 1, 1, 100000, "male"));
+        	landscape.populate(new Rodent("rodent", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addSmallBird)) {
         	landscape.populate(new smallBird("smallBird", 1, 1, 100000, "male", true));
         }
         else if (e.getSource().equals(animalMenu.addSnake)) {
-        	landscape.populate(new Snake("snake", 1, 1, 100000, "male"));
+        	landscape.populate(new Snake("snake", 1, 1, 1000000, "male"));
         }
         else if (e.getSource().equals(animalMenu.addTurtle)) {
-        	landscape.populate(new Turtle("turtle", 1, 1, 100000, "male"));
+        	landscape.populate(new Turtle("turtle", 1, 1, 1000000, "male"));
         }
         //if a weather button was source of action, set the weather to the appropriate type
         else if (e.getSource().equals(settingsMenu.sun)) {
