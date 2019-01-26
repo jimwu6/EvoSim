@@ -62,9 +62,9 @@ public class Primate extends Mammal {
 	 * @param primate is the parent primate
 	 * @param canMate checks if mammal can mate
 	 */
-	public Primate(Primate Primate, boolean canMate) {
-		super(Primate, canMate);
-		this.toolStrength = Primate.toolStrength;
+	public Primate(Primate primate, boolean canMate) {
+		super(primate, canMate);
+		this.toolStrength = primate.toolStrength;
 		carnivore = true;
 		herbivore = true;
 	}
