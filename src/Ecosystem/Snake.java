@@ -1,8 +1,20 @@
 package Ecosystem;
 
+/**
+ * class for snakes
+ *
+ */
 public class Snake extends Reptile{
-	public boolean venomous, hooded;
+	private boolean venomous, hooded;
 	
+	/**
+	 * creates a new snake that can live on land 
+	 * @param type refers to the type of animal this is - a snake
+	 * @param size - how large the animal is, which impacts the hunting
+	 * @param speed - the speed at which the animal moves
+	 * @param lifespan represents the animal's lifespan
+	 * @param gender the animal is either male or female
+	 */
 	public Snake(String type, int size, int speed, int lifespan, String gender) {
 		super(type, size, speed, lifespan, gender);
 		venomous = false;
@@ -17,6 +29,9 @@ public class Snake extends Reptile{
 		appearance = makeImage(bodyParts);
 	}
 	
+	/**creates a copy of another snake animal
+	 * @param s is the snake being copied
+	 */
 	public Snake(Snake s) {
 		super (s);
 		this.venomous = s.venomous;
@@ -30,6 +45,10 @@ public class Snake extends Reptile{
 		appearance = makeImage(bodyParts);
 	}
 	
+	/**creates a new snake baby from a parent if it can mate
+	 * @param s is the parent snake
+	 * @param canMate checks if the parent can mate
+	 */
 	public Snake(Snake s, boolean canMate) {
 		super(s, canMate);
 		this.venomous = Math.random() > 0.9;
@@ -43,6 +62,10 @@ public class Snake extends Reptile{
 		appearance = makeImage(bodyParts);
 	}
 
+	/**creates a snake baby from a parent reptile
+	 * @param reptile is the parent 
+	 * @param canMate checks if parent can mate
+	 */
 	public Snake(Reptile reptile, boolean canMate) {
 		super(reptile, canMate);
 		this.venomous = Math.random() > 0.9;

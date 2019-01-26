@@ -1,8 +1,20 @@
 package Ecosystem;
 
+/**
+ * Mammal class represents all mammalian forms of life such as canine, felines, and so on
+ */
 public class Mammal extends Animal {
+	//fields
 	protected int furDensity, furLength, hornSize, intelligence;
 
+	/**
+	 * creates a new mammal that can live on land
+	 * @param type refers to the type of animal this is - a mammal
+	 * @param size - how large the animal is, which impacts the hunting
+	 * @param speed - the speed at which the animal moves
+	 * @param lifespan represents the animal's lifespan
+	 * @param gender the animal is either male or female
+	*/
 	public Mammal(String type, int size, int speed, int lifespan, String gender) {
 		super (type, size, speed, lifespan, gender);
 		hornSize = 0;
@@ -10,6 +22,9 @@ public class Mammal extends Animal {
 		water = false;
 	}
 
+	/** takes a mammal and makes a copy of it
+	 * @param m is the duplicated mammal
+	 */
 	public Mammal(Mammal m) {
 		super (m);
 		furDensity = m.furDensity;
@@ -20,6 +35,10 @@ public class Mammal extends Animal {
 		water = false;
 	}
 
+	/**creates a new child mammal if parent can mate
+	 * @param m is the parent mammal
+	 * @param canMate checks if the mammal can mate
+	 */
 	public Mammal(Mammal m, boolean canMate) {
 		super(m, canMate);
 		furDensity = m.furDensity;
@@ -29,16 +48,25 @@ public class Mammal extends Animal {
 		land = true;
 		water = false;
 
+		//random chance to grow a horn
 		if (Math.random() > 0.95)
 			hornSize++;
 	}
 
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#mate(Ecosystem.Animal, boolean)
+	 * mating method for mammals
+	 */
 	public Animal mate(Animal animal, boolean canMate) {
 		if (canMate)
 			return this.mate(animal);
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#mate(Ecosystem.Animal)
+	 * mating method for mammals that allows them to branch out and evolve into other animals
+	 */
 	public Animal mate(Animal mate) {
 		if (this.canMate(mate)) {
 
@@ -63,6 +91,10 @@ public class Mammal extends Animal {
 		return null;	
 	}
 
+	/* (non-Javadoc)
+	 * @see Ecosystem.Animal#update()
+	 * updates animals characteristics and health/appetite
+	 */
 	public void update() {
 		super.update();
 		double rand = Math.random();
