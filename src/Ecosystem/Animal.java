@@ -212,7 +212,8 @@ public abstract class Animal {
 			speed -= (int) (Math.random() * 2);
 		}
 
-		mateTimer--;
+		if (mateTimer > 0 && Math.random() < .5) 
+			mateTimer--;
 		//System.out.println(this.hunger + ", " + this.thirst + ", " + this.health);
 	}
 

@@ -45,7 +45,7 @@ public class Hooved extends Mammal {
 	
 	/**
 	 * @param hooved is the parent hooved animal
-	 * @param canMate 
+	 * @param canMate is a boolean for if the parent can mate or not
 	 */
 	public Hooved(Hooved hooved, boolean canMate) {
 		super(hooved, canMate);
@@ -58,6 +58,10 @@ public class Hooved extends Mammal {
 		appearance = makeImage(bodyParts);
 	}
 	
+	/**
+	 * @param mammal represents the parent mammal
+	 * @param canMate 
+	 */
 	public Hooved(Mammal mammal, boolean canMate) {
 		super(mammal, canMate);
 		type = "hooved";
