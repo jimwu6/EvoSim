@@ -1,19 +1,18 @@
 package Ecosystem;
 
 /**
- * @author Justin
- *class for turtles
+ *The Turtle class represents animals that resemble Turtles.
  */
 public class Turtle extends Reptile{
 	private int shellHardness;
 	
 	/**
-	 * creates a new turtle that can live on land or in water
-	 * @param type refers to the type of animal this is - a turtle
-	 * @param size - how large the animal is, which impacts the hunting
-	 * @param speed - the speed at which the animal moves
-	 * @param lifespan represents the animal's lifespan
-	 * @param gender the animal is either male or female
+	 * This constructor creates a new Turtle that can live on land or in water.
+	 * @param type refers to the type of animal this is - a Turtle.
+	 * @param size refers to how large the animal is, which impacts the hunting.
+	 * @param speed refers to the speed at which the animal moves.
+	 * @param lifespan represents the animal's lifespan.
+	 * @param gender is a String depicting if the animal is either male or female.
 	 */
 	public Turtle(String type, int size, int speed, int lifespan, String gender) {
 		super(type, size, speed, lifespan, gender);
@@ -24,12 +23,12 @@ public class Turtle extends Reptile{
 		water = true;
 		
 		this.bodyParts.clear();
-		this.bodyParts.add("turtle");
+		this.bodyParts.add("Turtle");
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**creates a copy of a turtle
-	 * @param t is the copied turtle
+	/**This constructor creates a copy of a Turtle.
+	 * @param t is a parameter representing the Turtle that is being duplicated.
 	 */
 	public Turtle(Turtle t) {
 		super (t);
@@ -40,13 +39,13 @@ public class Turtle extends Reptile{
 		water = true;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("turtle");
+		this.bodyParts.add("Turtle");
 		appearance = makeImage(bodyParts);
 	}
 	
-	/** creates a new baby turtle from an adult turtle that can mate
-	 * @param t is the parent
-	 * @param canMate checks if mating is allowed
+	/** This constructor creates a new baby Turtle from an adult Turtle that can mate.
+	 * @param t is the parent Turtle.
+	 * @param canMate checks if mating is allowed.
 	 */
 	public Turtle(Turtle t, boolean canMate) {
 		super(t, canMate);
@@ -57,28 +56,29 @@ public class Turtle extends Reptile{
 		water = true;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("turtle");
+		this.bodyParts.add("Turtle");
 		appearance = makeImage(bodyParts);
 	}
 
-	/**creates a new baby turtle from a reptile that can mate
-	 * @param reptile is the parent
-	 * @param canMate checks if mating is allowed
+	/**creates a new baby Turtle from a reptile that can mate.
+	 * @param reptile represents the parent of the animal.
+	 * @param canMate is a boolean value that checks if mating is allowed.
 	 */
 	public Turtle(Reptile reptile, boolean canMate) {
 		super(reptile, canMate);
 		this.shellHardness = 30;
-		type = "turtle";
+		type = "Turtle";
 		carnivore = false;
 		herbivore = true;
 		land = true;
 		water = true;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("turtle");
+		this.bodyParts.add("Turtle");
 		appearance = makeImage(bodyParts);
 	}
 
+	//mating method extended from animals
 	public Animal mate(Animal mate) {
 		Animal a = super.mate(mate);
 		
@@ -91,6 +91,7 @@ public class Turtle extends Reptile{
 		return a;
 	}
 	
+	//mating method for Turtles
 	public Animal mate(Animal mate, boolean landSafe) {
 		if (landSafe)
 			return this.mate(mate);
@@ -99,15 +100,7 @@ public class Turtle extends Reptile{
 	
 	public void update() {
 		super.update();
-		
+		//randomly updates the shell's hardness
 		shellHardness += (int) (Math.random() * 4 - 1);
-	}
-	
-	public void withdraw(){
-		
-	}
-	
-	public void feed (String plant){
-		
-	}
+	}	
 }

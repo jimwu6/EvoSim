@@ -7,38 +7,38 @@ import java.util.ArrayList;
 import javax.imageio.*;
 
 /**
- * class representing a small unit of land
- * this consists of the ground and plants, as well as resources of the land
- * platform upon which animals interact
+ * This class represents a small unit of land.
+ * This consists of the ground and plants, as well as resources of the land.
+ * The Territory class is ultimately platform upon which animals interact.
  */
 public class Territory{
 	
 	//fields
 	/**
-	 * represents plant that inhabits a territory
+	 * This field represents plant that inhabits a territory.
 	 */
 	public Plant plant = null;
     /**
-     * list of all the resources that are currently on the territory
+     * This field is a list of all the resources that are currently on the territory.
      */
     public ArrayList <Resource> resources;
     /**
-     * string describing the ground type
+     * This field is a string describing the ground type.
      */
     public String ground;
     /**
-     * image for the ground and the plant's visual representation
+     * This image is an image for the ground and the plant's visual representation.
      */
     public Image groundImg = null, plantImg = null;
     /**
-     * rate describing how often resources are generated
+     * This field is the rate describing how often resources are generated.
      */
     double rRate = .014;
+
     
-    /**
-     * Creates a new territory, or an individual block of land.
-     * The territory can contain resources and a plant.
-     * @param gName represents the type of land being built
+    /**This constructor creates a new territory, or an individual block of land.
+     * It contains resources and a plant; this one creates a territory with no plant initially.
+     * @param gName represents the type of land being built.
      */
     public Territory(String gName) {
         resources = new ArrayList<Resource>();
@@ -55,10 +55,10 @@ public class Territory{
 		}
     }
     
-    /**creates new territory, but with a plant on it 
-     * @param gName represents the type of ground 
-     * @param pName is a string for the type of plant
-     * @param size is the size of the plant
+    /**This constructor creates a new territory, but with a plant on it. 
+     * @param gName represents the type of ground.
+     * @param pName is a string for the type of plant.
+     * @param size is the size of the plant on the territory.
      */
     public Territory(String gName, String pName, int size) {
     	this(gName);
@@ -74,9 +74,9 @@ public class Territory{
 		}
     }
     
-    /** method to add a new plant to a territory if it is empty
-     * @param pName is the plant type
-     * @param size is the size of the plant
+    /** This is a method used to add a new plant to a territory if it is empty.
+     * @param pName is the plant type that is being added.
+     * @param size is the size of the plant.
      */
     public void grow(String pName, int size) {
     	if (plant == null) {
@@ -93,8 +93,8 @@ public class Territory{
     	}
     }
     
-    /**method that releases resources on the land
-     * checks if there are resources or the appropriate conditions are met to release resources
+    /**The release method is a method that releases resources on the territory.
+     * It checks if there are resources present and if the appropriate conditions are met to release resources.
      */
     public void release() {
     	//checks for plant 
@@ -117,29 +117,29 @@ public class Territory{
     	}
     }
     
-    /** adds a fruit to the resources
-     * @param t is boolean indicating whether release is needed
+    /** The release method accepts a boolean and adds a fruit to the resources.
+     * @param t is boolean indicating whether a release of a fruit is needed.
      */
     public void release(boolean t) {
     	resources.add(new Resource("fruit"));
     }
     
     /**
-     * @return if the territory has resources on it
+     * @return a boolean value showing if the territory has resources on it.
      */
     public boolean hasResource() {
     	return resources != null;
     }
     
     /**
-     * @return the list of resources
+     * @return the list of resources.
      */
     public ArrayList<Resource> resources() {
     	return resources;
     }
     
-    /** changes the rate of resource drops
-     * @param rate is the new desired rate of change
+    /** This method changes the rate of resource drops.
+     * @param rate is the new desired rate of change.
      */
     public void changeRate(double rate) {
     	rRate = rate;

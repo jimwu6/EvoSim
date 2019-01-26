@@ -1,13 +1,13 @@
 package Ecosystem;
 
 /**
- *class representing monkey-like animals
+ *The Primate class represents primates, which are ape- or monkey-like mammals.
  */
 public class Primate extends Mammal {
 	private int toolStrength;
 
-	/**creates a new primate that can live on land
-	 * @param type refers to the type of animal this is - a primate
+	/**This method creates a new Primate that can live on land and generally consumes both plants and meat.
+	 * @param type refers to the type of animal this is - a Primate
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
 	 * @param lifespan represents the animal's lifespan
@@ -22,55 +22,56 @@ public class Primate extends Mammal {
 		carnivore = true;
 		herbivore = true;
 		this.bodyParts.clear();
-		this.bodyParts.add("primate");
+		this.bodyParts.add("Primate");
 		appearance = makeImage(bodyParts);
 	}
 
-	/**creates a copy of an existing primate
-	 * @param primate is the copied primate
+	/**This method creates a copy of an existing Primate.
+	 * @param Primate is the copied Primate
 	 */
-	public Primate(Primate primate) {
-		super(primate);
-		this.toolStrength = primate.toolStrength;
+	public Primate(Primate Primate) {
+		super(Primate);
+		this.toolStrength = Primate.toolStrength;
 		carnivore = true;
 		herbivore = true;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("primate");
+		this.bodyParts.add("Primate");
 		appearance = makeImage(bodyParts);
 	}
 
-	/** birth method that returns a new primate 
+	/**This method creates a new Primate that formed through the mating of Mammals. 
 	 * @param mammal is the parent mammal
 	 * @param canMate checks if mammal can mate
 	 */
 	public Primate(Mammal mammal, boolean canMate) {
 		super(mammal, canMate);
-		type = "primate";
+		type = "Primate";
 		this.toolStrength = 10;
 		carnivore = true;
 		herbivore = true;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("primate");
+		this.bodyParts.add("Primate");
 		appearance = makeImage(bodyParts);
 	}
 
 	/**
-	 * birth method that returns a new primate 
+	 * This method creates a Primate that formed during the mating process between two primates. 
+	 * 
 	 * @param primate is the parent primate
 	 * @param canMate checks if mammal can mate
 	 */
-	public Primate(Primate primate, boolean canMate) {
-		super(primate, canMate);
-		this.toolStrength = primate.toolStrength;
+	public Primate(Primate Primate, boolean canMate) {
+		super(Primate, canMate);
+		this.toolStrength = Primate.toolStrength;
 		carnivore = true;
 		herbivore = true;
 	}
 
 	/* (non-Javadoc)
 	 * @see Ecosystem.Mammal#mate(Ecosystem.Animal)
-	 * mating method for primate
+	 * mating method for Primate
 	 */
 	public Animal mate(Animal mate) {
 		Animal a = super.mate(mate);
@@ -86,7 +87,7 @@ public class Primate extends Mammal {
 	
 	/* (non-Javadoc)
 	 * @see Ecosystem.Mammal#mate(Ecosystem.Animal, boolean)
-	 * mating method for primates that returns an animal if the land is appropriate
+	 * mating method for Primates that returns an animal if the land is appropriate
 	 */
 	public Animal mate(Animal mate, boolean landSafe) {
 		if (landSafe)
@@ -109,19 +110,4 @@ public class Primate extends Mammal {
 		}
 	}
 
-	public void buildTool(){
-
-	}
-
-	public void feed(String plant){
-
-	}
-
-	public void chase(Animal prey){
-
-	}
-
-	public void feed(Animal prey){
-
-	}
 }

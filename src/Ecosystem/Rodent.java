@@ -1,8 +1,8 @@
 package Ecosystem;
 
 /**
- * class representing small mammals like mice
- *
+ * The Rodent class is a class representing small mammals like mice.
+ * Rodents are herbivorous and terrestrial.
  */
 public class Rodent extends Mammal{
 
@@ -10,8 +10,8 @@ public class Rodent extends Mammal{
 	private int claw;
 	public boolean disease;
 	
-	/** creates a new rodent that can live on land and eat plants
-	 * @param type refers to the type of animal this is - a rodent
+	/** Ths constructor creates a new Rodent that can live on land and eat plants.
+	 * @param type refers to the type of animal this is - a Rodent
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
 	 * @param lifespan represents the animal's lifespan
@@ -27,70 +27,70 @@ public class Rodent extends Mammal{
 		herbivore = true;
 		
 		this.bodyParts.clear();
-		this.bodyParts.add("rodent");
+		this.bodyParts.add("Rodent");
 		appearance = makeImage(bodyParts);
 	}
 	
-	/** creates a copy of another rodent
-	 * @param rodent is the rodent being copied
+	/** This constructor creates a copy of another Rodent.
+	 * @param Rodent is the Rodent being copied
 	 */
-	public Rodent(Rodent rodent) {
-		super(rodent);
-		this.claw = rodent.claw;
-		this.disease = rodent.disease;
+	public Rodent(Rodent Rodent) {
+		super(Rodent);
+		this.claw = Rodent.claw;
+		this.disease = Rodent.disease;
 		carnivore = false;
 		herbivore = true;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("rodent");
+		this.bodyParts.add("Rodent");
 		appearance = makeImage(bodyParts);
 	}
 	
-	/**creates a new rodent as a child  
-	 * @param rodent is the parent rodent
+	/**This constructor creates a new Rodent as a child of a Rodent parent. 
+	 * @param Rodent is the parent Rodent
 	 * @param canMate checks if the parent could mate
 	 */
-	public Rodent(Rodent rodent, boolean canMate) {
-		super(rodent, canMate);
-		this.claw = rodent.claw;
-		this.disease = rodent.disease;
+	public Rodent(Rodent Rodent, boolean canMate) {
+		super(Rodent, canMate);
+		this.claw = Rodent.claw;
+		this.disease = Rodent.disease;
 		carnivore = false;
 		herbivore = true;
 		
 		this.bodyParts.clear();
-		this.bodyParts.add("rodent");
+		this.bodyParts.add("Rodent");
 		appearance = makeImage(bodyParts);
 	}
 	
-	/** creates a new rodent from a mammal parent
+	/** This constructor creates a new Rodent that formed as a result of a mammal parent mating.
 	 * @param mammal is the parent mammal
 	 * @param canMate checks if the animal can mate
 	 */
 	public Rodent(Mammal mammal, boolean canMate) {
 		super(mammal, canMate);
-		type = "rodent";
+		type = "Rodent";
 		carnivore = false;
 		herbivore = true;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("rodent");
+		this.bodyParts.add("Rodent");
 		appearance = makeImage(bodyParts);
 	}
 
-	/**creates rodent evolved from small birds
+	/**This class creates Rodent that evolved from small birds.
 	 * @param smallBird is the parent animal
 	 * @param canMate checks if the parent could mate
 	 */
 	public Rodent(smallBird smallBird, boolean canMate) {
-		super("rodent", smallBird.size(), smallBird.speed(), smallBird.lifespan(), Math.random() < 0.5? "Male" : "Female");
+		super("Rodent", smallBird.size(), smallBird.speed(), smallBird.lifespan(), Math.random() < 0.5? "Male" : "Female");
 		claw = 5;
 		disease = false;
-		type = "rodent";
+		type = "Rodent";
 		carnivore = false;
 		herbivore = true;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("rodent");
+		this.bodyParts.add("Rodent");
 		appearance = makeImage(bodyParts);
 	}
 
@@ -120,12 +120,4 @@ public class Rodent extends Mammal{
 			claw++;
 	}
 	
-	public void spreadDisease(Animal animal){
-		
-	}
-	
-	public void feed(String plant){
-		
-	}
-
 }

@@ -1,14 +1,13 @@
 package Ecosystem;
 
 /**
- * @author Justin
- * class to represent carnivorous birds
+ * The Raptor class is used to represent carnivorous birds.
  */
 public class Raptor extends Bird {
 	private int talonSize, beakStrength;
 	
-	/**creates a new raptor that can live on land or fly over water
-	 * @param type refers to the type of animal this is - a raptor
+	/** This constructor creates a new Raptor that can live on land or fly over water.
+	 * @param type refers to the type of animal this is - a Raptor
 	 * @param size - how large the animal is, which impacts the hunting
 	 * @param speed - the speed at which the animal moves
 	 * @param lifespan represents the animal's lifespan
@@ -23,51 +22,51 @@ public class Raptor extends Bird {
 		herbivore = false;
 	}
 	
-	/** creates a copy of a preexisting raptor
-	 * @param raptor is the raptor that is being copied
+	/**This constructor creates a copy of a pre-existing Raptor.
+	 * @param Raptor is the Raptor that is being copied
 	 */
-	public Raptor(Raptor raptor) {
-		super (raptor);
-		this.talonSize = raptor.talonSize;
-		this.beakStrength = raptor.beakStrength;
+	public Raptor(Raptor Raptor) {
+		super (Raptor);
+		this.talonSize = Raptor.talonSize;
+		this.beakStrength = Raptor.beakStrength;
 		carnivore = true;
 		herbivore = false;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("raptor");
+		this.bodyParts.add("Raptor");
 		appearance = makeImage(bodyParts);
 	}
 	
-	/** constructs a raptor based on a parent if it can mate
-	 * @param raptor is the parent raptor
+	/** This method constructs a Raptor that was formed by a Raptor parent through the mating process.
+	 * @param Raptor is the parent Raptor
 	 * @param canMate checks if parent can mate
 	 */
-	public Raptor(Raptor raptor, boolean canMate) {
-		super(raptor, canMate);
+	public Raptor(Raptor Raptor, boolean canMate) {
+		super(Raptor, canMate);
 
-		this.talonSize = raptor.talonSize;
-		this.beakStrength = raptor.beakStrength;
+		this.talonSize = Raptor.talonSize;
+		this.beakStrength = Raptor.beakStrength;
 		carnivore = true;
 		herbivore = false;
 
 		this.bodyParts.clear();
-		this.bodyParts.add("raptor");
+		this.bodyParts.add("Raptor");
 		appearance = makeImage(bodyParts);
 	}
 
-	/** creates a raptor from a small bird parent through evolution
-	 * @param smallBird is the parent of the raptor 
+	/** This constructor creates a Raptor that was formed by the mating of smallBird parents through evolution.
+	 * @param smallBird is the parent of the Raptor 
 	 * @param canMate checks if the parent can mate
 	 */
 	public Raptor(smallBird smallBird, boolean canMate) {
-		super("raptor", smallBird.size(), smallBird.speed(), smallBird.lifespan() + 10, Math.random() < 0.5? "Male" : "Female", smallBird.flight);
+		super("Raptor", smallBird.size(), smallBird.speed(), smallBird.lifespan() + 10, Math.random() < 0.5? "Male" : "Female", smallBird.flight);
 		this.talonSize = 20;
 		this.beakStrength = 30;
-		type = "raptor";
+		type = "Raptor";
 		carnivore = true;
 		herbivore = false;
 		this.bodyParts.clear();
-		this.bodyParts.add("raptor");
+		this.bodyParts.add("Raptor");
 		appearance = makeImage(bodyParts);
 	}
 
@@ -103,16 +102,5 @@ public class Raptor extends Bird {
 		talonSize += (int) (Math.random() * 4 - 1);
 		beakStrength++;
 	}
-	
-	public void encircle(){
-		
-	}
-	
-	public void chase(Animal prey){
-		
-	}
-	
-	public void feed(Animal prey){
-		
-	}
+
 }

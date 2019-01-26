@@ -8,8 +8,9 @@ import javax.imageio.ImageIO;
 
 /**
  * @author Justin
- *class for resourcs that animals may consume
- *they are consumed so animals can maintain good health
+ *The Resource class represents resources that animals may consume. 
+ * They are consumed so animals can maintain good health and live sustainably.
+ * Resources include elements such as water and fruit.
  */
 public class Resource {
 	//fields
@@ -17,11 +18,11 @@ public class Resource {
 	private String name;
 	
 	/**
-	 * image that shows a graphical representation of the resource 
+	 * This field is an image that shows a graphical representation of the resource 
 	 */
 	public Image resourceImage = null;
 	
-	/** creates a new resource that can be eaten or drunk by animals
+	/** This constructor creates a new resource that can be eaten or drunk by animals. 
 	 * @param n is the string describing the nature of the resource
 	 */
 	public Resource(String n) {
@@ -42,14 +43,14 @@ public class Resource {
 	}
 	
 	/**
-	 * @return the value that a resource can heal an animal
+	 * @return the amount that a resource can heal an animal
 	 */
 	public int heal() {
 		return heal;
 	}
 	
 	/**
-	 * @return the name of the resource
+	 * @return the name of a resource
 	 */
 	public String getName() {
 		return name;
