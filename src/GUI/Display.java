@@ -61,8 +61,12 @@ public class Display extends JFrame implements MouseListener, KeyListener, Actio
 		menu.addKeyListener(this);
 		
 		//populate the game with animals
-		Animal cell = new Cellular("cellular", 15, 1, 10000, "Female");
-		Animal cell2 = new Cellular("cellular", 15, 1, 10000, "Male");
+		Animal cell = new Cellular("cellular", 1, 1, 10000, "Female");
+		Animal cell2 = new Cellular("cellular", 1, 1, 10000, "Male");
+		game.landscape().populate(cell);
+		game.landscape().populate(cell2);
+		game.landscape().populate(cell);
+		game.landscape().populate(cell2);
 		game.landscape().populate(cell);
 		game.landscape().populate(cell2);
 		
